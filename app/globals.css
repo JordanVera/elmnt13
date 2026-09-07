@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0a0a0a;
+  --paper: #f6f3ee;
+  --mist: #e8e3da;
+  --gold: #c4a574;
+  --gold-bright: #ddc49a;
+  --blush: #f3ebe3;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-blush: var(--blush);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-syne);
+  --font-serif: var(--font-cormorant);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-outfit), sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-syne), sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), serif;
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-mask {
+  overflow: hidden;
+}
+
+.hero-line {
+  display: block;
+  transform: translateX(-110%);
+  animation: slide-from-left 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-line.from-right {
+  transform: translateX(110%);
+  animation-name: slide-from-right;
+}
+
+@keyframes slide-from-left {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-from-right {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes toast-left {
+  from {
+    transform: translateX(-58vw) rotate(-18deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(-8deg);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-right {
+  from {
+    transform: translateX(58vw) rotate(18deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+.glass-left {
+  animation: toast-left 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.glass-right {
+  animation: toast-right 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@keyframes gold-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.gold-rule {
+  transform-origin: left;
+  animation: gold-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pulse-gold {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line,
+  .hero-line.from-right,
+  .glass-left,
+  .glass-right,
+  .marquee-track,
+  .reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
