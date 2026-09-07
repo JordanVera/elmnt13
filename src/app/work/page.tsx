@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { ProjectGrid } from "@/components/project-grid";
-import { WorkHero } from "@/components/work-hero";
-import { workProjects } from "@/lib/projects";
+import type { Metadata } from 'next';
+import { ProjectGrid } from '@/components/project-grid';
+import { WorkHero } from '@/components/work-hero';
+import { workProjects } from '@/lib/projects';
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "A selection of experiences produced by ELMNT13.",
+  title: 'Work',
+  description: 'A selection of experiences produced by ELMNT13.',
 };
 
 export default function WorkPage() {

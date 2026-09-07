@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   motion,
   useReducedMotion,
@@ -23,6 +24,8 @@ const CARD_SPREAD = [
   { x: 8.5, rotate: 3, y: -10 },
   { x: 24, rotate: 9, y: 16 },
 ] as const;
+
+const CARD_Z = ['z-0', 'z-[1]', 'z-[2]', 'z-[3]'] as const;
 
 const SPRING = { stiffness: 72, damping: 26, mass: 0.38, restDelta: 0.001 };
 
@@ -104,7 +107,7 @@ function WorkCard({
 
   return (
     <motion.div
-      className="absolute aspect-3/4 w-[38vw] max-w-56 overflow-hidden bg-ink shadow-[0_24px_60px_rgba(0,0,0,0.45)] ring-1 ring-paper/15 md:w-[22vw] md:max-w-xs"
+      className={`absolute ${CARD_Z[index]} aspect-3/4 w-[38vw] max-w-56 overflow-hidden bg-ink shadow-[0_24px_60px_rgba(0,0,0,0.45)] ring-1 ring-paper/15 hover:z-20 md:w-[22vw] md:max-w-xs`}
       style={
         reduceMotion
           ? {
@@ -112,19 +115,29 @@ function WorkCard({
               y: spread.y,
               rotate: spread.rotate,
               opacity: 1,
-              zIndex: index,
             }
-          : { x, y, rotate, opacity, scale, zIndex: index }
+          : { x, y, rotate, opacity, scale }
       }
     >
-      <Image
-        src={project.image}
-        alt={project.title}
-        fill
-        sizes="(max-width: 768px) 38vw, 22vw"
-        className="object-cover"
-        preload={index < 2}
-      />
+      <Link href={`/work/${project.slug}`} className="group absolute inset-0">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 38vw, 22vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          preload={index < 2}
+        />
+        <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/50" />
+        <div className="absolute inset-x-0 bottom-0 translate-y-3 p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
+            {project.service}
+          </p>
+          <p className="mt-2 font-display text-2xl text-paper uppercase">
+            {project.title}
+          </p>
+        </div>
+      </Link>
     </motion.div>
   );
 }
