@@ -135,11 +135,11 @@ export function ChampagneToast() {
   return (
     <section className="relative min-h-dvh overflow-hidden bg-white">
       <div
-        className="absolute inset-x-0 top-16 bottom-32 flex items-end justify-center md:bottom-40"
+        className="absolute inset-x-0 top-16 bottom-10 flex items-end justify-center md:bottom-12"
         aria-hidden="true"
       >
         <motion.div
-          className="h-[90%] w-auto shrink-0"
+          className="h-[82%] w-auto shrink-0"
           custom={-1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -154,7 +154,7 @@ export function ChampagneToast() {
           />
         </motion.div>
         <motion.div
-          className="h-[90%] w-auto shrink-0"
+          className="h-[82%] w-auto shrink-0"
           custom={1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -170,10 +170,10 @@ export function ChampagneToast() {
         <SparkBurst active={toasted && !skipMotion} />
       </div>
 
-      <h1 className="absolute inset-x-0 bottom-0 z-10 flex w-full flex-col items-center px-6 pb-8 text-center md:pb-12">
+      <h1 className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
         <span className="block overflow-hidden pb-1">
           <motion.span
-            className="block font-serif text-2xl italic text-ink md:text-4xl"
+            className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-none italic text-ink"
             initial={skipMotion ? false : { y: '115%' }}
             animate={{ y: '0%' }}
             transition={{
@@ -187,7 +187,7 @@ export function ChampagneToast() {
         </span>
         <span className="block overflow-hidden">
           <motion.span
-            className="font-display block text-5xl tracking-tight text-ink uppercase md:text-7xl"
+            className="font-display block text-[clamp(4.75rem,18vw,13rem)] leading-[0.82] tracking-tight text-ink uppercase"
             initial={skipMotion ? false : { y: '115%' }}
             animate={{ y: '0%' }}
             transition={{
@@ -224,7 +224,7 @@ function ChampagneFlute({
         src="/champagne-flute.png"
         alt=""
         fill
-        sizes="(min-width: 768px) 40vh, 32vh"
+        sizes="(min-width: 768px) 42vh, 34vh"
         className="object-contain drop-shadow-[0_24px_40px_rgba(10,10,10,0.12)]"
         preload
       />
@@ -339,7 +339,7 @@ function SparkBurst({ active }: { active: boolean }) {
 
   return (
     <motion.div
-      className="absolute top-[18%] left-1/2 z-20 h-32 w-32 -translate-x-1/2"
+      className="absolute top-[18%] left-1/2 h-32 w-32 -translate-x-1/2"
       initial={{ opacity: 0, scale: 0.4 }}
       animate={{ opacity: [0, 1, 0], scale: [0.4, 1.15, 1.55] }}
       transition={{ duration: 0.85, ease: EASE_LUXE }}
