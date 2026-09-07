@@ -16,23 +16,23 @@ function isActive(pathname: string, href: string) {
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
-    <span className="relative block h-3.5 w-4.5" aria-hidden="true">
+    <span className="relative block size-5" aria-hidden="true">
       <span
         className={cn(
-          'absolute inset-x-0 top-0 h-px origin-center bg-gold transition-transform duration-300',
-          open && 'top-1.5 rotate-45',
+          'absolute top-1/2 left-1/2 h-px w-4 origin-center -translate-x-1/2 bg-gold transition-transform duration-300',
+          open ? '-translate-y-1/2 rotate-45' : '-translate-y-1.5',
         )}
       />
       <span
         className={cn(
-          'absolute inset-x-0 top-1.5 h-px bg-gold transition-opacity duration-300',
+          'absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 -translate-y-1/2 bg-gold transition-opacity duration-300',
           open && 'opacity-0',
         )}
       />
       <span
         className={cn(
-          'absolute inset-x-0 top-3 h-px origin-center bg-gold transition-transform duration-300',
-          open && 'top-1.5 -rotate-45',
+          'absolute top-1/2 left-1/2 h-px w-4 origin-center -translate-x-1/2 bg-gold transition-transform duration-300',
+          open ? '-translate-y-1/2 -rotate-45' : 'translate-y-1.5',
         )}
       />
     </span>
@@ -98,36 +98,42 @@ export function SiteHeader() {
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4">
         <div
           className={cn(
-            'mx-auto flex w-full items-center justify-between rounded-full px-3 py-2 sm:px-4',
+            'relative mx-auto w-full',
             skip ? 'transition-none' : 'transition-all duration-300',
-            solid
-              ? 'max-w-5xl border border-white/15 bg-black/50 shadow-lg shadow-black/25 backdrop-blur-xl'
-              : 'max-w-6xl border border-transparent bg-transparent',
+            solid ? 'max-w-5xl' : 'max-w-6xl',
           )}
         >
-          <Link
-            href="/"
-            onClick={() => setMenuOpen(false)}
-            className="flex shrink-0 items-center pl-1"
-          >
-            <Image
-              src="/logo.png"
-              alt="ELMNT13"
-              width={160}
-              height={48}
-              className="h-10 w-auto sm:h-12"
+          {solid ? (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 rounded-full border border-white/15 bg-black/50 shadow-lg shadow-black/25 backdrop-blur-xl"
             />
-          </Link>
-          <button
-            type="button"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            aria-controls="site-menu"
-            onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-11 w-11 items-center justify-center rounded-full cursor-pointer"
-          >
-            <MenuIcon open={menuOpen} />
-          </button>
+          ) : null}
+          <div className="relative flex items-center justify-between py-2 pr-5 pl-4 sm:pr-6 sm:pl-5">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="flex shrink-0 items-center"
+            >
+              <Image
+                src="/logo.png"
+                alt="ELMNT13"
+                width={160}
+                height={48}
+                className="h-10 w-auto"
+              />
+            </Link>
+            <button
+              type="button"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full"
+            >
+              <MenuIcon open={menuOpen} />
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
