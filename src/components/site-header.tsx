@@ -123,7 +123,7 @@ export function SiteHeader() {
             className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4"
           >
             <div className="mx-auto flex max-w-5xl flex-col">
-              <div className="flex items-center justify-between rounded-full border border-white/15 bg-black/80 px-3 py-2 shadow-lg shadow-black/25 backdrop-blur-xl sm:px-4">
+              <div className="flex items-center justify-between rounded-full border border-white/15 bg-black/50 px-3 py-2 shadow-lg shadow-black/25 backdrop-blur-xl sm:px-4">
                 <Link
                   href="/"
                   onClick={() => setMenuOpen(false)}
