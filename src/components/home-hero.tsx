@@ -29,7 +29,12 @@ export function HomeHero() {
       </motion.div>
       <div className="mx-auto w-full max-w-6xl py-16">
         <h1 className="font-display text-[13vw] leading-[0.82] tracking-tight uppercase md:text-[8.4vw]">
-          <HeroLine from="left" delay={0.18} skip={skip} className="font-serif text-[0.42em] font-normal tracking-normal normal-case italic text-gold">
+          <HeroLine
+            from="left"
+            delay={0.18}
+            skip={skip}
+            className="font-serif text-[0.42em] font-normal tracking-normal normal-case italic text-gold"
+          >
             We See
           </HeroLine>
           <HeroLine from="right" delay={0.28} skip={skip}>

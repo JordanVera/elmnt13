@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProjectGrid } from "@/components/project-grid";
 import { WorkHero } from "@/components/work-hero";
-import { projects } from "@/lib/projects";
+import { workProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -14,7 +14,7 @@ export default function WorkPage() {
       <WorkHero />
       <section className="bg-paper px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          <ProjectGrid items={projects} />
+          <ProjectGrid items={workProjects} />
         </div>
       </section>
     </main>
