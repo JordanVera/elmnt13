@@ -1717,11 +1717,11 @@ export const projects: Project[] = [
     category: 'weddings',
     year: '2024',
     image:
-      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1761211488163-67bc659a8180?auto=format&fit=crop&w=1800&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80',
-      'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1800&q=80',
-      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1761211488163-67bc659a8180?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1769540209342-34d08f98a3b4?auto=format&fit=crop&w=1800&q=80',
     ],
     description:
       'A garden ceremony and candlelit reception designed around quiet luxury and personal ritual.',
@@ -1734,11 +1734,11 @@ export const projects: Project[] = [
     category: 'weddings',
     year: '2025',
     image:
-      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1800&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=80',
-      'https://images.unsplash.com/photo-1478146896981-b80fe45c8bbf?auto=format&fit=crop&w=1800&q=80',
-      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1800&q=80',
+      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1800&q=80',
     ],
     description:
       'Tablescapes, lighting, and a toast moment composed as a single visual story.',
