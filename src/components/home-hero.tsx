@@ -12,21 +12,6 @@ export function HomeHero() {
 
   return (
     <section className="relative flex min-h-dvh flex-col justify-center bg-ink px-6 text-paper">
-      <motion.div
-        className="absolute top-8 left-1/2 -translate-x-1/2 md:top-12"
-        initial={skip ? false : { opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: skip ? 0 : 0.9, ease: EASE_LUXE }}
-      >
-        <Image
-          src="/logo.png"
-          alt="ELMNT13 Marketing | Management"
-          width={258}
-          height={62}
-          preload
-          className="h-auto w-40 lg:w-52"
-        />
-      </motion.div>
       <div className="mx-auto w-full max-w-6xl py-16">
         <h1 className="font-display text-[13vw] leading-[0.82] tracking-tight uppercase md:text-[8.4vw]">
           <HeroLine
