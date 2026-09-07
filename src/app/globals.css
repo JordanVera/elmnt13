@@ -157,36 +157,6 @@ body {
   animation-play-state: paused;
 }
 
-@keyframes toast-left {
-  from {
-    transform: translateX(-58vw) rotate(-18deg);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) rotate(-8deg);
-    opacity: 1;
-  }
-}
-
-@keyframes toast-right {
-  from {
-    transform: translateX(58vw) rotate(18deg);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) rotate(8deg);
-    opacity: 1;
-  }
-}
-
-.glass-left {
-  animation: toast-left 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-}
-
-.glass-right {
-  animation: toast-right 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-}
-
 @keyframes gold-draw {
   from {
     transform: scaleX(0);
@@ -229,8 +199,6 @@ body {
   .hero-logo::after,
   .hero-line,
   .hero-line.from-right,
-  .glass-left,
-  .glass-right,
   .marquee-track,
   .reveal {
     animation: none !important;
