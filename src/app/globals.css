@@ -69,76 +69,6 @@ body {
   transform: none;
 }
 
-.hero-logo {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  animation: logo-enter 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero-logo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 45%;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    color-mix(in srgb, var(--gold-bright) 55%, white) 50%,
-    transparent 100%
-  );
-  mix-blend-mode: screen;
-  animation: logo-shimmer 1.35s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
-}
-
-@keyframes logo-enter {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes logo-shimmer {
-  from {
-    transform: translateX(-140%);
-  }
-  to {
-    transform: translateX(280%);
-  }
-}
-
-.hero-mask {
-  overflow: hidden;
-}
-
-.hero-line {
-  display: block;
-  transform: translateX(-110%);
-  animation: slide-from-left 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.hero-line.from-right {
-  transform: translateX(110%);
-  animation-name: slide-from-right;
-}
-
-@keyframes slide-from-left {
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-from-right {
-  to {
-    transform: translateX(0);
-  }
-}
-
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -195,10 +125,6 @@ body {
     scroll-behavior: auto;
   }
 
-  .hero-logo,
-  .hero-logo::after,
-  .hero-line,
-  .hero-line.from-right,
   .marquee-track,
   .reveal {
     animation: none !important;
