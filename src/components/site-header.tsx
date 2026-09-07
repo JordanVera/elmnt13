@@ -29,8 +29,8 @@ export function SiteHeader() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'font-display text-white hover:text-gold text-[9px] tracking-[0.12em] uppercase transition-colors sm:text-[10px] sm:tracking-wideset font-bold',
-                  active ? 'text-gold' : 'text-gold/55 hover:text-gold',
+                  'font-display text-[9px] tracking-[0.12em] uppercase transition-colors sm:text-[10px] sm:tracking-wideset font-bold',
+                  active ? 'text-gold' : 'text-white hover:text-gold',
                 )}
               >
                 {link.label}
