@@ -69,7 +69,7 @@ export function SiteFooter() {
           </a>
         </div>
       </div>
-      <div className="border-t border-white/10 px-6 py-5 pb-24 text-center text-[11px] tracking-[0.22em] text-paper/40 uppercase">
+      <div className="border-t border-white/10 px-6 py-5 text-center text-[11px] tracking-[0.22em] text-paper/40 uppercase">
         <p>© {new Date().getFullYear()} ELMNT13 · Marketing & Management</p>
         <p className="mt-2">
           Site by{' '}

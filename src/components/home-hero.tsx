@@ -24,7 +24,7 @@ export function HomeHero() {
           width={258}
           height={62}
           preload
-          className="h-auto w-64 max-w-[80vw]"
+          className="h-auto w-40 lg:w-52"
         />
       </motion.div>
       <div className="mx-auto w-full max-w-6xl py-16">
