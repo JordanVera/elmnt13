@@ -20,7 +20,7 @@ export function SiteHeader() {
       aria-label="Primary"
       className="pointer-events-none fixed inset-x-0 bottom-0 z-90 flex justify-center px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
     >
-      <ul className="pointer-events-auto flex w-full max-w-[calc(100vw-1.5rem)] items-center justify-between gap-2 rounded-2xl  bg-blush/55 px-4 py-3  backdrop-blur-xl backdrop-saturate-150 sm:w-auto sm:justify-center sm:gap-7 sm:px-8 sm:py-3.5">
+      <ul className="pointer-events-auto flex w-full max-w-[calc(100vw-1.5rem)] items-center justify-between gap-2 rounded-2xl  bg-gold/45 px-4 py-3  backdrop-blur-xl backdrop-saturate-150 sm:w-auto sm:justify-center sm:gap-7 sm:px-8 sm:py-3.5">
         {links.map((link) => {
           const active = isActive(pathname, link.href);
           return (
@@ -29,7 +29,7 @@ export function SiteHeader() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'font-display text-[9px] tracking-[0.12em] uppercase transition-colors sm:text-[10px] sm:tracking-wideset font-bold',
+                  'font-display text-white text-[9px] tracking-[0.12em] uppercase transition-colors sm:text-[10px] sm:tracking-wideset font-bold',
                   active ? 'text-ink' : 'text-ink/55 hover:text-ink',
                 )}
               >
