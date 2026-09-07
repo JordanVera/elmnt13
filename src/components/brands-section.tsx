@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { allBrands, featuredBrands } from "@/lib/brands";
-import { LogoMarquee } from "@/components/logo-marquee";
+import { useState } from 'react';
+import { allBrands, featuredBrands } from '@/lib/brands';
+import { LogoMarquee } from '@/components/logo-marquee';
 
 export function BrandsSection() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export function BrandsSection() {
             className="text-[11px] tracking-[0.32em] text-ink/60 uppercase transition-colors hover:text-ink"
             aria-expanded={open}
           >
-            {open ? "Close list" : "View all"}
+            {open ? 'Close list' : 'View all'}
           </button>
           {open ? (
             <ul className="mt-10 grid grid-cols-2 gap-x-8 gap-y-3 text-left sm:grid-cols-3 md:grid-cols-4">
@@ -31,12 +31,7 @@ export function BrandsSection() {
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="mt-4 text-xs text-ink/40">
-              {featuredBrands.length} in the marquee · {allBrands.length} in the
-              full roster — the strip can hold as many as you have.
-            </p>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 export type InquiryState = {
   ok: boolean;
@@ -9,30 +9,30 @@ export async function submitInquiry(
   _prev: InquiryState,
   formData: FormData,
 ): Promise<InquiryState> {
-  const honeypot = String(formData.get("company_website") ?? "");
+  const honeypot = String(formData.get('company_website') ?? '');
   if (honeypot.trim()) {
-    return { ok: true, message: "Thank you. We’ll be in touch." };
+    return { ok: true, message: 'Thank you. We’ll be in touch.' };
   }
 
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const category = String(formData.get("category") ?? "").trim();
-  const offering = String(formData.get("offering") ?? "").trim();
-  const details = String(formData.get("details") ?? "").trim();
+  const name = String(formData.get('name') ?? '').trim();
+  const email = String(formData.get('email') ?? '').trim();
+  const phone = String(formData.get('phone') ?? '').trim();
+  const category = String(formData.get('category') ?? '').trim();
+  const offering = String(formData.get('offering') ?? '').trim();
+  const details = String(formData.get('details') ?? '').trim();
 
   if (!name || !email || !category || !details) {
     return {
       ok: false,
-      message: "Please complete name, email, service, and details.",
+      message: 'Please complete name, email, service, and details.',
     };
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { ok: false, message: "Please enter a valid email address." };
+    return { ok: false, message: 'Please enter a valid email address.' };
   }
 
-  console.info("[ELMNT13 inquiry]", {
+  console.info('[ELMNT13 inquiry]', {
     name,
     email,
     phone,
@@ -43,6 +43,6 @@ export async function submitInquiry(
 
   return {
     ok: true,
-    message: "Thank you. We’ll be in touch to talk through the vision.",
+    message: 'Thank you. We’ll be in touch to talk through the vision.',
   };
 }

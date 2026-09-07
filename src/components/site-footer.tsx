@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 md:py-20">
         <div className="space-y-6">
           <Logo inverted />
-          <Logo variant="weddings" href="/weddings" inverted />
+          {/* <Logo variant="weddings" href="/weddings" inverted /> */}
         </div>
 
         <div>
@@ -70,7 +70,18 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10 px-6 py-5 pb-24 text-center text-[11px] tracking-[0.22em] text-paper/40 uppercase">
-        © {new Date().getFullYear()} ELMNT13 · Marketing & Management
+        <p>© {new Date().getFullYear()} ELMNT13 · Marketing & Management</p>
+        <p className="mt-2">
+          Site by{' '}
+          <a
+            href="https://jordanvera.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-paper/55 transition-colors hover:text-gold"
+          >
+            Jordan Vera
+          </a>
+        </p>
       </div>
     </footer>
   );
