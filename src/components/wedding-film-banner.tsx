@@ -35,7 +35,7 @@ export function WeddingFilmBanner() {
   return (
     <div
       ref={ref}
-      className="relative aspect-video min-h-70 overflow-hidden bg-ink text-paper md:aspect-21/9"
+      className="relative aspect-video min-h-70 w-full overflow-hidden bg-ink text-paper md:aspect-21/9"
     >
       <Image src={POSTER} alt="" fill sizes="100vw" className="object-cover " />
       {active ? (
