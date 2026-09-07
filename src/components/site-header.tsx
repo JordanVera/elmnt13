@@ -159,7 +159,7 @@ export function SiteHeader() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={skip ? undefined : { opacity: 0, y: -8 }}
                     transition={transition}
-                    className="mt-2 w-full overflow-hidden rounded-3xl border border-white/15 bg-black/80 p-3 shadow-xl backdrop-blur-xl"
+                    className="mt-2 w-full overflow-hidden rounded-3xl border border-white/15 bg-black/50 p-3 shadow-xl backdrop-blur-xl"
                   >
                     <ul className="flex flex-col">
                       {footerLinks.map((link) => {
