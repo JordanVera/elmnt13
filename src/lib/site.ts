@@ -6,10 +6,11 @@ export const site = {
 };
 
 export const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
+  { href: '/weddings', label: 'Weddings' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
-  { href: '/weddings', label: 'Weddings' },
   { href: '/contact', label: 'Contact' },
 ] as const;
 

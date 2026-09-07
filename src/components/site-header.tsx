@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { footerLinks } from '@/lib/site';
+import { navLinks } from '@/lib/site';
 import { cn } from '@/lib/cn';
 
 const EASE = { duration: 0.22, ease: [0.16, 1, 0.3, 1] as const };
@@ -152,7 +152,7 @@ export function SiteHeader() {
               )}
             >
               <ul className="flex flex-col">
-                {footerLinks.map((link) => {
+                {navLinks.map((link) => {
                   const active = isActive(pathname, link.href);
                   return (
                     <li key={link.href}>
