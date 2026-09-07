@@ -1,33 +1,106 @@
-"use client";
+'use client';
 
-import { useActionState, useMemo, useState } from "react";
-import { submitInquiry, type InquiryState } from "@/app/contact/actions";
-import { inquiryServices } from "@/lib/services";
+import { useMemo, useState, type FormEvent } from 'react';
+import { inquiryServices } from '@/lib/services';
 
-const initial: InquiryState = { ok: false, message: "" };
+const FORM_ACTION = 'https://formsubmit.co/ashley@elmnt13.com';
+const FORM_AJAX = 'https://formsubmit.co/ajax/ashley@elmnt13.com';
+
+type InquiryState = { ok: boolean; message: string };
+
+const initial: InquiryState = { ok: false, message: '' };
 const categories = Object.keys(inquiryServices) as Array<
   keyof typeof inquiryServices
 >;
 
 export function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitInquiry, initial);
-  const [category, setCategory] = useState<(typeof categories)[number] | "">(
-    "",
+  const [pending, setPending] = useState(false);
+  const [state, setState] = useState<InquiryState>(initial);
+  const [category, setCategory] = useState<(typeof categories)[number] | ''>(
+    '',
   );
   const offerings = useMemo(
     () => (category ? [...inquiryServices[category]] : []),
     [category],
   );
 
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    if (String(formData.get('_honey') ?? '').trim()) {
+      form.reset();
+      setCategory('');
+      setState({ ok: true, message: 'Thank you. We’ll be in touch.' });
+      return;
+    }
+
+    setPending(true);
+    setState(initial);
+
+    try {
+      const response = await fetch(FORM_AJAX, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+      });
+
+      const data = (await parseJson(response)) as {
+        success?: string | boolean;
+        message?: string;
+      };
+      const succeeded =
+        response.ok && data.success !== false && data.success !== 'false';
+
+      if (!succeeded) {
+        setState({
+          ok: false,
+          message:
+            data.message ||
+            'Something went wrong. Please try again or email us directly.',
+        });
+        return;
+      }
+
+      form.reset();
+      setCategory('');
+      setState({
+        ok: true,
+        message: 'Thank you. We’ll be in touch to talk through the vision.',
+      });
+    } catch {
+      setState({
+        ok: false,
+        message: 'Something went wrong. Please try again or email us directly.',
+      });
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
-    <form action={formAction} className="space-y-6">
+    <form
+      action={FORM_ACTION}
+      method="POST"
+      onSubmit={handleSubmit}
+      className="space-y-6"
+    >
+      <input type="hidden" name="_subject" value="ELMNT13 website inquiry" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+
       <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
         Quick question?
       </p>
 
       <label className="hidden">
         Company website
-        <input type="text" name="company_website" tabIndex={-1} autoComplete="off" />
+        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" />
       </label>
 
       <Field label="Full name" name="name" required />
@@ -43,7 +116,7 @@ export function ContactForm() {
           required
           value={category}
           onChange={(event) =>
-            setCategory(event.target.value as (typeof categories)[number] | "")
+            setCategory(event.target.value as (typeof categories)[number] | '')
           }
           className="mt-2 w-full border-b border-ink/20 bg-transparent py-3 outline-none"
         >
@@ -91,11 +164,13 @@ export function ContactForm() {
         disabled={pending}
         className="bg-ink px-10 py-4 text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:bg-gold hover:text-ink disabled:opacity-50"
       >
-        {pending ? "Sending" : "Send"}
+        {pending ? 'Sending' : 'Send'}
       </button>
 
       {state.message ? (
-        <p className={state.ok ? "text-sm text-ink/70" : "text-sm text-red-700"}>
+        <p
+          className={state.ok ? 'text-sm text-ink/70' : 'text-sm text-red-700'}
+        >
           {state.message}
         </p>
       ) : null}
@@ -106,7 +181,7 @@ export function ContactForm() {
 function Field({
   label,
   name,
-  type = "text",
+  type = 'text',
   required,
 }: {
   label: string;
@@ -127,4 +202,13 @@ function Field({
       />
     </label>
   );
+}
+
+async function parseJson(response: Response) {
+  const text = await response.text();
+  try {
+    return JSON.parse(text) as unknown;
+  } catch {
+    throw new Error('Unexpected response');
+  }
 }
