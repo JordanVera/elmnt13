@@ -197,7 +197,7 @@ export function ServicesExplorer() {
                   sizes="(max-width: 1024px) 0px, 28vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-ink/10" />
+                <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/15 to-ink/10" />
               </motion.div>
             ))}
             <div className="absolute inset-x-0 bottom-0 p-6">
