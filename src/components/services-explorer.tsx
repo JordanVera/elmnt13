@@ -87,7 +87,7 @@ export function ServicesExplorer() {
                     <button
                       type="button"
                       onClick={() => scrollToCategory(category.id)}
-                      className="text-left"
+                      className="text-left cursor-pointer"
                     >
                       <span
                         className={cn(
@@ -134,7 +134,7 @@ export function ServicesExplorer() {
                       type="button"
                       onClick={() => scrollToIndex(index)}
                       aria-current={selected ? 'true' : undefined}
-                      className="flex w-full items-start justify-between gap-4 py-3 text-left"
+                      className="flex w-full items-start justify-between gap-4 py-3 text-left cursor-pointer"
                     >
                       <span className="min-w-0">
                         <span

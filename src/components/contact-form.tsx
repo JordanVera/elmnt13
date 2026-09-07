@@ -162,7 +162,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="bg-ink px-10 py-4 text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:bg-gold hover:text-ink disabled:opacity-50"
+        className="cursor-pointer bg-ink px-10 py-4 text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:bg-gold hover:text-ink disabled:opacity-50"
       >
         {pending ? 'Sending' : 'Send'}
       </button>
