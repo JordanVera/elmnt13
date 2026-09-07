@@ -1,6 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type Ref,
+} from 'react';
 import Image from 'next/image';
 import {
   motion,
@@ -10,6 +17,19 @@ import {
 } from 'framer-motion';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const MEET_ROTATE = -11;
+const HOLD_ROTATE = -9.5;
+const PIVOT_Y = 0.68;
+const RIM_Y = 0.055;
+const RIM_WIDTH = 0.262;
+
+function kissOffset(width: number, height: number, degrees: number) {
+  const theta = (Math.abs(degrees) * Math.PI) / 180;
+  const gap =
+    width * (1 - RIM_WIDTH * Math.cos(theta)) -
+    2 * (PIVOT_Y - RIM_Y) * height * Math.sin(theta);
+  return -(gap / 2) * 0.88;
+}
 
 const BUBBLES = [
   { id: 1, x: 50, r: 3.2, delay: 0.05, duration: 2.7, drift: 2.4 },
@@ -40,38 +60,57 @@ const SPARKS = [
   { id: 8, angle: 228 },
 ] as const;
 
-const glassVariants: Variants = {
-  hidden: (dir: number) => ({
-    x: `${dir * 78}vw`,
-    rotate: dir * 26,
-    opacity: 0,
-  }),
-  approach: (dir: number) => ({
-    x: dir * 52,
-    rotate: dir * 8,
-    opacity: 1,
-    transition: { duration: 2.15, ease: [0.45, 0.02, 0.18, 1] },
-  }),
-  clink: (dir: number) => ({
-    x: dir * -8,
-    rotate: dir * -13,
-    transition: { type: 'spring', stiffness: 380, damping: 14, mass: 0.7 },
-  }),
-  hold: (dir: number) => ({
-    x: dir * -8,
-    y: [0, -8, 0],
-    rotate: [dir * -13, dir * -11.5, dir * -13],
-    transition: { duration: 5.4, repeat: Infinity, ease: 'easeInOut' },
-  }),
-};
+function getGlassVariants(meetX: number): Variants {
+  return {
+    hidden: (dir: number) => ({
+      x: `${dir * 42}vw`,
+      rotate: dir * 8,
+      opacity: 0,
+    }),
+    clink: (dir: number) => ({
+      x: dir * meetX,
+      rotate: dir * MEET_ROTATE,
+      opacity: 1,
+      transition: { duration: 2.8, ease: EASE_LUXE },
+    }),
+    hold: (dir: number) => ({
+      x: dir * meetX,
+      y: [0, -4, 0],
+      rotate: [dir * MEET_ROTATE, dir * HOLD_ROTATE, dir * MEET_ROTATE],
+      transition: { duration: 7.2, repeat: Infinity, ease: 'easeInOut' },
+    }),
+  };
+}
 
 export function ChampagneToast() {
   const controls = useAnimation();
   const reduceMotion = useReducedMotion();
+  const glassRef = useRef<HTMLDivElement>(null);
   const [toasted, setToasted] = useState(false);
+  const [meetX, setMeetX] = useState<number | null>(null);
   const skipMotion = Boolean(reduceMotion);
+  const ready = meetX !== null;
+  const glassVariants = useMemo(() => getGlassVariants(meetX ?? 0), [meetX]);
+
+  useLayoutEffect(() => {
+    const el = glassRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const { width, height } = el.getBoundingClientRect();
+      if (width < 8 || height < 8) return;
+      setMeetX(kissOffset(width, height, Math.abs(MEET_ROTATE)));
+    };
+
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
+    if (!ready) return;
+
     let cancelled = false;
 
     async function play() {
@@ -81,8 +120,6 @@ export function ChampagneToast() {
         return;
       }
 
-      await controls.start('approach');
-      if (cancelled) return;
       await controls.start('clink');
       if (cancelled) return;
       setToasted(true);
@@ -93,91 +130,76 @@ export function ChampagneToast() {
     return () => {
       cancelled = true;
     };
-  }, [controls, skipMotion]);
+  }, [controls, ready, skipMotion]);
 
   return (
-    <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-blush">
-      <Image
-        src="/weddings-hero.jpg"
-        alt=""
-        fill
-        preload
-        sizes="100vw"
-        className="object-cover opacity-45"
-      />
-      <div className="absolute inset-0 bg-blush/60" />
+    <section className="relative min-h-dvh overflow-hidden bg-white">
       <div
-        className="pointer-events-none absolute top-[28%] left-1/2 h-[36vh] w-[min(80vw,32rem)] -translate-x-1/2 rounded-full bg-gold/20 blur-3xl"
+        className="absolute inset-x-0 top-16 bottom-32 flex items-end justify-center md:bottom-40"
         aria-hidden="true"
-      />
-
-      <div className="relative z-10 flex min-h-dvh w-full flex-col items-center justify-center px-6 pt-10 pb-28">
-        <h1 className="text-center">
-          <span className="block overflow-hidden pb-1">
-            <motion.span
-              className="block font-serif text-3xl italic text-ink md:text-6xl"
-              initial={skipMotion ? false : { y: '115%' }}
-              animate={{ y: '0%' }}
-              transition={{
-                duration: skipMotion ? 0 : 0.95,
-                delay: skipMotion ? 0 : 2.05,
-                ease: EASE_LUXE,
-              }}
-            >
-              To your
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span
-              className="font-display block text-7xl tracking-tight text-ink uppercase md:text-9xl"
-              initial={skipMotion ? false : { y: '115%' }}
-              animate={{ y: '0%' }}
-              transition={{
-                duration: skipMotion ? 0 : 1.05,
-                delay: skipMotion ? 0 : 2.18,
-                ease: EASE_LUXE,
-              }}
-            >
-              Love.
-            </motion.span>
-          </span>
-        </h1>
-
-        <div
-          className="relative mt-2 flex w-full items-end justify-center md:mt-4"
-          aria-hidden="true"
+      >
+        <motion.div
+          className="h-[90%] w-auto shrink-0"
+          custom={-1}
+          variants={glassVariants}
+          initial={skipMotion ? 'clink' : 'hidden'}
+          animate={controls}
+          style={{ originX: 0.5, originY: PIVOT_Y }}
         >
-          <motion.div
-            className="-mr-10 md:-mr-16"
-            custom={-1}
-            variants={glassVariants}
-            initial={skipMotion ? 'clink' : 'hidden'}
-            animate={controls}
-            style={{ originX: 0.5, originY: 0.68 }}
-          >
-            <ChampagneFlute
-              side="left"
-              toasted={toasted}
-              reduceMotion={skipMotion}
-            />
-          </motion.div>
-          <motion.div
-            className="-ml-10 md:-ml-16"
-            custom={1}
-            variants={glassVariants}
-            initial={skipMotion ? 'clink' : 'hidden'}
-            animate={controls}
-            style={{ originX: 0.5, originY: 0.68 }}
-          >
-            <ChampagneFlute
-              side="right"
-              toasted={toasted}
-              reduceMotion={skipMotion}
-            />
-          </motion.div>
-          <SparkBurst active={toasted && !skipMotion} />
-        </div>
+          <ChampagneFlute
+            ref={glassRef}
+            side="left"
+            toasted={toasted}
+            reduceMotion={skipMotion}
+          />
+        </motion.div>
+        <motion.div
+          className="h-[90%] w-auto shrink-0"
+          custom={1}
+          variants={glassVariants}
+          initial={skipMotion ? 'clink' : 'hidden'}
+          animate={controls}
+          style={{ originX: 0.5, originY: PIVOT_Y }}
+        >
+          <ChampagneFlute
+            side="right"
+            toasted={toasted}
+            reduceMotion={skipMotion}
+          />
+        </motion.div>
+        <SparkBurst active={toasted && !skipMotion} />
       </div>
+
+      <h1 className="absolute inset-x-0 bottom-0 z-10 flex w-full flex-col items-center px-6 pb-8 text-center md:pb-12">
+        <span className="block overflow-hidden pb-1">
+          <motion.span
+            className="block font-serif text-2xl italic text-ink md:text-4xl"
+            initial={skipMotion ? false : { y: '115%' }}
+            animate={{ y: '0%' }}
+            transition={{
+              duration: skipMotion ? 0 : 1,
+              delay: skipMotion ? 0 : 2.15,
+              ease: EASE_LUXE,
+            }}
+          >
+            To your
+          </motion.span>
+        </span>
+        <span className="block overflow-hidden">
+          <motion.span
+            className="font-display block text-5xl tracking-tight text-ink uppercase md:text-7xl"
+            initial={skipMotion ? false : { y: '115%' }}
+            animate={{ y: '0%' }}
+            transition={{
+              duration: skipMotion ? 0 : 1.1,
+              delay: skipMotion ? 0 : 2.28,
+              ease: EASE_LUXE,
+            }}
+          >
+            Love.
+          </motion.span>
+        </span>
+      </h1>
     </section>
   );
 }
@@ -186,29 +208,31 @@ function ChampagneFlute({
   side,
   toasted,
   reduceMotion,
+  ref,
 }: {
   side: 'left' | 'right';
   toasted: boolean;
   reduceMotion: boolean;
+  ref?: Ref<HTMLDivElement>;
 }) {
   const clipId = `${side}-liquid-bowl`;
   const bubbleId = `${side}-bubble-glint`;
 
   return (
-    <div className="relative h-[38vh] w-[calc(38vh*2/3)] md:h-[50vh] md:w-[calc(50vh*2/3)]">
+    <div ref={ref} className="relative aspect-2/3 h-full">
       <Image
         src="/champagne-flute.png"
         alt=""
         fill
-        sizes="(min-width: 768px) 33vh, 25vh"
-        className="object-contain drop-shadow-xl"
+        sizes="(min-width: 768px) 40vh, 32vh"
+        className="object-contain drop-shadow-[0_24px_40px_rgba(10,10,10,0.12)]"
         preload
       />
       <div className="absolute top-[31%] left-1/2 w-[46%] -translate-x-1/2 text-center">
-        <p className="font-display font-bold text-[clamp(0.55rem,1.15vh,0.8rem)] tracking-[0.32em] text-[#fff6e4]">
+        <p className="font-display font-bold text-[clamp(0.65rem,1.35vh,0.95rem)] tracking-[0.32em] text-[#fff6e4]">
           ELMNT13
         </p>
-        <p className="font-serif font-bold text-[clamp(0.7rem,1.55vh,1.05rem)] italic text-white/90">
+        <p className="font-serif font-bold text-[clamp(0.85rem,1.8vh,1.2rem)] italic text-white/90">
           Weddings
         </p>
       </div>
@@ -315,10 +339,10 @@ function SparkBurst({ active }: { active: boolean }) {
 
   return (
     <motion.div
-      className="absolute top-[10%] left-1/2 z-20 h-28 w-28 -translate-x-1/2"
-      initial={{ opacity: 0, scale: 0.35 }}
-      animate={{ opacity: [0, 1, 0], scale: [0.35, 1.2, 1.7] }}
-      transition={{ duration: 0.65, ease: 'easeOut' }}
+      className="absolute top-[18%] left-1/2 z-20 h-32 w-32 -translate-x-1/2"
+      initial={{ opacity: 0, scale: 0.4 }}
+      animate={{ opacity: [0, 1, 0], scale: [0.4, 1.15, 1.55] }}
+      transition={{ duration: 0.85, ease: EASE_LUXE }}
     >
       {SPARKS.map((spark) => (
         <span
@@ -327,7 +351,7 @@ function SparkBurst({ active }: { active: boolean }) {
           style={{ transform: `rotate(${spark.angle}deg)` }}
         />
       ))}
-      <span className="absolute top-1/2 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-bright shadow-[0_0_22px_rgba(221,196,154,1)]" />
+      <span className="absolute top-1/2 left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-bright shadow-[0_0_22px_rgba(221,196,154,1)]" />
     </motion.div>
   );
 }

@@ -17,7 +17,7 @@ export default function WeddingsPage() {
     <main>
       <ChampagneToast />
 
-      <section className="bg-paper px-6 py-28">
+      <section className="bg-white px-6 py-28">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             With you for the moments that matter
@@ -52,7 +52,7 @@ export default function WeddingsPage() {
         </div>
       </section>
 
-      <section className="bg-blush px-6 py-28">
+      <section className="bg-white px-6 py-28">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             Why ELMNT13 Weddings
@@ -69,7 +69,7 @@ export default function WeddingsPage() {
         </div>
       </section>
 
-      <DetailsMoment />
+      <DetailsMoment tone="paper" />
       <WeddingGallery />
       <ContactCta
         kicker="Contact"

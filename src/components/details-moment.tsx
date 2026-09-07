@@ -5,7 +5,7 @@ export function DetailsMoment({
   tone = "blush",
 }: {
   line?: string;
-  tone?: "blush" | "ink";
+  tone?: "blush" | "ink" | "paper";
 }) {
   const words = line.split(" ");
   const dark = tone === "ink";
@@ -15,7 +15,9 @@ export function DetailsMoment({
       className={
         dark
           ? "flex min-h-[70vh] items-center bg-ink px-6 py-28"
-          : "flex min-h-[70vh] items-center bg-blush px-6 py-28"
+          : tone === "paper"
+            ? "flex min-h-[70vh] items-center bg-white px-6 py-28"
+            : "flex min-h-[70vh] items-center bg-blush px-6 py-28"
       }
     >
       <Reveal className="mx-auto max-w-6xl text-center">

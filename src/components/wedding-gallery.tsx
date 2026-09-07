@@ -4,7 +4,7 @@ import { weddingProjects } from '@/lib/projects';
 
 export function WeddingGallery() {
   return (
-    <section className="bg-paper max-w-7xl mx-auto">
+    <section className="mx-auto max-w-7xl bg-white">
       <div className="mx-auto max-w-6xl px-6 pt-28 pb-14">
         <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
           Work
