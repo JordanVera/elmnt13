@@ -205,10 +205,10 @@ function ChampagneFlute({
         preload
       />
       <div className="absolute top-[31%] left-1/2 w-[46%] -translate-x-1/2 text-center">
-        <p className="font-display text-[clamp(0.55rem,1.15vh,0.8rem)] tracking-[0.32em] text-[#fff6e4]">
+        <p className="font-display font-bold text-[clamp(0.55rem,1.15vh,0.8rem)] tracking-[0.32em] text-[#fff6e4]">
           ELMNT13
         </p>
-        <p className="font-serif text-[clamp(0.7rem,1.55vh,1.05rem)] italic text-white/90">
+        <p className="font-serif font-bold text-[clamp(0.7rem,1.55vh,1.05rem)] italic text-white/90">
           Weddings
         </p>
       </div>
@@ -266,7 +266,13 @@ function Bubble({
   once = false,
 }: {
   fillId: string;
-  bubble: { x: number; r: number; delay: number; duration: number; drift: number };
+  bubble: {
+    x: number;
+    r: number;
+    delay: number;
+    duration: number;
+    drift: number;
+  };
   reduceMotion: boolean;
   start: number;
   end: number;
