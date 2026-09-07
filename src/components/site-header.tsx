@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { footerLinks } from '@/lib/site';
@@ -121,17 +122,32 @@ export function SiteHeader() {
             transition={transition}
             className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4"
           >
-            <div className="mx-auto flex max-w-6xl flex-col items-end">
-              <button
-                type="button"
-                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={menuOpen}
-                aria-controls="site-menu"
-                onClick={() => setMenuOpen((open) => !open)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/20 text-black shadow-lg shadow-black/25 backdrop-blur-xl"
-              >
-                <MenuIcon open={menuOpen} />
-              </button>
+            <div className="mx-auto flex max-w-5xl flex-col">
+              <div className="flex items-center justify-between rounded-full border border-white/15 bg-black/80 px-3 py-2 shadow-lg shadow-black/25 backdrop-blur-xl sm:px-4">
+                <Link
+                  href="/"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex shrink-0 items-center pl-1"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="ELMNT13"
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto sm:h-12"
+                  />
+                </Link>
+                <button
+                  type="button"
+                  aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                  aria-expanded={menuOpen}
+                  aria-controls="site-menu"
+                  onClick={() => setMenuOpen((open) => !open)}
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-black"
+                >
+                  <MenuIcon open={menuOpen} />
+                </button>
+              </div>
 
               <AnimatePresence>
                 {menuOpen ? (
@@ -143,18 +159,9 @@ export function SiteHeader() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={skip ? undefined : { opacity: 0, y: -8 }}
                     transition={transition}
-                    className="mt-2 w-full max-w-xs overflow-hidden rounded-3xl border border-white/15 bg-white/20 p-3 shadow-xl backdrop-blur-xl"
+                    className="mt-2 w-full overflow-hidden rounded-3xl border border-white/15 bg-black/80 p-3 shadow-xl backdrop-blur-xl"
                   >
                     <ul className="flex flex-col">
-                      <li>
-                        <Link
-                          href="/"
-                          onClick={() => setMenuOpen(false)}
-                          className="block rounded-xl px-3 py-2.5 font-display text-sm tracking-[0.18em] text-black uppercase transition hover:bg-white/10"
-                        >
-                          Home
-                        </Link>
-                      </li>
                       {footerLinks.map((link) => {
                         const active = isActive(pathname, link.href);
                         return (
@@ -166,8 +173,8 @@ export function SiteHeader() {
                               className={cn(
                                 'block rounded-xl px-3 py-2.5 font-display text-sm tracking-[0.18em] uppercase transition hover:bg-white/10',
                                 active
-                                  ? 'text-black-bright'
-                                  : 'text-black hover:text-black-bright',
+                                  ? 'text-white'
+                                  : 'text-white hover:text-white-bright',
                               )}
                             >
                               {link.label}
@@ -196,7 +203,7 @@ export function SiteHeader() {
           >
             <nav
               aria-label="Primary"
-              className="pointer-events-auto mx-auto flex max-w-2xl items-center justify-between rounded-2xl border border-white/10 bg-white/20 px-5 py-2.5 backdrop-blur-xl sm:px-8 sm:py-3"
+              className="pointer-events-auto mx-auto flex max-w-md items-center justify-between rounded-2xl border border-white/10 bg-white/20 px-5 py-2.5 backdrop-blur-xl sm:px-8 sm:py-3"
             >
               <ul className="flex w-full items-center justify-between gap-2">
                 {footerLinks.map((link) => {
@@ -207,7 +214,7 @@ export function SiteHeader() {
                         href={link.href}
                         aria-current={active ? 'page' : undefined}
                         className={cn(
-                          'font-display text-[10px] tracking-[0.18em] uppercase transition-colors sm:text-[11px] sm:tracking-[0.22em]',
+                          'font-bold text-[10px] uppercase transition-colors sm:text-[11px] sm:tracking-[0.22em]',
                           active
                             ? 'text-black-bright'
                             : 'text-black hover:text-black-bright',
