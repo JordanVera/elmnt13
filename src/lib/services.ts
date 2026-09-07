@@ -11,7 +11,14 @@ export type ServiceCategory = {
   description: string;
   stageTitle: string;
   stageItems: Array<{ label: string; href?: string }>;
+  image: string;
+  imageAlt: string;
   options: ServiceOption[];
+};
+
+export type ServiceOffering = ServiceOption & {
+  categoryId: ServiceCategory["id"];
+  categoryTitle: string;
 };
 
 export const serviceCategories: ServiceCategory[] = [
