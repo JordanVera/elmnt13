@@ -36,7 +36,7 @@ export default async function ProjectPage({ params }: Props) {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-ink/40" />
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-12">
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-28">
           <div className="mx-auto max-w-6xl">
             <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
               {project.service} · {project.year}

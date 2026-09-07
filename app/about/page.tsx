@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-paper px-6 pt-36 pb-24 md:pt-44">
+      <section className="bg-paper px-6 pt-16 pb-24 md:pt-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">About</p>
           <Reveal>

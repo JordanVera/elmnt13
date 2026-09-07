@@ -12,7 +12,7 @@ export function ServicesExplorer() {
   const preview = active?.options.find((item) => item.name === hovered);
 
   return (
-    <section className="min-h-dvh bg-ink px-6 pt-32 pb-24 text-paper">
+    <section className="min-h-dvh bg-ink px-6 pt-16 pb-32 text-paper md:pt-24">
       <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">

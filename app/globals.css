@@ -23,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-bottom: 5.5rem;
 }
 
 body {
