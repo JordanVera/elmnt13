@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Project } from "@/lib/projects";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Project } from '@/lib/projects';
 
 export function ProjectGrid({ items }: { items: Project[] }) {
   return (
@@ -18,8 +18,8 @@ export function ProjectGrid({ items }: { items: Project[] }) {
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/50" />
-          <div className="absolute inset-x-0 bottom-0 translate-y-3 p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="absolute inset-0 bg-linear-to-t from-ink/70 via-ink/15 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-6 text-left">
             <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
               {project.service}
             </p>
