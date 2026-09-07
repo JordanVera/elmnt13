@@ -1,27 +1,31 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { GoldLink } from "@/components/gold-link";
-import { featuredProjects, projects } from "@/lib/projects";
+import Image from 'next/image';
+import Link from 'next/link';
+import { GoldLink } from '@/components/gold-link';
+import { featuredProjects, projects } from '@/lib/projects';
 
-const slides = featuredProjects.length ? featuredProjects : projects.slice(0, 4);
+const slides = featuredProjects.length
+  ? featuredProjects
+  : projects.slice(0, 4);
 
 export function WorkCarousel() {
   return (
     <section className="bg-paper py-28 md:py-36">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
         <div>
-          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">Work</p>
+          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+            Work
+          </p>
           <h2 className="mt-4 font-display text-5xl tracking-tight uppercase md:text-7xl">
             Curated
             <br />
             Experiences
           </h2>
         </div>
-        <GoldLink href="/work" className="hidden md:inline-flex">
-          View all
-        </GoldLink>
+        <div className="hidden md:block">
+          <GoldLink href="/work">View all</GoldLink>
+        </div>
       </div>
 
       <div className="no-scrollbar mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
