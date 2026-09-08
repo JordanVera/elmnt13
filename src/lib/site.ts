@@ -8,8 +8,8 @@ export const site = {
 export const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/weddings', label: 'Weddings' },
   { href: '/services', label: 'Services' },
+  { href: '/weddings', label: 'Weddings' },
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
 ] as const;
