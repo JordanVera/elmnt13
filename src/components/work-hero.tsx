@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -13,116 +13,219 @@ import {
 } from 'framer-motion';
 import type { Project } from '@/lib/projects';
 
-const SPRING = { stiffness: 100, damping: 30, restDelta: 0.001 };
-const CARD_HEIGHT = '48vh'; // Smaller, more elegant cards
+// svh rather than vh so collapsing mobile browser chrome never resizes the track.
+// The mobile size keeps the track short enough to scroll through in one sitting.
+const CARD_CLASS =
+  'relative aspect-3/4 h-[36svh] w-auto shrink-0 overflow-hidden bg-mist md:h-[48svh]';
+const CARD_ASPECT = 3 / 4;
+const MOBILE_CARD_VH = 0.36;
+const DESKTOP_CARD_VH = 0.48;
+
+// Must match the `md:` breakpoint the card height switches on.
+const MOBILE_BREAKPOINT = 768;
+
+// Cards that pop into the parted title before the track starts sliding.
+const INTRO_CARDS = 4;
+// Upper bound on cards that can be on screen during the intro, and so need a reveal.
+const REVEAL_CARDS = 16;
+
+// Card travel in px per px of page scroll, once the intro is complete.
+const SLIDE_SPEED = { mobile: 0.7, desktop: 1.15 };
+
+const SPRING = {
+  mobile: { stiffness: 130, damping: 26, mass: 0.6, restDelta: 0.0005 },
+  desktop: { stiffness: 90, damping: 28, mass: 0.9, restDelta: 0.0005 },
+};
+
+type Metrics = {
+  isMobile: boolean;
+  scrollHeight: number;
+  travel: number;
+  introOffset: number;
+  step: number;
+  cardWidth: number;
+  padLeft: number;
+  viewportWidth: number;
+  /** Scroll progress breakpoints, derived from pixel distances. */
+  cardsStart: number;
+  titleEnd: number;
+  carouselStart: number;
+  cardsEnd: number;
+};
+
+const INITIAL_METRICS: Metrics = {
+  isMobile: false,
+  scrollHeight: 3000,
+  travel: 0,
+  introOffset: 0,
+  step: 1,
+  cardWidth: 0,
+  padLeft: 0,
+  viewportWidth: 1,
+  cardsStart: 0.04,
+  titleEnd: 0.08,
+  carouselStart: 0.18,
+  cardsEnd: 0.22,
+};
+
+function rotationFor(slug: string) {
+  const hash = slug
+    .split('')
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return ((hash % 30) - 15) / 5; // -3 to 3 degrees
+}
 
 export function WorkHero({ items }: { items: Project[] }) {
   const containerRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const [scrollHeight, setScrollHeight] = useState(3000);
-  const [maxScroll, setMaxScroll] = useState(1000);
+  const [metrics, setMetrics] = useState<Metrics>(INITIAL_METRICS);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const introPieces = useMemo(() => {
-    const featured = items.filter((project) => project.featured);
-    return (featured.length ? featured : items).slice(0, 4);
-  }, [items]);
-
-  const slides = useMemo(() => {
-    return items;
-  }, [items]);
+  const slides = items;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, SPRING);
+  const smoothProgress = useSpring(
+    scrollYProgress,
+    metrics.isMobile ? SPRING.mobile : SPRING.desktop,
+  );
 
-  // Calculate dimensions
+  const viewportRef = useRef({ width: 0, height: 0 });
+
   useEffect(() => {
     if (reduceMotion) return;
 
-    const updateDimensions = () => {
+    const measure = (): Metrics | null => {
       const track = trackRef.current;
-      if (!track) return;
+      if (!track) return null;
 
-      const vh = window.innerHeight;
       const viewportWidth = window.innerWidth;
+      const vh = window.innerHeight;
+      const isMobile = viewportWidth < MOBILE_BREAKPOINT;
 
-      // Animation phases - smooth continuous motion
-      const titleDistance = vh * 0.08; // Very quick title split
-      const cardPopDistance = vh * 0.2; // Cards pop in quickly
-      const carouselWidth = track.scrollWidth - viewportWidth;
-      const carouselDistance = carouselWidth * 0.6; // Comfortable scroll speed
+      const styles = getComputedStyle(track);
+      const gap = Number.parseFloat(styles.columnGap) || 0;
+      const padLeft = Number.parseFloat(styles.paddingLeft) || 0;
+      const firstCard = track.firstElementChild as HTMLElement | null;
+      const cardWidth =
+        firstCard?.offsetWidth ||
+        vh * (isMobile ? MOBILE_CARD_VH : DESKTOP_CARD_VH) * CARD_ASPECT;
+      const step = cardWidth + gap;
+      const travel = Math.max(0, track.scrollWidth - viewportWidth);
 
-      const totalHeight =
-        vh + titleDistance + cardPopDistance + Math.max(carouselDistance, vh);
-      setScrollHeight(totalHeight);
-      setMaxScroll(Math.max(0, carouselWidth));
+      // Centre as many of the opening cards as the viewport can actually hold,
+      // so they land in the gap the title opens up.
+      const fits = Math.max(
+        1,
+        Math.floor((viewportWidth - padLeft * 2 + gap) / step),
+      );
+      const clusterWidth = Math.min(INTRO_CARDS, fits) * step - gap;
+      const introOffset = Math.max(
+        0,
+        (viewportWidth - clusterWidth) / 2 - padLeft,
+      );
+
+      const titleDistance = vh * (isMobile ? 0.45 : 0.38);
+      const popDistance = vh * (isMobile ? 0.8 : 0.66);
+      const slideDistance =
+        (travel + introOffset) /
+        (isMobile ? SLIDE_SPEED.mobile : SLIDE_SPEED.desktop);
+      const total = Math.max(vh, titleDistance + popDistance + slideDistance);
+
+      return {
+        isMobile,
+        scrollHeight: vh + total,
+        travel,
+        introOffset,
+        step,
+        cardWidth,
+        padLeft,
+        viewportWidth,
+        cardsStart: (titleDistance * 0.5) / total,
+        titleEnd: titleDistance / total,
+        carouselStart: (titleDistance + popDistance * 0.7) / total,
+        cardsEnd: (titleDistance + popDistance) / total,
+      };
     };
 
-    const timeoutId = setTimeout(updateDimensions, 100);
+    let frameId = 0;
 
-    const observer = new ResizeObserver(updateDimensions);
+    const update = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const last = viewportRef.current;
+      // Mobile browser chrome hides and shows mid-scroll, which reports as a
+      // resize. Re-measuring there would jump the track under the finger.
+      if (
+        width < MOBILE_BREAKPOINT &&
+        last.width === width &&
+        Math.abs(last.height - height) < 160
+      ) {
+        return;
+      }
+      viewportRef.current = { width, height };
+
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const next = measure();
+        if (next) setMetrics(next);
+      });
+    };
+
+    const observer = new ResizeObserver(update);
     const track = trackRef.current;
-
     if (track) observer.observe(track);
-    window.addEventListener('resize', updateDimensions);
+    window.addEventListener('resize', update);
 
     return () => {
-      clearTimeout(timeoutId);
+      cancelAnimationFrame(frameId);
       observer.disconnect();
-      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('resize', update);
     };
   }, [reduceMotion, slides.length]);
 
-  // Animation breakpoints - smooth continuous motion
-  const titleEnd = 0.05; // Title splits very quickly
-  const cardsStart = 0.08; // Cards start appearing
-  const cardsVisible = 0.18; // All 4 intro cards visible
-  const carouselStart = 0.2; // Carousel motion begins smoothly
+  const { cardsStart, titleEnd, carouselStart, cardsEnd, introOffset, travel } =
+    metrics;
 
-  // Title animation
   const leftX = useTransform(smoothProgress, [0, titleEnd], ['0vw', '-18vw']);
   const rightX = useTransform(smoothProgress, [0, titleEnd], ['0vw', '18vw']);
   const titleOpacity = useTransform(
     smoothProgress,
-    [0, titleEnd, carouselStart, 1],
-    [1, 1, 0.25, 0.1],
+    [0, carouselStart, cardsEnd],
+    [1, 1, 0.1],
   );
 
-  // Carousel moves continuously - no separate intro/carousel phases
-  const carouselProgress = useTransform(
-    smoothProgress,
-    [carouselStart, 1],
-    [0, 1],
-  );
-
+  // One continuous slide: parked while the cards pop, then linear to the end.
   const carouselX = useTransform(
-    carouselProgress,
-    [0, 1],
-    [0, -maxScroll * 0.6],
+    smoothProgress,
+    [0, carouselStart, 1],
+    [introOffset, introOffset, -travel],
   );
 
-  // UI elements
-  const hintOpacity = useTransform(smoothProgress, [0, titleEnd], [0.8, 0]);
+  const hintOpacity = useTransform(smoothProgress, [0, cardsStart], [0.85, 0]);
   const counterOpacity = useTransform(
     smoothProgress,
-    [cardsStart, cardsVisible],
+    [cardsStart, cardsEnd],
     [0, 1],
   );
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
   useEffect(() => {
-    const unsubscribe = carouselProgress.on('change', (p) => {
-      const normalized = Math.max(0, Math.min(1, p));
-      const index = Math.round(normalized * (slides.length - 1));
-      setActiveIndex(index);
-    });
-    return unsubscribe;
-  }, [carouselProgress, slides.length]);
+    const { step, cardWidth, padLeft, viewportWidth } = metrics;
+    if (step <= 0) return;
+
+    const readActive = (x: number) => {
+      const centreOfTrack = viewportWidth / 2 - x - padLeft;
+      const index = Math.round((centreOfTrack - cardWidth / 2) / step);
+      setActiveIndex(Math.max(0, Math.min(slides.length - 1, index)));
+    };
+
+    readActive(carouselX.get());
+    return carouselX.on('change', readActive);
+  }, [carouselX, metrics, slides.length]);
 
   if (reduceMotion) {
     return (
@@ -133,42 +236,18 @@ export function WorkHero({ items }: { items: Project[] }) {
               Our Work
             </h1>
             <div className="no-scrollbar flex gap-3 overflow-x-auto pb-8 snap-x snap-mandatory md:gap-4">
-              {slides.map((project, index) => {
-                const hash = project.slug
-                  .split('')
-                  .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-                const rotation = ((hash % 30) - 15) / 5;
-                return (
-                  <Link
-                    key={project.slug}
-                    href={`/work/${project.slug}`}
-                    className="group relative aspect-3/4 shrink-0 overflow-hidden bg-mist snap-center"
-                    style={{
-                      height: CARD_HEIGHT,
-                      width: 'auto',
-                      transform: `rotate(${rotation}deg)`,
-                    }}
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="70vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      priority={index < 2}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/12 to-transparent opacity-90" />
-                    <div className="absolute inset-x-0 bottom-0 p-4 text-left md:p-5">
-                      <p className="text-[10px] tracking-[0.28em] text-gold uppercase">
-                        {project.service}
-                      </p>
-                      <p className="mt-1.5 font-display text-base text-paper uppercase md:text-lg">
-                        {project.title}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
+              {slides.map((project, index) => (
+                <Link
+                  key={project.slug}
+                  href={`/work/${project.slug}`}
+                  className={`group snap-center ${CARD_CLASS}`}
+                  style={{
+                    transform: `rotate(${rotationFor(project.slug)}deg)`,
+                  }}
+                >
+                  <CardFace project={project} priority={index < 2} />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -180,18 +259,17 @@ export function WorkHero({ items }: { items: Project[] }) {
     <section
       ref={containerRef}
       className="relative w-full bg-ink"
-      style={{ height: `${scrollHeight}px` }}
+      style={{ height: `${metrics.scrollHeight}px` }}
     >
-      <div className="sticky top-0 h-dvh w-full overflow-hidden">
+      <div className="sticky top-0 h-svh w-full overflow-hidden">
         {/* Progress bar */}
         <motion.div
           className="absolute top-0 left-0 z-50 h-px w-full origin-left bg-gold"
           style={{ scaleX: smoothProgress }}
         />
 
-        {/* Main content */}
         <div className="relative flex h-full w-full items-center justify-center">
-          {/* Animated title */}
+          {/* Title parts to make room for the opening cards */}
           <h1 className="font-display pointer-events-none absolute z-10 flex w-full max-w-6xl items-center justify-center gap-[0.18em] px-6 text-[16vw] leading-none tracking-tight text-paper uppercase md:text-[11vw]">
             <motion.span style={{ x: leftX, opacity: titleOpacity }}>
               Our
@@ -201,24 +279,40 @@ export function WorkHero({ items }: { items: Project[] }) {
             </motion.span>
           </h1>
 
-          {/* Continuous carousel - cards pop in, then slide */}
           <div className="absolute inset-0 z-20 flex items-center overflow-hidden">
             <motion.div
               ref={trackRef}
               className="flex w-max gap-3 px-6 will-change-transform md:gap-4 lg:gap-5 lg:px-10"
               style={{ x: carouselX }}
             >
-              {slides.map((project, index) => (
-                <WorkCard
-                  key={project.slug}
-                  project={project}
-                  index={index}
-                  progress={smoothProgress}
-                  cardsStart={cardsStart}
-                  cardsVisible={cardsVisible}
-                  preload={index < 4}
-                />
-              ))}
+              {slides.map((project, index) => {
+                if (index < INTRO_CARDS) {
+                  return (
+                    <PopCard
+                      key={project.slug}
+                      project={project}
+                      index={index}
+                      progress={smoothProgress}
+                      cardsStart={cardsStart}
+                      cardsEnd={cardsEnd}
+                    />
+                  );
+                }
+
+                if (index < REVEAL_CARDS) {
+                  return (
+                    <RevealCard
+                      key={project.slug}
+                      project={project}
+                      progress={smoothProgress}
+                      cardsStart={cardsStart}
+                      cardsEnd={cardsEnd}
+                    />
+                  );
+                }
+
+                return <StaticCard key={project.slug} project={project} />;
+              })}
             </motion.div>
           </div>
         </div>
@@ -244,75 +338,112 @@ export function WorkHero({ items }: { items: Project[] }) {
   );
 }
 
-function WorkCard({
+const PopCard = memo(function PopCard({
   project,
   index,
   progress,
   cardsStart,
-  cardsVisible,
-  preload,
+  cardsEnd,
 }: {
   project: Project;
   index: number;
   progress: MotionValue<number>;
   cardsStart: number;
-  cardsVisible: number;
-  preload: boolean;
+  cardsEnd: number;
 }) {
-  // Cards pop in sequentially
-  const popStart = cardsStart + (cardsVisible - cardsStart) * (index * 0.12);
-  const popDuration = 0.025;
+  // Overlapping slots so the four cards read as one rising cascade.
+  const slot = (cardsEnd - cardsStart) / INTRO_CARDS;
+  const popStart = cardsStart + slot * index * 0.8;
+  const popEnd = popStart + slot * 1.4;
 
-  // Pop effect with scale
-  const scale = useTransform(
-    progress,
-    [popStart, popStart + popDuration],
-    [0.6, 1],
-  );
+  const scale = useTransform(progress, [popStart, popEnd], [0.86, 1]);
+  const y = useTransform(progress, [popStart, popEnd], [40, 0]);
   const opacity = useTransform(
     progress,
-    [popStart, popStart + popDuration / 2],
+    [popStart, popStart + (popEnd - popStart) * 0.45],
     [0, 1],
   );
 
-  // Consistent rotation based on project slug for dynamic look
-  const rotation = useMemo(() => {
-    const hash = project.slug
-      .split('')
-      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return ((hash % 30) - 15) / 5; // -3 to 3 degrees
-  }, [project.slug]);
+  const rotate = useMemo(() => rotationFor(project.slug), [project.slug]);
 
   return (
-    <motion.div
-      className="relative aspect-3/4 shrink-0 overflow-hidden bg-mist"
-      style={{
-        scale,
-        opacity,
-        rotate: rotation,
-        height: CARD_HEIGHT,
-        width: 'auto',
-      }}
-    >
+    <motion.div className={CARD_CLASS} style={{ scale, y, opacity, rotate }}>
       <Link href={`/work/${project.slug}`} className="group absolute inset-0">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          sizes="(max-width: 768px) 70vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          priority={preload}
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/12 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
-        <div className="absolute inset-x-0 bottom-0 p-4 text-left md:p-5">
-          <p className="text-[10px] tracking-[0.28em] text-gold uppercase">
-            {project.service}
-          </p>
-          <p className="mt-1.5 font-display text-base text-paper uppercase md:text-lg">
-            {project.title}
-          </p>
-        </div>
+        <CardFace project={project} priority />
       </Link>
     </motion.div>
+  );
+});
+
+const RevealCard = memo(function RevealCard({
+  project,
+  progress,
+  cardsStart,
+  cardsEnd,
+}: {
+  project: Project;
+  progress: MotionValue<number>;
+  cardsStart: number;
+  cardsEnd: number;
+}) {
+  // Fades in behind the cascade so nothing peeks in at the edge beforehand.
+  const slot = (cardsEnd - cardsStart) / INTRO_CARDS;
+  const opacity = useTransform(
+    progress,
+    [cardsStart + slot * 2.4, cardsEnd],
+    [0, 1],
+  );
+
+  const rotate = useMemo(() => rotationFor(project.slug), [project.slug]);
+
+  return (
+    <motion.div className={CARD_CLASS} style={{ opacity, rotate }}>
+      <Link href={`/work/${project.slug}`} className="group absolute inset-0">
+        <CardFace project={project} priority={false} />
+      </Link>
+    </motion.div>
+  );
+});
+
+const StaticCard = memo(function StaticCard({ project }: { project: Project }) {
+  return (
+    <div
+      className={CARD_CLASS}
+      style={{ transform: `rotate(${rotationFor(project.slug)}deg)` }}
+    >
+      <Link href={`/work/${project.slug}`} className="group absolute inset-0">
+        <CardFace project={project} priority={false} />
+      </Link>
+    </div>
+  );
+});
+
+function CardFace({
+  project,
+  priority,
+}: {
+  project: Project;
+  priority: boolean;
+}) {
+  return (
+    <>
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        sizes="(max-width: 768px) 60vw, 26vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        priority={priority}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/12 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 bottom-0 p-4 text-left md:p-5">
+        <p className="text-[10px] tracking-[0.28em] text-gold uppercase">
+          {project.service}
+        </p>
+        <p className="mt-1.5 font-display text-base text-paper uppercase md:text-lg">
+          {project.title}
+        </p>
+      </div>
+    </>
   );
 }
