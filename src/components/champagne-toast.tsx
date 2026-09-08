@@ -18,10 +18,12 @@ import {
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const MEET_ROTATE = -11;
-const HOLD_ROTATE = -9.5;
+const SETTLE_ROTATE = -6.5;
+const HOLD_ROTATE = -5;
 const PIVOT_Y = 0.68;
 const RIM_Y = 0.055;
 const RIM_WIDTH = 0.262;
+const SETTLE_BACK = 0.1;
 
 function kissOffset(width: number, height: number, degrees: number) {
   const theta = (Math.abs(degrees) * Math.PI) / 180;
@@ -60,7 +62,7 @@ const SPARKS = [
   { id: 8, angle: 228 },
 ] as const;
 
-function getGlassVariants(meetX: number): Variants {
+function getGlassVariants(meetX: number, settleX: number): Variants {
   return {
     hidden: (dir: number) => ({
       x: `${dir * 42}vw`,
@@ -73,10 +75,16 @@ function getGlassVariants(meetX: number): Variants {
       opacity: 1,
       transition: { duration: 2.8, ease: EASE_LUXE },
     }),
+    settle: (dir: number) => ({
+      x: dir * settleX,
+      rotate: dir * SETTLE_ROTATE,
+      opacity: 1,
+      transition: { duration: 1.15, delay: 0.18, ease: EASE_LUXE },
+    }),
     hold: (dir: number) => ({
-      x: dir * meetX,
+      x: dir * settleX,
       y: [0, -4, 0],
-      rotate: [dir * MEET_ROTATE, dir * HOLD_ROTATE, dir * MEET_ROTATE],
+      rotate: [dir * SETTLE_ROTATE, dir * HOLD_ROTATE, dir * SETTLE_ROTATE],
       transition: { duration: 7.2, repeat: Infinity, ease: 'easeInOut' },
     }),
   };
@@ -87,10 +95,15 @@ export function ChampagneToast() {
   const reduceMotion = useReducedMotion();
   const glassRef = useRef<HTMLDivElement>(null);
   const [toasted, setToasted] = useState(false);
-  const [meetX, setMeetX] = useState<number | null>(null);
+  const [pose, setPose] = useState<{ meetX: number; settleX: number } | null>(
+    null,
+  );
   const skipMotion = Boolean(reduceMotion);
-  const ready = meetX !== null;
-  const glassVariants = useMemo(() => getGlassVariants(meetX ?? 0), [meetX]);
+  const ready = pose !== null;
+  const glassVariants = useMemo(
+    () => getGlassVariants(pose?.meetX ?? 0, pose?.settleX ?? 0),
+    [pose],
+  );
 
   useLayoutEffect(() => {
     const el = glassRef.current;
@@ -99,7 +112,8 @@ export function ChampagneToast() {
     const update = () => {
       const { width, height } = el.getBoundingClientRect();
       if (width < 8 || height < 8) return;
-      setMeetX(kissOffset(width, height, Math.abs(MEET_ROTATE)));
+      const meetX = kissOffset(width, height, Math.abs(MEET_ROTATE));
+      setPose({ meetX, settleX: meetX + width * SETTLE_BACK });
     };
 
     update();
@@ -115,7 +129,7 @@ export function ChampagneToast() {
 
     async function play() {
       if (skipMotion) {
-        controls.set('clink');
+        controls.set('settle');
         setToasted(true);
         return;
       }
@@ -123,6 +137,8 @@ export function ChampagneToast() {
       await controls.start('clink');
       if (cancelled) return;
       setToasted(true);
+      await controls.start('settle');
+      if (cancelled) return;
       await controls.start('hold');
     }
 
