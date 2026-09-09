@@ -1,14 +1,13 @@
 import './globals.css';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Bebas_Neue, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-const inter = Inter({
+const bebas = Bebas_Neue({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
-  variable: '--font-inter',
+  weight: '400',
+  variable: '--font-bebas',
 });
 
 const playfair = Playfair_Display({
@@ -35,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
+      className={`${bebas.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
