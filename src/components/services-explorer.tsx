@@ -46,64 +46,57 @@ function typesLabel(category: ServiceCategory) {
     : 'Types of events';
 }
 
-function CategoryHeading({
+function CategoryTitle({
   category,
   selected,
   onSelect,
-  alwaysOpen = false,
 }: {
   category: ServiceCategory;
   selected: boolean;
   onSelect: () => void;
-  alwaysOpen?: boolean;
 }) {
   const words = category.title.split(' ');
-  const open = alwaysOpen || selected;
 
   return (
-    <li className={cn(!alwaysOpen && !selected && 'max-lg:hidden')}>
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-current={selected ? 'true' : undefined}
-        className="w-full cursor-pointer text-left"
-      >
-        <span
-          className={cn(
-            'font-display block leading-[0.86] tracking-tight uppercase transition-[font-size,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
-            open
-              ? 'text-[clamp(2.15rem,5.8vw,5.75rem)] text-paper'
-              : 'text-[clamp(1.2rem,2.2vw,2.15rem)] text-paper/28 hover:text-paper/55',
-          )}
-        >
-          {words.map((word) => (
-            <span key={word} className="block">
-              {word}
-            </span>
-          ))}
-        </span>
-      </button>
-      <div
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-current={selected ? 'true' : undefined}
+      className="w-full cursor-pointer text-left"
+    >
+      <span
         className={cn(
-          'grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:grid-rows-[1fr]',
-          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+          'font-display block leading-[0.86] tracking-tight uppercase transition-[font-size,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
+          selected
+            ? 'text-[clamp(1.55rem,6.5vw,5.75rem)] text-paper'
+            : 'text-[clamp(0.95rem,3.4vw,2.15rem)] text-paper/28 hover:text-paper/55',
         )}
       >
-        <div className="min-h-0 overflow-hidden">
-          <p className="mt-4 max-w-md font-serif text-lg italic text-gold sm:mt-5 sm:text-2xl md:text-3xl">
-            {category.short}
-          </p>
-          <p className="mt-4 max-w-sm text-sm leading-7 text-paper/55 max-lg:hidden lg:mt-5">
-            {category.description}
-          </p>
-          <div className="mt-6 max-lg:hidden lg:mt-8">
-            <GoldLink href="/contact" inverted>
-              Start an inquiry
-            </GoldLink>
-          </div>
-        </div>
+        {words.map((word) => (
+          <span key={word} className="block">
+            {word}
+          </span>
+        ))}
+      </span>
+    </button>
+  );
+}
+
+function CategoryDetails({ category }: { category: ServiceCategory }) {
+  return (
+    <div>
+      <p className="mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl">
+        {category.short}
+      </p>
+      <p className="mt-4 max-w-sm text-sm leading-7 text-paper/55 max-lg:hidden lg:mt-5">
+        {category.description}
+      </p>
+      <div className="mt-6 max-lg:hidden lg:mt-8">
+        <GoldLink href="/contact" inverted>
+          Start an inquiry
+        </GoldLink>
       </div>
-    </li>
+    </div>
   );
 }
 
@@ -124,13 +117,7 @@ function OptionsList({
         const selected = expandAll || index === activeIndex;
 
         return (
-          <li
-            key={option.name}
-            className={cn(
-              'border-b border-white/10',
-              !expandAll && !selected && 'max-sm:hidden',
-            )}
-          >
+          <li key={option.name} className="border-b border-white/10">
             <button
               type="button"
               onClick={() => onSelect(index)}
@@ -143,8 +130,8 @@ function OptionsList({
                   className={cn(
                     'font-display block tracking-tight uppercase transition-[color,font-size,line-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
                     selected
-                      ? 'text-[clamp(1.35rem,3.2vw,3.15rem)] leading-[0.95] text-paper'
-                      : 'text-sm text-paper/35 hover:text-paper/70 lg:text-lg',
+                      ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-paper'
+                      : 'text-[13px] text-paper/35 hover:text-paper/70 sm:text-sm lg:text-lg',
                   )}
                 >
                   {option.name}
@@ -156,7 +143,7 @@ function OptionsList({
                   )}
                 >
                   <span className="min-h-0 overflow-hidden">
-                    <span className="mt-3 block max-w-xl text-sm leading-6 text-paper/60 max-md:line-clamp-4 md:mt-4 md:leading-7">
+                    <span className="mt-3 block max-w-xl text-sm leading-6 text-paper/60 max-md:line-clamp-3 md:mt-4 md:line-clamp-none md:leading-7">
                       {option.description}
                     </span>
                   </span>
@@ -347,7 +334,7 @@ export function ServicesExplorer() {
       style={skip ? undefined : { height: PIN_HEIGHT }}
     >
       <h1 className="sr-only">Services</h1>
-      <div className="sticky top-0 flex h-dvh items-center overflow-hidden motion-reduce:relative motion-reduce:h-auto motion-reduce:items-stretch motion-reduce:overflow-visible">
+      <div className="sticky top-0 flex h-dvh items-start overflow-y-auto overflow-x-hidden lg:items-center lg:overflow-hidden motion-reduce:relative motion-reduce:h-auto motion-reduce:items-stretch motion-reduce:overflow-visible">
         <div
           ref={progressRef}
           aria-hidden="true"
@@ -374,12 +361,14 @@ export function ServicesExplorer() {
                     className={index === 0 ? 'mt-8 lg:mt-14' : undefined}
                   >
                     <ul>
-                      <CategoryHeading
-                        category={category}
-                        selected
-                        alwaysOpen
-                        onSelect={() => scrollToCategory(category.id)}
-                      />
+                      <li>
+                        <CategoryTitle
+                          category={category}
+                          selected
+                          onSelect={() => scrollToCategory(category.id)}
+                        />
+                        <CategoryDetails category={category} />
+                      </li>
                     </ul>
                   </nav>
                 </div>
@@ -400,22 +389,34 @@ export function ServicesExplorer() {
             ))}
           </div>
         ) : (
-          <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl grid-cols-1 content-start gap-7 px-6 pt-20 pb-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:content-center lg:items-center lg:gap-20 lg:px-10 lg:pt-20 lg:pb-10">
+          <div className="relative z-10 mx-auto grid min-h-full w-full max-w-7xl grid-cols-1 content-start gap-6 px-6 pt-20 pb-10 lg:h-full lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:content-center lg:items-center lg:gap-20 lg:px-10 lg:pt-20 lg:pb-10">
             <div>
               <p className="max-w-xs text-[11px] leading-5 tracking-[0.28em] text-gold uppercase">
                 Discover our services
               </p>
-              <nav aria-label="Service practices" className="mt-8 lg:mt-14">
-                <ul className="space-y-8 lg:space-y-10">
-                  {serviceCategories.map((category) => (
-                    <CategoryHeading
-                      key={category.id}
-                      category={category}
-                      selected={category.id === activeCategory.id}
-                      onSelect={() => scrollToCategory(category.id)}
-                    />
-                  ))}
+              <nav aria-label="Service practices" className="mt-6 lg:mt-14">
+                <ul className="grid grid-cols-2 items-start gap-x-4 gap-y-2 lg:grid-cols-1 lg:gap-10">
+                  {serviceCategories.map((category) => {
+                    const selected = category.id === activeCategory.id;
+                    return (
+                      <li key={category.id}>
+                        <CategoryTitle
+                          category={category}
+                          selected={selected}
+                          onSelect={() => scrollToCategory(category.id)}
+                        />
+                        {selected ? (
+                          <div className="max-lg:hidden">
+                            <CategoryDetails category={category} />
+                          </div>
+                        ) : null}
+                      </li>
+                    );
+                  })}
                 </ul>
+                <div className="lg:hidden">
+                  <CategoryDetails category={activeCategory} />
+                </div>
               </nav>
             </div>
 
