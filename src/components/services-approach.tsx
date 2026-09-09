@@ -22,13 +22,15 @@ export function ServicesApproach() {
             {serviceApproach.map((step, index) => (
               <Reveal key={step.number} delay={index * 80}>
                 <li className="border-t border-ink/10 pt-8">
-                  <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
+                  <p className="text-[11px] tracking-[0.32em] text-black uppercase">
                     {step.number}
                   </p>
                   <h3 className="mt-4 font-display text-3xl tracking-tight uppercase md:text-4xl">
                     {step.title}
                   </h3>
-                  <p className="mt-5 text-sm leading-7 text-ink/70">{step.body}</p>
+                  <p className="mt-5 text-sm leading-7 text-ink/70">
+                    {step.body}
+                  </p>
                 </li>
               </Reveal>
             ))}
@@ -36,9 +38,9 @@ export function ServicesApproach() {
         </div>
       </section>
 
-      <section className="bg-ink px-6 py-24 text-paper md:py-32">
+      <section className="bg-paper px-6 py-24 text-paper md:py-32">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[11px] tracking-[0.36em] text-black uppercase">
             Formats
           </p>
           <Reveal>
@@ -49,16 +51,19 @@ export function ServicesApproach() {
           <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
             {serviceCategories.map((category) => (
               <div key={category.id}>
-                <p className="font-serif text-3xl italic text-gold">
+                <p className="font-serif text-3xl italic text-black">
                   {category.stageTitle}
                 </p>
                 <ul className="mt-8 space-y-3">
                   {category.stageItems.map((item) => (
-                    <li key={item.label} className="border-b border-white/10 pb-3">
+                    <li
+                      key={item.label}
+                      className="border-b border-white/10 pb-3"
+                    >
                       {item.href ? (
                         <Link
                           href={item.href}
-                          className="text-sm tracking-[0.16em] text-gold uppercase underline decoration-gold/40 underline-offset-4"
+                          className="text-sm tracking-[0.16em] text-black uppercase underline decoration-gold/40 underline-offset-4"
                         >
                           {item.label}
                         </Link>
