@@ -9,7 +9,7 @@ export function LogoMarquee({
   const loop = [...featuredBrandLogos, ...featuredBrandLogos];
 
   return (
-    <section className="overflow-hidden bg-mist py-4 md:py-5">
+    <section className="bg-paper overflow-hidden bg-mist py-4 md:py-5">
       <p className="mb-4 text-center text-[11px] tracking-[0.36em] text-ink/50 uppercase">
         {title}
       </p>
