@@ -36,7 +36,7 @@ export function ContactCta({
             <Link
               href={href}
               aria-label="Get in contact — open the inquiry form"
-              className="font-serif font-normal tracking-normal text-gold italic normal-case underline decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+              className="text-gold underline decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
             >
               Contact
             </Link>

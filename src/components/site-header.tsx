@@ -5,12 +5,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { navLinks } from '@/lib/site';
+import { heroNavLinks, navLinks } from '@/lib/site';
 import { cn } from '@/lib/cn';
 
-const EASE = { duration: 0.22, ease: [0.16, 1, 0.3, 1] as const };
+const EASE = { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const };
+const SCROLL_THRESHOLD = 16;
 
 function isActive(pathname: string, href: string) {
+  if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -26,7 +28,7 @@ function MenuIcon({ open }: { open: boolean }) {
       <span
         className={cn(
           'absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 -translate-y-1/2 bg-gold transition-opacity duration-300',
-          open && 'opacity-0',
+          open ? 'opacity-0' : 'opacity-100',
         )}
       />
       <span
@@ -46,10 +48,11 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const skip = Boolean(reduceMotion);
   const transition = skip ? { duration: 0 } : EASE;
-  const solid = scrolled || menuOpen;
+  const isHome = pathname === '/';
+  const showHeroNav = isHome && !scrolled && !menuOpen;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -79,104 +82,131 @@ export function SiteHeader() {
 
   return (
     <>
-      <AnimatePresence>
-        {menuOpen ? (
-          <motion.button
-            key="menu-backdrop"
-            type="button"
-            aria-label="Close menu"
-            initial={skip ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={skip ? undefined : { opacity: 0 }}
-            transition={transition}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className="flex items-start justify-center px-5 pt-4 sm:px-8 sm:pt-5">
+          <Link
+            href="/"
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-40 bg-ink/45 backdrop-blur-sm"
-          />
+            className="pointer-events-auto flex shrink-0 items-center"
+          >
+            <Image
+              src="/logo.png"
+              alt="ELMNT13"
+              width={160}
+              height={48}
+              className="h-10 w-auto"
+              priority
+              loading="eager"
+            />
+          </Link>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {showHeroNav ? (
+          <motion.nav
+            key="hero-nav"
+            aria-label="Primary"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            exit={skip ? undefined : { opacity: 0, y: -72, x: 48 }}
+            transition={transition}
+            className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-6 pb-[max(1.75rem,env(safe-area-inset-bottom))]"
+          >
+            <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-12">
+              {heroNavLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[11px] tracking-[0.32em] hover:text-paper uppercase transition-colors text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
         ) : null}
       </AnimatePresence>
 
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4">
-        <div
-          className={cn(
-            'relative mx-auto w-full',
-            skip ? 'transition-none' : 'transition-all duration-300',
-            solid ? 'max-w-5xl' : 'max-w-6xl',
-          )}
-        >
-          {solid ? (
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 rounded-full border border-white/15 bg-black/50 shadow-lg shadow-black/25 backdrop-blur-xl"
-            />
-          ) : null}
-          <div className="relative flex items-center justify-between py-2 pr-5 pl-4 sm:pr-6 sm:pl-5">
-            <Link
-              href="/"
-              onClick={() => setMenuOpen(false)}
-              className="flex shrink-0 items-center"
-            >
-              <Image
-                src="/logo.png"
-                alt="ELMNT13"
-                width={160}
-                height={48}
-                className="h-10 w-auto"
-              />
-            </Link>
-            <button
-              type="button"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              aria-controls="site-menu"
-              onClick={() => setMenuOpen((open) => !open)}
-              className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full"
-            >
-              <MenuIcon open={menuOpen} />
-            </button>
-          </div>
-        </div>
+      <AnimatePresence>
+        {showHeroNav ? null : (
+          <motion.button
+            key="menu-toggle"
+            type="button"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            initial={
+              skip || !isHome ? false : { opacity: 0, scale: 0.72, y: 12 }
+            }
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={skip ? undefined : { opacity: 0, scale: 0.72 }}
+            transition={
+              skip
+                ? { duration: 0 }
+                : { ...EASE, delay: isHome && !menuOpen ? 0.08 : 0 }
+            }
+            onClick={() => setMenuOpen((open) => !open)}
+            className="bg-white/20 rounded-full bg-blur-2xl fixed top-3 right-3 z-50 flex h-12 w-12 cursor-pointer items-center justify-center sm:top-4 sm:right-5"
+          >
+            <MenuIcon open={menuOpen} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-        <AnimatePresence>
-          {menuOpen ? (
-            <motion.nav
-              key="site-menu"
-              id="site-menu"
-              aria-label="Primary"
-              initial={skip ? false : { opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={skip ? undefined : { opacity: 0, y: -8 }}
-              transition={transition}
-              className={cn(
-                'mx-auto mt-2 w-full overflow-hidden rounded-3xl border border-white/15 bg-black/50 p-3 shadow-xl backdrop-blur-xl',
-                solid ? 'max-w-5xl' : 'max-w-6xl',
-              )}
-            >
-              <ul className="flex flex-col">
-                {navLinks.map((link) => {
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            key="site-menu"
+            id="site-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Primary"
+            initial={skip ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={skip ? undefined : { opacity: 0 }}
+            transition={
+              skip ? { duration: 0 } : { duration: 0.32, ease: EASE.ease }
+            }
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink/95 px-6 pt-28 pb-16 sm:justify-center sm:pb-24"
+          >
+            <nav onClick={(event) => event.stopPropagation()}>
+              <ul className="mx-auto flex w-full max-w-5xl flex-col gap-1">
+                {navLinks.map((link, index) => {
                   const active = isActive(pathname, link.href);
                   return (
                     <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        onClick={() => setMenuOpen(false)}
-                        aria-current={active ? 'page' : undefined}
-                        className={cn(
-                          'block rounded-xl px-3 py-2.5 font-display text-sm tracking-[0.18em] uppercase transition hover:bg-white/10',
-                          active
-                            ? 'text-white'
-                            : 'text-white hover:text-white/80',
-                        )}
+                      <motion.div
+                        initial={skip ? false : { opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={
+                          skip
+                            ? { duration: 0 }
+                            : { ...EASE, delay: 0.05 + index * 0.05 }
+                        }
                       >
-                        {link.label}
-                      </Link>
+                        <Link
+                          href={link.href}
+                          onClick={() => setMenuOpen(false)}
+                          aria-current={active ? 'page' : undefined}
+                          className={cn(
+                            'block py-2 font-display text-4xl tracking-tight uppercase transition-colors sm:text-6xl',
+                            active ? 'text-gold' : 'text-paper hover:text-gold',
+                          )}
+                        >
+                          {link.label}
+                        </Link>
+                      </motion.div>
                     </li>
                   );
                 })}
               </ul>
-            </motion.nav>
-          ) : null}
-        </AnimatePresence>
-      </header>
+            </nav>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

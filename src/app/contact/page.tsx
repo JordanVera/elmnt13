@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact-form";
+import type { Metadata } from 'next';
+import { ContactForm } from '@/components/contact-form';
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Have an idea? Let’s make it happen.",
+  title: 'Contact',
+  description: 'Have an idea? Let’s make it happen.',
 };
 
 export default function ContactPage() {
   return (
     <main className="bg-paper">
-      <section className="mx-auto grid max-w-6xl gap-16 px-6 pt-16 pb-28 md:grid-cols-2 md:pt-24 md:pb-36">
+      <section className="mx-auto grid max-w-6xl gap-16 px-6 pt-24 pb-28 md:grid-cols-2 md:pt-32 md:pb-36">
         <div>
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             Contact
