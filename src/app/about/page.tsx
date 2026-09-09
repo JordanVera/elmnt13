@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import { BrandsSection } from '@/components/brands-section';
-import { CountUp } from '@/components/count-up';
-import { DetailsMoment } from '@/components/details-moment';
-import { Reveal } from '@/components/reveal';
-import { WhyChoose } from '@/components/why-choose';
 import { stats } from '@/lib/site';
+import type { Metadata } from 'next';
+import { Reveal } from '@/components/reveal';
+import { CountUp } from '@/components/count-up';
+import { WhyChoose } from '@/components/why-choose';
+import { BrandsSection } from '@/components/brands-section';
+import { DetailsMoment } from '@/components/details-moment';
 
 export const metadata: Metadata = {
   title: 'About',

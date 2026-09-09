@@ -16,9 +16,9 @@
   --color-gold: var(--gold);
   --color-gold-bright: var(--gold-bright);
   --color-blush: var(--blush);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-bebas);
-  --font-serif: var(--font-inter);
+  --font-sans: var(--font-lora);
+  --font-display: var(--font-inter);
+  --font-serif: var(--font-lora);
 }
 
 html {
@@ -28,7 +28,9 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-lora), serif;
+  font-style: italic;
+  font-weight: 400;
   overflow-x: clip;
 }
 
@@ -38,11 +40,14 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-bebas), sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  font-style: normal;
 }
 
 .font-serif {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-lora), serif;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .grain {
