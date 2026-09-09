@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-white px-6 pt-16 pb-24 md:pt-24">
+      <section className="bg-white px-6 pt-24 pb-24 md:pt-32">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             About
@@ -30,22 +30,20 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-12 max-w-2xl text-lg leading-8 text-ink/75">
-              ELMNT13 is a creative marketing and management company where vision
-              drives the work and the details shape the outcome. Since 2012, we’ve
-              partnered with brands, organizations and individuals to bring ideas
-              to life through strategy, creativity and management. We see the full
-              vision, understand how every brand element matters and handle the
-              creative direction and execution needed to create a memorable
-              experience.
+              ELMNT13 is a creative marketing and management company where
+              vision drives the work and the details shape the outcome. Since
+              2012, we’ve partnered with brands, organizations and individuals
+              to bring ideas to life through strategy, creativity and
+              management. We see the full vision, understand how every brand
+              element matters and handle the creative direction and execution
+              needed to create a memorable experience.
             </p>
           </Reveal>
         </div>
       </section>
 
       <BrandsSection />
-
       <WhyChoose />
-
       <DetailsMoment
         line="We take your vision further"
         highlight="vision"
