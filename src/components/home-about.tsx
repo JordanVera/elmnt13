@@ -3,7 +3,7 @@ import { Reveal } from '@/components/reveal';
 
 export function HomeAbout() {
   return (
-    <section className="relative overflow-hidden bg-paper px-6 py-28 md:py-36">
+    <section className="relative overflow-hidden bg-white px-6 py-28 md:py-36">
       <p
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-[78%] -translate-x-1/2 -translate-y-1/2 font-display text-[38vw] leading-none text-gold/20 select-none md:left-[80%]"
