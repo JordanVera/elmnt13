@@ -1,24 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Outfit, Syne } from 'next/font/google';
+import { Bebas_Neue, Inter } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import './globals.css';
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-outfit',
-});
-
-const syne = Syne({
-  subsets: ['latin'],
-  variable: '--font-syne',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-inter',
+});
+
+const bebas = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-bebas',
 });
 
 export const metadata: Metadata = {
@@ -38,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${syne.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${inter.variable} ${bebas.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
