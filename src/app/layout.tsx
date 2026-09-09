@@ -6,6 +6,7 @@ import { SiteHeader } from '@/components/site-header';
 
 const inter = Inter({
   subsets: ['latin'],
+  weight: '500',
   style: ['normal', 'italic'],
   variable: '--font-inter',
 });
