@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
-import { ContactCta } from '@/components/contact-cta';
-import { ServicesApproach } from '@/components/services-approach';
 import { ServicesExplorer } from '@/components/services-explorer';
-import { ServicesIntro } from '@/components/services-hero';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -12,16 +9,8 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main>
-      {/* <ServicesIntro /> */}
+    <main className="bg-ink">
       <ServicesExplorer />
-      <ServicesApproach />
-      {/* <ContactCta
-        kicker="Let’s connect"
-        title="Make things happen."
-        href="/contact"
-        label="Inquire"
-      /> */}
     </main>
   );
 }
