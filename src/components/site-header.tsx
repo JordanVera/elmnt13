@@ -83,7 +83,7 @@ export function SiteHeader() {
   return (
     <>
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-        <div className="flex items-start justify-between px-5 pt-4 sm:px-8 sm:pt-5">
+        <div className="flex items-start justify-center px-5 pt-4 sm:px-8 sm:pt-5">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
