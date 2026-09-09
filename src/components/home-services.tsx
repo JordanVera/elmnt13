@@ -25,7 +25,7 @@ export function HomeServices() {
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
-            <h2 className=" font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-7xl">
+            <h2 className="font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-7xl">
               Event
               <br />
               Management
