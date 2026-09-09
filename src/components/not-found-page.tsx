@@ -34,7 +34,11 @@ export function NotFoundPage() {
             className="text-[11px] tracking-[0.36em] text-gold uppercase"
             initial={skip ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: skip ? 0 : 0.8, delay: skip ? 0 : 0.1, ease: EASE_LUXE }}
+            transition={{
+              duration: skip ? 0 : 0.8,
+              delay: skip ? 0 : 0.1,
+              ease: EASE_LUXE,
+            }}
           >
             404 — Off the itinerary
           </motion.p>
@@ -52,20 +56,29 @@ export function NotFoundPage() {
               >
                 The Guest
               </HeroLine>
-              <HeroLine from="right" delay={0.44} skip={skip} className="mt-[0.06em]">
+              <HeroLine
+                from="right"
+                delay={0.44}
+                skip={skip}
+                className="mt-[0.06em]"
+              >
                 List.
               </HeroLine>
             </span>
           </h1>
 
           <motion.p
-            className="mt-10 max-w-xl font-serif text-xl leading-relaxed text-paper/75 italic md:mt-12 md:text-2xl"
+            className="mt-10 max-w-xl text-xl leading-relaxed text-paper/75 md:mt-12 md:text-2xl"
             initial={skip ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: skip ? 0 : 0.9, delay: skip ? 0 : 0.72, ease: EASE_LUXE }}
+            transition={{
+              duration: skip ? 0 : 0.9,
+              delay: skip ? 0 : 0.72,
+              ease: EASE_LUXE,
+            }}
           >
-            Every detail matters — including this one. The page you&apos;re looking for
-            has left the venue.
+            Every detail matters — including this one. The page you&apos;re
+            looking for has left the venue.
           </motion.p>
 
           <motion.span
@@ -73,7 +86,11 @@ export function NotFoundPage() {
             className="gold-rule mt-10 block h-px w-24 origin-left bg-gold md:mt-12"
             initial={skip ? false : { scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: skip ? 0 : 1.1, delay: skip ? 0 : 0.88, ease: EASE_LUXE }}
+            transition={{
+              duration: skip ? 0 : 1.1,
+              delay: skip ? 0 : 0.88,
+              ease: EASE_LUXE,
+            }}
           />
 
           <motion.nav
@@ -81,7 +98,11 @@ export function NotFoundPage() {
             className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 md:mt-12"
             initial={skip ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: skip ? 0 : 0.8, delay: skip ? 0 : 1, ease: EASE_LUXE }}
+            transition={{
+              duration: skip ? 0 : 0.8,
+              delay: skip ? 0 : 1,
+              ease: EASE_LUXE,
+            }}
           >
             <GoldLink href="/" inverted>
               Return home
@@ -91,7 +112,7 @@ export function NotFoundPage() {
             </GoldLink>
             <Link
               href="/contact"
-              className="font-serif text-lg text-gold italic transition-colors hover:text-gold-bright md:text-xl"
+              className="text-lg text-gold transition-colors hover:text-gold-bright md:text-xl"
             >
               Plan an event →
             </Link>
@@ -131,7 +152,11 @@ function TableCard({ skip }: { skip: boolean }) {
       className="pointer-events-none absolute top-24 right-6 z-0 hidden sm:block md:top-28 md:right-10 lg:right-16"
       initial={skip ? false : { opacity: 0, rotate: -8, y: -20 }}
       animate={{ opacity: 1, rotate: 6, y: 0 }}
-      transition={{ duration: skip ? 0 : 1.1, delay: skip ? 0 : 0.55, ease: EASE_LUXE }}
+      transition={{
+        duration: skip ? 0 : 1.1,
+        delay: skip ? 0 : 0.55,
+        ease: EASE_LUXE,
+      }}
     >
       <div className="relative flex size-28 flex-col items-center justify-center border border-gold/30 bg-paper/5 backdrop-blur-sm md:size-32">
         <span className="font-display text-[10px] tracking-[0.28em] text-gold/70 uppercase">
@@ -140,7 +165,9 @@ function TableCard({ skip }: { skip: boolean }) {
         <span className="mt-1 font-display text-4xl leading-none text-gold md:text-5xl">
           404
         </span>
-        <span className="mt-2 font-serif text-xs text-paper/45 italic">Unassigned</span>
+        <span className="mt-2 font-serif text-xs text-paper/45 italic">
+          Unassigned
+        </span>
         <span className="absolute -top-px left-1/2 h-2 w-px -translate-x-1/2 bg-gold/40" />
       </div>
     </motion.div>
