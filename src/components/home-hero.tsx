@@ -18,7 +18,7 @@ export function HomeHero() {
             from="right"
             delay={0.18}
             skip={skip}
-            className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"
+            className="text-[0.36em] tracking-tight text-gold"
             wrapperClassName="w-full"
           >
             We See
@@ -30,14 +30,13 @@ export function HomeHero() {
             className="items-center gap-[0.16em]"
             wrapperClassName="min-w-max"
           >
-            {/* <GoldDash /> */}
             The Vision.
           </HeroLine>
           <HeroLine
             from="right"
             delay={0.52}
             skip={skip}
-            className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"
+            className="text-[0.36em] tracking-tight text-gold"
             wrapperClassName="mt-[0.14em] w-full"
           >
             We Handle
@@ -50,7 +49,6 @@ export function HomeHero() {
             wrapperClassName="min-w-max"
           >
             The Details.
-            {/* <GoldDash /> */}
           </HeroLine>
         </span>
       </h1>
