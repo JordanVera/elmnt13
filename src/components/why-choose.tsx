@@ -16,7 +16,7 @@ export function WhyChoose() {
             Why clients choose ELMNT13
           </p>
         </Reveal>
-        <ul className="mt-10 font-display text-[clamp(1.7rem,4.6vw,4.75rem)] leading-[0.9] tracking-tight uppercase md:mt-14">
+        <ul className="mt-10 font-display text-[clamp(1.85rem,5.2vw,5.5rem)] leading-[0.88] tracking-tight uppercase md:mt-14">
           {reasons.map((line, index) => (
             <li key={line}>
               <Reveal delay={index * 90}>
