@@ -20,6 +20,13 @@ const pieces = (featuredProjects.length ? featuredProjects : projects).slice(
 
 const SPRING = { stiffness: 72, damping: 26, mass: 0.38, restDelta: 0.001 };
 
+const cardEntrance = [
+  { x: [-36, -12], y: [72, 8], rotate: [-12, -3.5] },
+  { x: [40, 14], y: [58, -10], rotate: [10, 2.5] },
+  { x: [-24, 6], y: [68, 6], rotate: [9, -2] },
+  { x: [32, 16], y: [84, -12], rotate: [-8, 3.5] },
+] as const;
+
 export function WorkHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
@@ -65,6 +72,7 @@ export function WorkHero() {
                   key={project.slug}
                   project={project}
                   index={index}
+                  entrance={cardEntrance[index] ?? cardEntrance[0]}
                   progress={progress}
                   reduceMotion={Boolean(reduceMotion)}
                 />
@@ -80,23 +88,36 @@ export function WorkHero() {
 function WorkPiece({
   project,
   index,
+  entrance,
   progress,
   reduceMotion,
 }: {
   project: Project;
   index: number;
+  entrance: (typeof cardEntrance)[number];
   progress: MotionValue<number>;
   reduceMotion: boolean;
 }) {
   const start = 0.12 + index * 0.06;
   const end = 0.48 + index * 0.05;
-  const y = useTransform(progress, [start, end], [64, 0]);
+  const x = useTransform(progress, [start, end], [...entrance.x]);
+  const y = useTransform(progress, [start, end], [...entrance.y]);
+  const rotate = useTransform(progress, [start, end], [...entrance.rotate]);
   const opacity = useTransform(progress, [start, start + 0.16], [0, 1]);
 
   return (
     <motion.div
-      className="relative aspect-3/4 overflow-hidden bg-mist"
-      style={reduceMotion ? { opacity: 1 } : { y, opacity }}
+      className="relative aspect-3/4 overflow-hidden bg-mist will-change-transform"
+      style={
+        reduceMotion
+          ? {
+              opacity: 1,
+              x: entrance.x[1],
+              y: entrance.y[1],
+              rotate: entrance.rotate[1],
+            }
+          : { x, y, rotate, opacity }
+      }
     >
       <Link href={`/work/${project.slug}`} className="group absolute inset-0">
         <Image

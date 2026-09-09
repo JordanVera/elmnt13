@@ -14,7 +14,7 @@ export function ProjectGrid({ items }: { items: Project[] }) {
 
   return (
     <div>
-      <div className="-mb-3 columns-3 gap-3">
+      <div className="-mb-3 columns-2 md:columns-3 gap-3">
         {visible.map((project) => (
           <Link
             key={project.slug}
