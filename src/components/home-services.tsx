@@ -1,5 +1,5 @@
-import { GoldLink } from "@/components/gold-link";
-import { Reveal } from "@/components/reveal";
+import { GoldLink } from '@/components/gold-link';
+import { Reveal } from '@/components/reveal';
 
 export function HomeServices() {
   return (
@@ -10,13 +10,14 @@ export function HomeServices() {
         </p>
         <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
           <Reveal>
-            <h2 className="font-display text-5xl leading-[0.9] tracking-tight uppercase md:text-6xl">
+            <h2 className="text-left font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-8xl">
               Experiential
               <br />
               Marketing
             </h2>
-            <p className="mt-6 max-w-sm font-serif text-2xl italic text-gold">
-              Brand worlds people can walk into.
+            <p className="mt-6 max-w-lg text-left font-serif text-2xl italic text-gold md:text-3xl">
+              Creating immersive brand experiences that connect, engage and
+              drive impact.
             </p>
             <p className="mt-6 max-w-md text-sm leading-7 tracking-wide text-paper/55">
               Brand activations · Product launches · Campaign activations ·

@@ -11,13 +11,13 @@ const slides = featuredProjects.length
 
 export function WorkCarousel() {
   return (
-    <section className="bg-paper py-28 md:py-36">
+    <section className="bg-paper pt-16 pb-24 md:pt-20 md:pb-28">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
         <div>
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             Work
           </p>
-          <h2 className="mt-4 font-display text-5xl tracking-tight uppercase md:text-7xl">
+          <h2 className="mt-3 font-display text-6xl tracking-tight uppercase md:text-8xl">
             Curated
             <br />
             Experiences

@@ -1,27 +1,57 @@
-import { GoldLink } from "@/components/gold-link";
-import { Reveal } from "@/components/reveal";
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import { GoldLink } from '@/components/gold-link';
+import { Reveal } from '@/components/reveal';
 
 export function ContactCta({
-  kicker = "Contact",
-  title = "Let’s make it happen.",
-  href = "/contact",
-  label = "Contact",
+  kicker,
+  title,
+  href = '/contact',
+  label,
 }: {
   kicker?: string;
-  title?: string;
+  title?: ReactNode;
   href?: string;
   label?: string;
 }) {
+  const isHomePhrase = title == null;
+
   return (
-    <section className="bg-paper px-6 py-28 md:py-36">
+    <section
+      className={
+        isHomePhrase
+          ? 'bg-paper px-6 py-16 md:py-20'
+          : 'bg-paper px-6 py-28 md:py-36'
+      }
+    >
       <Reveal className="mx-auto max-w-6xl">
-        <p className="text-[11px] tracking-[0.36em] text-gold uppercase">{kicker}</p>
-        <h2 className="mt-6 font-display text-5xl tracking-tight uppercase md:text-8xl">
-          {title}
-        </h2>
-        <div className="mt-10">
-          <GoldLink href={href}>{label}</GoldLink>
-        </div>
+        {kicker ? (
+          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+            {kicker}
+          </p>
+        ) : null}
+        {isHomePhrase ? (
+          <h2 className="font-display text-5xl tracking-tight uppercase md:text-8xl">
+            Get in{' '}
+            <Link
+              href={href}
+              className="font-serif font-normal tracking-normal text-gold italic normal-case transition-colors hover:text-gold-bright"
+            >
+              Contact
+            </Link>
+          </h2>
+        ) : (
+          <>
+            <h2 className="mt-6 font-display text-5xl tracking-tight uppercase md:text-8xl">
+              {title}
+            </h2>
+            {label ? (
+              <div className="mt-10">
+                <GoldLink href={href}>{label}</GoldLink>
+              </div>
+            ) : null}
+          </>
+        )}
       </Reveal>
     </section>
   );
