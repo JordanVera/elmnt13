@@ -20,8 +20,8 @@ export function ContactCta({
     <section
       className={
         isHomePhrase
-          ? 'bg-paper px-6 py-16 md:py-20'
-          : 'bg-paper px-6 py-28 md:py-36'
+          ? 'bg-paper px-6 py-12 md:py-16'
+          : 'bg-paper px-6 py-20 md:py-24'
       }
     >
       <Reveal className="mx-auto max-w-6xl">

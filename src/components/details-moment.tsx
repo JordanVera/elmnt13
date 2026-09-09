@@ -16,10 +16,10 @@ export function DetailsMoment({
     <section
       className={
         dark
-          ? "flex min-h-[70vh] items-center bg-ink px-6 py-28"
+          ? "flex min-h-[70vh] items-center bg-ink px-6 py-20"
           : tone === "paper"
-            ? "flex min-h-[70vh] items-center bg-white px-6 py-28"
-            : "flex min-h-[70vh] items-center bg-blush px-6 py-28"
+            ? "flex min-h-[70vh] items-center bg-white px-6 py-20"
+            : "flex min-h-[70vh] items-center bg-blush px-6 py-20"
       }
     >
       <Reveal className="mx-auto max-w-6xl text-center">

@@ -12,7 +12,7 @@ export default function WorkPage() {
   return (
     <main>
       <WorkHero />
-      <section className="bg-paper px-6 py-20">
+      <section className="bg-paper px-6 py-14">
         <div className="mx-auto max-w-7xl">
           <ProjectGrid items={workProjects} />
         </div>

@@ -11,7 +11,7 @@ const slides = featuredProjects.length
 
 export function WorkCarousel() {
   return (
-    <section className="bg-paper pt-16 pb-24 md:pt-20 md:pb-28">
+    <section className="bg-paper pt-12 pb-16 md:pt-16 md:pb-20">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
         <div>
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">

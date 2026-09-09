@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-white px-6 pt-24 pb-24 md:pt-32">
+      <section className="bg-white px-6 pt-20 pb-20 md:pt-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             About
@@ -50,7 +50,7 @@ export default function AboutPage() {
         tone="ink"
       />
 
-      <section className="bg-mist px-6 py-24 md:py-28">
+      <section className="bg-mist px-6 py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {stats.map((stat) => (
             <div key={stat.label}>

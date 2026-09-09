@@ -17,7 +17,7 @@ export default function WeddingsPage() {
     <main>
       <ChampagneToast />
 
-      <section className="bg-white px-6 py-28">
+      <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             With you for the moments that matter
@@ -25,7 +25,7 @@ export default function WeddingsPage() {
           <h2 className="mt-4 font-serif text-4xl italic md:text-6xl">
             from yes to I do
           </h2>
-          <div className="mt-20 space-y-20">
+          <div className="mt-14 space-y-14">
             {weddingServices.map((service, index) => (
               <Reveal key={service.title} delay={index * 40}>
                 <article className="grid gap-8 border-t border-ink/10 pt-10 md:grid-cols-[0.9fr_1.4fr]">
@@ -52,7 +52,7 @@ export default function WeddingsPage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-28">
+      <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             Why ELMNT13 Weddings

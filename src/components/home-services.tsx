@@ -3,7 +3,7 @@ import { Reveal } from '@/components/reveal';
 
 export function HomeServices() {
   return (
-    <section className="bg-ink px-6 py-28 text-paper md:py-36">
+    <section className="bg-ink px-6 py-20 text-paper md:py-24">
       <div className="mx-auto max-w-6xl">
         <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
           Services

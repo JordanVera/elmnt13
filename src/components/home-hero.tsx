@@ -1,8 +1,8 @@
 'use client';
 
+import { cn } from '@/lib/cn';
 import type { ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { cn } from '@/lib/cn';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -11,7 +11,7 @@ export function HomeHero() {
   const skip = Boolean(reduceMotion);
 
   return (
-    <section className="relative flex min-h-dvh flex-col justify-center bg-ink px-6 pt-24 pb-28 text-paper">
+    <section className="relative flex min-h-dvh flex-col justify-center bg-ink px-6 pt-20 pb-20 text-paper">
       <h1 className="mx-auto flex w-full max-w-7xl justify-center font-display text-[11.5vw] leading-[0.86] tracking-tight uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
         <span className="flex w-max max-w-full flex-col items-start">
           <HeroLine
