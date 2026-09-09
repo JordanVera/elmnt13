@@ -58,14 +58,14 @@ export function HomeHero() {
   );
 }
 
-function GoldDash() {
-  return (
-    <span
-      aria-hidden="true"
-      className="mb-[0.12em] inline-block h-[0.07em] w-[0.72em] shrink-0 bg-gold"
-    />
-  );
-}
+// function GoldDash() {
+//   return (
+//     <span
+//       aria-hidden="true"
+//       className="mb-[0.12em] inline-block h-[0.07em] w-[0.72em] shrink-0 bg-gold"
+//     />
+//   );
+// }
 
 function HeroLine({
   children,
