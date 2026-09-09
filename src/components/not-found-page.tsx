@@ -43,7 +43,7 @@ export function NotFoundPage() {
             404 — Off the itinerary
           </motion.p>
 
-          <h1 className="mt-8 font-display text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.88] tracking-tight uppercase md:mt-10">
+          <h1 className="mt-8 font-display text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.88] tracking-tight text-white uppercase md:mt-10">
             <span className="flex flex-col items-start">
               <HeroLine from="right" delay={0.2} skip={skip}>
                 Not On

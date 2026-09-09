@@ -26,7 +26,7 @@ export function DetailsMoment({
         <p
           className={
             dark
-              ? "font-serif text-5xl leading-tight text-paper italic md:text-8xl"
+              ? "font-serif text-5xl leading-tight text-white italic md:text-8xl"
               : "font-serif text-5xl leading-tight text-ink italic md:text-8xl"
           }
         >

@@ -47,7 +47,7 @@ export function WorkCarousel() {
               <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
                 {project.service}
               </p>
-              <p className="mt-2 font-display text-2xl text-paper uppercase">
+              <p className="mt-2 font-display text-2xl text-white uppercase">
                 {project.title}
               </p>
             </div>

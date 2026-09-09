@@ -118,7 +118,7 @@ export function SiteHeader() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[11px] tracking-[0.32em] hover:text-paper uppercase transition-colors text-gold"
+                    className="text-[11px] tracking-[0.32em] hover:text-gold uppercase transition-colors text-white"
                   >
                     {link.label}
                   </Link>
@@ -193,7 +193,7 @@ export function SiteHeader() {
                           aria-current={active ? 'page' : undefined}
                           className={cn(
                             'block py-2 font-display text-4xl tracking-tight uppercase transition-colors sm:text-6xl',
-                            active ? 'text-gold' : 'text-paper hover:text-gold',
+                            active ? 'text-gold' : 'text-white hover:text-gold',
                           )}
                         >
                           {link.label}

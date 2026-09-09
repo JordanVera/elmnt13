@@ -44,7 +44,7 @@ export function ServicesApproach() {
             Formats
           </p>
           <Reveal>
-            <h2 className="mt-4 font-display text-4xl tracking-tight uppercase md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl tracking-tight text-white uppercase md:text-6xl">
               What this looks like
             </h2>
           </Reveal>

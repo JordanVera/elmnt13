@@ -68,8 +68,8 @@ function CategoryTitle({
         className={cn(
           'font-display block leading-[0.86] tracking-tight uppercase transition-[font-size,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
           selected
-            ? 'text-[clamp(1.55rem,6.5vw,5.75rem)] text-paper'
-            : 'text-[clamp(0.95rem,3.4vw,2.15rem)] text-paper/28 hover:text-paper/55',
+            ? 'text-[clamp(1.55rem,6.5vw,5.75rem)] text-white'
+            : 'text-[clamp(0.95rem,3.4vw,2.15rem)] text-white/28 hover:text-white/55',
         )}
       >
         {words.map((word) => (
@@ -130,8 +130,8 @@ function OptionsList({
                   className={cn(
                     'font-display block tracking-tight uppercase transition-[color,font-size,line-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
                     selected
-                      ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-paper'
-                      : 'text-[13px] text-paper/35 hover:text-paper/70 sm:text-sm lg:text-lg',
+                      ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-white'
+                      : 'text-[13px] text-white/35 hover:text-white/70 sm:text-sm lg:text-lg',
                   )}
                 >
                   {option.name}
@@ -208,7 +208,7 @@ function TypesPanel({
                 <span className="w-6 shrink-0 text-[11px] tracking-[0.18em] text-gold/70">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="font-display text-[clamp(1.15rem,2.2vw,1.85rem)] leading-none tracking-tight text-paper uppercase">
+                <span className="font-display text-[clamp(1.15rem,2.2vw,1.85rem)] leading-none tracking-tight text-white uppercase">
                   {item.label}
                 </span>
               </span>

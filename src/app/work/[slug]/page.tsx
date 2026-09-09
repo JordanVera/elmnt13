@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: Props) {
             <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
               {project.service} · {project.year}
             </p>
-            <h1 className="mt-3 font-display text-5xl tracking-tight uppercase md:text-7xl">
+            <h1 className="mt-3 font-display text-5xl tracking-tight text-white uppercase md:text-7xl">
               {project.title}
             </h1>
           </div>
