@@ -1,5 +1,5 @@
 import './globals.css';
-import { Bebas_Neue, Playfair_Display } from 'next/font/google';
+import { Bebas_Neue, Lato, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
@@ -15,6 +15,12 @@ const playfair = Playfair_Display({
   weight: '400',
   style: 'italic',
   variable: '--font-playfair',
+});
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-lato',
 });
 
 export const metadata: Metadata = {
@@ -34,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${playfair.variable} h-full antialiased`}
+      className={`${bebas.variable} ${playfair.variable} ${lato.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
