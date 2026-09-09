@@ -148,7 +148,7 @@ export function SiteHeader() {
                 : { ...EASE, delay: isHome && !menuOpen ? 0.08 : 0 }
             }
             onClick={() => setMenuOpen((open) => !open)}
-            className="bg-white/20 rounded-full bg-blur-2xl fixed top-3 right-3 z-50 flex h-12 w-12 cursor-pointer items-center justify-center sm:top-4 sm:right-5"
+            className=" bg-white/20 rounded-full bg-blur-2xl fixed top-3 right-3 z-50 flex h-9 w-9 cursor-pointer items-center justify-center sm:top-4 sm:right-5"
           >
             <MenuIcon open={menuOpen} />
           </motion.button>
