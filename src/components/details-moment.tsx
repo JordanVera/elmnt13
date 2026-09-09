@@ -3,9 +3,11 @@ import { Reveal } from "@/components/reveal";
 export function DetailsMoment({
   line = "Love is in the details",
   tone = "blush",
+  highlight = "details",
 }: {
   line?: string;
   tone?: "blush" | "ink" | "paper";
+  highlight?: string;
 }) {
   const words = line.split(" ");
   const dark = tone === "ink";
@@ -32,7 +34,7 @@ export function DetailsMoment({
             <span
               key={`${word}-${index}`}
               className={
-                word.toLowerCase() === "details"
+                word.toLowerCase() === highlight.toLowerCase()
                   ? "text-gold not-italic font-display uppercase tracking-tight"
                   : "inline-block px-[0.12em]"
               }

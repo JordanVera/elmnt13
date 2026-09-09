@@ -1,22 +1,25 @@
-import type { Metadata } from "next";
-import { BrandsSection } from "@/components/brands-section";
-import { CountUp } from "@/components/count-up";
-import { DetailsMoment } from "@/components/details-moment";
-import { Reveal } from "@/components/reveal";
-import { stats } from "@/lib/site";
+import type { Metadata } from 'next';
+import { BrandsSection } from '@/components/brands-section';
+import { CountUp } from '@/components/count-up';
+import { DetailsMoment } from '@/components/details-moment';
+import { Reveal } from '@/components/reveal';
+import { WhyChoose } from '@/components/why-choose';
+import { stats } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: "About",
+  title: 'About',
   description:
-    "ELMNT13 is a creative marketing and management company where vision drives the work and the details shape the outcome. Since 2012.",
+    'ELMNT13 is a creative marketing and management company where vision drives the work and the details shape the outcome. Since 2012.',
 };
 
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-paper px-6 pt-16 pb-24 md:pt-24">
+      <section className="bg-white px-6 pt-16 pb-24 md:pt-24">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">About</p>
+          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+            About
+          </p>
           <Reveal>
             <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
               Vision drives the work.
@@ -41,37 +44,22 @@ export default function AboutPage() {
 
       <BrandsSection />
 
-      <section className="bg-paper px-6 py-28 md:py-36">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
-            Why clients choose ELMNT13
-          </p>
-          <div className="mt-12 space-y-6">
-            {[
-              "We approach every project with intention.",
-              "We see the whole vision.",
-              "We think beyond what you see.",
-            ].map((line, index) => (
-              <Reveal key={line} delay={index * 80}>
-                <p className="font-display text-3xl tracking-tight uppercase md:text-5xl">
-                  {line}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyChoose />
 
-      <DetailsMoment line="Because the details matter" tone="ink" />
+      <DetailsMoment
+        line="We take your vision further"
+        highlight="vision"
+        tone="ink"
+      />
 
-      <section className="bg-mist px-6 py-24">
-        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-mist px-6 py-24 md:py-28">
+        <div className="mx-auto grid max-w-6xl gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {stats.map((stat) => (
-            <div key={stat.label} className="border-t border-ink/15 pt-6">
-              <p className="font-display text-5xl text-ink">
+            <div key={stat.label}>
+              <p className="font-display text-7xl leading-none tracking-tight text-ink md:text-8xl">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-3 text-[11px] tracking-[0.22em] text-ink/50 uppercase">
+              <p className="mt-4 text-[11px] tracking-[0.22em] text-ink/50 uppercase">
                 {stat.label}
               </p>
             </div>

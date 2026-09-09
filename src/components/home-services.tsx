@@ -10,7 +10,7 @@ export function HomeServices() {
         </p>
         <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
           <Reveal>
-            <h2 className="text-left font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-8xl">
+            <h2 className="text-left font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-7xl">
               Experiential
               <br />
               Marketing
@@ -25,7 +25,7 @@ export function HomeServices() {
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
-            <h2 className="font-display text-5xl leading-[0.9] tracking-tight uppercase md:text-6xl">
+            <h2 className=" font-display text-6xl leading-[0.88] tracking-tight uppercase md:text-7xl">
               Event
               <br />
               Management
