@@ -15,7 +15,7 @@ export function BrandsSection() {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="text-[11px] tracking-[0.32em] text-ink/60 uppercase transition-colors hover:text-ink"
+            className="cursor-pointer text-[11px] tracking-[0.32em] text-ink/60 uppercase transition-colors hover:text-ink"
             aria-expanded={open}
           >
             {open ? 'Close list' : 'View all'}
