@@ -13,15 +13,15 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main>
-      <ServicesIntro />
+      {/* <ServicesIntro /> */}
       <ServicesExplorer />
       <ServicesApproach />
-      <ContactCta
+      {/* <ContactCta
         kicker="Let’s connect"
         title="Make things happen."
         href="/contact"
         label="Inquire"
-      />
+      /> */}
     </main>
   );
 }
