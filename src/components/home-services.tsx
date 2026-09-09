@@ -15,7 +15,7 @@ export function HomeServices() {
               <br />
               Marketing
             </h2>
-            <p className="mt-6 max-w-lg text-left text-lg leading-8 text-gold md:text-xl">
+            <p className="mt-6 max-w-lg text-left font-serif text-2xl italic text-gold md:text-3xl">
               Creating immersive brand experiences that connect, engage and
               drive impact.
             </p>
@@ -30,7 +30,7 @@ export function HomeServices() {
               <br />
               Management
             </h2>
-            <p className="mt-6 text-lg leading-8 text-gold md:ml-auto md:max-w-sm md:text-xl">
+            <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-sm">
               From first concept to last light.
             </p>
             <p className="mt-6 text-sm leading-7 tracking-wide text-paper/55 md:ml-auto md:max-w-md">

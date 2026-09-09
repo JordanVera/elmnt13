@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo, Cormorant_Garamond, Outfit } from 'next/font/google';
+import { Cormorant_Garamond, Outfit, Syne } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import './globals.css';
@@ -9,9 +9,9 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
-const archivo = Archivo({
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-archivo',
+  variable: '--font-syne',
 });
 
 const cormorant = Cormorant_Garamond({
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${archivo.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${outfit.variable} ${syne.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
