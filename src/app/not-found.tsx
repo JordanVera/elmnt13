@@ -1,13 +1,16 @@
-import Link from "next/link";
+import type { Metadata } from 'next';
+import { NotFoundPage } from '@/components/not-found-page';
+
+export const metadata: Metadata = {
+  title: 'Page Not Found',
+  description:
+    'This page is off the itinerary. Return to ELMNT13 — creative marketing and event management since 2012.',
+};
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center bg-ink px-6 text-center text-paper">
-      <p className="text-[11px] tracking-[0.36em] text-gold uppercase">404</p>
-      <h1 className="mt-4 font-display text-5xl uppercase">Lost the vision.</h1>
-      <Link href="/" className="mt-8 text-[11px] tracking-[0.32em] text-gold uppercase">
-        Back home
-      </Link>
+    <main>
+      <NotFoundPage />
     </main>
   );
 }
