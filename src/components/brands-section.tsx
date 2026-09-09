@@ -10,7 +10,7 @@ export function BrandsSection() {
   return (
     <div>
       <LogoMarquee />
-      <div className="bg-mist px-6 pb-16">
+      <div className="bg-mist px-6 pb-8">
         <div className="mx-auto max-w-6xl text-center">
           <button
             type="button"

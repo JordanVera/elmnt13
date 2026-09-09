@@ -28,7 +28,7 @@ export function WorkCarousel() {
         </div>
       </div>
 
-      <div className="no-scrollbar mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
+      <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
         {slides.map((project) => (
           <Link
             key={project.slug}

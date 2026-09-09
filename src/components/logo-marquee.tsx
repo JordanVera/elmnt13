@@ -9,8 +9,8 @@ export function LogoMarquee({
   const loop = [...featuredBrandLogos, ...featuredBrandLogos];
 
   return (
-    <section className="overflow-hidden bg-mist py-8 md:py-10">
-      <p className="mb-6 text-center text-[11px] tracking-[0.36em] text-ink/50 uppercase">
+    <section className="overflow-hidden bg-mist py-4 md:py-5">
+      <p className="mb-4 text-center text-[11px] tracking-[0.36em] text-ink/50 uppercase">
         {title}
       </p>
       <div className="relative">
@@ -20,7 +20,7 @@ export function LogoMarquee({
           {loop.map((brand, index) => (
             <span
               key={`${brand.name}-${index}`}
-              className="flex h-8 shrink-0 items-center justify-center md:h-10"
+              className="flex h-7 shrink-0 items-center justify-center md:h-9"
             >
               <Image
                 src={brand.src}
