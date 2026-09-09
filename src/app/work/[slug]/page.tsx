@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="px-6 py-14">
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[1fr_1.4fr]">
           <div>
             <p className="text-[11px] tracking-[0.28em] text-gold uppercase">

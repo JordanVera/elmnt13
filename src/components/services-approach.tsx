@@ -5,7 +5,7 @@ import { serviceApproach, serviceCategories } from '@/lib/services';
 export function ServicesApproach() {
   return (
     <>
-      <section className="bg-paper px-6 py-24 md:py-32">
+      <section className="bg-paper px-6 py-16 md:py-20">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
             Approach
@@ -38,7 +38,7 @@ export function ServicesApproach() {
         </div>
       </section>
 
-      <section className="bg-paper px-6 py-24 text-paper md:py-32">
+      <section className="bg-paper px-6 py-16 text-paper md:py-20">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.36em] text-black uppercase">
             Formats

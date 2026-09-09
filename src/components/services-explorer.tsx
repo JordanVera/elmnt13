@@ -343,12 +343,12 @@ export function ServicesExplorer() {
         />
 
         {skip ? (
-          <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
             {serviceCategories.map((category, index) => (
               <div
                 key={category.id}
                 id={category.id}
-                className="grid grid-cols-1 gap-10 py-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20"
+                className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20"
               >
                 <div>
                   {index === 0 ? (

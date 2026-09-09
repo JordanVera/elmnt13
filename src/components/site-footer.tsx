@@ -5,7 +5,7 @@ import { footerLinks, site, socialLinks } from '@/lib/site';
 export function SiteFooter() {
   return (
     <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-12 md:grid-cols-4 md:py-16">
         <div className="space-y-6">
           <Logo inverted />
           {/* <Logo variant="weddings" href="/weddings" inverted /> */}

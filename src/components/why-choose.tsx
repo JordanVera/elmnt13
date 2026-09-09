@@ -9,7 +9,7 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section className="bg-paper px-6 py-28 md:py-36">
+    <section className="bg-paper px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <p className="font-serif text-2xl italic text-ink md:text-3xl">

@@ -3,7 +3,7 @@ import { serviceCategories } from '@/lib/services';
 
 export function ServicesHero() {
   return (
-    <section className="relative flex min-h-dvh flex-col justify-end overflow-hidden bg-ink px-6 pt-16 pb-24 text-paper md:pt-24 md:pb-32">
+    <section className="relative flex min-h-dvh flex-col justify-end overflow-hidden bg-ink px-6 pt-14 pb-20 text-paper md:pt-20 md:pb-24">
       <p
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[42vw] leading-none text-gold/[0.07] select-none"
@@ -35,7 +35,7 @@ export function ServicesHero() {
 
 export function ServicesIntro() {
   return (
-    <section className="bg-paper px-6 py-24 md:py-32">
+    <section className="bg-paper px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
         <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
           Our services
