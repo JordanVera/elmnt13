@@ -27,7 +27,7 @@ export function HomeHero() {
             from="right"
             delay={0.28}
             skip={skip}
-            className="items-center gap-[0.16em]"
+            className="items-center gap-[0.16em] text-white"
             wrapperClassName="min-w-max"
           >
             {/* <GoldDash /> */}
@@ -46,7 +46,7 @@ export function HomeHero() {
             from="right"
             delay={0.62}
             skip={skip}
-            className="items-center gap-[0.16em]"
+            className="items-center gap-[0.16em] text-white"
             wrapperClassName="min-w-max"
           >
             The Details.

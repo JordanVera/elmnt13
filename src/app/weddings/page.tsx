@@ -60,7 +60,7 @@ export default function WeddingsPage() {
           <h2 className="mt-6 font-display text-4xl tracking-tight uppercase md:text-6xl">
             Allow us to be a part of your love story
           </h2>
-          <p className="mx-auto mt-8 max-w-2xl font-serif text-2xl leading-9 italic text-ink/80">
+          <p className="mx-auto mt-8 max-w-2xl text-2xl leading-9 text-ink/80">
             We love love, and we’d be honored to be part of yours. We know being
             trusted with your day means being trusted with one of the most
             meaningful moments of your life. We care about your day, your vision

@@ -6,7 +6,7 @@ export function HomeAbout() {
     <section className="relative overflow-hidden bg-white px-6 py-20 md:py-24">
       <p
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-[78%] -translate-x-1/2 -translate-y-1/2 font-lora text-[38vw] leading-none text-gold/20 select-none md:left-[80%]"
+        className="pointer-events-none absolute top-1/2 left-[78%] -translate-x-1/2 -translate-y-1/2 font-serif text-[38vw] leading-none text-gold/20 select-none md:left-[80%]"
       >
         E13
       </p>

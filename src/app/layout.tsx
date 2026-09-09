@@ -1,21 +1,21 @@
 import './globals.css';
-import { Inter, Lora } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: '500',
+  weight: ['400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-inter',
 });
 
-const lora = Lora({
+const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: '400',
   style: 'italic',
-  variable: '--font-lora',
+  variable: '--font-playfair',
 });
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${lora.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
