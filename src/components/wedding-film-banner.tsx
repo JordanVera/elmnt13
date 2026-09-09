@@ -48,7 +48,7 @@ export function WeddingFilmBanner() {
         />
       ) : null}
       <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/40 to-ink/25" />
-      <p className="absolute inset-x-0 bottom-0 z-10 px-6 py-8 font-serif text-3xl italic md:px-12 md:py-12 md:text-5xl">
+      <p className="absolute inset-x-0 bottom-0 z-10 px-6 py-8 font-serif text-3xl text-white italic md:px-12 md:py-12 md:text-5xl">
         Film and stills, composed as one memory.
       </p>
     </div>

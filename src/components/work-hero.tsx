@@ -44,7 +44,7 @@ export function WorkHero() {
     <section ref={sectionRef} className="relative h-[200vh] bg-ink">
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden px-6">
         <div className="relative flex w-full max-w-6xl flex-col items-center justify-center">
-          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-paper uppercase md:text-[11vw]">
+          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-white uppercase md:text-[11vw]">
             <motion.span
               style={
                 reduceMotion
@@ -133,7 +133,7 @@ function WorkPiece({
           <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
             {project.service}
           </p>
-          <p className="mt-2 font-display text-lg text-paper uppercase md:text-xl">
+          <p className="mt-2 font-display text-lg text-white uppercase md:text-xl">
             {project.title}
           </p>
         </div>

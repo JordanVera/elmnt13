@@ -15,7 +15,7 @@ export function ServicesHero() {
           From concept to completion
         </p>
         <Reveal>
-          <h1 className="mt-6 font-display text-[18vw] leading-[0.8] tracking-tight uppercase md:text-[10vw]">
+          <h1 className="mt-6 font-display text-[18vw] leading-[0.8] tracking-tight text-white uppercase md:text-[10vw]">
             Services
           </h1>
         </Reveal>

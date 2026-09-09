@@ -35,7 +35,7 @@ export function ProjectGrid({ items }: { items: Project[] }) {
               <p className="text-[10px] tracking-[0.28em] text-gold uppercase sm:text-[11px]">
                 {project.service}
               </p>
-              <p className="mt-1.5 font-display text-base leading-tight text-paper uppercase sm:mt-2 sm:text-xl lg:text-2xl">
+              <p className="mt-1.5 font-display text-base leading-tight text-white uppercase sm:mt-2 sm:text-xl lg:text-2xl">
                 {project.title}
               </p>
             </div>
