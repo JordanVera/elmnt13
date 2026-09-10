@@ -50,7 +50,7 @@ export function HomeHero() {
             headline="The Vision."
             delay={FIRST_STATEMENT_DELAY}
             skip={skip}
-            from="right"
+            from="left"
           />
           <HeroStatement
             eyebrow="We Handle"
@@ -58,7 +58,7 @@ export function HomeHero() {
             delay={SECOND_STATEMENT_DELAY}
             skip={skip}
             className="mt-[0.14em] ml-[0.8em]"
-            from="left"
+            from="right"
           />
         </h1>
       </section>
