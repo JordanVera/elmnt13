@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <main>
       <HomeHero />
-      {/* <HomeAbout /> */}
+      <HomeAbout />
       <LogoMarquee />
       <HomeServices />
       <WorkCarousel />
