@@ -9,7 +9,7 @@ const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const ENTRANCE_DURATION = 1.12;
 const FIRST_STATEMENT_DELAY = 0.2;
 /** Long enough to read most of the first line before the second enters. */
-const SECOND_STATEMENT_DELAY = 1.5;
+const SECOND_STATEMENT_DELAY = 1.1;
 
 export function HomeHero() {
   const reduceMotion = useReducedMotion();
