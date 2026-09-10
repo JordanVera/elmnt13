@@ -15,7 +15,7 @@ export function HomeHero() {
       <h1 className="mx-auto flex w-full max-w-7xl justify-center font-display text-[11.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
         <span className="flex w-max max-w-full flex-col items-start">
           <HeroLine
-            from="right"
+            from="left"
             delay={0.18}
             skip={skip}
             className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"
@@ -34,7 +34,7 @@ export function HomeHero() {
             The Vision.
           </HeroLine>
           <HeroLine
-            from="right"
+            from="left"
             delay={0.52}
             skip={skip}
             className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"

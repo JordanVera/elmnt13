@@ -118,7 +118,7 @@ export function SiteHeader() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[11px] tracking-[0.32em] hover:text-gold uppercase transition-colors text-white"
+                    className="text-[11px] tracking-[0.32em] hover:text-white uppercase transition-colors text-gold"
                   >
                     {link.label}
                   </Link>

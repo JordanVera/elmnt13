@@ -14,7 +14,7 @@ const bebas = Bebas_Neue({
 const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: '400',
-  style: 'italic',
+  style: ['normal', 'italic'],
   variable: '--font-playfair',
 });
 
