@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { cn } from "@/lib/cn";
+import Link from 'next/link';
+import { cn } from '@/lib/cn';
 
 type GoldLinkProps = {
   href: string;
@@ -8,21 +8,30 @@ type GoldLinkProps = {
   inverted?: boolean;
 };
 
-export function GoldLink({ href, children, className, inverted }: GoldLinkProps) {
+export function GoldLink({
+  href,
+  children,
+  className,
+  inverted,
+}: GoldLinkProps) {
   return (
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-3 text-[11px] tracking-[0.32em] uppercase",
-        inverted ? "text-gold" : "text-ink",
+        'group inline-flex items-center gap-3 text-[11px] tracking-[0.32em] uppercase transition-colors duration-500',
+        inverted
+          ? 'text-gold hover:text-gold-bright'
+          : 'text-ink hover:text-gold',
         className,
       )}
     >
       <span>{children}</span>
       <span
         className={cn(
-          "h-px w-8 origin-left scale-x-100 transition-transform duration-500 group-hover:scale-x-150",
-          inverted ? "bg-gold" : "bg-ink",
+          'h-px w-8 origin-left scale-x-100 transition-[transform,background-color] duration-500 group-hover:scale-x-150',
+          inverted
+            ? 'bg-gold group-hover:bg-gold-bright'
+            : 'bg-ink group-hover:bg-gold',
         )}
       />
     </Link>

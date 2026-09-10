@@ -51,6 +51,7 @@ export function HomeHero() {
               headline="The Vision."
               delay={FIRST_STATEMENT_DELAY}
               skip={skip}
+              from="left"
             />
             <HeroStatement
               eyebrow="We Handle"
@@ -58,6 +59,7 @@ export function HomeHero() {
               delay={SECOND_STATEMENT_DELAY}
               skip={skip}
               className="mt-[0.14em] ml-[0.8em]"
+              from="right"
             />
           </span>
         </h1>
@@ -72,17 +74,19 @@ function HeroStatement({
   delay,
   skip,
   className,
+  from,
 }: {
   eyebrow: string;
   headline: string;
   delay: number;
   skip: boolean;
   className?: string;
+  from: 'left' | 'right';
 }) {
   return (
     <span className={cn('flex flex-col items-start', className)}>
       <HeroLine
-        from="left"
+        from={from}
         delay={delay}
         skip={skip}
         className="font-serif text-[0.36em] font-normal tracking-normal text-gold italic normal-case"
@@ -90,7 +94,7 @@ function HeroStatement({
         {eyebrow}
       </HeroLine>
       <HeroLine
-        from="right"
+        from={from}
         delay={delay}
         skip={skip}
         className="whitespace-nowrap"
