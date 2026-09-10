@@ -36,7 +36,7 @@ export function HomeHero() {
             alt="ELMNT13"
             width={160}
             height={48}
-            className="h-8 w-auto md:h-16"
+            className="h-8 w-auto md:h-12"
             priority
             loading="eager"
           />
