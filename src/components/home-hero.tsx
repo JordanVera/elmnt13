@@ -46,7 +46,7 @@ export function HomeHero() {
               from="left"
               delay={0.18}
               skip={skip}
-              className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"
+              className="font-serif text-[0.36em] font-normal tracking-[0.0em]  text-gold italic normal-case"
               wrapperClassName="w-full"
             >
               We See
@@ -65,7 +65,7 @@ export function HomeHero() {
               from="left"
               delay={0.52}
               skip={skip}
-              className="font-serif text-[0.36em] font-normal tracking-[0.12em] text-gold italic normal-case"
+              className="font-serif text-[0.36em] font-normal tracking-[0.0em] text-gold italic normal-case"
               wrapperClassName="mt-[0.14em] w-full"
             >
               We Handle
