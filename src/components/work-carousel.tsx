@@ -3,13 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { GoldLink } from '@/components/gold-link';
-import { featuredProjects, projects } from '@/lib/projects';
+import type { Project } from '@/lib/project-types';
 
-const slides = featuredProjects.length
-  ? featuredProjects
-  : projects.slice(0, 4);
-
-export function WorkCarousel() {
+export function WorkCarousel({ projects }: { projects: Project[] }) {
+  const slides = projects;
   return (
     <section className="bg-paper pt-12 pb-16 md:pt-16 md:pb-20">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">

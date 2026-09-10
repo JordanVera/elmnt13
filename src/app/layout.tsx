@@ -2,8 +2,7 @@ import './globals.css';
 import localFont from 'next/font/local';
 import { Bebas_Neue, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
-import { SiteFooter } from '@/components/site-footer';
-import { SiteHeader } from '@/components/site-header';
+import { SiteShell } from '@/components/site-shell';
 
 const bebas = Bebas_Neue({
   subsets: ['latin'],
@@ -61,11 +60,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <div id="main" className="flex min-h-full flex-col">
-          {children}
-        </div>
-        <SiteFooter />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

@@ -11,12 +11,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion';
-import { featuredProjects, projects, type Project } from '@/lib/projects';
-
-const pieces = (featuredProjects.length ? featuredProjects : projects).slice(
-  0,
-  4,
-);
+import type { Project } from '@/lib/project-types';
 
 const SPRING = { stiffness: 72, damping: 26, mass: 0.38, restDelta: 0.001 };
 
@@ -27,7 +22,8 @@ const cardEntrance = [
   { x: [32, 16], y: [84, -12], rotate: [-8, 3.5] },
 ] as const;
 
-export function WorkHero() {
+export function WorkHero({ projects }: { projects: Project[] }) {
+  const pieces = projects.slice(0, 4);
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({

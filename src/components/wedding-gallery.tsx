@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { WeddingFilmBanner } from '@/components/wedding-film-banner';
-import { weddingProjects } from '@/lib/projects';
+import { getWeddingProjects } from '@/lib/projects';
 
-export function WeddingGallery() {
+export async function WeddingGallery() {
+  const weddingProjects = await getWeddingProjects();
   return (
     <section className="mx-auto max-w-7xl bg-white">
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-12">
