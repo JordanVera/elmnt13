@@ -82,26 +82,6 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-        <div className="flex items-start justify-center px-5 pt-4 sm:px-8 sm:pt-5">
-          <Link
-            href="/"
-            onClick={() => setMenuOpen(false)}
-            className="pointer-events-auto flex shrink-0 items-center"
-          >
-            <Image
-              src="/logo.png"
-              alt="ELMNT13"
-              width={160}
-              height={48}
-              className="h-10 w-auto"
-              priority
-              loading="eager"
-            />
-          </Link>
-        </div>
-      </header>
-
       <AnimatePresence>
         {showHeroNav ? (
           <motion.nav
