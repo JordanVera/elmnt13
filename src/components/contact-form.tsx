@@ -3,8 +3,7 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import { inquiryServices } from '@/lib/services';
 
-const FORM_ACTION = 'https://formsubmit.co/ashley@elmnt13.com';
-const FORM_AJAX = 'https://formsubmit.co/ajax/ashley@elmnt13.com';
+const CONTACT_API = '/api/contact';
 
 type InquiryState = { ok: boolean; message: string };
 
@@ -41,7 +40,7 @@ export function ContactForm() {
     setState(initial);
 
     try {
-      const response = await fetch(FORM_AJAX, {
+      const response = await fetch(CONTACT_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,13 +50,11 @@ export function ContactForm() {
       });
 
       const data = (await parseJson(response)) as {
-        success?: string | boolean;
+        ok?: boolean;
         message?: string;
       };
-      const succeeded =
-        response.ok && data.success !== false && data.success !== 'false';
 
-      if (!succeeded) {
+      if (!response.ok || !data.ok) {
         setState({
           ok: false,
           message:
@@ -85,15 +82,11 @@ export function ContactForm() {
 
   return (
     <form
-      action={FORM_ACTION}
+      action={CONTACT_API}
       method="POST"
       onSubmit={handleSubmit}
       className="space-y-6"
     >
-      <input type="hidden" name="_subject" value="ELMNT13 website inquiry" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
-
       <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
         Quick question?
       </p>
