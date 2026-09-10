@@ -64,7 +64,7 @@ export const brandCategories = [
     logos: [
       logo('Jordan Brand', '/brands/jordan.png', 124, 124, 1.2),
       logo('BODYARMOR', '/brands/bodyarmor.png', 1000, 345),
-      logo('Beats by Dre', '/brands/beats.svg', 24, 24, 1.2),
+      logo('Beats by Dre', '/brands/beats-by-dre.png', 24, 24, 1.2),
       logo('Kroger', '/brands/kroger.png', 1000, 840),
       logo('Martell', '/brands/martell.png', 280, 171),
       logo('T-Mobile', '/brands/tmobile.png', 1000, 447),
@@ -85,7 +85,6 @@ export const brandCategories = [
         128,
         1.2,
       ),
-      logo('Counter Culture', '/brands/counter-culture.png', 1000, 523),
       logo('Hennessy', '/brands/hennessy.svg', 185, 108, 1.2),
       logo('Puma', '/brands/puma.svg', 24, 24),
       logo("McDonald's", '/brands/mcdonalds.png', 273, 238, 1.15),
