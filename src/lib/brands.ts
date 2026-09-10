@@ -27,7 +27,7 @@ export const featuredBrandLogos: BrandLogo[] = [
   logo('T-Mobile', '/brands/tmobile.png', 1000, 447),
   logo('Verizon', '/brands/verizon.png', 399, 126),
   logo('Uber', '/brands/uber.png', 1536, 533),
-  logo('MLB', '/brands/mlb.svg', 172, 93, 1.1),
+  logo('MLB', '/brands/mlb.png', 172, 93, 1.1),
   logo('Forbes', '/brands/forbes.png', 1000, 359),
   logo('ESSENCE', '/brands/essence.png', 626, 171),
   logo('VH1', '/brands/vh1.png', 358, 141),
