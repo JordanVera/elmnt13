@@ -22,7 +22,7 @@ export const featuredBrandLogos: BrandLogo[] = [
   logo('Nike', '/brands/nike.svg', 24, 24, 1.15),
   logo('NFL', '/brands/nfl.svg', 134, 96, 1.15),
   logo('Target', '/brands/target.svg', 135, 135, 1.25),
-  logo("McDonald's", '/brands/mcdonalds.svg', 273, 238, 1.2),
+  logo("McDonald's", '/brands/mcdonalds.png', 273, 238, 1.2),
   logo('Toyota', '/brands/toyota.svg', 251, 42),
   logo('T-Mobile', '/brands/tmobile.png', 1000, 447),
   logo('Verizon', '/brands/verizon.png', 399, 126),
