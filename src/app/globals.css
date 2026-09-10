@@ -16,7 +16,7 @@
   --color-gold: var(--gold);
   --color-gold-bright: var(--gold-bright);
   --color-blush: var(--blush);
-  --font-sans: var(--font-josefin-sans);
+  --font-sans: var(--font-century-gothic);
   --font-display: var(--font-bebas);
   --font-serif: var(--font-playfair);
 }
@@ -28,7 +28,7 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-josefin-sans), sans-serif;
+  font-family: var(--font-sans);
   font-style: normal;
   font-weight: 400;
   overflow-x: clip;

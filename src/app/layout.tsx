@@ -1,5 +1,6 @@
 import './globals.css';
-import { Bebas_Neue, Josefin_Sans, Playfair_Display } from 'next/font/google';
+import localFont from 'next/font/local';
+import { Bebas_Neue, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
@@ -17,10 +18,20 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
 });
 
-const josefinSans = Josefin_Sans({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-josefin-sans',
+const centuryGothic = localFont({
+  src: [
+    {
+      path: './fonts/centurygothic.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/centurygothic_bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-century-gothic',
 });
 
 export const metadata: Metadata = {
@@ -40,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${playfair.variable} ${josefinSans.variable} h-full antialiased`}
+      className={`${bebas.variable} ${playfair.variable} ${centuryGothic.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />
