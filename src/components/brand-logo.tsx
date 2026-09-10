@@ -13,6 +13,7 @@ export function BrandLogo({
 
   return (
     <span
+      title={brand.name}
       className="flex h-[calc(3.25rem*var(--logo-scale))] w-full items-center justify-center md:h-[calc(3.75rem*var(--logo-scale))]"
       style={{ '--logo-scale': scale } as CSSProperties}
     >

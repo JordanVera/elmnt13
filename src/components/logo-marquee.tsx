@@ -23,6 +23,7 @@ export function LogoMarquee({
 
             return (
               <span
+                title={brand.name}
                 key={`${brand.name}-${index}`}
                 className="flex h-[calc(1.75rem*var(--logo-scale))] shrink-0 items-center justify-center md:h-[calc(2.25rem*var(--logo-scale))]"
                 style={{ '--logo-scale': scale } as CSSProperties}

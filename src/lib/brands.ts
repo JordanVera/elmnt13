@@ -88,7 +88,7 @@ export const brandCategories = [
       logo('Counter Culture', '/brands/counter-culture.png', 1000, 523),
       logo('Hennessy', '/brands/hennessy.svg', 185, 108, 1.2),
       logo('Puma', '/brands/puma.svg', 24, 24),
-      logo("McDonald's", '/brands/mcdonalds.svg', 273, 238, 1.15),
+      logo("McDonald's", '/brands/mcdonalds.png', 273, 238, 1.15),
       logo('Barclays Center', '/brands/barclays-center.png', 1000, 494),
       logo('Cedar Point', '/brands/cedar-point.png', 585, 240),
       logo('Cleveland Browns', '/brands/cleveland-browns.png', 127, 127, 1.2),
