@@ -74,12 +74,12 @@ export function SiteFooter() {
         <p className="mt-2">
           Site by{' '}
           <a
-            href="https://jordanvera.com"
+            href="https://webmarketingsolutionstx.com"
             target="_blank"
             rel="noreferrer"
             className="text-paper/55 transition-colors hover:text-gold"
           >
-            Jordan Vera
+            Web Marketing Solutions
           </a>
         </p>
       </div>
