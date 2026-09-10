@@ -51,7 +51,7 @@ export function HomeServices() {
           <GoldLink
             href="/services"
             inverted
-            className="text-[13px] hover:text-white"
+            className="text-[13px] hover:!text-white"
           >
             Explore services
           </GoldLink>

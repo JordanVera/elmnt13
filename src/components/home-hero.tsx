@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/cn';
-import type { ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -43,25 +43,23 @@ export function HomeHero() {
         </Link>
       </motion.div>
 
-      <section className="relative flex min-h-dvh flex-col justify-center px-6 text-paper">
-        <h1 className="mx-auto flex w-full max-w-7xl justify-center font-display text-[11.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
-          <span className="flex w-max max-w-full flex-col items-start">
-            <HeroStatement
-              eyebrow="We See"
-              headline="The Vision."
-              delay={FIRST_STATEMENT_DELAY}
-              skip={skip}
-              from="right"
-            />
-            <HeroStatement
-              eyebrow="We Handle"
-              headline="The Details."
-              delay={SECOND_STATEMENT_DELAY}
-              skip={skip}
-              className="mt-[0.14em] ml-[0.8em]"
-              from="left"
-            />
-          </span>
+      <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-6 text-paper">
+        <h1 className="mx-auto flex w-max max-w-full flex-col items-start font-display text-[11.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
+          <HeroStatement
+            eyebrow="We See"
+            headline="The Vision."
+            delay={FIRST_STATEMENT_DELAY}
+            skip={skip}
+            from="right"
+          />
+          <HeroStatement
+            eyebrow="We Handle"
+            headline="The Details."
+            delay={SECOND_STATEMENT_DELAY}
+            skip={skip}
+            className="mt-[0.14em] ml-[0.8em]"
+            from="left"
+          />
         </h1>
       </section>
     </div>
@@ -118,12 +116,38 @@ function HeroLine({
   skip: boolean;
   className?: string;
 }) {
+  const lineRef = useRef<HTMLSpanElement>(null);
+  const [enterX, setEnterX] = useState<number | null>(() => (skip ? 0 : null));
+  const ready = skip || enterX !== null;
+
+  useLayoutEffect(() => {
+    if (skip) return;
+
+    const measure = () => {
+      const el = lineRef.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      setEnterX(
+        from === 'right'
+          ? window.innerWidth - rect.left
+          : -(rect.left + rect.width),
+      );
+    };
+
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [from, skip]);
+
   return (
-    <span className="block overflow-hidden">
+    <span className={cn('block', !ready && 'invisible')}>
       <motion.span
+        key={ready ? 'ready' : 'pending'}
+        ref={!ready ? lineRef : undefined}
         className={cn('block', className)}
-        initial={skip ? false : { x: from === 'left' ? '-110%' : '110%' }}
-        animate={{ x: '0%' }}
+        initial={skip || enterX === null ? false : { x: enterX }}
+        animate={{ x: 0 }}
         transition={{
           duration: skip ? 0 : ENTRANCE_DURATION,
           delay: skip ? 0 : delay,

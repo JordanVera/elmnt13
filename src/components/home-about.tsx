@@ -17,7 +17,7 @@ export function HomeAbout() {
           </p>
           <Reveal>
             <h2 className="mt-6 max-w-xl text-6xl leading-[0.86] tracking-tight uppercase md:text-7xl lg:text-8xl">
-              <span className="font-sans text-[0.58em] font-normal tracking-[0.06em] normal-case">
+              <span className="font-sans text-[0.58em] tracking-[0.06em] uppercase">
                 We take your
               </span>
               <br />
