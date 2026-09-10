@@ -71,7 +71,8 @@ export const serviceCategories: ServiceCategory[] = [
   {
     id: 'events',
     title: 'Event Management',
-    short: 'From first concept to last light.',
+    short:
+      'From the initial concept to the final detail, we thoughtfully manage each element of the event experience.',
     description:
       'From the initial concept to the final detail, we thoughtfully manage each element of the event experience to ensure successful execution and a memorable attendee experience.',
     stageTitle: 'Events',

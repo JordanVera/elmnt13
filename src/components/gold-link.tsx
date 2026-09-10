@@ -26,14 +26,7 @@ export function GoldLink({
       )}
     >
       <span>{children}</span>
-      <span
-        className={cn(
-          'h-px w-8 origin-left scale-x-100 transition-[transform,background-color] duration-500 group-hover:scale-x-150',
-          inverted
-            ? 'bg-gold group-hover:bg-gold-bright'
-            : 'bg-ink group-hover:bg-gold',
-        )}
-      />
+      <span className="h-px w-8 origin-left scale-x-100 bg-current transition-transform duration-500 group-hover:scale-x-150" />
     </Link>
   );
 }

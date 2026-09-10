@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { GoldLink } from '@/components/gold-link';
 import { Reveal } from '@/components/reveal';
 
@@ -5,42 +6,53 @@ export function HomeServices() {
   return (
     <section className="bg-ink px-6 py-20 text-paper md:py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+        <p className="text-[13px] tracking-[0.36em] text-gold uppercase">
           Services
         </p>
         <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
           <Reveal>
-            <h2 className="text-left font-display text-6xl leading-[0.88] tracking-tight text-white uppercase md:text-7xl">
+            <h2 className="text-left font-display text-7xl leading-[0.88] tracking-tight text-white uppercase md:text-8xl">
               Experiential
               <br />
               Marketing
             </h2>
-            <p className="mt-6 max-w-lg text-left font-serif text-2xl italic text-gold md:text-3xl">
+            <p className="mt-6 max-w-lg text-left font-serif text-3xl italic text-gold md:text-4xl">
               Creating immersive brand experiences that connect, engage and
               drive impact.
             </p>
-            <p className="mt-6 max-w-md text-sm leading-7 tracking-wide text-paper/55">
-              Brand activations · Product launches · Campaign activations ·
-              Sponsorship activations · Community activations & more
+            <p className="mt-6 max-w-md text-base leading-8 tracking-wide text-paper/55">
+              Brand Activations · Product Launches · Campaign Activations ·
+              Sponsorship Activations · Community Activations & More
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
-            <h2 className="font-display text-6xl leading-[0.88] tracking-tight text-white uppercase md:text-7xl">
+            <h2 className="font-display text-7xl leading-[0.88] tracking-tight text-white uppercase md:text-8xl">
               Event
               <br />
               Management
             </h2>
-            <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-sm">
-              From first concept to last light.
+            <p className="mt-6 font-serif text-3xl italic text-gold md:ml-auto md:max-w-md md:text-4xl">
+              From the initial concept to the final detail, we thoughtfully
+              manage each element of the event experience.
             </p>
-            <p className="mt-6 text-sm leading-7 tracking-wide text-paper/55 md:ml-auto md:max-w-md">
-              Corporate events · Conferences · Church events · Milestones ·
-              Weddings & more
+            <p className="mt-6 text-base leading-8 tracking-wide text-paper/55 md:ml-auto md:max-w-md">
+              Corporate Events · Conferences · Church Events · Milestones ·{' '}
+              <Link
+                href="/weddings"
+                className="underline decoration-gold/40 underline-offset-4 transition-colors hover:text-gold"
+              >
+                Weddings
+              </Link>{' '}
+              & More
             </p>
           </Reveal>
         </div>
         <div className="mt-16">
-          <GoldLink href="/services" inverted>
+          <GoldLink
+            href="/services"
+            inverted
+            className="text-[13px] hover:text-white"
+          >
             Explore services
           </GoldLink>
         </div>
