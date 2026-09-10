@@ -33,7 +33,7 @@ export function LogoMarquee({
                   width={brand.width}
                   height={brand.height}
                   unoptimized={brand.src.endsWith('.svg')}
-                  className="h-full w-auto max-w-40 object-contain object-center grayscale opacity-90 md:max-w-48"
+        className="h-full w-auto max-w-40 object-contain object-center grayscale mix-blend-multiply opacity-90 md:max-w-48"
                 />
               </span>
             );

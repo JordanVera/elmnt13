@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { allBrands, featuredBrands } from '@/lib/brands';
+import { brandCategories } from '@/lib/brands';
+import { BrandLogo } from '@/components/brand-logo';
 import { LogoMarquee } from '@/components/logo-marquee';
 
 export function BrandsSection() {
@@ -21,16 +22,28 @@ export function BrandsSection() {
             {open ? 'Close list' : 'View all'}
           </button>
           {open ? (
-            <ul className="mt-10 grid grid-cols-2 gap-x-8 gap-y-3 text-left sm:grid-cols-3 md:grid-cols-4">
-              {allBrands.map((brand) => (
-                <li
-                  key={brand}
-                  className="border-t border-ink/10 pt-3 font-display text-sm tracking-[0.16em] uppercase"
+            <div className="mt-12 space-y-14 text-left">
+              {brandCategories.map((category) => (
+                <section
+                  key={category.id}
+                  aria-labelledby={`brands-${category.id}`}
                 >
-                  {brand}
-                </li>
+                  <h3
+                    id={`brands-${category.id}`}
+                    className="border-b border-ink/10 pb-3 text-[11px] tracking-[0.32em] text-ink/50 uppercase"
+                  >
+                    {category.label}
+                  </h3>
+                  <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    {category.logos.map((brand) => (
+                      <li key={brand.name}>
+                        <BrandLogo brand={brand} />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
+            </div>
           ) : null}
         </div>
       </div>
