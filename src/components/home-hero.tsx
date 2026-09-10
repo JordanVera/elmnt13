@@ -6,6 +6,10 @@ import type { ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const ENTRANCE_DURATION = 1.12;
+const FIRST_STATEMENT_DELAY = 0.2;
+/** Long enough to read most of the first line before the second enters. */
+const SECOND_STATEMENT_DELAY = 1.5;
 
 export function HomeHero() {
   const reduceMotion = useReducedMotion();
@@ -42,44 +46,19 @@ export function HomeHero() {
       <section className="relative flex min-h-dvh flex-col justify-center px-6 text-paper">
         <h1 className="mx-auto flex w-full max-w-7xl justify-center font-display text-[11.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
           <span className="flex w-max max-w-full flex-col items-start">
-            <HeroLine
-              from="left"
-              delay={0.18}
+            <HeroStatement
+              eyebrow="We See"
+              headline="The Vision."
+              delay={FIRST_STATEMENT_DELAY}
               skip={skip}
-              className="font-serif text-[0.36em] font-normal tracking-[0.0em]  text-gold italic normal-case"
-              wrapperClassName="w-full"
-            >
-              We See
-            </HeroLine>
-            <HeroLine
-              from="right"
-              delay={0.28}
+            />
+            <HeroStatement
+              eyebrow="We Handle"
+              headline="The Details."
+              delay={SECOND_STATEMENT_DELAY}
               skip={skip}
-              className="items-center gap-[0.16em] text-white"
-              wrapperClassName="min-w-max"
-            >
-              {/* <GoldDash /> */}
-              The Vision.
-            </HeroLine>
-            <HeroLine
-              from="left"
-              delay={0.52}
-              skip={skip}
-              className="font-serif text-[0.36em] font-normal tracking-[0.0em] text-gold italic normal-case"
-              wrapperClassName="mt-[0.14em] w-full"
-            >
-              We Handle
-            </HeroLine>
-            <HeroLine
-              from="right"
-              delay={0.62}
-              skip={skip}
-              className="items-center gap-[0.16em] text-white"
-              wrapperClassName="min-w-max"
-            >
-              The Details.
-              {/* <GoldDash /> */}
-            </HeroLine>
+              className="mt-[0.14em] ml-[0.8em]"
+            />
           </span>
         </h1>
       </section>
@@ -87,14 +66,40 @@ export function HomeHero() {
   );
 }
 
-// function GoldDash() {
-//   return (
-//     <span
-//       aria-hidden="true"
-//       className="mb-[0.12em] inline-block h-[0.07em] w-[0.72em] shrink-0 bg-gold"
-//     />
-//   );
-// }
+function HeroStatement({
+  eyebrow,
+  headline,
+  delay,
+  skip,
+  className,
+}: {
+  eyebrow: string;
+  headline: string;
+  delay: number;
+  skip: boolean;
+  className?: string;
+}) {
+  return (
+    <span className={cn('flex flex-col items-start', className)}>
+      <HeroLine
+        from="left"
+        delay={delay}
+        skip={skip}
+        className="font-serif text-[0.36em] font-normal tracking-normal text-gold italic normal-case"
+      >
+        {eyebrow}
+      </HeroLine>
+      <HeroLine
+        from="right"
+        delay={delay}
+        skip={skip}
+        className="whitespace-nowrap"
+      >
+        {headline}
+      </HeroLine>
+    </span>
+  );
+}
 
 function HeroLine({
   children,
@@ -102,23 +107,21 @@ function HeroLine({
   delay,
   skip,
   className,
-  wrapperClassName,
 }: {
   children: ReactNode;
   from: 'left' | 'right';
   delay: number;
   skip: boolean;
   className?: string;
-  wrapperClassName?: string;
 }) {
   return (
-    <span className={cn('block overflow-hidden', wrapperClassName)}>
+    <span className="block overflow-hidden">
       <motion.span
-        className={cn('flex w-full items-center whitespace-nowrap', className)}
+        className={cn('block', className)}
         initial={skip ? false : { x: from === 'left' ? '-110%' : '110%' }}
         animate={{ x: '0%' }}
         transition={{
-          duration: skip ? 0 : 1.28,
+          duration: skip ? 0 : ENTRANCE_DURATION,
           delay: skip ? 0 : delay,
           ease: EASE_LUXE,
         }}
