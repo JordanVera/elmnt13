@@ -67,7 +67,7 @@ export const brandCategories = [
       logo('Beats by Dre', '/brands/beats.svg', 24, 24, 1.2),
       logo('Kroger', '/brands/kroger.png', 1000, 840),
       logo('Martell', '/brands/martell.png', 280, 171),
-      logo('T-Mobile', '/brands/tmobile.jpg', 1000, 447),
+      logo('T-Mobile', '/brands/tmobile.png', 1000, 447),
       logo('Seattle Seahawks', '/brands/seattle-seahawks.png', 1000, 406),
       logo('Xhibition', '/brands/xhibition.png', 278, 40),
       logo('Avión Tequila', '/brands/avion-tequila.png', 1000, 765),
@@ -106,7 +106,7 @@ export const brandCategories = [
       logo('Zoom', '/brands/zoom.svg', 24, 24),
       logo('A3C', '/brands/a3c.png', 300, 300),
       logo('McKinsey & Company', '/brands/mckinsey.svg', 39, 12),
-      logo('Los Angeles Dodgers', '/brands/dodgers.svg', 50, 23),
+      logo('Los Angeles Dodgers', '/brands/dodgers.png', 50, 23),
     ],
   },
   {
@@ -131,7 +131,7 @@ export const brandCategories = [
     id: 'organizations',
     label: 'Organizations',
     logos: [
-      logo('Obama–Biden Campaign', '/brands/obama-biden.jpg', 292, 329),
+      logo('Obama–Biden Campaign', '/brands/obama-biden.png', 292, 329),
       logo(
         'Boys & Girls Clubs of America',
         '/brands/boys-girls-clubs.png',
@@ -139,7 +139,7 @@ export const brandCategories = [
         225,
       ),
       logo('City Year', '/brands/city-year.png', 225, 225),
-      logo('YMCA', '/brands/ymca.jpeg', 257, 196),
+      logo('YMCA', '/brands/ymca.png', 257, 196),
       logo(
         'Greater Cleveland Sports Commission',
         '/brands/greater-cleveland-sports-commission.png',
