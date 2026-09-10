@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getProject, getProjectSlugs } from "@/lib/projects";
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { getProject, getProjectSlugs } from '@/lib/projects';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProject(slug);
-  if (!project) return { title: "Work" };
+  if (!project) return { title: 'Work' };
   return { title: project.title, description: project.description };
 }
 
@@ -62,10 +62,16 @@ export default async function ProjectPage({ params }: Props) {
           </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl gap-3 md:grid-cols-2">
+        <div className="mx-auto mt-16 grid max-w-6xl gap-3 md:grid-cols-2 lg:grid-cols-3">
           {project.gallery.map((src) => (
             <div key={src} className="relative aspect-4/5 overflow-hidden">
-              <Image src={src} alt="" fill sizes="50vw" className="object-cover" />
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="50vw"
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
