@@ -12,7 +12,7 @@ export function HomeAbout() {
       </p>
       <div className="relative z-10 mx-auto grid max-w-6xl items-start gap-12 md:grid-cols-12 md:gap-4">
         <div className="md:col-span-6">
-          <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[13px] tracking-[0.36em] text-gold uppercase">
             About
           </p>
           <Reveal>
