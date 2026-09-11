@@ -10,7 +10,7 @@ export function LogoMarquee({
 
   return (
     <section className="bg-paper overflow-hidden py-4 md:py-5">
-      <p className="mb-4 text-center text-[11px] tracking-[0.36em] text-ink/50 uppercase">
+      <p className="mb-4 text-center text-[15px] tracking-[0.36em] text-ink/50 uppercase">
         {title}
       </p>
       <div className="relative">
