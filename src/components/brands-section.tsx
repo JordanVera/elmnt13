@@ -39,7 +39,10 @@ export function BrandsSection() {
                   </h3>
                   <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                     {category.logos.map((brand) => (
-                      <li key={brand.name}>
+                      <li
+                        key={brand.name}
+                        className="flex items-center justify-center"
+                      >
                         <BrandLogo brand={brand} />
                       </li>
                     ))}
