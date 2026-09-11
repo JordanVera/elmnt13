@@ -26,7 +26,7 @@ export function ContactCta({
                 Let’s Take Your
               </span>
               <span className="flex items-baseline gap-x-2 md:gap-x-3 justify-center">
-                <span className="font-bebas font-bold uppercase">Vision</span>
+                <span className="font-bebas font-black uppercase">Vision</span>
                 <span className="font-serif normal-case text-gold">
                   further
                 </span>
