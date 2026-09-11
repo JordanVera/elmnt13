@@ -26,7 +26,7 @@ export function ContactCta({
     >
       <Reveal className="mx-auto max-w-6xl">
         {kicker ? (
-          <p className="text-[13px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[14px] tracking-[0.36em] text-gold uppercase">
             {kicker}
           </p>
         ) : null}

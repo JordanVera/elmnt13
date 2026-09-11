@@ -12,7 +12,7 @@ export function HomeAbout() {
       </p>
       <div className="relative z-10 mx-auto grid max-w-6xl items-start gap-12 md:grid-cols-12 md:gap-4">
         <div className="md:col-span-6">
-          <p className="text-[13px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[14px] tracking-[0.36em] text-gold uppercase">
             About
           </p>
           <Reveal>
@@ -20,10 +20,8 @@ export function HomeAbout() {
               <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
                 We take your
               </span>
-              <span className="self-center font-bebas font-bold">Vision</span>
-              <span className="self-end font-serif normal-case text-gold">
-                further
-              </span>
+              <span className=" font-bebas font-bold">Vision</span>
+              <span className=" font-serif normal-case text-gold">further</span>
             </h2>
           </Reveal>
         </div>
