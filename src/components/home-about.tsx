@@ -21,7 +21,9 @@ export function HomeAbout() {
                 We take your
               </span>
               <span className=" font-bebas font-bold">Vision</span>
-              <span className=" font-serif normal-case text-gold">further</span>
+              <span className=" font-serif normal-case text-gold ml-18">
+                further
+              </span>
             </h2>
           </Reveal>
         </div>
