@@ -1,15 +1,24 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { featuredBrandLogos } from '@/lib/brands';
 
 export function LogoMarquee({
   title = 'Brands We’ve Worked With',
+  action,
 }: {
   title?: string;
+  action?: ReactNode;
 }) {
   const loop = [...featuredBrandLogos, ...featuredBrandLogos];
 
   return (
-    <section className="bg-paper overflow-hidden py-4 md:py-5">
+    <section
+      className={
+        action
+          ? 'bg-paper overflow-hidden pt-4 pb-3 md:pt-5 md:pb-3.5'
+          : 'bg-paper overflow-hidden py-4 md:py-5'
+      }
+    >
       <p className="mb-4 text-center text-[15px] tracking-[0.36em] text-stone uppercase">
         {title}
       </p>
@@ -35,6 +44,9 @@ export function LogoMarquee({
           ))}
         </div>
       </div>
+      {action ? (
+        <div className="mt-2.5 flex justify-center px-6">{action}</div>
+      ) : null}
     </section>
   );
 }

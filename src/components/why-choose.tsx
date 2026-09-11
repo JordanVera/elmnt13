@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '@/components/reveal';
 
 const reasons = [
@@ -6,23 +10,59 @@ const reasons = [
   'We think beyond the expected.',
 ];
 
+const HOLD_MS = 3800;
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 export function WhyChoose() {
+  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [index, setIndex] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.35 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView || paused) return;
+
+    const id = window.setInterval(() => {
+      if (document.visibilityState === 'hidden') return;
+      setIndex((current) => (current + 1) % reasons.length);
+    }, HOLD_MS);
+
+    return () => window.clearInterval(id);
+  }, [inView, paused]);
+
+  const line = reasons[index];
+
   return (
-    <section className="relative overflow-hidden bg-white px-6 py-24 md:py-32">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white px-6 py-24 md:py-32"
+    >
       <div className="relative mx-auto max-w-6xl text-center">
         <Reveal>
-          <h2 className="font-display !text-[15px] text-ink uppercase">
-            Why clients choose{' '}
-            <span className="bg-gold/25 px-[0.18em] py-[0.04em]">ELMNT13</span>
+          <h2 className="font-display text-5xl leading-[0.9] tracking-tight text-ink uppercase md:text-7xl">
+            Why clients choose <span className="text-gold">ELMNT13</span>
           </h2>
         </Reveal>
 
-        <div className="relative mt-6 md:mt-8">
+        <div className="relative mt-14 md:mt-20">
           <svg
             aria-hidden="true"
             viewBox="0 0 1440 320"
             preserveAspectRatio="none"
-            className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-[260px] w-[140vw] -translate-x-1/2 -translate-y-1/2 md:h-[340px]"
+            className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-[100px] w-[140vw] max-w-none -translate-x-1/2 -translate-y-1/2 md:h-[140px]"
           >
             <defs>
               <linearGradient id="why-wave-gold" x1="0" y1="0" x2="1" y2="0">
@@ -41,17 +81,49 @@ export function WhyChoose() {
             />
           </svg>
 
-          <ul className="relative z-0 space-y-8 md:space-y-12">
-            {reasons.map((line, index) => (
-              <li key={line}>
-                <Reveal delay={index * 90}>
-                  <p className="font-serif text-[clamp(2.25rem,6.8vw,5.75rem)] leading-[0.92] text-ink">
-                    {line}
-                  </p>
-                </Reveal>
-              </li>
+          <div
+            className="relative z-10 grid overflow-hidden"
+            style={{ perspective: 900 }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {reasons.map((reason) => (
+              <p
+                key={reason}
+                aria-hidden="true"
+                className="invisible col-start-1 row-start-1 font-serif text-[clamp(0.95rem,3.4vw,2.5rem)] leading-[1.2] text-ink"
+              >
+                {reason}
+              </p>
             ))}
-          </ul>
+
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={line}
+                aria-live="polite"
+                className="col-start-1 row-start-1 font-serif text-[clamp(0.95rem,3.4vw,2.5rem)] leading-[1.2] text-ink"
+                initial={
+                  reduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: 82 }
+                }
+                animate={
+                  reduceMotion ? { opacity: 1 } : { opacity: 1, rotateX: 0 }
+                }
+                exit={
+                  reduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: -82 }
+                }
+                transition={{
+                  duration: reduceMotion ? 0.35 : 0.65,
+                  ease: EASE,
+                }}
+                style={{
+                  transformOrigin: 'center',
+                  backfaceVisibility: 'hidden',
+                }}
+              >
+                {line}
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
