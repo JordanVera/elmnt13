@@ -31,7 +31,7 @@ export function HomeAbout() {
           delay={120}
           className="md:col-span-5 md:col-start-6 mt-14 -ml-8"
         >
-          <p className="max-w-md text-lg leading-8 text-stone">
+          <p className="max-w-md text-lg leading-8 text-black">
             ELMNT13 brings together strategy, creativity and management to turn
             ideas into memorable experiences. We see the full vision, understand
             how every brand element matters and handle the creative direction
