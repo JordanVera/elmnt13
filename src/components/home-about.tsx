@@ -29,9 +29,9 @@ export function HomeAbout() {
         </div>
         <Reveal
           delay={120}
-          className="md:col-span-5 md:col-start-8 md:-ml-10 md:pt-24 lg:-ml-4"
+          className="md:col-span-5 md:col-start-7 md:-ml-10 md:pt-24 lg:-ml-4"
         >
-          <p className="max-w-md text-lg leading-8 text-ink/75 ml-12">
+          <p className="max-w-md text-lg leading-8 text-ink/75">
             ELMNT13 brings together strategy, creativity and management to turn
             ideas into memorable experiences. We see the full vision, understand
             how every brand element matters and handle the creative direction

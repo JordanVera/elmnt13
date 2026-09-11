@@ -16,13 +16,13 @@ export function HomeServices() {
               <br />
               Marketing
             </h2>
-            <p className="mt-6 max-w-lg text-left font-serif text-3xl italic text-gold md:text-4xl">
+            <p className="mt-6 max-w-lg text-left font-serif text-2xl italic text-gold md:text-3xl">
               Creating immersive brand experiences that connect, engage and
               drive impact.
             </p>
             <p className="mt-6 max-w-md text-base leading-8 tracking-wide text-paper/55">
-              Brand Activations · Product Launches · Campaign Activations ·
-              Sponsorship Activations · Community Activations & More
+              Brand Activations · Product Launches · Campaigns · Sponsorship
+              Activations · Community Activations & More
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
@@ -31,7 +31,7 @@ export function HomeServices() {
               <br />
               Management
             </h2>
-            <p className="mt-6 font-serif text-3xl italic text-gold md:ml-auto md:max-w-md md:text-4xl">
+            <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-md md:text-3xl">
               From the initial concept to the final detail, we thoughtfully
               manage each element of the event experience.
             </p>
