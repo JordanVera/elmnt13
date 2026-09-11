@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import type { Project } from '@/lib/project-types';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 9;
 
 export function ProjectGrid({ items }: { items: Project[] }) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -14,21 +14,19 @@ export function ProjectGrid({ items }: { items: Project[] }) {
 
   return (
     <div>
-      <div className="-mb-3 columns-2 md:columns-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((project) => (
           <Link
             key={project.slug}
             href={`/work/${project.slug}`}
-            className="group relative mb-3 block break-inside-avoid overflow-hidden bg-mist"
+            className="group relative aspect-3/4 overflow-hidden bg-mist"
           >
             <Image
               src={project.image}
               alt={project.title}
-              width={1200}
-              height={1500}
-              sizes="33vw"
-              className="transition-transform duration-700 group-hover:scale-105"
-              style={{ width: '100%', height: 'auto' }}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-linear-to-t from-ink/70 via-ink/15 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-4 text-left sm:p-5">

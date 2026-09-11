@@ -38,7 +38,7 @@ export const socialLinks = [
 
 export const stats = [
   { value: 14, suffix: '+', label: 'Years in business' },
-  { value: 500, suffix: '+', label: 'Experiences produced' },
+  { value: 500, suffix: '+', label: 'Curated experiences' },
   { value: 100, suffix: '+', label: 'Brands and clients' },
   { value: 90, suffix: '%', label: 'Repeat + referral business' },
 ] as const;

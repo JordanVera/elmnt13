@@ -37,10 +37,10 @@ export function WorkHero({ projects }: { projects: Project[] }) {
   const titleOpacity = useTransform(progress, [0, 0.45, 1], [1, 1, 0.42]);
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh] bg-ink">
+    <section ref={sectionRef} className="relative h-[200vh] bg-white">
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden px-6">
         <div className="relative flex w-full max-w-6xl flex-col items-center justify-center">
-          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-white uppercase md:text-[11vw]">
+          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-ink uppercase md:text-[11vw]">
             <motion.span
               style={
                 reduceMotion

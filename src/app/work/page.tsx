@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ContactCta } from '@/components/contact-cta';
 import { ProjectGrid } from '@/components/project-grid';
 import { WorkHero } from '@/components/work-hero';
 import { getFeaturedProjects, getWorkProjects } from '@/lib/projects';
@@ -18,13 +19,14 @@ export default async function WorkPage() {
   ).slice(0, 4);
 
   return (
-    <main>
+    <main className="bg-white">
       <WorkHero projects={heroProjects} />
-      <section className="bg-paper px-6 py-14">
+      <section className="bg-white px-6 py-14">
         <div className="mx-auto max-w-7xl">
           <ProjectGrid items={workProjects} />
         </div>
       </section>
+      <ContactCta barOnly />
     </main>
   );
 }
