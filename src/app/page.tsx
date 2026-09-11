@@ -17,7 +17,7 @@ export default async function HomePage() {
       <LogoMarquee />
       <HomeServices />
       <WorkCarousel projects={slides} />
-      <ContactCta kicker="Let's Make It Happen" />
+      <ContactCta />
     </main>
   );
 }

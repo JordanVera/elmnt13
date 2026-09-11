@@ -51,7 +51,7 @@ export default function AboutPage() {
 
       <BrandsSection />
       <WhyChoose />
-      <DetailsMoment tone="paper" layout="tagline" compact showRule={false} />
+      <DetailsMoment tone="paper" layout="tagline" compact />
       <AboutStats />
       <ContactCta barOnly />
     </main>

@@ -9,6 +9,7 @@ import {
   type Ref,
 } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   motion,
   useAnimation,
@@ -17,20 +18,48 @@ import {
 } from 'framer-motion';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const MEET_ROTATE = -11;
-const SETTLE_ROTATE = -6.5;
-const HOLD_ROTATE = -5;
 const PIVOT_Y = 0.68;
 const RIM_Y = 0.055;
 const RIM_WIDTH = 0.262;
-const SETTLE_BACK = 0.1;
+const SETTLE_BACK = 0.08;
+const KISS_DEGREES = 11.5;
+
+// Positive rotate tilts the top of the glass to the right. The left glass
+// leans right (toward center) and the right glass leans left, with slightly
+// different angles and heights so the toast reads as two hands, not a mirror.
+const LEFT = {
+  meetRotate: 13,
+  settleRotate: 5.5,
+  holdRotate: 4,
+  meetY: -18,
+  settleY: -10,
+} as const;
+
+const RIGHT = {
+  meetRotate: -10,
+  settleRotate: -4.5,
+  holdRotate: -3,
+  meetY: 12,
+  settleY: 8,
+} as const;
+
+const PAGE_NAV = [
+  { href: '#services', label: 'Services' },
+  // { href: '#story', label: 'Story' },
+  { href: '#work', label: 'Work' },
+  { href: '#contact', label: 'Contact' },
+] as const;
+
+function poseFor(dir: number) {
+  return dir < 0 ? LEFT : RIGHT;
+}
 
 function kissOffset(width: number, height: number, degrees: number) {
   const theta = (Math.abs(degrees) * Math.PI) / 180;
   const gap =
     width * (1 - RIM_WIDTH * Math.cos(theta)) -
     2 * (PIVOT_Y - RIM_Y) * height * Math.sin(theta);
-  return -(gap / 2) * 0.88;
+  return -(gap / 2) * 0.96;
 }
 
 const BUBBLES = [
@@ -62,42 +91,71 @@ const SPARKS = [
   { id: 8, angle: 228 },
 ] as const;
 
+const STARS = [
+  { id: 1, x: -26, y: -52, size: 20, delay: 0, rotate: -16 },
+  { id: 2, x: 40, y: -34, size: 14, delay: 0.05, rotate: 22 },
+  { id: 3, x: -50, y: 10, size: 17, delay: 0.08, rotate: 10 },
+  { id: 4, x: 54, y: 24, size: 12, delay: 0.12, rotate: -14 },
+  { id: 5, x: 8, y: 46, size: 18, delay: 0.03, rotate: 36 },
+  { id: 6, x: -30, y: -12, size: 10, delay: 0.15, rotate: -28 },
+  { id: 7, x: 28, y: -60, size: 12, delay: 0.1, rotate: 14 },
+  { id: 8, x: -10, y: 34, size: 9, delay: 0.18, rotate: 4 },
+  { id: 9, x: 64, y: -8, size: 9, delay: 0.2, rotate: 30 },
+  { id: 10, x: -62, y: -30, size: 11, delay: 0.14, rotate: -8 },
+] as const;
+
 function getGlassVariants(meetX: number, settleX: number): Variants {
   return {
     hidden: (dir: number) => ({
       x: `${dir * 42}vw`,
-      rotate: dir * 8,
+      y: poseFor(dir).meetY * 0.35,
+      rotate: -dir * 8,
       opacity: 0,
     }),
-    clink: (dir: number) => ({
-      x: dir * meetX,
-      rotate: dir * MEET_ROTATE,
-      opacity: 1,
-      transition: { duration: 2.8, ease: EASE_LUXE },
-    }),
-    settle: (dir: number) => ({
-      x: dir * settleX,
-      rotate: dir * SETTLE_ROTATE,
-      opacity: 1,
-      transition: { duration: 1.15, delay: 0.18, ease: EASE_LUXE },
-    }),
-    hold: (dir: number) => ({
-      x: dir * settleX,
-      y: [0, -4, 0],
-      rotate: [dir * SETTLE_ROTATE, dir * HOLD_ROTATE, dir * SETTLE_ROTATE],
-      transition: { duration: 7.2, repeat: Infinity, ease: 'easeInOut' },
-    }),
+    clink: (dir: number) => {
+      const pose = poseFor(dir);
+      return {
+        x: dir * meetX,
+        y: pose.meetY,
+        rotate: pose.meetRotate,
+        opacity: 1,
+        transition: { duration: 2.8, ease: EASE_LUXE },
+      };
+    },
+    settle: (dir: number) => {
+      const pose = poseFor(dir);
+      return {
+        x: dir * settleX,
+        y: pose.settleY,
+        rotate: pose.settleRotate,
+        opacity: 1,
+        transition: { duration: 1.15, delay: 0.18, ease: EASE_LUXE },
+      };
+    },
+    hold: (dir: number) => {
+      const pose = poseFor(dir);
+      return {
+        x: dir * settleX,
+        y: [pose.settleY, pose.settleY - 4, pose.settleY],
+        rotate: [pose.settleRotate, pose.holdRotate, pose.settleRotate],
+        transition: { duration: 7.2, repeat: Infinity, ease: 'easeInOut' },
+      };
+    },
   };
 }
 
 export function ChampagneToast() {
   const controls = useAnimation();
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const glassRef = useRef<HTMLDivElement>(null);
   const [toasted, setToasted] = useState(false);
-  const [pose, setPose] = useState<{ meetX: number; settleX: number } | null>(
-    null,
-  );
+  const [pose, setPose] = useState<{
+    meetX: number;
+    settleX: number;
+    contactY: number;
+  } | null>(null);
   const skipMotion = Boolean(reduceMotion);
   const ready = pose !== null;
   const glassVariants = useMemo(
@@ -110,10 +168,32 @@ export function ChampagneToast() {
     if (!el) return;
 
     const update = () => {
-      const { width, height } = el.getBoundingClientRect();
+      // Layout sizes, not the bounding box: the glass is already rotated and
+      // translated in its `hidden` pose when this first runs.
+      const width = el.offsetWidth;
+      const height = el.offsetHeight;
       if (width < 8 || height < 8) return;
-      const meetX = kissOffset(width, height, Math.abs(MEET_ROTATE));
-      setPose({ meetX, settleX: meetX + width * SETTLE_BACK });
+
+      const meetX = kissOffset(width, height, KISS_DEGREES);
+
+      let contactY = 0;
+      const stage = stageRef.current;
+      const section = sectionRef.current;
+      if (stage && section) {
+        const glassTop =
+          stage.getBoundingClientRect().bottom -
+          height -
+          section.getBoundingClientRect().top;
+        const theta = (KISS_DEGREES * Math.PI) / 180;
+        const rimDrop = (PIVOT_Y - RIM_Y) * height * (1 - Math.cos(theta));
+        contactY =
+          glassTop +
+          RIM_Y * height +
+          (LEFT.meetY + RIGHT.meetY) / 2 +
+          rimDrop;
+      }
+
+      setPose({ meetX, settleX: meetX + width * SETTLE_BACK, contactY });
     };
 
     update();
@@ -149,13 +229,17 @@ export function ChampagneToast() {
   }, [controls, ready, skipMotion]);
 
   return (
-    <section className="relative min-h-dvh overflow-hidden bg-white">
+    <section
+      ref={sectionRef}
+      className="relative min-h-dvh overflow-hidden bg-white"
+    >
       <div
-        className="absolute inset-x-0 top-16 bottom-10 flex items-end justify-center md:bottom-12"
+        ref={stageRef}
+        className="absolute inset-x-0 top-8 bottom-19 flex items-end justify-center md:bottom-24"
         aria-hidden="true"
       >
         <motion.div
-          className="h-[82%] w-auto shrink-0"
+          className="h-[92%] w-auto shrink-0 md:h-[96%]"
           custom={-1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -170,7 +254,7 @@ export function ChampagneToast() {
           />
         </motion.div>
         <motion.div
-          className="h-[82%] w-auto shrink-0"
+          className="h-[92%] w-auto shrink-0 md:h-[96%]"
           custom={1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -183,13 +267,17 @@ export function ChampagneToast() {
             reduceMotion={skipMotion}
           />
         </motion.div>
-        <SparkBurst active={toasted && !skipMotion} />
       </div>
 
+      <SparkBurst
+        active={toasted && !skipMotion}
+        contactY={pose?.contactY ?? 0}
+      />
+
       <h1 className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
-        <span className="block overflow-hidden pb-1">
+        <span className="block overflow-hidden pb-[0.32em]">
           <motion.span
-            className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-none italic text-ink"
+            className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-[1.12] italic text-ink"
             initial={skipMotion ? false : { y: '115%' }}
             animate={{ y: '0%' }}
             transition={{
@@ -216,6 +304,31 @@ export function ChampagneToast() {
           </motion.span>
         </span>
       </h1>
+
+      <motion.nav
+        aria-label="On this page"
+        className="absolute inset-x-0 bottom-0 z-20 flex justify-center px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+        initial={skipMotion ? false : { opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: skipMotion ? 0 : 0.85,
+          delay: skipMotion ? 0 : 2.9,
+          ease: EASE_LUXE,
+        }}
+      >
+        <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2 sm:gap-x-12">
+          {PAGE_NAV.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:text-ink"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </motion.nav>
     </section>
   );
 }
@@ -350,24 +463,80 @@ function Bubble({
   );
 }
 
-function SparkBurst({ active }: { active: boolean }) {
+function SparkleIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className={className} aria-hidden="true">
+      <path
+        d="M8 0c.45 3.35 1.55 5.45 4.2 6.2C9.55 6.95 8.45 9.05 8 16c-.45-3.35-1.55-5.45-4.2-6.2C6.45 9.05 7.55 6.95 8 0Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function SparkBurst({
+  active,
+  contactY,
+}: {
+  active: boolean;
+  contactY: number;
+}) {
   if (!active) return null;
 
   return (
-    <motion.div
-      className="absolute top-[18%] left-1/2 h-32 w-32 -translate-x-1/2"
-      initial={{ opacity: 0, scale: 0.4 }}
-      animate={{ opacity: [0, 1, 0], scale: [0.4, 1.15, 1.55] }}
-      transition={{ duration: 0.85, ease: EASE_LUXE }}
+    <div
+      className="pointer-events-none absolute left-1/2 z-20"
+      style={{ top: contactY > 0 ? contactY : '14%' }}
     >
-      {SPARKS.map((spark) => (
-        <span
-          key={spark.id}
-          className="absolute top-1/2 left-1/2 h-px w-8 origin-left bg-linear-to-r from-gold-bright to-transparent"
-          style={{ transform: `rotate(${spark.angle}deg)` }}
-        />
+      <motion.div
+        className="absolute top-0 left-0 h-40 w-40 -translate-x-1/2 -translate-y-1/2"
+        initial={{ opacity: 0, scale: 0.4 }}
+        animate={{ opacity: [0, 1, 0], scale: [0.4, 1.2, 1.7] }}
+        transition={{ duration: 1.1, ease: EASE_LUXE }}
+      >
+        {SPARKS.map((spark) => (
+          <span
+            key={spark.id}
+            className="absolute top-1/2 left-1/2 h-px w-12 origin-left bg-linear-to-r from-gold-bright to-transparent"
+            style={{ transform: `rotate(${spark.angle}deg)` }}
+          />
+        ))}
+        <span className="absolute top-1/2 left-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-bright shadow-[0_0_32px_rgba(221,196,154,1)]" />
+      </motion.div>
+      {STARS.map((star) => (
+        <motion.span
+          key={star.id}
+          className="absolute top-0 left-0 text-gold-bright"
+          style={{
+            width: star.size,
+            height: star.size,
+            marginLeft: -star.size / 2,
+            marginTop: -star.size / 2,
+          }}
+          initial={{
+            opacity: 0,
+            x: 0,
+            y: 0,
+            scale: 0.1,
+            rotate: star.rotate,
+          }}
+          animate={{
+            opacity: [0, 1, 1, 0],
+            x: star.x,
+            y: star.y,
+            scale: [0.1, 1.25, 1, 0.7],
+            rotate: star.rotate + 40,
+          }}
+          transition={{
+            duration: 1.6,
+            delay: star.delay,
+            ease: EASE_LUXE,
+            opacity: { duration: 1.6, delay: star.delay, times: [0, 0.15, 0.7, 1] },
+          }}
+        >
+          <SparkleIcon className="h-full w-full drop-shadow-[0_0_12px_rgba(221,196,154,0.95)]" />
+        </motion.span>
       ))}
-      <span className="absolute top-1/2 left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-bright shadow-[0_0_22px_rgba(221,196,154,1)]" />
-    </motion.div>
+    </div>
   );
 }

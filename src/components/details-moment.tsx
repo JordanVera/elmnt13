@@ -1,93 +1,134 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { Reveal } from '@/components/reveal';
+import { SlideLine } from '@/components/slide-line';
+import { cn } from '@/lib/cn';
+
+const FIRST_LINE_DELAY = 0.15;
+const SECOND_LINE_DELAY = 0.95;
+
+function StatementTypography({
+  dark,
+  active,
+  skip,
+}: {
+  dark: boolean;
+  active: boolean;
+  skip: boolean;
+}) {
+  return (
+    <h2
+      aria-label="Love is in the details"
+      className="mx-auto flex w-max max-w-full flex-col items-start overflow-hidden"
+    >
+      <SlideLine
+        from="left"
+        delay={FIRST_LINE_DELAY}
+        skip={skip}
+        active={active}
+        className={cn(
+          'font-serif text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] italic',
+          dark ? 'text-white' : 'text-ink',
+        )}
+      >
+        Love is in the
+      </SlideLine>
+      <SlideLine
+        from="right"
+        delay={SECOND_LINE_DELAY}
+        skip={skip}
+        active={active}
+        className="mt-1 ml-[0.42em] font-display text-[clamp(3.25rem,10.5vw,8rem)] leading-[0.88] tracking-tight text-gold uppercase"
+      >
+        details
+      </SlideLine>
+    </h2>
+  );
+}
 
 export function DetailsMoment({
-  line = 'Love is in the details',
   tone = 'blush',
-  highlight = 'details',
   compact = false,
-  showRule = true,
   layout = 'inline',
 }: {
-  line?: string;
   tone?: 'blush' | 'ink' | 'paper';
-  highlight?: string;
   compact?: boolean;
-  showRule?: boolean;
   layout?: 'inline' | 'tagline';
 }) {
-  const words = line.split(' ');
+  const sectionRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const skip = Boolean(reduceMotion);
   const dark = tone === 'ink';
+
+  useEffect(() => {
+    if (skip) {
+      setActive(true);
+      return;
+    }
+
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35, rootMargin: '0px 0px -4% 0px' },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [skip]);
+
   const heightClass =
     compact && layout === 'tagline'
       ? 'py-8 md:py-10'
       : compact
         ? 'min-h-[38vh] py-14 md:py-16'
-        : 'min-h-[70vh] py-20';
+        : layout === 'inline'
+          ? 'py-6 md:py-8'
+          : 'min-h-[70vh] py-20';
 
   return (
     <section
+      ref={sectionRef}
       className={
         dark
-          ? `flex ${heightClass} items-center bg-ink px-6`
+          ? `flex ${heightClass} items-center overflow-hidden bg-ink px-6`
           : tone === 'paper'
-            ? `flex ${heightClass} items-center bg-white px-6`
-            : `flex ${heightClass} items-center bg-blush px-6`
+            ? `flex ${heightClass} items-center overflow-hidden bg-white px-6`
+            : `flex ${heightClass} items-center overflow-hidden bg-blush px-6`
       }
     >
-      <Reveal
-        className={`mx-auto max-w-6xl ${layout === 'tagline' ? 'text-left' : 'text-center'}`}
+      <div
+        className={`mx-auto w-full max-w-6xl ${layout === 'tagline' ? 'text-left' : 'text-center'}`}
       >
         {layout === 'tagline' ? (
-          <p className="text-5xl leading-[0.95] -mt-2 tracking-tight md:text-7xl lg:text-8xl text-center">
-            <span className="block text-black font-sans  !text-6xl  font-light tracking-[0em]  uppercase">
-              We take your
-            </span>
-            <span className="mt-2 block ml-100!">
-              <span className="font-display font-bold text-black uppercase">
-                Vision
-              </span>{' '}
-              <span className="font-serif text-gold italic normal-case">
-                further
+          <Reveal>
+            <p className="-mt-2 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+              <span className="block font-sans text-6xl! font-light tracking-[0em] text-black uppercase">
+                We take your
               </span>
-            </span>
-          </p>
+              <span className="mt-2 block ml-100!">
+                <span className="font-display font-bold text-black uppercase">
+                  Vision
+                </span>{' '}
+                <span className="font-serif text-gold italic normal-case">
+                  further
+                </span>
+              </span>
+            </p>
+          </Reveal>
         ) : (
-          // <div className="inline-block text-left">
-          //   <h2 className="mt-6 flex w-full max-w-xl flex-col items-start text-6xl leading-[0.8] tracking-tight uppercase md:text-7xl lg:text-8xl">
-          //     <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
-          //       We take your
-          //     </span>
-          //     <span className=" font-bebas font-bold">Vision</span>
-          //     <span className=" font-serif normal-case text-gold ml-26">
-          //       further
-          //     </span>
-          //   </h2>
-          // </div>
-          <p
-            className={
-              dark
-                ? 'font-serif text-5xl leading-tight text-white italic md:text-8xl'
-                : 'font-serif text-5xl leading-tight text-ink italic md:text-8xl'
-            }
-          >
-            {words.map((word, index) => (
-              <span
-                key={`${word}-${index}`}
-                className={
-                  word.toLowerCase() === highlight.toLowerCase()
-                    ? 'text-gold not-italic font-display uppercase tracking-tight'
-                    : 'inline-block px-[0.12em]'
-                }
-              >
-                {word}{' '}
-              </span>
-            ))}
-          </p>
+          <StatementTypography dark={dark} active={active} skip={skip} />
         )}
-        {showRule ? (
-          <span className="gold-rule mx-auto mt-10 block h-px w-32 bg-gold" />
-        ) : null}
-      </Reveal>
+      </div>
     </section>
   );
 }

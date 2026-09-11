@@ -1,37 +1,68 @@
 import Link from 'next/link';
-import type { ReactNode } from 'react';
 import { GoldLink } from '@/components/gold-link';
 import { Reveal } from '@/components/reveal';
 
+function ContactBar({ href }: { href: string }) {
+  return (
+    <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-6xl">
+      <span className="font-bebas">Get in </span>{' '}
+      <Link
+        href={href}
+        aria-label="Get in contact — open the inquiry form"
+        className="font-serif font-normal tracking-normal text-gold italic normal-case underline decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+      >
+        contact
+      </Link>
+    </h2>
+  );
+}
+
+function CreativePhrase({ variant }: { variant: 'home' | 'weddings' }) {
+  if (variant === 'weddings') {
+    return (
+      <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
+        <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+          Let&apos;s get started
+        </span>
+        <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
+          <span className="font-bebas font-black uppercase">on your</span>
+          <span className="font-serif normal-case text-gold italic">forever</span>
+        </span>
+      </p>
+    );
+  }
+
+  return (
+    <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
+      <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+        Let&apos;s Take Your
+      </span>
+      <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
+        <span className="font-bebas font-black uppercase">Vision</span>
+        <span className="font-serif normal-case text-gold">further</span>
+      </span>
+    </p>
+  );
+}
+
 export function ContactCta({
-  kicker,
-  title,
   href = '/contact',
   label,
   barOnly = false,
+  phrase = 'home',
+  id,
 }: {
-  kicker?: string;
-  title?: ReactNode;
   href?: string;
   label?: string;
   barOnly?: boolean;
+  phrase?: 'home' | 'weddings';
+  id?: string;
 }) {
-  const isHomePhrase = title == null;
-
   if (barOnly) {
     return (
-      <section className="bg-paper px-6 py-2 md:py-2">
+      <section id={id} className="scroll-mt-8 bg-paper px-6 py-2 md:py-2">
         <Reveal>
-          <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-6xl">
-            <span className="font-bebas">Get in </span>{' '}
-            <Link
-              href={href}
-              aria-label="Get in contact — open the inquiry form"
-              className="font-serif font-normal tracking-normal underline text-gold italic normal-case decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
-            >
-              contact
-            </Link>
-          </h2>
+          <ContactBar href={href} />
         </Reveal>
       </section>
     );
@@ -39,55 +70,22 @@ export function ContactCta({
 
   return (
     <>
-      <div className="bg-white">
-        <div className="flex justify-center px-6 pb md:pb-24 mx-auto max-w-6xl ">
+      <div id={id} className="scroll-mt-8 bg-white">
+        <div className="mx-auto flex max-w-6xl justify-center px-6 pb md:pb-24">
           <Reveal>
-            <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
-              <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
-                Let’s Take Your
-              </span>
-              <span className="flex items-baseline gap-x-2 md:gap-x-3 justify-center">
-                <span className="font-bebas font-black uppercase">Vision</span>
-                <span className="font-serif normal-case text-gold">
-                  further
-                </span>
-              </span>
-            </p>
+            <CreativePhrase variant={phrase} />
           </Reveal>
         </div>
       </div>
 
-      <section
-        className={
-          isHomePhrase
-            ? 'bg-paper px-6 py-2 md:py-2'
-            : 'bg-paper px-6 py-2 md:py-2'
-        }
-      >
+      <section className="bg-paper px-6 py-2 md:py-2">
         <Reveal>
-          {isHomePhrase ? (
-            <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-6xl">
-              <span className="font-bebas">Get in </span>{' '}
-              <Link
-                href={href}
-                aria-label="Get in contact — open the inquiry form"
-                className="font-serif font-normal tracking-normal underline text-gold italic normal-case decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
-              >
-                contact
-              </Link>
-            </h2>
-          ) : (
-            <>
-              <h2 className="mt-6 font-display text-5xl tracking-tight uppercase md:text-8xl">
-                {title}
-              </h2>
-              {label ? (
-                <div className="mt-10">
-                  <GoldLink href={href}>{label}</GoldLink>
-                </div>
-              ) : null}
-            </>
-          )}
+          <ContactBar href={href} />
+          {label ? (
+            <div className="mt-10">
+              <GoldLink href={href}>{label}</GoldLink>
+            </div>
+          ) : null}
         </Reveal>
       </section>
     </>
