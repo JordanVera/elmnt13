@@ -34,7 +34,7 @@ export function HomeAbout() {
             how every brand element matters and handle the creative direction
             and execution to make it happen.
           </p>
-          <div className="mt-10 ml-12">
+          <div className="mt-10">
             <GoldLink href="/about">Learn more</GoldLink>
           </div>
         </Reveal>
