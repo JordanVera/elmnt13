@@ -7,6 +7,7 @@
   --gold: #c4a574;
   --gold-bright: #ddc49a;
   --blush: #f3ebe3;
+  --stone: #817b73;
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   --color-gold: var(--gold);
   --color-gold-bright: var(--gold-bright);
   --color-blush: var(--blush);
+  --color-stone: var(--stone);
   --font-sans: var(--font-century-gothic);
   --font-display: var(--font-bebas);
   --font-serif: var(--font-playfair);

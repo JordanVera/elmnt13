@@ -69,7 +69,7 @@ function CategoryTitle({
           'font-display block leading-[0.86] tracking-tight uppercase transition-[font-size,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
           selected
             ? 'text-[clamp(1.55rem,6.5vw,5.75rem)] text-white'
-            : 'text-[clamp(0.95rem,3.4vw,2.15rem)] text-white/28 hover:text-white/55',
+            : 'text-[clamp(0.95rem,3.4vw,2.15rem)] text-stone hover:text-white/55',
         )}
       >
         {words.map((word) => (
@@ -88,7 +88,7 @@ function CategoryDetails({ category }: { category: ServiceCategory }) {
       <p className="mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl">
         {category.short}
       </p>
-      <p className="mt-4 max-w-sm text-sm leading-7 text-paper/55 max-lg:hidden lg:mt-5">
+      <p className="mt-4 max-w-sm text-sm leading-7 text-stone max-lg:hidden lg:mt-5">
         {category.description}
       </p>
       <div className="mt-6 max-lg:hidden lg:mt-8">
@@ -131,7 +131,7 @@ function OptionsList({
                     'font-display block tracking-tight uppercase transition-[color,font-size,line-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
                     selected
                       ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-white'
-                      : 'text-[15px] text-white/35 hover:text-white/70 sm:text-sm lg:text-lg',
+                      : 'text-[15px] text-stone hover:text-white/70 sm:text-sm lg:text-lg',
                   )}
                 >
                   {option.name}
@@ -143,7 +143,7 @@ function OptionsList({
                   )}
                 >
                   <span className="min-h-0 overflow-hidden">
-                    <span className="mt-3 block max-w-xl text-sm leading-6 text-paper/60 max-md:line-clamp-3 md:mt-4 md:line-clamp-none md:leading-7">
+                    <span className="mt-3 block max-w-xl text-sm leading-6 text-stone max-md:line-clamp-3 md:mt-4 md:line-clamp-none md:leading-7">
                       {option.description}
                     </span>
                   </span>

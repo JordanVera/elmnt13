@@ -16,7 +16,7 @@ export function BrandsSection() {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="cursor-pointer text-[11px] tracking-[0.32em] text-ink/60 uppercase transition-colors hover:text-ink"
+            className="cursor-pointer text-[11px] tracking-[0.32em] text-stone uppercase transition-colors hover:text-ink"
             aria-expanded={open}
           >
             {open ? 'Close list' : 'View all'}
@@ -30,7 +30,7 @@ export function BrandsSection() {
                 >
                   <h3
                     id={`brands-${category.id}`}
-                    className="border-b border-ink/10 pb-3 text-[11px] tracking-[0.32em] text-ink/50 uppercase"
+                    className="border-b border-ink/10 pb-3 text-[11px] tracking-[0.32em] text-stone uppercase"
                   >
                     {category.label}
                   </h3>

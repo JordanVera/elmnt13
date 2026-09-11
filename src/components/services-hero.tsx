@@ -23,7 +23,7 @@ export function ServicesHero() {
           <p className="mt-8 max-w-xl font-serif text-3xl italic text-gold md:text-5xl">
             Strategy to the last light.
           </p>
-          <p className="mt-6 max-w-lg text-sm leading-7 text-paper/55 md:text-base md:leading-8">
+          <p className="mt-6 max-w-lg text-sm leading-7 text-stone md:text-base md:leading-8">
             Experiential marketing and event management, explored as you scroll
             — one offering at a time.
           </p>
@@ -61,7 +61,7 @@ export function ServicesIntro() {
                 <p className="mt-4 font-serif text-2xl italic text-gold">
                   {category.short}
                 </p>
-                <p className="mt-6 max-w-md text-sm leading-7 text-ink/70">
+                <p className="mt-6 max-w-md text-sm leading-7 text-stone">
                   {category.description}
                 </p>
               </article>

@@ -68,7 +68,7 @@ export function NotFoundPage() {
           </h1>
 
           <motion.p
-            className="mt-10 max-w-xl text-xl leading-relaxed text-paper/75 md:mt-12 md:text-2xl"
+            className="mt-10 max-w-xl text-xl leading-relaxed text-stone md:mt-12 md:text-2xl"
             initial={skip ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -165,7 +165,7 @@ function TableCard({ skip }: { skip: boolean }) {
         <span className="mt-1 font-display text-4xl leading-none text-gold md:text-5xl">
           404
         </span>
-        <span className="mt-2 font-serif text-xs text-paper/45 italic">
+        <span className="mt-2 font-serif text-xs text-stone italic">
           Unassigned
         </span>
         <span className="absolute -top-px left-1/2 h-2 w-px -translate-x-1/2 bg-gold/40" />

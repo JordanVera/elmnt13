@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }: Props) {
             </p>
             <p className="mt-2 text-lg">{project.client}</p>
           </div>
-          <p className="max-w-xl text-lg leading-8 text-paper/75">
+          <p className="max-w-xl text-lg leading-8 text-stone">
             {project.description}
           </p>
         </div>

@@ -29,7 +29,7 @@ export default function AboutPage() {
             </h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="mt-12 max-w-2xl text-lg leading-8 text-ink/75">
+            <p className="mt-12 max-w-2xl text-lg leading-8 text-stone">
               ELMNT13 is a creative marketing and management company where
               vision drives the work and the details shape the outcome. Since
               2012, we’ve partnered with brands, organizations and individuals
@@ -57,7 +57,7 @@ export default function AboutPage() {
               <p className="font-display text-7xl leading-none tracking-tight text-ink md:text-8xl">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-4 text-[11px] tracking-[0.22em] text-ink/50 uppercase">
+              <p className="mt-4 text-[11px] tracking-[0.22em] text-stone uppercase">
                 {stat.label}
               </p>
             </div>

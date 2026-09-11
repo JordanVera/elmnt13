@@ -101,7 +101,7 @@ export function ContactForm() {
       <Field label="Phone" name="phone" type="tel" />
 
       <label className="block">
-        <span className="text-[11px] tracking-[0.28em] text-ink/50 uppercase">
+        <span className="text-[11px] tracking-[0.28em] text-stone uppercase">
           Service of interest
         </span>
         <select
@@ -123,7 +123,7 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[11px] tracking-[0.28em] text-ink/50 uppercase">
+        <span className="text-[11px] tracking-[0.28em] text-stone uppercase">
           Offering
         </span>
         <select
@@ -141,7 +141,7 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[11px] tracking-[0.28em] text-ink/50 uppercase">
+        <span className="text-[11px] tracking-[0.28em] text-stone uppercase">
           Tell us more
         </span>
         <textarea
@@ -162,7 +162,7 @@ export function ContactForm() {
 
       {state.message ? (
         <p
-          className={state.ok ? 'text-sm text-ink/70' : 'text-sm text-red-700'}
+          className={state.ok ? 'text-sm text-stone' : 'text-sm text-red-700'}
         >
           {state.message}
         </p>
@@ -184,7 +184,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="text-[11px] tracking-[0.28em] text-ink/50 uppercase">
+      <span className="text-[11px] tracking-[0.28em] text-stone uppercase">
         {label}
       </span>
       <input
