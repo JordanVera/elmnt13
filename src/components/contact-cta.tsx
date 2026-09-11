@@ -32,7 +32,8 @@ export function ContactCta({
         ) : null}
         {isHomePhrase ? (
           <h2 className="font-display text-5xl tracking-tight uppercase md:text-8xl">
-            Get in{' '}
+            <span className="font-sans">Get</span>{' '}
+            <span className="font-bebas">in </span>{' '}
             <Link
               href={href}
               aria-label="Get in contact — open the inquiry form"
