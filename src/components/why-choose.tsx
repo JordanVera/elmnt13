@@ -48,7 +48,7 @@ export function WhyChoose() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-white px-6 py-24 md:py-32"
+      className="relative overflow-hidden bg-white px-6 pt-24 pb-12 md:pt-32 md:pb-16"
     >
       <div className="relative mx-auto max-w-6xl text-center">
         <Reveal>
@@ -57,7 +57,7 @@ export function WhyChoose() {
           </h2>
         </Reveal>
 
-        <div className="relative mt-14 md:mt-20">
+        <div className="relative mt-6 md:mt-8">
           <svg
             aria-hidden="true"
             viewBox="0 0 1440 320"

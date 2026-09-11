@@ -23,7 +23,7 @@ export default function AboutPage() {
           <Reveal>
             <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
               Vision drives the work.
-              <span className="mt-3 block font-serif text-4xl tracking-normal normal-case italic md:text-6xl">
+              <span className="mt-3 text-gold block font-serif text-4xl tracking-normal normal-case italic md:text-6xl">
                 Details shape the outcome.
               </span>
             </h1>
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
       <BrandsSection />
       <WhyChoose />
-      <DetailsMoment tone="ink" layout="tagline" compact showRule={false} />
+      <DetailsMoment tone="paper" layout="tagline" compact showRule={false} />
       <AboutStats />
       <ContactCta barOnly />
     </main>
