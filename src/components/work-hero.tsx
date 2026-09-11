@@ -16,14 +16,13 @@ import type { Project } from '@/lib/project-types';
 const SPRING = { stiffness: 72, damping: 26, mass: 0.38, restDelta: 0.001 };
 
 const cardEntrance = [
-  { x: [-36, -12], y: [72, 8], rotate: [-12, -3.5] },
-  { x: [40, 14], y: [58, -10], rotate: [10, 2.5] },
-  { x: [-24, 6], y: [68, 6], rotate: [9, -2] },
-  { x: [32, 16], y: [84, -12], rotate: [-8, 3.5] },
+  { x: [-18, -5], y: [200, 6], rotate: [-10, -2] },
+  { x: [2, 1], y: [220, -8], rotate: [6, 1] },
+  { x: [20, 5], y: [200, 6], rotate: [-7, 2] },
 ] as const;
 
 export function WorkHero({ projects }: { projects: Project[] }) {
-  const pieces = projects.slice(0, 4);
+  const pieces = projects.slice(0, 3);
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -62,7 +61,7 @@ export function WorkHero({ projects }: { projects: Project[] }) {
           </h1>
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="grid w-full max-w-5xl grid-cols-2 gap-2 px-1 sm:gap-3 md:grid-cols-4 md:gap-4">
+            <div className="grid w-full max-w-2xl grid-cols-3 gap-3 px-4">
               {pieces.map((project, index) => (
                 <WorkPiece
                   key={project.slug}
@@ -94,8 +93,8 @@ function WorkPiece({
   progress: MotionValue<number>;
   reduceMotion: boolean;
 }) {
-  const start = 0.12 + index * 0.06;
-  const end = 0.48 + index * 0.05;
+  const start = 0.1 + index * 0.05;
+  const end = 0.42 + index * 0.04;
   const x = useTransform(progress, [start, end], [...entrance.x]);
   const y = useTransform(progress, [start, end], [...entrance.y]);
   const rotate = useTransform(progress, [start, end], [...entrance.rotate]);
