@@ -38,18 +38,31 @@ export function DetailsMoment({
         className={`mx-auto max-w-6xl ${layout === 'tagline' ? 'text-left' : 'text-center'}`}
       >
         {layout === 'tagline' ? (
-          <div className="inline-block text-left">
-            <h2 className="mt-6 flex w-full max-w-xl flex-col items-start text-6xl leading-[0.8] tracking-tight uppercase md:text-7xl lg:text-8xl">
-              <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
-                We take your
-              </span>
-              <span className=" font-bebas font-bold">Vision</span>
-              <span className=" font-serif normal-case text-gold ml-26">
+          <p className="text-5xl leading-[0.95] -mt-2 tracking-tight md:text-7xl lg:text-8xl text-center">
+            <span className="block text-black font-sans  !text-6xl  font-light tracking-[0em]  uppercase">
+              We take your
+            </span>
+            <span className="mt-2 block ml-100!">
+              <span className="font-display font-bold text-black uppercase">
+                Vision
+              </span>{' '}
+              <span className="font-serif text-gold italic normal-case">
                 further
               </span>
-            </h2>
-          </div>
+            </span>
+          </p>
         ) : (
+          // <div className="inline-block text-left">
+          //   <h2 className="mt-6 flex w-full max-w-xl flex-col items-start text-6xl leading-[0.8] tracking-tight uppercase md:text-7xl lg:text-8xl">
+          //     <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+          //       We take your
+          //     </span>
+          //     <span className=" font-bebas font-bold">Vision</span>
+          //     <span className=" font-serif normal-case text-gold ml-26">
+          //       further
+          //     </span>
+          //   </h2>
+          // </div>
           <p
             className={
               dark
