@@ -21,7 +21,9 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
           </h2>
         </div>
         <div className="hidden md:block">
-          <GoldLink href="/work">View all</GoldLink>
+          <GoldLink href="/work" className="text-[15px]">
+            View all
+          </GoldLink>
         </div>
       </div>
 

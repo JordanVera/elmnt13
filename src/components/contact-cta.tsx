@@ -25,11 +25,11 @@ export function ContactCta({
       }
     >
       <Reveal className="mx-auto max-w-6xl">
-        {kicker ? (
-          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-            {kicker}
-          </p>
-        ) : null}
+        <p className="text-[15px] tracking-tight text-gold uppercase">
+          <span className="font-sans">Let’s</span>{' '}
+          <span className="font-bebas font-bold">take your vision</span>{' '}
+          <span className="font-serif">further</span>
+        </p>
         {isHomePhrase ? (
           <h2 className="font-display text-5xl tracking-tight uppercase md:text-8xl">
             <span className="font-sans">Get</span>{' '}
