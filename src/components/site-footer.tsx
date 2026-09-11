@@ -12,8 +12,8 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
-            Pages
+          <p className="text-[11px] font-bebas font-bold  text-gold uppercase">
+            Menu
           </p>
           <ul className="mt-4 space-y-2">
             {footerLinks.map((link) => (
@@ -30,7 +30,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
+          <p className="text-[11px] font-bebas font-bold  text-gold uppercase">
             Social
           </p>
           <ul className="mt-4 space-y-2">
