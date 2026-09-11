@@ -7,14 +7,6 @@ export function AboutStats() {
     <section className="bg-white px-6 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="relative grid grid-cols-2 md:grid-cols-4">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 hidden md:block"
-          >
-            <div className="absolute top-0 left-1/2 h-full w-px -translate-x-1/2 bg-gold/25" />
-            <div className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-gold/25" />
-          </div>
-
           {stats.map((stat, index) => (
             <Reveal
               key={stat.label}

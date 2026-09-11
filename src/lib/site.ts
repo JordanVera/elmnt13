@@ -31,7 +31,7 @@ export const footerLinks = [
 
 export const socialLinks = [
   { href: 'https://www.instagram.com/elmnt13/', label: 'Instagram' },
-  { href: 'https://www.facebook.com/elmnt13', label: 'Facebook' },
+  { href: 'https://www.facebook.com/elmnt13llc', label: 'Facebook' },
   { href: 'https://www.tiktok.com/elmnt13', label: 'TikTok' },
   { href: 'https://www.youtube.com/elmnt13', label: 'YouTube' },
 ] as const;

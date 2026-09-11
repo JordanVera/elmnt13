@@ -16,11 +16,11 @@ export default function AboutPage() {
   return (
     <main>
       <section className="bg-white px-6 pt-20 pb-20 md:pt-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-            About
-          </p>
+        <div className="mx-auto flex items-center max-w-7xl">
           <Reveal>
+            <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+              About
+            </p>
             <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
               Vision drives the work.
               <span className="mt-3 text-gold block font-serif text-4xl tracking-normal normal-case italic md:text-6xl">
@@ -28,6 +28,10 @@ export default function AboutPage() {
               </span>
             </h1>
           </Reveal>
+          <div
+            className="hidden md:flex mx-10 h-40 w-px bg-gold rounded"
+            aria-hidden="true"
+          ></div>
           <Reveal delay={120} className="mt-12 md:ml-auto md:max-w-xl">
             <p className="text-lg leading-8 text-black">
               ELMNT13 is a creative marketing and management company where
