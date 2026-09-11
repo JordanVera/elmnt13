@@ -10,7 +10,7 @@ export type ServiceCategory = {
   short: string;
   description: string;
   stageTitle: string;
-  stageItems: Array<{ label: string; href?: string }>;
+  stageItems: Array<{ label: string; href?: string; suffix?: string }>;
   image: string;
   imageAlt: string;
   options: ServiceOption[];
@@ -25,94 +25,91 @@ export const serviceCategories: ServiceCategory[] = [
   {
     id: 'experiential',
     title: 'Experiential Marketing',
-    short: 'Brand worlds people can walk into.',
+    short: 'Connect with your audience, differently',
     description:
-      'We bring marketing strategies to life through purposeful experiences that carry the brand through every detail, creating meaningful opportunities for audience engagement, strengthening brand connections and driving impactful results.',
+      'We create intentional experiences designed around the brand, the audience and the objective. From concept through execution, we shape how the brand shows up, how audiences engage with it and how the experience drives meaningful, measurable results.',
     stageTitle: 'Experiences',
     image: '/work/k-swiss-x-karen-civil/K-Swiss_ST_20131-scaled.jpg',
     imageAlt: 'K-Swiss brand activation produced by ELMNT13',
     stageItems: [
       { label: 'Pop Ups' },
-      { label: 'Retail Activations' },
+      { label: 'Retail Experiences' },
       { label: 'Product Launches' },
-      { label: 'Campaign Activations' },
+      { label: 'Campaigns' },
       { label: 'Sponsorship Activations' },
-      { label: 'Community Activations' },
-      { label: 'More' },
+      { label: 'Community Engagement & More' },
     ],
     options: [
       {
         name: 'Brand Activations',
         description:
-          'Bringing brands, campaigns and initiatives to life through experiences that drive engagement and build meaningful connections between brands and the audience they want to reach.',
+          'Connecting brands, campaigns and initiatives with audiences through intentional experiences designed to drive engagement and strengthen brand relationships.',
       },
       {
         name: 'Experiential Strategy',
         description:
-          'Defining the goals, audience, messaging and desired outcomes that shape the foundation of an experiential campaign or initiative.',
+          'Defining the goals, audience, messaging and desired outcomes that shape the direction and vision of an experiential campaign or initiative.',
       },
       {
         name: 'Concept Development',
         description:
-          'Developing experiential ideas and concepts that turn strategy into meaningful opportunities for audience engagement.',
+          'Developing experiential ideas and concepts that turn strategy into opportunities for audience engagement.',
       },
       {
         name: 'Experiential Design',
         description:
-          'Establishing the creative direction, visual approach and brand elements that carry the concept throughout the experience, shaping how it looks, feels and connects with the audience.',
+          'Establishing the creative direction, visual approach and brand elements that shape how the concept looks, feels and comes to life.',
       },
       {
         name: 'Production & Execution',
         description:
-          'Coordinating the production, vendors and logistics required to bring the approved concept and experiential design to life.',
+          'Coordinating the production, vendors and logistics required to execute the developed strategy, approved concept and experiential design.',
       },
     ],
   },
   {
     id: 'events',
     title: 'Event Management',
-    short:
-      'From the initial concept to the final detail, we thoughtfully manage each element of the event experience.',
+    short: 'Curate an experience worth remembering',
     description:
-      'From the initial concept to the final detail, we thoughtfully manage each element of the event experience to ensure successful execution and a memorable attendee experience.',
+      'From the initial concept through execution, we thoughtfully manage every element, ensuring each detail reflects the vision, brand and intended guest experience.',
     stageTitle: 'Events',
     image: '/work/8th-annual-live-civil-brunch/MG_3398-1-scaled.jpeg',
     imageAlt: 'Live Civil Brunch event produced by ELMNT13',
     stageItems: [
-      { label: 'Corporate Events' },
+      { label: 'Corporate' },
       { label: 'Conferences & Meetings' },
-      { label: 'Awards & Recognition Events' },
-      { label: 'Church & Ministry Events' },
-      { label: 'Nonprofit & Community Events' },
-      { label: 'Social & Milestone Events' },
-      { label: 'Weddings', href: '/weddings' },
-      { label: 'More' },
+      { label: 'Awards & Recognition' },
+      { label: 'Church & Ministry' },
+      { label: 'Nonprofit & Community' },
+      { label: 'Social & Milestone' },
+      { label: 'Weddings', href: '/weddings', suffix: ' & More' },
     ],
     options: [
       {
         name: 'Concept & Creative Direction',
         description:
-          'Developing the concept and creative vision that shape the overall look and feel of the event experience.',
+          'Developing the concept and creative vision that shape the overall look, feel and direction of the event.',
       },
       {
         name: 'Event Design',
         description:
-          'Creating the physical environment, visual elements and intentional details that carry the creative vision throughout the event experience.',
+          'Creating the physical environment, visual elements and intentional details that carry the creative vision and brand throughout the event.',
       },
       {
         name: 'Planning & Coordination',
         description:
-          'Planning and coordinating timelines, vendors, event elements and logistics required to ensure every detail is organized and on track ahead of the event.',
+          'Planning and coordinating timelines, vendors, event elements and logistics to ensure every detail is organized and on track leading up to the event.',
       },
       {
         name: 'Event Setup & Execution',
         description:
-          'Executing and managing the physical setup and installation of event elements to bring the approved event design to life.',
+          'Managing the physical setup and installation of event elements to execute the approved event design and create the intended attendee experience.',
       },
       {
         name: 'On-Site Event Management',
         description:
-          'Managing the event in real time to ensure timelines, vendors, staff and event elements operate seamlessly from start to finish.',
+          'Managing the event in real time to ensure timelines, vendors, staff and event elements remain coordinated and the event runs seamlessly from start to finish.',
       },
     ],
   },
