@@ -22,7 +22,7 @@ export function ContactCta({
         <div className="flex justify-center px-6 pb md:pb-24 mx-auto max-w-6xl ">
           <Reveal>
             <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
-              <span className="font-sans text-[0.5em] leading-none tracking-tighter normal-case">
+              <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
                 Let’s Take Your
               </span>
               <span className="flex items-baseline gap-x-2 md:gap-x-3 justify-center">
@@ -50,7 +50,7 @@ export function ContactCta({
               <Link
                 href={href}
                 aria-label="Get in contact — open the inquiry form"
-                className="font-serif font-normal tracking-normal underline text-gold italic normal-case decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+                className="font-serif font-normal tracking-normal underline text-gold italic normal-case decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
               >
                 contact
               </Link>
