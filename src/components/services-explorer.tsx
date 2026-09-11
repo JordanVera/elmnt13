@@ -131,7 +131,7 @@ function OptionsList({
                     'font-display block tracking-tight uppercase transition-[color,font-size,line-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
                     selected
                       ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-white'
-                      : 'text-[14px] text-white/35 hover:text-white/70 sm:text-sm lg:text-lg',
+                      : 'text-[15px] text-white/35 hover:text-white/70 sm:text-sm lg:text-lg',
                   )}
                 >
                   {option.name}

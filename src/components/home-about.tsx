@@ -12,7 +12,7 @@ export function HomeAbout() {
       </p>
       <div className="relative z-10 mx-auto grid max-w-6xl items-start gap-12 md:grid-cols-12 md:gap-4">
         <div className="md:col-span-6">
-          <p className="text-[14px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             About
           </p>
           <Reveal>
@@ -27,10 +27,7 @@ export function HomeAbout() {
             </h2>
           </Reveal>
         </div>
-        <Reveal
-          delay={120}
-          className="md:col-span-5 md:col-start-7 md:-ml-10 md:pt-24 lg:-ml-4"
-        >
+        <Reveal delay={120} className="md:col-span-5 md:col-start-7  md:pt-24">
           <p className="max-w-md text-lg leading-8 text-ink/75">
             ELMNT13 brings together strategy, creativity and management to turn
             ideas into memorable experiences. We see the full vision, understand

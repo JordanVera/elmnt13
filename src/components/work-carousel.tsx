@@ -11,7 +11,7 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
     <section className="bg-white pt-12 pb-16 md:pt-16 md:pb-20">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
         <div>
-          <p className="text-[14px] tracking-[0.36em] text-gold uppercase">
+          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             Work
           </p>
           <h2 className="mt-3 font-display text-6xl tracking-tight uppercase md:text-8xl">

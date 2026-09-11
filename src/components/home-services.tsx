@@ -6,7 +6,7 @@ export function HomeServices() {
   return (
     <section className="bg-ink px-6 py-20 text-paper md:py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="text-[14px] tracking-[0.36em] text-gold uppercase">
+        <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
           Services
         </p>
         <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
@@ -51,7 +51,7 @@ export function HomeServices() {
           <GoldLink
             href="/services"
             inverted
-            className="text-[14px] hover:!text-white"
+            className="text-[15px] hover:!text-white"
           >
             Explore services
           </GoldLink>
