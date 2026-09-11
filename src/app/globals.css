@@ -109,6 +109,21 @@ body {
   animation: gold-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes gold-wave-draw {
+  from {
+    stroke-dashoffset: 1800;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.gold-wave {
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: gold-wave-draw 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
 @keyframes pulse-gold {
   0%,
   100% {
@@ -134,10 +149,15 @@ body {
   }
 
   .marquee-track,
+  .gold-wave,
   .reveal {
     animation: none !important;
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .gold-wave {
+    stroke-dashoffset: 0;
   }
 }

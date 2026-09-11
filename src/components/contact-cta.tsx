@@ -8,13 +8,34 @@ export function ContactCta({
   title,
   href = '/contact',
   label,
+  barOnly = false,
 }: {
   kicker?: string;
   title?: ReactNode;
   href?: string;
   label?: string;
+  barOnly?: boolean;
 }) {
   const isHomePhrase = title == null;
+
+  if (barOnly) {
+    return (
+      <section className="bg-paper px-6 py-2 md:py-2">
+        <Reveal>
+          <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-6xl">
+            <span className="font-bebas">Get in </span>{' '}
+            <Link
+              href={href}
+              aria-label="Get in contact — open the inquiry form"
+              className="font-serif font-normal tracking-normal underline text-gold italic normal-case decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+            >
+              contact
+            </Link>
+          </h2>
+        </Reveal>
+      </section>
+    );
+  }
 
   return (
     <>
