@@ -8,9 +8,7 @@ import { getFeaturedProjects, getProjects } from '@/lib/projects';
 
 export default async function HomePage() {
   const featured = await getFeaturedProjects();
-  const slides = featured.length
-    ? featured
-    : (await getProjects()).slice(0, 4);
+  const slides = featured.length ? featured : (await getProjects()).slice(0, 4);
 
   return (
     <main>
@@ -19,7 +17,7 @@ export default async function HomePage() {
       <LogoMarquee />
       <HomeServices />
       <WorkCarousel projects={slides} />
-      <ContactCta />
+      <ContactCta kicker="Let's Make It Happen" />
     </main>
   );
 }
