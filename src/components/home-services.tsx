@@ -33,7 +33,7 @@ export function HomeServices() {
             </h2>
             <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-md md:text-3xl">
               From the initial concept to the final detail, we thoughtfully
-              manage each element of the event experience.
+              manage every element.
             </p>
             <p className="mt-6 text-base leading-8 tracking-wide text-paper/55 md:ml-auto md:max-w-md">
               Corporate Events · Conferences · Church Events · Milestones ·{' '}
