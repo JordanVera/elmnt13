@@ -10,6 +10,7 @@
     "seed:projects": "tsx --env-file=.env.local scripts/seed-projects.ts"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.6.1",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.13.1",
     "framer-motion": "^13.2.0",

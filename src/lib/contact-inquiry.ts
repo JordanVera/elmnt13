@@ -6,7 +6,12 @@ export type ContactInquiryInput = {
   offering: string;
   details: string;
   honey: string;
+  honeyConfirm: string;
+  formStartedAt: number;
+  turnstileToken: string;
 };
+
+const MIN_FORM_DURATION_MS = 3_000;
 
 export type ContactInquiryPayload = ContactInquiryInput & {
   first_name: string;
@@ -19,21 +24,39 @@ export type ContactInquiryPayload = ContactInquiryInput & {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function parseContactInquiry(
-  data: Record<string, FormDataEntryValue | string | undefined>,
+  data: Record<
+    string,
+    FormDataEntryValue | FormDataEntryValue[] | string | string[] | undefined
+  >,
 ): ContactInquiryInput {
   return {
     name: String(data.name ?? '').trim(),
     email: String(data.email ?? '').trim(),
     phone: String(data.phone ?? '').trim(),
     category: String(data.category ?? '').trim(),
-    offering: String(data.offering ?? '').trim(),
+    offering: parseOfferings(data.offering ?? data.offerings),
     details: String(data.details ?? '').trim(),
     honey: String(data._honey ?? data.honey ?? '').trim(),
+    honeyConfirm: String(data._confirm ?? data.honeyConfirm ?? '').trim(),
+    formStartedAt: Number(data._ts ?? data.formStartedAt ?? 0),
+    turnstileToken: String(
+      data.turnstileToken ?? data['cf-turnstile-response'] ?? '',
+    ).trim(),
   };
 }
 
+export function isSpamSubmission(input: ContactInquiryInput): boolean {
+  if (input.honey || input.honeyConfirm) return true;
+
+  if (!input.formStartedAt || Number.isNaN(input.formStartedAt)) {
+    return true;
+  }
+
+  return Date.now() - input.formStartedAt < MIN_FORM_DURATION_MS;
+}
+
 export function validateContactInquiry(input: ContactInquiryInput): string | null {
-  if (input.honey) return null;
+  if (isSpamSubmission(input)) return null;
 
   if (!input.name) return 'Full name is required.';
   if (!input.email) return 'Email is required.';
@@ -67,6 +90,19 @@ export function buildContactInquiryPayload(
     tags,
     source: 'ELMNT13 Website',
   };
+}
+
+function parseOfferings(
+  value: FormDataEntryValue | FormDataEntryValue[] | string | string[] | undefined,
+): string {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => String(item).trim())
+      .filter(Boolean)
+      .join(', ');
+  }
+
+  return String(value ?? '').trim();
 }
 
 function splitName(fullName: string): { first_name: string; last_name: string } {

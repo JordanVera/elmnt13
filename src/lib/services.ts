@@ -160,7 +160,7 @@ export const inquiryServices = {
     'Event Setup & Execution',
     'On-Site Event Management',
   ],
-  Weddings: [
+  Wedding: [
     'Proposals',
     'Full-Service Wedding Planning',
     'Wedding Design',

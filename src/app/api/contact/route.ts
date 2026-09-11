@@ -1,33 +1,59 @@
 import {
   buildContactInquiryPayload,
+  isSpamSubmission,
   parseContactInquiry,
   resolveZapierWebhookUrl,
   validateContactInquiry,
 } from '@/lib/contact-inquiry';
+import { isTurnstileConfigured, verifyTurnstileToken } from '@/lib/turnstile';
 
 const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/ashley@elmnt13.com';
 
 export async function POST(request: Request) {
-  let fields: Record<string, FormDataEntryValue | string | undefined>;
+  let fields: Record<
+    string,
+    FormDataEntryValue | FormDataEntryValue[] | string | string[] | undefined
+  >;
 
   const contentType = request.headers.get('content-type') ?? '';
 
   if (contentType.includes('application/json')) {
-    fields = (await request.json()) as Record<string, string>;
+    fields = (await request.json()) as Record<
+      string,
+      string | string[] | undefined
+    >;
   } else {
     const formData = await request.formData();
-    fields = Object.fromEntries(formData.entries());
+    fields = {
+      ...Object.fromEntries(
+        [...formData.entries()].filter(([key]) => key !== 'offering'),
+      ),
+      offering: formData.getAll('offering'),
+    };
   }
 
   const input = parseContactInquiry(fields);
 
-  if (input.honey) {
+  if (isSpamSubmission(input)) {
     return Response.json({ ok: true });
   }
 
   const validationError = validateContactInquiry(input);
   if (validationError) {
     return Response.json({ ok: false, message: validationError }, { status: 400 });
+  }
+
+  if (isTurnstileConfigured()) {
+    const verified = await verifyTurnstileToken(input.turnstileToken);
+    if (!verified) {
+      return Response.json(
+        {
+          ok: false,
+          message: 'Security check failed. Please try again.',
+        },
+        { status: 400 },
+      );
+    }
   }
 
   const webhookUrl = resolveZapierWebhookUrl(
