@@ -26,14 +26,6 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/weddings"
-                className="text-sm text-paper/80 transition-colors hover:text-gold"
-              >
-                Weddings
-              </Link>
-            </li>
           </ul>
         </div>
 

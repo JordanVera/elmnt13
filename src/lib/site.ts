@@ -22,7 +22,7 @@ export const heroNavLinks = [
 ] as const;
 
 export const footerLinks = [
-  { href: '/', label: 'Home' },
+  // { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
