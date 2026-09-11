@@ -25,9 +25,9 @@ export function ContactCta({
       }
     >
       <Reveal className="mx-auto max-w-6xl">
-        <p className="text-[15px] tracking-tight text-gold capitalize">
+        <p className="text-xl tracking-tight text-gold capitalize">
           <span className="font-sans">Let’s</span>{' '}
-          <span className="font-bebas font-bold">take your </span>{' '}
+          <span className="font-bebas font-bold">take your </span> <br />
           <span className="font-serif">vision further</span>
         </p>
         {isHomePhrase ? (
