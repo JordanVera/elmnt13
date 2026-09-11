@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-paper">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-12 md:grid-cols-4 md:py-16">
         <div className="space-y-6">
-          <Logo inverted />
+          <Logo inverted className="[&_img]:h-12 md:[&_img]:h-14" />
           {/* <Logo variant="weddings" href="/weddings" inverted /> */}
         </div>
 
@@ -50,9 +50,15 @@ export function SiteFooter() {
         </div>
 
         <div className="md:text-right">
-          <p className="font-serif text-2xl italic text-gold">
-            Vision, then details.
-          </p>
+          <h2 className="flex w-full flex-col items-start text-4xl leading-[0.8] tracking-tight text-paper uppercase md:items-end md:text-5xl">
+            <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+              Taking your
+            </span>
+            <span className="font-bebas font-bold">Vision</span>
+            <span className="ml-18 font-serif normal-case text-gold">
+              further
+            </span>
+          </h2>
           <a
             href={`mailto:${site.email}`}
             className="mt-4 inline-block text-sm tracking-wide text-stone hover:text-gold"

@@ -45,7 +45,7 @@ export function ContactCta({
       >
         <Reveal>
           {isHomePhrase ? (
-            <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-5xl">
+            <h2 className="text-right font-display text-5xl tracking-tight uppercase md:text-6xl">
               <span className="font-bebas">Get in </span>{' '}
               <Link
                 href={href}
