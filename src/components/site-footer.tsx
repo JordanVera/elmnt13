@@ -53,7 +53,7 @@ export function SiteFooter() {
 
         <div className="md:text-right">
           <h2 className="flex w-full flex-col items-start text-5xl leading-[0.8] tracking-tight text-paper uppercase md:items-end md:text-5xl">
-            <span className="font-sans text-[0.5em] mr-12 leading-none tracking-tighter uppercase">
+            <span className=" font-sans text-[0.5em] mr-14 leading-none tracking-tighter uppercase">
               Taking your
             </span>
             <span className="font-bebas font-bold mr-12">Vision</span>
