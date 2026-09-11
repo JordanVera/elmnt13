@@ -8,7 +8,7 @@ import type { Project } from '@/lib/project-types';
 export function WorkCarousel({ projects }: { projects: Project[] }) {
   const slides = projects;
   return (
-    <section className="bg-paper pt-12 pb-16 md:pt-16 md:pb-20">
+    <section className="bg-white pt-12 pb-16 md:pt-16 md:pb-20">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
         <div>
           <p className="text-[13px] tracking-[0.36em] text-gold uppercase">
