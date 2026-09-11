@@ -20,7 +20,7 @@ export function HomeServices() {
               Creating immersive brand experiences that connect, engage and
               drive impact.
             </p>
-            <p className="mt-6 max-w-md text-base leading-8 tracking-wide text-paper/55">
+            <p className="mt-6 max-w-md text-[#817b73] leading-8 tracking-wide">
               Brand Activations · Product Launches · Campaigns · Sponsorship
               Activations · Community Activations & More
             </p>
@@ -35,7 +35,7 @@ export function HomeServices() {
               From the initial concept to the final detail, we thoughtfully
               manage every element.
             </p>
-            <p className="mt-6 text-base leading-8 tracking-wide text-paper/55 md:ml-auto md:max-w-md">
+            <p className="mt-6 text-[#817b73] leading-8 tracking-wide md:ml-auto md:max-w-md">
               Corporate Events · Conferences · Church Events · Milestones ·{' '}
               <Link
                 href="/weddings"
