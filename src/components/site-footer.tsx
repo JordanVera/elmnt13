@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/logo';
 import { Reveal } from '@/components/reveal';
 import { footerLinks, socialLinks } from '@/lib/site';
@@ -78,6 +81,8 @@ function SocialIcon({ label }: { label: string }) {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
+
   return (
     <footer className="bg-ink text-paper">
       <div className="mx-auto grid max-w-7xl gap-10 px-8 py-12 md:grid-cols-3 md:items-center md:gap-6 md:py-14">
@@ -88,6 +93,12 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    onClick={(event) => {
+                      if (link.href === '/' && pathname === '/') {
+                        event.preventDefault();
+                        window.scrollTo({ top: 0 });
+                      }
+                    }}
                     className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
                   >
                     {link.label}
