@@ -54,7 +54,7 @@ export function WhyChoose() {
         <div className="relative mx-auto max-w-6xl text-center">
           <Reveal>
             <h2 className="font-display text-5xl leading-[0.9] tracking-tight text-ink uppercase md:text-7xl">
-              Why clients choose <span className="text-gold">ELMNT13</span>
+              Why clients choose <span className="text-gold">US</span>
             </h2>
           </Reveal>
 
@@ -79,7 +79,7 @@ export function WhyChoose() {
                 <motion.p
                   key={line}
                   aria-live="polite"
-                  className="col-start-1 row-start-1 font-serif text-[clamp(0.95rem,3.4vw,2.5rem)] leading-[1.2] text-ink"
+                  className="col-start-1 row-start-1 font-serif text-5xl leading-[1.2] text-ink"
                   initial={
                     reduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: 82 }
                   }

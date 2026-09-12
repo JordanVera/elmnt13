@@ -11,15 +11,18 @@ export function AboutStats() {
             <Reveal
               key={stat.label}
               delay={index * 80}
-              className={`relative px-4 py-10 text-center md:px-6 md:py-14 border-r border-gold ${
-                index === stats.length - 1 ? 'border-r-0' : ''
+              className={`relative px-4 py-10 text-center md:px-6 md:py-14 ${
+                index !== stats.length - 1
+                  ? 'after:absolute after:top-1/2 after:right-0 after:h-32 after:w-px after:-translate-y-1/2 after:bg-gold md:after:h-32 max-md:even:after:hidden'
+                  : ''
               }`}
             >
-              <p className="font-display text-[clamp(3.5rem,10vw,6rem)] leading-none tracking-tight text-ink">
+              <p className="font-display text-[clamp(4rem,10vw,6rem)] leading-none tracking-tight text-ink">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="mx-auto mt-5 max-w-[12rem] font-sans uppercase text-base leading-snug text-stone md:text-lg">
-                {stat.label}
+                {stat.label} <br />
+                {stat.label2}
               </p>
             </Reveal>
           ))}
