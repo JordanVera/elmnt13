@@ -111,7 +111,7 @@ export function DetailsMoment({
       >
         {layout === 'tagline' ? (
           <Reveal>
-            <p className=" mr-60! text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+            <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
               <span className="block font-sans text-6xl! font-light tracking-[-0.04em] text-black uppercase">
                 We take your
               </span>

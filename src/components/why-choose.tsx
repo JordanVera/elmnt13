@@ -49,7 +49,7 @@ export function WhyChoose() {
     <>
       <section
         ref={sectionRef}
-        className="relative overflow-hidden bg-white px-6 pb-12 "
+        className="relative overflow-hidden bg-white px-6 pb-24 "
       >
         <div className="relative mx-auto max-w-6xl text-center">
           <Reveal>
@@ -104,10 +104,10 @@ export function WhyChoose() {
             </div>
           </div>
 
-          <div
+          {/* <div
             className="mx-auto mt-12 hidden h-px w-36 bg-gold  md:block"
             aria-hidden="true"
-          />
+          /> */}
         </div>
       </section>
     </>
