@@ -105,7 +105,7 @@ export function WhyChoose() {
           </div>
 
           <div
-            className="mx-auto mt-12 hidden h-px w-46 bg-gold  md:block"
+            className="mx-auto mt-12 hidden h-px w-36 bg-gold  md:block"
             aria-hidden="true"
           />
         </div>

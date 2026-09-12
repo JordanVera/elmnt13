@@ -17,7 +17,7 @@ export function AboutStats() {
                   : ''
               }`}
             >
-              <p className="font-display text-[clamp(4rem,10vw,6rem)] leading-none tracking-tight text-ink">
+              <p className="font-display text-[clamp(6rem,10vw,6rem)] leading-none tracking-tight text-ink">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="mx-auto mt-5 max-w-[12rem] font-sans uppercase text-base leading-snug text-stone md:text-lg">
