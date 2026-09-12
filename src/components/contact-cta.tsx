@@ -72,25 +72,28 @@ export function ContactCta({
   }
 
   return (
-    <>
-      <div id={id} className="scroll-mt-8 bg-white">
-        <div className="mx-auto flex max-w-6xl justify-center px-6 py-10 md:py-14">
-          <Reveal>
-            <CreativePhrase variant={phrase} />
-          </Reveal>
-        </div>
-      </div>
+    <section className="bg-white px-6 py-20 text-ink md:py-12">
+      <p className="text-black flex flex-col items-center justify-center text-center text-xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl">
+        <span className=" font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+          {/* Let&apos;s Take Your */}
+          Ready to take your
+        </span>
+        <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
+          <span className="font-bebas font-black uppercase">Vision</span>
+          <span className="font-serif normal-case text-gold">further?</span>
+        </span>
+      </p>
 
-      <section className="bg-paper px-6 py-2 md:py-2">
-        <Reveal>
-          <ContactBar href={href} />
-          {label ? (
-            <div className="mt-10">
-              <GoldLink href={href}>{label}</GoldLink>
-            </div>
-          ) : null}
-        </Reveal>
-      </section>
-    </>
+      <h2 className="font-sans text-black mt-4 text-center text-5xl uppercase md:text-5xl">
+        Get in{' '}
+        <Link
+          href="/contact"
+          aria-label="Get in contact — open the inquiry form"
+          className="font-bebas font-black tracking-normal text-gold normal-case underline decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+        >
+          contact
+        </Link>
+      </h2>
+    </section>
   );
 }

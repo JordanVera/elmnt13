@@ -42,7 +42,7 @@ export function WorkHero({ projects }: { projects: Project[] }) {
     <section ref={sectionRef} className="relative h-[200vh] bg-white">
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden bg-white px-6">
         <div className="relative flex w-full max-w-6xl items-center justify-center">
-          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-ink uppercase md:text-[11vw]">
+          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[22vw] leading-none tracking-tight text-ink uppercase md:text-[18vw]">
             <motion.span
               style={
                 reduceMotion
