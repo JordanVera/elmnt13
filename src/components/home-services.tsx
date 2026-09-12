@@ -21,8 +21,9 @@ export function HomeServices() {
               drive impact.
             </p>
             <p className="mt-6 max-w-md text-stone leading-8 tracking-wide">
-              Brand Activations · Product Launches · Campaigns · Sponsorship
-              Activations · Community Activations & More
+              Brand Activations · Pop Ups · Retail Experiences · Product
+              Launches · Campaigns· Sponsorship Activations · Community
+              Engagement & More
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
@@ -32,8 +33,8 @@ export function HomeServices() {
               Management
             </h2>
             <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-md md:text-3xl">
-              From the initial concept to the final detail, we thoughtfully
-              manage every element.
+              From the initial concept through execution, we thoughtfully manage
+              every element.
             </p>
             <p className="mt-6 text-stone leading-8 tracking-wide md:ml-auto md:max-w-md">
               Corporate Events · Conferences · Church Events · Milestones ·{' '}
