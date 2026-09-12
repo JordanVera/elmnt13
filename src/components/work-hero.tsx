@@ -39,9 +39,9 @@ export function WorkHero({ projects }: { projects: Project[] }) {
   const titleOpacity = useTransform(progress, [0, 0.45, 1], [1, 1, 0.5]);
 
   return (
-    <section ref={sectionRef} className="relative h-[150vh] bg-white">
-      <div className="sticky top-0 z-20 h-[75vh] overflow-hidden bg-white px-6 pt-[5vh]">
-        <div className="relative mx-auto flex h-[48vh] w-full max-w-6xl items-center justify-center">
+    <section ref={sectionRef} className="relative h-[200vh] bg-white">
+      <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden bg-white px-6">
+        <div className="relative flex w-full max-w-6xl items-center justify-center">
           <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[16vw] leading-none tracking-tight text-ink uppercase md:text-[11vw]">
             <motion.span
               style={
@@ -97,7 +97,7 @@ function WorkCard({
 
   const x = useTransform(progress, [start, end], ['0vw', `${spread.x}vw`]);
   const rotate = useTransform(progress, [start, end], [0, spread.rotate]);
-  const y = useTransform(progress, [start, end], [40, spread.y]);
+  const y = useTransform(progress, [start, end], [56, spread.y]);
   const opacity = useTransform(progress, [start, start + 0.18], [0, 1]);
   const scale = useTransform(progress, [start, end], [0.84, 1]);
 

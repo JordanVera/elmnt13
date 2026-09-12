@@ -135,7 +135,7 @@ export function ContactForm() {
       action={CONTACT_API}
       method="POST"
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-6 "
     >
       <label className="sr-only" aria-hidden="true">
         Company website
@@ -233,9 +233,7 @@ export function ContactForm() {
       </button>
 
       {state.message ? (
-        <p
-          className={state.ok ? 'text-sm text-stone' : 'text-sm text-red-700'}
-        >
+        <p className={state.ok ? 'text-sm text-stone' : 'text-sm text-red-700'}>
           {state.message}
         </p>
       ) : null}

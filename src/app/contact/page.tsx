@@ -24,9 +24,11 @@ export default function ContactPage() {
             </h1>
           </div>
         </Reveal>
-        <Reveal delay={120}>
-          <ContactForm />
-        </Reveal>
+        <div className="mt-10">
+          <Reveal delay={120}>
+            <ContactForm />
+          </Reveal>
+        </div>
       </section>
     </main>
   );
