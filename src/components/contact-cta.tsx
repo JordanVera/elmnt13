@@ -35,8 +35,8 @@ function CreativePhrase({ variant }: { variant: 'home' | 'weddings' }) {
   }
 
   return (
-    <p className="flex flex-col items-center justify-center text-center text-xl leading-[0.8] tracking-tight md:text-5xl lg:text-6xl">
-      <span className="pt-16 font-sans text-[0.4em] leading-none tracking-tighter uppercase">
+    <p className="flex flex-col items-center justify-center text-center text-xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl">
+      <span className="pt-16 font-sans text-[0.5em] leading-none tracking-tighter uppercase">
         {/* Let&apos;s Take Your */}
         Ready to take your
       </span>

@@ -140,15 +140,10 @@ function CategorySection({ category }: { category: ServiceCategory }) {
       <div
         className={cn(
           'grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20',
-          isEvents &&
-            'lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]',
+          isEvents && 'lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]',
         )}
       >
-        <div
-          className={cn(
-            isEvents && 'lg:order-2 lg:pt-24 lg:text-right',
-          )}
-        >
+        <div className={cn(isEvents && 'lg:order-2 lg:text-right')}>
           <CategoryTitle category={category} id={`${category.id}-title`} />
           <p
             className={cn(
