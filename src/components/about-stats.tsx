@@ -4,7 +4,7 @@ import { CountUp } from '@/components/count-up';
 
 export function AboutStats() {
   return (
-    <section className="bg-white px-6 py-20 md:py-28">
+    <section className="bg-white px-6 py-20 md:py-12">
       <div className="mx-auto max-w-6xl">
         <div className="relative grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (
@@ -17,7 +17,7 @@ export function AboutStats() {
                   : ''
               }`}
             >
-              <p className="font-display text-[clamp(6rem,10vw,6rem)] leading-none tracking-tight text-ink">
+              <p className="font-display text-[clamp(8rem,10vw,6rem)] leading-none tracking-tight text-ink">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="mx-auto mt-5 max-w-[12rem] font-sans uppercase text-base leading-snug text-stone md:text-lg">
