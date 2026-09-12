@@ -21,9 +21,8 @@ export function HomeServices() {
               drive impact.
             </p>
             <p className="mt-6 max-w-md text-stone leading-8 tracking-wide">
-              Brand Activations · Pop Ups · Retail Experiences · Product
-              Launches · Campaigns· Sponsorship Activations · Community
-              Engagement & More
+              Brand Activations · Product Launches · Campaigns· Sponsorship
+              Activations & More
             </p>
           </Reveal>
           <Reveal delay={140} className="md:pt-24 md:text-right">
