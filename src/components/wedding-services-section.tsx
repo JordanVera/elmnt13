@@ -11,13 +11,10 @@ export function WeddingServicesSection() {
             <span className="block font-display text-3xl tracking-tight uppercase md:text-5xl">
               with you for the
             </span>
-            <span className="mt-1 block font-serif text-3xl italic md:text-5xl">
+            <span className="text-gold mt-1 block font-serif text-3xl italic md:text-5xl">
               moments that matter
             </span>
           </h2>
-          <p className="mt-3 text-center font-serif text-3xl italic md:text-5xl">
-            from yes to I do
-          </p>
         </Reveal>
         <WeddingServicesGrid services={weddingServices} />
       </div>
