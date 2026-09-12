@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Reveal } from '@/components/reveal';
 import { serviceCategories, type ServiceCategory } from '@/lib/services';
 import { cn } from '@/lib/cn';
 
@@ -131,48 +132,58 @@ function TypesRow({ category }: { category: ServiceCategory }) {
   );
 }
 
-function CategorySection({ category }: { category: ServiceCategory }) {
+function CategorySection({
+  category,
+  index,
+}: {
+  category: ServiceCategory;
+  index: number;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const isEvents = category.id === 'events';
 
   return (
     <section id={category.id} aria-labelledby={`${category.id}-title`}>
-      <div
-        className={cn(
-          'grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20',
-          isEvents && 'lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]',
-        )}
-      >
-        <div className={cn(isEvents && 'lg:order-2 lg:text-right')}>
-          <CategoryTitle category={category} id={`${category.id}-title`} />
-          <p
-            className={cn(
-              'mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl',
-              isEvents && 'lg:ml-auto',
-            )}
-          >
-            {category.short}
-          </p>
-          <p
-            className={cn(
-              'mt-4 max-w-md text-stone leading-8 tracking-wide lg:mt-5',
-              isEvents && 'lg:ml-auto',
-            )}
-          >
-            {category.description}
-          </p>
+      <Reveal delay={index * 80}>
+        <div
+          className={cn(
+            'grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20',
+            isEvents && 'lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]',
+          )}
+        >
+          <div className={cn(isEvents && 'lg:order-2 lg:text-right')}>
+            <CategoryTitle category={category} id={`${category.id}-title`} />
+            <p
+              className={cn(
+                'mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl',
+                isEvents && 'lg:ml-auto',
+              )}
+            >
+              {category.short}
+            </p>
+            <p
+              className={cn(
+                'mt-4 max-w-md text-stone leading-8 tracking-wide lg:mt-5',
+                isEvents && 'lg:ml-auto',
+              )}
+            >
+              {category.description}
+            </p>
+          </div>
+          <div className={cn('min-w-0', isEvents && 'lg:order-1')}>
+            <OptionsList
+              category={category}
+              openIndex={openIndex}
+              onToggle={(optionIndex) =>
+                setOpenIndex((current) =>
+                  current === optionIndex ? null : optionIndex,
+                )
+              }
+            />
+          </div>
         </div>
-        <div className={cn('min-w-0', isEvents && 'lg:order-1')}>
-          <OptionsList
-            category={category}
-            openIndex={openIndex}
-            onToggle={(index) =>
-              setOpenIndex((current) => (current === index ? null : index))
-            }
-          />
-        </div>
-      </div>
-      <TypesRow category={category} />
+        <TypesRow category={category} />
+      </Reveal>
     </section>
   );
 }
@@ -181,13 +192,19 @@ export function ServicesExplorer() {
   return (
     <div className="bg-ink px-6 pt-20 pb-20 text-paper md:pt-24 md:pb-24">
       <div className="mx-auto w-full max-w-7xl">
-        <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-          Services
-        </p>
-        <h1 className="sr-only">Services</h1>
+        <Reveal>
+          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+            Services
+          </p>
+          <h1 className="sr-only">Services</h1>
+        </Reveal>
         <div className="mt-8 space-y-20 lg:mt-14 lg:space-y-28">
-          {serviceCategories.map((category) => (
-            <CategorySection key={category.id} category={category} />
+          {serviceCategories.map((category, index) => (
+            <CategorySection
+              key={category.id}
+              category={category}
+              index={index}
+            />
           ))}
         </div>
       </div>

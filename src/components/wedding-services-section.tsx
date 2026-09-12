@@ -1,16 +1,24 @@
+import { Reveal } from '@/components/reveal';
 import { WeddingServicesGrid } from '@/components/wedding-services-grid';
 import { weddingServices } from '@/lib/weddings';
 
 export function WeddingServicesSection() {
   return (
-    <section id="services" className="scroll-mt-8 bg-white px-6 py-20">
+    <section id="services" className="scroll-mt-8 bg-white px-6 py-12 md:py-14">
       <div className="mx-auto max-w-6xl">
-        <p className="text-center text-[11px] tracking-[0.36em] text-gold uppercase">
-          With you for the moments that matter
-        </p>
-        <h2 className="mt-4 text-center font-serif text-4xl italic md:text-6xl">
-          from yes to I do
-        </h2>
+        <Reveal>
+          <h2 className="text-center leading-[1.05]">
+            <span className="block font-display text-3xl tracking-tight uppercase md:text-5xl">
+              with you for the
+            </span>
+            <span className="mt-1 block font-serif text-3xl italic md:text-5xl">
+              moments that matter
+            </span>
+          </h2>
+          <p className="mt-3 text-center font-serif text-3xl italic md:text-5xl">
+            from yes to I do
+          </p>
+        </Reveal>
         <WeddingServicesGrid services={weddingServices} />
       </div>
     </section>

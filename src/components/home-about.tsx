@@ -12,10 +12,12 @@ export function HomeAbout() {
       </p>
       <div className="relative z-10 mx-auto grid max-w-6xl items-start gap-12 md:grid-cols-12 md:gap-4">
         <div className="md:col-span-5">
-          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-            About
-          </p>
           <Reveal>
+            <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+              About
+            </p>
+          </Reveal>
+          <Reveal delay={60}>
             <h2 className="mt-6 flex w-full max-w-xl flex-col items-start text-6xl leading-[0.8] tracking-tight uppercase md:text-7xl lg:text-8xl">
               <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
                 We take your

@@ -6,9 +6,11 @@ export function HomeServices() {
   return (
     <section className="bg-ink px-6 py-20 text-paper md:py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-          Services
-        </p>
+        <Reveal>
+          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+            Services
+          </p>
+        </Reveal>
         <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-24">
           <Reveal>
             <h2 className="text-left font-display text-7xl leading-[0.88] tracking-tight text-white uppercase md:text-8xl">
@@ -47,7 +49,7 @@ export function HomeServices() {
             </p>
           </Reveal>
         </div>
-        <div className="mt-16">
+        <Reveal className="mt-16">
           <GoldLink
             href="/services"
             inverted
@@ -55,7 +57,7 @@ export function HomeServices() {
           >
             Explore services
           </GoldLink>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

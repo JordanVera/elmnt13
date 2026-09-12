@@ -59,7 +59,7 @@ function kissOffset(width: number, height: number, degrees: number) {
   const gap =
     width * (1 - RIM_WIDTH * Math.cos(theta)) -
     2 * (PIVOT_Y - RIM_Y) * height * Math.sin(theta);
-  return -(gap / 2) * 0.96;
+  return -(gap / 2) * 1.02;
 }
 
 const BUBBLES = [

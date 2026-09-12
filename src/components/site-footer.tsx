@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
+import { Reveal } from '@/components/reveal';
 import { footerLinks, socialLinks } from '@/lib/site';
 
 function SocialIcon({ label }: { label: string }) {
@@ -79,45 +80,52 @@ function SocialIcon({ label }: { label: string }) {
 export function SiteFooter() {
   return (
     <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-7xl gap-14 px-8 py-20 md:grid-cols-3 md:items-center md:gap-8 md:py-24">
-        <nav aria-label="Footer">
-          <ul className="space-y-4">
-            {footerLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      <div className="mx-auto grid max-w-7xl gap-10 px-8 py-12 md:grid-cols-3 md:items-center md:gap-6 md:py-14">
+        <Reveal>
+          <nav aria-label="Footer">
+            <ul className="space-y-3">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Reveal>
 
-        <div className="flex flex-col items-center text-center">
-          <Logo inverted className="[&_img]:h-14 md:[&_img]:h-24" />
-        </div>
+        <Reveal delay={80}>
+          <div className="flex flex-col items-center text-center">
+            <Logo inverted className="[&_img]:h-12 md:[&_img]:h-20" />
+          </div>
+        </Reveal>
 
-        <div className="flex justify-start md:justify-end">
-          <ul className="flex flex-col items-start gap-5 md:items-end">
-            {socialLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={link.label}
-                  className="text-paper transition-colors hover:text-gold"
-                >
-                  <SocialIcon label={link.label} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Reveal delay={160}>
+          <div className="flex justify-start md:justify-end">
+            <ul className="flex flex-col items-start gap-4 md:items-end">
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={link.label}
+                    className="text-paper transition-colors hover:text-gold"
+                  >
+                    <SocialIcon label={link.label} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
-      <div className="border-t border-white/10 px-6 py-5 text-center text-[11px] tracking-[0.22em] text-stone uppercase">
+
+      <div className="border-t border-white/10 px-6 py-3.5 text-center text-[11px] tracking-[0.22em] text-stone uppercase">
         <p>© {new Date().getFullYear()} ELMNT13 · Marketing & Management</p>
         <p className="mt-2">
           Site by{' '}

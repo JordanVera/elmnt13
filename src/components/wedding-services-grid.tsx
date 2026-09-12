@@ -12,6 +12,7 @@ function ServiceCard({
   service,
   index,
   colIndex,
+  totalCount,
   expanded,
   rowExpanded,
   onToggle,
@@ -20,20 +21,22 @@ function ServiceCard({
   service: WeddingService;
   index: number;
   colIndex: number;
+  totalCount: number;
   expanded: boolean;
   rowExpanded: boolean;
   onToggle: () => void;
   onClose: () => void;
 }) {
   const isLastColumn = colIndex === COLUMNS - 1;
+  const isLastCell = index === totalCount - 1;
   const allowHoverReveal = !rowExpanded || expanded;
 
   return (
     <Reveal delay={index * 40} className="h-full">
       <div
         className={cn(
-          'group relative h-full min-h-60 md:min-h-70',
-          'border-b border-gold md:border-b-0',
+          'group relative h-full min-h-64 md:min-h-80',
+          !isLastCell && 'border-b border-gold md:border-b-0',
           !isLastColumn && 'md:border-r md:border-gold',
           expanded && 'bg-blush/40',
         )}
@@ -116,17 +119,18 @@ export function WeddingServicesGrid({
     expandedIndex !== null ? Math.floor(expandedIndex / COLUMNS) : null;
 
   return (
-    <div className="mt-14 border border-gold">
+    <div className="mt-10 border-x border-gold">
       {Array.from({ length: ROW_COUNT }, (_, row) => (
         <div
           key={row}
           className={cn(
-            'md:grid md:grid-cols-3 md:items-stretch',
+            'grid grid-cols-1 md:grid-cols-3 md:items-stretch',
             row === 0 && 'border-b border-gold',
           )}
         >
-          {services.slice(row * COLUMNS, row * COLUMNS + COLUMNS).map(
-            (service, colIndex) => {
+          {services
+            .slice(row * COLUMNS, row * COLUMNS + COLUMNS)
+            .map((service, colIndex) => {
               const index = row * COLUMNS + colIndex;
               const rowExpanded = expandedRow === row;
 
@@ -146,8 +150,7 @@ export function WeddingServicesGrid({
                   onClose={() => setExpandedIndex(null)}
                 />
               );
-            },
-          )}
+            })}
         </div>
       ))}
     </div>

@@ -17,10 +17,12 @@ export default function AboutPage() {
     <main>
       <section className="bg-white px-6 pt-20 pb-20 md:pt-24">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
-            About
-          </p>
           <Reveal>
+            <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+              About
+            </p>
+          </Reveal>
+          <Reveal delay={60}>
             <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
               Vision drives the work.
               <span className="text-gold mt-3 block font-serif text-4xl tracking-normal normal-case italic md:text-6xl">

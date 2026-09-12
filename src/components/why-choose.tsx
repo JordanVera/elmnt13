@@ -58,7 +58,7 @@ export function WhyChoose() {
             </h2>
           </Reveal>
 
-          <div className="relative mt-6 md:mt-8">
+          <Reveal delay={120} className="relative mt-6 md:mt-8">
             <div
               className="relative z-10 grid overflow-hidden"
               style={{ perspective: 900 }}
@@ -102,7 +102,7 @@ export function WhyChoose() {
                 </motion.p>
               </AnimatePresence>
             </div>
-          </div>
+          </Reveal>
 
           {/* <div
             className="mx-auto mt-12 hidden h-px w-36 bg-gold  md:block"

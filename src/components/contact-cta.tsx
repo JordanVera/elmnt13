@@ -20,12 +20,12 @@ function ContactBar({ href }: { href: string }) {
 function CreativePhrase({ variant }: { variant: 'home' | 'weddings' }) {
   if (variant === 'weddings') {
     return (
-      <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
-        <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
-          Let&apos;s get started
+      <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.85] tracking-tight md:text-7xl lg:text-8xl">
+        <span className="font-sans text-[0.42em] leading-none tracking-tighter uppercase">
+          Let&apos;s get started{' '}
         </span>
-        <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
-          <span className="font-bebas font-black uppercase">on your</span>
+        <span className="mt-1 flex items-baseline justify-center gap-x-2 md:gap-x-3">
+          <span className="font-display uppercase"> on your</span>
           <span className="font-serif normal-case text-gold italic">
             forever
           </span>
@@ -74,7 +74,7 @@ export function ContactCta({
   return (
     <>
       <div id={id} className="scroll-mt-8 bg-white">
-        <div className="mx-auto flex max-w-6xl justify-center px-6 pb md:pb-24">
+        <div className="mx-auto flex max-w-6xl justify-center px-6 py-10 md:py-14">
           <Reveal>
             <CreativePhrase variant={phrase} />
           </Reveal>
