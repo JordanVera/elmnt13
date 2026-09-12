@@ -29,7 +29,7 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
         </Reveal>
       </div>
 
-      <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
+      <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6">
         {slides.map((project, index) => (
           <Reveal key={project.slug} delay={index * 70} className="shrink-0">
             <Link
