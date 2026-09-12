@@ -26,7 +26,7 @@ export default async function WorkPage() {
           <ProjectGrid items={workProjects} />
         </div>
       </section>
-      <ContactCta barOnly />
+      <ContactCta />
     </main>
   );
 }

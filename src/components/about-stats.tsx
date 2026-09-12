@@ -4,7 +4,7 @@ import { CountUp } from '@/components/count-up';
 
 export function AboutStats() {
   return (
-    <section className="bg-white px-6 py-20 md:py-12">
+    <section className="bg-white px-6 pt-20">
       <div className="mx-auto max-w-6xl">
         <div className="relative grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (

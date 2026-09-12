@@ -55,7 +55,7 @@ export default function AboutPage() {
       <BrandsSection />
       <DetailsMoment tone="paper" layout="tagline" compact />
       <AboutStats />
-      <ContactCta barOnly />
+      <ContactCta />
     </main>
   );
 }

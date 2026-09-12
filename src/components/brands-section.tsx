@@ -10,7 +10,7 @@ export function BrandsSection() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
+    <div className="bg-white border-t border-b border-stone/20">
       <LogoMarquee
         action={
           <button
@@ -24,7 +24,7 @@ export function BrandsSection() {
         }
       />
       {open ? (
-        <div className="bg-paper px-6 pb-8">
+        <div className=" px-6 pb-8">
           <div className="mx-auto max-w-6xl text-left">
             <div className="mt-8 space-y-14">
               {brandCategories.map((category, index) => (
@@ -32,7 +32,7 @@ export function BrandsSection() {
                   <section aria-labelledby={`brands-${category.id}`}>
                     <h3
                       id={`brands-${category.id}`}
-                      className="border-b border-ink/10 pb-3 text-[11px] tracking-[0.32em] text-stone uppercase"
+                      className="border-b border-ink/10 pb-3 text-[15px] tracking-[0.32em] text-stone uppercase"
                     >
                       {category.label}
                     </h3>
@@ -51,6 +51,14 @@ export function BrandsSection() {
               ))}
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="cursor-pointer text-[11px] tracking-[0.32em] text-stone uppercase transition-colors hover:text-ink mx-auto block text-center pb-4"
+            aria-expanded={open}
+          >
+            {open ? 'Close list' : 'View all'}
+          </button>
         </div>
       ) : null}
     </div>

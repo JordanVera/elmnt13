@@ -111,18 +111,35 @@ export function DetailsMoment({
       >
         {layout === 'tagline' ? (
           <Reveal>
-            <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
-              <span className="block font-sans text-6xl! font-light tracking-[-0.04em] text-black uppercase">
-                We take your
-              </span>
-              <span className="mt-0 block ml-100! text-[100px]">
-                <span className="font-display font-bold text-black uppercase">
-                  Vision
-                </span>{' '}
-                <span className="-ml-3 font-serif text-gold italic normal-case">
-                  further
-                </span>
-              </span>
+            <p className="text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              suscipit. Quas, illum, temporibus sed quia, voluptate cupiditate
+              natus soluta dolor aut repellendus nulla! Ipsam deserunt voluptate
+              nesciunt? Impedit, officiis soluta? Blanditiis enim incidunt
+              mollitia neque molestias numquam deserunt recusandae repellendus
+              soluta quae perferendis dicta ipsum ea voluptatum repellat nisi,
+              dignissimos non nostrum vel nihil modi labore, cupiditate sint.
+              Debitis nesciunt adipisci voluptas assumenda ratione sapiente quod
+              facere nostrum iure veniam. Delectus architecto nulla fugit sunt
+              repellendus numquam officia adipisci quis, laboriosam dignissimos
+              suscipit? Id error sit amet, alias inventore dignissimos
+              praesentium quod ducimus debitis expedita illum maiores in quia
+              iure.
+            </p>
+            <p className="text-lg mx-auto mt-6 text-center max-w-5xl  tracking-tight">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+              suscipit. Quas, illum, temporibus sed quia, voluptate cupiditate
+              natus soluta dolor aut repellendus nulla! Ipsam deserunt voluptate
+              nesciunt? Impedit, officiis soluta? Blanditiis enim incidunt
+              mollitia neque molestias numquam deserunt recusandae repellendus
+              soluta quae perferendis dicta ipsum ea voluptatum repellat nisi,
+              dignissimos non nostrum vel nihil modi labore, cupiditate sint.
+              Debitis nesciunt adipisci voluptas assumenda ratione sapiente quod
+              facere nostrum iure veniam. Delectus architecto nulla fugit sunt
+              repellendus numquam officia adipisci quis, laboriosam dignissimos
+              suscipit? Id error sit amet, alias inventore dignissimos
+              praesentium quod ducimus debitis expedita illum maiores in quia
+              iure.
             </p>
           </Reveal>
         ) : (
