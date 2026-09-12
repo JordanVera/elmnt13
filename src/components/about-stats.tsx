@@ -11,7 +11,9 @@ export function AboutStats() {
             <Reveal
               key={stat.label}
               delay={index * 80}
-              className="relative px-4 py-10 text-center md:px-6 md:py-14"
+              className={`relative px-4 py-10 text-center md:px-6 md:py-14 border-r border-gold ${
+                index === stats.length - 1 ? 'border-r-0' : ''
+              }`}
             >
               <p className="font-display text-[clamp(3.5rem,10vw,6rem)] leading-none tracking-tight text-ink">
                 <CountUp value={stat.value} suffix={stat.suffix} />

@@ -107,19 +107,19 @@ export function DetailsMoment({
       }
     >
       <div
-        className={`mx-auto w-full max-w-6xl ${layout === 'tagline' ? 'text-left' : 'text-center'}`}
+        className={`mx-auto w-full ${layout === 'tagline' ? 'text-left' : 'text-center'}`}
       >
         {layout === 'tagline' ? (
           <Reveal>
-            <p className="-mt-2 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
-              <span className="block font-sans text-6xl! font-light tracking-[0em] text-black uppercase">
+            <p className=" mr-60! text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+              <span className="block font-sans text-6xl! font-light tracking-[-0.04em] text-black uppercase">
                 We take your
               </span>
-              <span className="mt-2 block ml-100!">
+              <span className="mt-0 block ml-100! text-[100px]">
                 <span className="font-display font-bold text-black uppercase">
                   Vision
                 </span>{' '}
-                <span className="font-serif text-gold italic normal-case">
+                <span className="-ml-3 font-serif text-gold italic normal-case">
                   further
                 </span>
               </span>

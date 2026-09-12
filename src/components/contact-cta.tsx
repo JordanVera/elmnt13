@@ -26,7 +26,9 @@ function CreativePhrase({ variant }: { variant: 'home' | 'weddings' }) {
         </span>
         <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
           <span className="font-bebas font-black uppercase">on your</span>
-          <span className="font-serif normal-case text-gold italic">forever</span>
+          <span className="font-serif normal-case text-gold italic">
+            forever
+          </span>
         </span>
       </p>
     );
@@ -34,12 +36,13 @@ function CreativePhrase({ variant }: { variant: 'home' | 'weddings' }) {
 
   return (
     <p className="flex flex-col items-center justify-center text-center text-6xl leading-[0.8] tracking-tight md:text-7xl lg:text-8xl">
-      <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
-        Let&apos;s Take Your
+      <span className="font-sans text-[0.6em] leading-none tracking-tighter uppercase">
+        {/* Let&apos;s Take Your */}
+        Ready to take your
       </span>
       <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">
         <span className="font-bebas font-black uppercase">Vision</span>
-        <span className="font-serif normal-case text-gold">further</span>
+        <span className="font-serif normal-case text-gold">further?</span>
       </span>
     </p>
   );
