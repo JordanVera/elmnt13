@@ -1,9 +1,8 @@
 'use client';
-
-import Image from 'next/image';
 import Link from 'next/link';
-import { GoldLink } from '@/components/gold-link';
+import Image from 'next/image';
 import { Reveal } from '@/components/reveal';
+import { GoldLink } from '@/components/gold-link';
 import type { Project } from '@/lib/project-types';
 
 export function WorkCarousel({ projects }: { projects: Project[] }) {
