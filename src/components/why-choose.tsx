@@ -10,7 +10,7 @@ const reasons = [
   'We think beyond the expected.',
 ];
 
-const HOLD_MS = 2800;
+const HOLD_MS = 2000;
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function WhyChoose() {
