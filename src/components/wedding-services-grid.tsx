@@ -140,6 +140,7 @@ export function WeddingServicesGrid({
                   service={service}
                   index={index}
                   colIndex={colIndex}
+                  totalCount={services.length}
                   expanded={expandedIndex === index}
                   rowExpanded={rowExpanded}
                   onToggle={() =>
