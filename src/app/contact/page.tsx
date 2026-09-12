@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/contact-form';
 import { Reveal } from '@/components/reveal';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -22,6 +23,16 @@ export default function ContactPage() {
                 Let’s take it further.
               </span>
             </h1>
+            <div
+              className="mt-8 h-px w-16 bg-gold md:mt-10"
+              aria-hidden="true"
+            />
+            <a
+              href={`mailto:${site.email}`}
+              className="mt-6 inline-block text-base tracking-[0.14em] text-ink transition-colors hover:text-gold md:mt-8 md:text-lg"
+            >
+              {site.email}
+            </a>
           </div>
         </Reveal>
         <div className="mt-10">
