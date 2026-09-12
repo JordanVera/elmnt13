@@ -60,8 +60,10 @@ function OptionsList({
             >
               <span
                 className={cn(
-                  'font-display min-w-0 text-lg tracking-tight uppercase transition-colors duration-300 md:text-xl lg:text-2xl',
-                  selected ? 'text-gold' : 'text-white hover:text-white/70',
+                  'font-display block min-w-0 tracking-tight uppercase transition-[color,font-size,line-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                  selected
+                    ? 'text-[clamp(1.2rem,4.6vw,3.15rem)] leading-[0.95] text-gold'
+                    : 'text-lg text-white hover:text-white/70 md:text-xl lg:text-2xl',
                 )}
               >
                 {option.name}
@@ -87,7 +89,7 @@ function OptionsList({
               )}
             >
               <p className="min-h-0 overflow-hidden">
-                <span className="mb-3 block max-w-xl pr-10 text-sm leading-6 text-stone md:mb-4 md:leading-7">
+                <span className="mb-3 block max-w-xl pr-10 text-stone leading-8 tracking-wide md:mb-4">
                   {option.description}
                 </span>
               </p>
@@ -100,19 +102,21 @@ function OptionsList({
 }
 
 function TypesRow({ category }: { category: ServiceCategory }) {
+  const isEvents = category.id === 'events';
+
   return (
-    <div className="mt-10 lg:mt-14">
-      <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
+    <div className={cn('mt-10 lg:mt-14', isEvents && 'lg:text-right')}>
+      <p className="text-[11px] tracking-[0.32em] text-white uppercase">
         {typesLabel(category)}
       </p>
-      <p className="mt-4 max-w-4xl text-base leading-8 tracking-wide text-stone">
+      <p className="mt-4 w-full text-base leading-8 tracking-wide text-gold">
         {category.stageItems.map((item, index) => (
           <span key={item.label}>
             {index > 0 ? ' · ' : null}
             {item.href ? (
               <Link
                 href={item.href}
-                className="underline decoration-gold/40 underline-offset-4 transition-colors hover:text-gold"
+                className="underline decoration-white/40 underline-offset-4 transition-colors hover:text-white"
               >
                 {item.label}
               </Link>
@@ -129,20 +133,41 @@ function TypesRow({ category }: { category: ServiceCategory }) {
 
 function CategorySection({ category }: { category: ServiceCategory }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const isEvents = category.id === 'events';
 
   return (
     <section id={category.id} aria-labelledby={`${category.id}-title`}>
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20">
-        <div>
+      <div
+        className={cn(
+          'grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-20',
+          isEvents &&
+            'lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]',
+        )}
+      >
+        <div
+          className={cn(
+            isEvents && 'lg:order-2 lg:pt-24 lg:text-right',
+          )}
+        >
           <CategoryTitle category={category} id={`${category.id}-title`} />
-          <p className="mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl">
+          <p
+            className={cn(
+              'mt-3 max-w-md font-serif text-base italic text-gold sm:mt-5 sm:text-2xl md:text-3xl',
+              isEvents && 'lg:ml-auto',
+            )}
+          >
             {category.short}
           </p>
-          <p className="mt-4 max-w-md text-sm leading-7 text-stone lg:mt-5">
+          <p
+            className={cn(
+              'mt-4 max-w-md text-stone leading-8 tracking-wide lg:mt-5',
+              isEvents && 'lg:ml-auto',
+            )}
+          >
             {category.description}
           </p>
         </div>
-        <div className="min-w-0">
+        <div className={cn('min-w-0', isEvents && 'lg:order-1')}>
           <OptionsList
             category={category}
             openIndex={openIndex}
