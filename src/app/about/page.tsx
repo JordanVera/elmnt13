@@ -49,8 +49,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <BrandsSection />
       <WhyChoose />
+      <BrandsSection />
       <DetailsMoment tone="paper" layout="tagline" compact />
       <AboutStats />
       <ContactCta barOnly />

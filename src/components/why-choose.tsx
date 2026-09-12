@@ -49,7 +49,7 @@ export function WhyChoose() {
     <>
       <section
         ref={sectionRef}
-        className="relative overflow-hidden bg-white px-6 pt-24 pb-12 md:pt-32"
+        className="relative overflow-hidden bg-white px-6 pb-12 "
       >
         <div className="relative mx-auto max-w-6xl text-center">
           <Reveal>
