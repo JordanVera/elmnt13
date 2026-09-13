@@ -16,7 +16,7 @@ import {
   type ThreadPlan,
 } from '@/lib/wedding-thread';
 
-const SPRING = { stiffness: 52, damping: 24, mass: 0.42, restDelta: 0.001 };
+const SPRING = { stiffness: 70, damping: 26, mass: 0.28, restDelta: 0.0005 };
 
 export function KnotMarker({
   kind,
@@ -32,7 +32,7 @@ export function KnotMarker({
       data-knot={kind}
       data-side={side}
       data-word={word}
-      className="pointer-events-none h-20 md:h-24"
+      className="pointer-events-none h-px w-full opacity-0"
       aria-hidden="true"
     />
   );
@@ -52,8 +52,9 @@ export function TieTheKnot({ children }: { children: ReactNode }) {
 
   const { scrollYProgress } = useScroll({
     target: wrapRef,
-    offset: ['start start', 'end 0.72'],
+    offset: ['start start', 'end 0.82'],
   });
+
   const progress = useSpring(scrollYProgress, SPRING);
   const dashOffset = useTransform(progress, (value) => {
     if (!plan) return 0;
