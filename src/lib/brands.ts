@@ -20,7 +20,7 @@ function logo(
 
 export const featuredBrandLogos: BrandLogo[] = [
   logo('Nike', '/brands/nike.svg', 24, 9),
-  logo('NFL', '/brands/nfl.svg', 134, 96),
+  logo('NFL', '/brands/nfl.png', 134, 96),
   logo('Target', '/brands/target.png', 500, 500),
   logo("McDonald's", '/brands/mcdonalds.png', 800, 600),
   logo('Toyota', '/brands/toyota.svg', 251, 42),
@@ -76,7 +76,7 @@ export const brandCategories = [
       logo('Verizon', '/brands/verizon.png', 399, 126),
       logo('Foot Locker', '/brands/foot-locker.svg', 1048, 214),
       logo('Target', '/brands/target.png', 500, 500),
-      logo('Main Event Entertainment', '/brands/main-event.jpg', 800, 400),
+      logo('Main Event Entertainment', '/brands/main-event.png', 800, 400),
       logo('Nike', '/brands/nike.svg', 24, 9),
       logo('Cleveland Guardians', '/brands/cleveland-guardians.png', 128, 128),
       logo('Hennessy', '/brands/hennessy.svg', 185, 108),
@@ -89,7 +89,7 @@ export const brandCategories = [
       logo('DTLR / Villa', '/brands/dtlr-villa.png', 600, 70),
       logo("D'Ussé", '/brands/dusse.png', 436, 115),
       logo("Raising Cane's", '/brands/raising-canes.png', 151, 72),
-      logo('K-Swiss', '/brands/k-swiss.svg', 250, 169),
+      logo('K-Swiss', '/brands/k-swiss.png', 250, 169),
       logo('New Balance', '/brands/new-balance.svg', 24, 24),
       logo('Mountain Dew', '/brands/mountain-dew.svg', 281, 195),
       logo('Under Armour', '/brands/under-armour.png', 24, 24),
@@ -116,8 +116,8 @@ export const brandCategories = [
       logo('Blavity Inc.', '/brands/blavity.png', 1000, 187),
       logo('ESSENCE', '/brands/essence.png', 626, 171),
       logo('Radio One', '/brands/radio-one.png', 139, 49),
-      logo('iHeartRadio', '/brands/iheartradio.svg', 599, 192),
-      logo('TEDx', '/brands/tedx.svg', 400, 119),
+      logo('iHeartRadio', '/brands/i-heart.png', 599, 192),
+      logo('TEDx', '/brands/tedx.png', 400, 119),
     ],
   },
   {

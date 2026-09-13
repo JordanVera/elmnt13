@@ -187,10 +187,7 @@ export function ChampagneToast() {
         const theta = (KISS_DEGREES * Math.PI) / 180;
         const rimDrop = (PIVOT_Y - RIM_Y) * height * (1 - Math.cos(theta));
         contactY =
-          glassTop +
-          RIM_Y * height +
-          (LEFT.meetY + RIGHT.meetY) / 2 +
-          rimDrop;
+          glassTop + RIM_Y * height + (LEFT.meetY + RIGHT.meetY) / 2 + rimDrop;
       }
 
       setPose({ meetX, settleX: meetX + width * SETTLE_BACK, contactY });
@@ -358,7 +355,7 @@ function ChampagneFlute({
         preload
       />
       <div className="absolute top-[31%] left-1/2 w-[46%] -translate-x-1/2 text-center">
-        <p className="font-display font-bold text-[clamp(0.65rem,1.35vh,0.95rem)] tracking-[0.32em] text-[#fff6e4]">
+        <p className="font-display font-bold text-[clamp(0.65rem,1.35vh,0.95rem)] tracking-[0.32em] text-white/90">
           ELMNT13
         </p>
         <p className="font-serif font-bold text-[clamp(0.85rem,1.8vh,1.2rem)] italic text-white/90">
@@ -531,7 +528,11 @@ function SparkBurst({
             duration: 1.6,
             delay: star.delay,
             ease: EASE_LUXE,
-            opacity: { duration: 1.6, delay: star.delay, times: [0, 0.15, 0.7, 1] },
+            opacity: {
+              duration: 1.6,
+              delay: star.delay,
+              times: [0, 0.15, 0.7, 1],
+            },
           }}
         >
           <SparkleIcon className="h-full w-full drop-shadow-[0_0_12px_rgba(221,196,154,0.95)]" />

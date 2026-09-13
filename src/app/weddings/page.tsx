@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ChampagneToast } from '@/components/champagne-toast';
 import { ContactCta } from '@/components/contact-cta';
 import { DetailsMoment } from '@/components/details-moment';
+import { KnotMarker, TieTheKnot } from '@/components/tie-the-knot';
 import { WeddingWorkSection } from '@/components/wedding-work-section';
 import { WeddingLoveStory } from '@/components/wedding-love-story';
 import { WeddingServicesSection } from '@/components/wedding-services-section';
@@ -15,12 +16,15 @@ export const metadata: Metadata = {
 export default function WeddingsPage() {
   return (
     <main>
-      <ChampagneToast />
-      <WeddingServicesSection />
-      <WeddingLoveStory />
-      <DetailsMoment tone="paper" />
-      <WeddingWorkSection />
-      <ContactCta phrase="weddings" href="/contact" id="contact" />
+      <TieTheKnot>
+        <ChampagneToast />
+        <WeddingServicesSection />
+        <WeddingLoveStory />
+        <DetailsMoment tone="paper" />
+        <WeddingWorkSection />
+        <KnotMarker kind="bow" side="center" word="forever" />
+        <ContactCta phrase="weddings" href="/contact" id="contact" />
+      </TieTheKnot>
     </main>
   );
 }

@@ -27,7 +27,7 @@ function ServiceCard({
   onToggle: () => void;
   onClose: () => void;
 }) {
-  const isLastColumn = colIndex === COLUMNS - 1;
+  const isMiddleColumn = colIndex === 1;
   const isLastCell = index === totalCount - 1;
   const allowHoverReveal = !rowExpanded || expanded;
 
@@ -35,18 +35,31 @@ function ServiceCard({
     <Reveal delay={index * 40} className="h-full">
       <div
         className={cn(
-          'group relative h-full min-h-64 md:min-h-80',
+          'group relative h-full transition-[min-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+          expanded ? 'min-h-64 md:min-h-80' : 'min-h-36 md:min-h-44',
           !isLastCell && 'border-b border-gold md:border-b-0',
-          !isLastColumn && 'md:border-r md:border-gold',
           expanded && 'bg-blush/40',
         )}
       >
+        {isMiddleColumn ? (
+          <>
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-y-8 left-0 hidden w-px bg-gold md:block"
+            />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-y-8 right-0 hidden w-px bg-gold md:block"
+            />
+          </>
+        ) : null}
         <button
           type="button"
           onClick={onToggle}
           aria-expanded={expanded}
           className={cn(
-            'flex h-full w-full cursor-pointer flex-col justify-between p-8 text-left transition-colors duration-500 md:p-10',
+            'flex h-full w-full cursor-pointer flex-col justify-between text-left transition-[padding,background-color] duration-500',
+            expanded ? 'p-8 md:p-10' : 'p-5 md:p-6',
             !expanded && allowHoverReveal && 'hover:bg-blush/40',
             'focus-visible:bg-blush/40 focus-visible:outline-none',
           )}
@@ -96,7 +109,7 @@ function ServiceCard({
         ) : (
           <span
             className={cn(
-              'pointer-events-none absolute top-8 right-8 text-lg text-gold transition-transform duration-500 md:top-10 md:right-10',
+              'pointer-events-none absolute top-5 right-5 text-lg text-gold transition-all duration-500 md:top-6 md:right-6',
               allowHoverReveal && 'group-hover:rotate-45',
             )}
             aria-hidden="true"
@@ -119,7 +132,7 @@ export function WeddingServicesGrid({
     expandedIndex !== null ? Math.floor(expandedIndex / COLUMNS) : null;
 
   return (
-    <div className="mt-10 border-x border-gold">
+    <div className="mt-10">
       {Array.from({ length: ROW_COUNT }, (_, row) => (
         <div
           key={row}

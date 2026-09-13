@@ -8,10 +8,10 @@ export function WeddingServicesSection() {
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <h2 className="text-center leading-[1.05]">
-            <span className="block font-display text-3xl tracking-tight uppercase md:text-5xl">
+            <span className="block font-display text-3xl tracking-tight uppercase md:text-6xl">
               with you for the
             </span>
-            <span className="text-gold mt-1 block font-serif text-3xl italic md:text-5xl">
+            <span className="text-gold block font-serif text-3xl italic md:text-5xl">
               moments that matter
             </span>
           </h2>
