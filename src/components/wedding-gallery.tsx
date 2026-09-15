@@ -1,12 +1,23 @@
-import Image from 'next/image';
-import { WeddingFilmBanner } from '@/components/wedding-film-banner';
-import { getWeddingProjects } from '@/lib/projects';
+'use client';
 
-export async function WeddingGallery() {
-  const weddingProjects = await getWeddingProjects();
+import { useState } from 'react';
+import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
+import { WeddingFilmBanner } from '@/components/wedding-film-banner';
+import { cn } from '@/lib/cn';
+import { weddingCollections } from '@/lib/wedding-gallery';
+
+export function WeddingGallery() {
+  const [activeSlug, setActiveSlug] = useState<string | null>(
+    weddingCollections[0]?.slug ?? null,
+  );
+
+  const activeCollection = weddingCollections.find(
+    (collection) => collection.slug === activeSlug,
+  );
+
   return (
-    <section className="mx-auto max-w-7xl bg-white">
-      <div className="mx-auto max-w-6xl px-6 pt-20 pb-12">
+    <section className="bg-white">
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-12">
         <p className="text-[11px] tracking-[0.36em] text-gold uppercase">
           Work
         </p>
@@ -16,33 +27,47 @@ export async function WeddingGallery() {
           Memories Now
         </h2>
       </div>
-      <div className="grid md:grid-cols-12 md:h-[min(82vh,860px)] gap-2">
-        {weddingProjects.map((project, index) => (
-          <div
-            key={project.slug}
-            className={
-              index === 0
-                ? 'relative aspect-4/5 overflow-hidden md:col-span-7 md:aspect-auto md:h-full'
-                : 'relative aspect-4/5 overflow-hidden md:col-span-5 md:aspect-auto md:h-full'
-            }
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              sizes={
-                index === 0
-                  ? '(max-width: 768px) 100vw, 58vw'
-                  : '(max-width: 768px) 100vw, 42vw'
-              }
-              className="object-cover"
-            />
-          </div>
-        ))}
+
+      <div className="mx-auto max-w-7xl border-t border-ink/10 px-6">
+        {weddingCollections.map((collection) => {
+          const isActive = collection.slug === activeSlug;
+
+          return (
+            <button
+              key={collection.slug}
+              type="button"
+              onClick={() => setActiveSlug(collection.slug)}
+              className={cn(
+                'grid w-full cursor-pointer gap-3 border-b border-ink/10 py-6 text-left transition-colors md:grid-cols-[1fr_auto] md:items-center md:gap-8',
+                isActive ? 'bg-paper' : 'hover:bg-paper/60',
+              )}
+            >
+              <div>
+                <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
+                  Collection
+                </p>
+                <h3 className="mt-2 font-display text-2xl tracking-tight uppercase md:text-3xl">
+                  {collection.title}
+                </h3>
+              </div>
+              <p className="text-sm tracking-[0.16em] text-ink/50 uppercase">
+                {collection.photos.length} photos
+                {collection.video ? ' · film' : ''}
+              </p>
+            </button>
+          );
+        })}
       </div>
-      <div className="max-w-7xl mx-auto py-2">
+
+      {activeCollection ? (
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <WeddingCollectionPanel collection={activeCollection} />
+        </div>
+      ) : null}
+
+      {/* <div className="mx-auto max-w-7xl px-6 py-3">
         <WeddingFilmBanner />
-      </div>
+      </div> */}
     </section>
   );
 }
