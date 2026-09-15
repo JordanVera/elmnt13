@@ -28,7 +28,7 @@ export function ServicesApproach() {
                   <h3 className="mt-4 font-display text-3xl tracking-tight uppercase md:text-4xl">
                     {step.title}
                   </h3>
-                  <p className="mt-5 text-sm leading-7 text-ink/70">
+                  <p className="mt-5 text-sm leading-7 text-stone">
                     {step.body}
                   </p>
                 </li>
@@ -68,7 +68,7 @@ export function ServicesApproach() {
                           {item.label}
                         </Link>
                       ) : (
-                        <span className="text-sm tracking-[0.16em] text-paper/75 uppercase">
+                        <span className="text-sm tracking-[0.16em] text-stone uppercase">
                           {item.label}
                         </span>
                       )}

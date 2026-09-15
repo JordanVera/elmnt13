@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-import { ChampagneToast } from "@/components/champagne-toast";
-import { ContactCta } from "@/components/contact-cta";
-import { DetailsMoment } from "@/components/details-moment";
-import { Reveal } from "@/components/reveal";
-import { WeddingGallery } from "@/components/wedding-gallery";
-import { weddingServices } from "@/lib/weddings";
+import type { Metadata } from 'next';
+import { ChampagneToast } from '@/components/champagne-toast';
+import { ContactCta } from '@/components/contact-cta';
+import { DetailsMoment } from '@/components/details-moment';
+import { KnotMarker, TieTheKnot } from '@/components/tie-the-knot';
+import { WeddingWorkSection } from '@/components/wedding-work-section';
+import { WeddingLoveStory } from '@/components/wedding-love-story';
+import { WeddingServicesSection } from '@/components/wedding-services-section';
 
 export const metadata: Metadata = {
-  title: "Weddings",
+  title: 'Weddings',
   description:
-    "ELMNT13 Weddings — with you for the moments that matter, from yes to I do.",
+    'ELMNT13 Weddings — with you for the moments that matter, from yes to I do.',
 };
 
 export default function WeddingsPage() {
@@ -42,7 +43,7 @@ export default function WeddingsPage() {
                       {service.description}
                     </p>
                     <p className="mt-6 text-sm tracking-[0.16em] text-ink/50 uppercase">
-                      {service.details.join(" · ")}
+                      {service.details.join(' · ')}
                     </p>
                   </div>
                 </article>

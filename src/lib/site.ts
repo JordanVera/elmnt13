@@ -31,14 +31,15 @@ export const footerLinks = [
 
 export const socialLinks = [
   { href: 'https://www.instagram.com/elmnt13/', label: 'Instagram' },
-  { href: 'https://www.facebook.com/', label: 'Facebook' },
-  { href: 'https://www.tiktok.com/', label: 'TikTok' },
-  { href: 'https://www.youtube.com/', label: 'YouTube' },
+  { href: 'https://www.facebook.com/elmnt13llc', label: 'Facebook' },
+  { href: 'https://www.tiktok.com/elmnt13', label: 'TikTok' },
+  { href: 'https://www.youtube.com/elmnt13', label: 'YouTube' },
+  { href: 'https://www.linkedin.com/company/elmnt13', label: 'LinkedIn' },
 ] as const;
 
 export const stats = [
-  { value: 14, suffix: '+', label: 'Years in business' },
-  { value: 500, suffix: '+', label: 'Experiences produced' },
-  { value: 100, suffix: '+', label: 'Brands and clients' },
-  { value: 90, suffix: '%', label: 'Repeat + referral business' },
+  { value: 14, suffix: '+', label: `Years`, label2: `in business` },
+  { value: 500, suffix: '+', label: `Curated`, label2: `experiences` },
+  { value: 100, suffix: '+', label: `Brands`, label2: `+ clients` },
+  { value: 90, suffix: '%', label: `Repeat +`, label2: `referral business` },
 ] as const;
