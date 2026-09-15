@@ -20,6 +20,8 @@ export type ThreadPlan = {
   length: number;
 };
 
+const KAPPA = 0.5522847498;
+
 function n(value: number) {
   return value.toFixed(1);
 }
@@ -42,31 +44,59 @@ function measure(d: string) {
   return path.getTotalLength();
 }
 
-/** Smooth cubic spline through waypoints (Catmull–Rom → Bézier). */
-function smoothPath(points: Point[], tension = 0.92) {
-  if (points.length < 2) return '';
+function sCurve(from: Point, to: Point, amp: number) {
+  const mid = {
+    x: (from.x + to.x) / 2 + amp,
+    y: (from.y + to.y) / 2,
+  };
+  const rise1 = mid.y - from.y;
+  const rise2 = to.y - mid.y;
 
-  const pad = [points[0], ...points, points[points.length - 1]!];
-  let d = `M ${n(points[0]!.x)} ${n(points[0]!.y)}`;
-  const t = tension / 6;
+  return (
+    cubic(
+      from.x + amp * 0.85,
+      from.y + rise1 * 0.28,
+      mid.x - amp * 0.35,
+      mid.y - rise1 * 0.22,
+      mid.x,
+      mid.y,
+    ) +
+    cubic(
+      mid.x + amp * 0.35,
+      mid.y + rise2 * 0.22,
+      to.x - amp * 0.85,
+      to.y - rise2 * 0.28,
+      to.x,
+      to.y,
+    )
+  );
+}
 
-  for (let i = 1; i < pad.length - 2; i++) {
-    const p0 = pad[i - 1]!;
-    const p1 = pad[i]!;
-    const p2 = pad[i + 1]!;
-    const p3 = pad[i + 2]!;
+function circularLoop(cx: number, cy: number, r: number, wind: 1 | -1) {
+  const k = r * KAPPA;
+  const top = { x: cx, y: cy - r };
+  const side = { x: cx + wind * r, y: cy };
+  const bottom = { x: cx, y: cy + r };
+  const other = { x: cx - wind * r, y: cy };
 
-    d += cubic(
-      p1.x + (p2.x - p0.x) * t,
-      p1.y + (p2.y - p0.y) * t,
-      p2.x - (p3.x - p1.x) * t,
-      p2.y - (p3.y - p1.y) * t,
-      p2.x,
-      p2.y,
-    );
-  }
-
-  return d;
+  return {
+    d: [
+      cubic(top.x + wind * k, top.y, side.x, side.y - k, side.x, side.y),
+      cubic(side.x, side.y + k, bottom.x + wind * k, bottom.y, bottom.x, bottom.y),
+      cubic(bottom.x - wind * k, bottom.y, other.x, other.y + k, other.x, other.y),
+      cubic(other.x, other.y - k, top.x - wind * k, top.y, top.x, top.y),
+      cubic(
+        top.x + wind * k * 0.35,
+        top.y + r * 0.55,
+        cx + wind * r * 0.12,
+        cy + r * 0.7,
+        cx,
+        cy + r * 1.15,
+      ),
+    ].join(''),
+    entry: top,
+    exit: { x: cx, y: cy + r * 1.15 },
+  };
 }
 
 function bowKnot(cx: number, cy: number, s: number) {
@@ -133,37 +163,10 @@ function bowKnot(cx: number, cy: number, s: number) {
 }
 
 export function sideX(side: KnotSide, width: number, compact: boolean) {
+  const inset = compact ? 0.28 : 0.5;
   if (side === 'left') return width * (compact ? 0.28 : 0.22);
   if (side === 'right') return width * (compact ? 0.72 : 0.78);
-  return width * 0.5;
-}
-
-function flowWaypoints(
-  width: number,
-  height: number,
-  knotX: number,
-  knotY: number,
-  compact: boolean,
-): Point[] {
-  const startY = Math.min(height * 0.06, 88);
-  const left = width * (compact ? 0.27 : 0.23);
-  const right = width * (compact ? 0.73 : 0.77);
-  const center = width * 0.5;
-  const bowSize = compact ? 38 : 52;
-
-  return [
-    { x: center, y: startY },
-    { x: left, y: height * 0.12 },
-    { x: right, y: height * 0.22 },
-    { x: left, y: height * 0.33 },
-    { x: right, y: height * 0.44 },
-    { x: left, y: height * 0.55 },
-    { x: right, y: height * 0.66 },
-    { x: left, y: height * 0.76 },
-    { x: (left + knotX) / 2, y: knotY - bowSize * 1.05 },
-    { x: knotX, y: knotY - bowSize * 0.35 },
-    { x: knotX, y: knotY },
-  ];
+  return width * inset;
 }
 
 export function buildWeddingThread(
@@ -172,24 +175,46 @@ export function buildWeddingThread(
   knots: Array<Pick<KnotPlan, 'kind' | 'side' | 'y' | 'word'>>,
   compact: boolean,
 ): ThreadPlan | null {
-  if (width < 40 || height < 200 || knots.length === 0) return null;
+  if (width < 40 || height < 200) return null;
 
-  const knotInput = knots[knots.length - 1]!;
-  const knotX = sideX(knotInput.side, width, compact);
-  const knotY = knotInput.y;
-  const bowSize = compact ? 38 : 52;
+  const knotInput = knots[knots.length - 1];
+  const size = compact ? 32 : 46;
+  const knot = {
+    kind: knotInput?.kind ?? 'bow',
+    side: knotInput?.side ?? 'center',
+    word: knotInput?.word ?? 'forever',
+    x: knotInput ? sideX(knotInput.side, width, compact) : width * 0.5,
+    y: Math.min(
+      Math.max(knotInput?.y ?? height * 0.9, height * 0.72),
+      height - size * 2.4,
+    ),
+    size,
+    tiedAt: 0,
+  };
 
-  const flow = smoothPath(
-    flowWaypoints(width, height, knotX, knotY, compact),
-    0.95,
-  );
-  const bow = bowKnot(knotX, knotY, bowSize);
-  const d = `${flow}${bow.d}`;
+  const start = { x: width * 0.5, y: Math.min(height * 0.06, 88) };
+  const left = width * (compact ? 0.3 : 0.26);
+  const right = width * (compact ? 0.7 : 0.74);
+  const loopR = Math.min(compact ? 48 : 78, width * 0.1);
+  const loop1 = { x: left, y: height * 0.26 };
+  const loop2 = { x: right, y: height * 0.56 };
+  const wave = width * (compact ? 0.16 : 0.2);
 
+  const first = circularLoop(loop1.x, loop1.y, loopR, -1);
+  const second = circularLoop(loop2.x, loop2.y, loopR, 1);
+  const bow = bowKnot(knot.x, knot.y, size);
+
+  const approach = sCurve(start, first.entry, -wave * 0.65);
+  const bridge = sCurve(first.exit, second.entry, wave);
+  const finish = sCurve(second.exit, { x: knot.x, y: knot.y }, -wave * 0.55);
+
+  const d = `M ${n(start.x)} ${n(start.y)}${approach}${first.d}${bridge}${second.d}${finish}${bow.d}`;
   const fullLength = measure(d);
   if (fullLength <= 0) return null;
 
-  const beforeBow = measure(flow);
+  const beforeBow = measure(
+    `M ${n(start.x)} ${n(start.y)}${approach}${first.d}${bridge}${second.d}${finish}`,
+  );
 
   return {
     d,
@@ -198,16 +223,8 @@ export function buildWeddingThread(
     length: fullLength,
     knots: [
       {
-        kind: knotInput.kind,
-        side: knotInput.side,
-        x: knotX,
-        y: knotY,
-        size: bowSize,
-        word: knotInput.word,
-        tiedAt: Math.min(
-          0.992,
-          (beforeBow + (fullLength - beforeBow) * 0.35) / fullLength,
-        ),
+        ...knot,
+        tiedAt: Math.min(0.985, (beforeBow + (fullLength - beforeBow) * 0.4) / fullLength),
       },
     ],
   };

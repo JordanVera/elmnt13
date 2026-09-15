@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
-import { WeddingFilmBanner } from '@/components/wedding-film-banner';
 import { cn } from '@/lib/cn';
 import { weddingCollections } from '@/lib/wedding-gallery';
 
