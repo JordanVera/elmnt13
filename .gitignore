@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# wedding media — videos are hosted externally (Google Drive, Vidflow)
+public/weddings/collections/**/source-video.*
+public/weddings/collections/**/video.mp4
+public/weddings/collections/**/poster.jpg
