@@ -71,12 +71,7 @@ export default function WeddingsPage() {
 
       <DetailsMoment tone="paper" />
       <WeddingGallery />
-      <ContactCta
-        kicker="Contact"
-        title="Let’s get started on your forever"
-        href="/contact"
-        label="Now"
-      />
+      <ContactCta phrase="weddings" href="/contact" />
     </main>
   );
 }
