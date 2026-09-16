@@ -6,6 +6,7 @@ import { KnotMarker, TieTheKnot } from '@/components/tie-the-knot';
 import { WeddingGallery } from '@/components/wedding-gallery';
 import { WeddingLoveStory } from '@/components/wedding-love-story';
 import { WeddingServicesSection } from '@/components/wedding-services-section';
+import { WeddingWorkSection } from '@/components/wedding-work-section';
 
 export const metadata: Metadata = {
   title: 'Weddings',
@@ -21,7 +22,8 @@ export default function WeddingsPage() {
       <WeddingServicesSection />
       <WeddingLoveStory />
       <DetailsMoment tone="paper" />
-      <WeddingGallery />
+      <WeddingWorkSection />
+      {/* <WeddingGallery /> */}
       {/* <KnotMarker kind="bow" side="center" word="forever" /> */}
       <ContactCta phrase="weddings" href="/contact" id="contact" />
       {/* </TieTheKnot> */}

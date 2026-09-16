@@ -1,60 +1,72 @@
 import Image from 'next/image';
-import { Reveal } from '@/components/reveal';
-import { WeddingWorkVideo } from '@/components/wedding-work-video';
+import { WeddingFilmBanner } from '@/components/wedding-film-banner';
 import { cn } from '@/lib/cn';
-import type { Project } from '@/lib/project-types';
+import { getWeddingWorkPhotos } from '@/lib/wedding-work-photos';
 
-function GalleryPhoto({
-  project,
-  className,
+const MOSAIC_BREAK = 24;
+const WIDE_SLOTS = new Set([0, 3, 6, 7, 8, 9]);
+
+function tileClass(index: number) {
+  return WIDE_SLOTS.has(index % 12) ? 'col-span-2' : '';
+}
+
+function Mosaic({
+  photos,
+  offset = 0,
 }: {
-  project: Project;
-  className?: string;
+  photos: ReturnType<typeof getWeddingWorkPhotos>;
+  offset?: number;
 }) {
   return (
-    <div
-      className={cn('relative aspect-square overflow-hidden bg-mist', className)}
-    >
-      <Image
-        src={project.image}
-        alt={project.title}
-        fill
-        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 16vw"
-        className="object-cover"
-      />
+    <div className="grid auto-rows-28 grid-cols-2 gap-0.75 bg-gold/20 p-0.75 sm:auto-rows-36 sm:grid-cols-4 lg:auto-rows-44 lg:grid-cols-6">
+      {photos.map((photo, index) => {
+        const wide = WIDE_SLOTS.has((index + offset) % 12);
+
+        return (
+          <figure
+            key={photo.src}
+            className={cn(
+              'group relative h-full min-h-0 overflow-hidden bg-mist',
+              tileClass(index + offset),
+            )}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.title}
+              fill
+              sizes={
+                wide
+                  ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 34vw'
+                  : '(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 17vw'
+              }
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+            />
+            <figcaption className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-ink/70 via-ink/10 to-transparent px-3 py-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              <span className="text-[10px] tracking-[0.28em] text-gold uppercase">
+                {photo.title}
+              </span>
+            </figcaption>
+          </figure>
+        );
+      })}
     </div>
   );
 }
 
-export function WeddingWorkGallery({ projects }: { projects: Project[] }) {
-  const photos = projects.slice(0, 10);
+export function WeddingGallery() {
+  const photos = getWeddingWorkPhotos();
+  const opening = photos.slice(0, MOSAIC_BREAK);
+  const closing = photos.slice(MOSAIC_BREAK);
 
   return (
-    <>
-      <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6">
-        <Reveal className="col-span-2 row-span-2 aspect-square md:aspect-auto md:min-h-0">
-          <WeddingWorkVideo className="aspect-square md:aspect-auto md:min-h-0 md:h-full" />
-        </Reveal>
-
-        {photos.map((project, index) => (
-          <Reveal
-            key={project.slug}
-            delay={(index + 1) * 60}
-            className={cn(index === 0 && 'col-span-2 md:col-span-1')}
-          >
-            <GalleryPhoto project={project} />
-          </Reveal>
-        ))}
+    <div>
+      <Mosaic photos={opening} />
+      <div className="py-0.75">
+        <WeddingFilmBanner />
       </div>
-
-      <Reveal className="mt-10 text-center">
-        <button
-          type="button"
-          className="cursor-pointer border border-ink/20 px-8 py-3 text-[11px] tracking-[0.32em] text-ink uppercase transition-colors hover:border-ink hover:bg-ink hover:text-gold"
-        >
-          View More
-        </button>
-      </Reveal>
-    </>
+      {closing.length > 0 ? (
+        <Mosaic photos={closing} offset={opening.length} />
+      ) : null}
+    </div>
   );
 }
