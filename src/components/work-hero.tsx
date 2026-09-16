@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
   motion,
+  useMotionValue,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -27,37 +28,54 @@ const SPRING = { stiffness: 72, damping: 26, mass: 0.38, restDelta: 0.001 };
 export function WorkHero({ projects }: { projects: Project[] }) {
   const cards = projects.slice(0, 4);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const heroReady = useMotionValue(0);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
   const progress = useSpring(scrollYProgress, SPRING);
+  const cardProgress = useTransform(
+    [scrollYProgress, heroReady],
+    ([scroll, ready]: number[]) => (ready ? scroll : 0),
+  );
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    let outerFrame = 0;
+    let innerFrame = 0;
+
+    outerFrame = requestAnimationFrame(() => {
+      innerFrame = requestAnimationFrame(() => {
+        if (window.scrollY !== 0) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+        heroReady.set(1);
+      });
+    });
+
+    return () => {
+      cancelAnimationFrame(outerFrame);
+      cancelAnimationFrame(innerFrame);
+    };
+  }, [heroReady]);
 
   const leftX = useTransform(progress, [0, 0.5], ['0vw', '-16vw']);
   const rightX = useTransform(progress, [0, 0.5], ['0vw', '16vw']);
-  const titleOpacity = useTransform(progress, [0, 0.45, 1], [1, 1, 0.5]);
 
   return (
     <section ref={sectionRef} className="relative h-[200vh] bg-white">
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden bg-white px-6">
         <div className="relative flex w-full max-w-6xl items-center justify-center">
-          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[22vw] leading-none tracking-tight text-ink uppercase md:text-[18vw]">
+          <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[19vw] leading-none tracking-tight text-ink uppercase md:text-[15vw]">
             <motion.span
-              style={
-                reduceMotion
-                  ? { x: '-16vw', opacity: 0.5 }
-                  : { x: leftX, opacity: titleOpacity }
-              }
+              style={reduceMotion ? { x: '-16vw' } : { x: leftX }}
             >
               Our
             </motion.span>
             <motion.span
-              style={
-                reduceMotion
-                  ? { x: '16vw', opacity: 0.5 }
-                  : { x: rightX, opacity: titleOpacity }
-              }
+              style={reduceMotion ? { x: '16vw' } : { x: rightX }}
             >
               Work
             </motion.span>
@@ -69,7 +87,7 @@ export function WorkHero({ projects }: { projects: Project[] }) {
                 key={project.slug}
                 project={project}
                 index={index}
-                progress={progress}
+                progress={cardProgress}
                 reduceMotion={Boolean(reduceMotion)}
               />
             ))}
@@ -100,10 +118,13 @@ function WorkCard({
   const y = useTransform(progress, [start, end], [56, spread.y]);
   const opacity = useTransform(progress, [start, start + 0.18], [0, 1]);
   const scale = useTransform(progress, [start, end], [0.84, 1]);
+  const visibility = useTransform(opacity, (value) =>
+    value > 0 ? 'visible' : 'hidden',
+  );
 
   return (
     <motion.div
-      className={`absolute ${CARD_Z[index]} aspect-3/4 w-[38vw] max-w-56 overflow-hidden bg-white shadow-[0_12px_32px_rgba(0,0,0,0.12)] ring-1 ring-ink/10 hover:z-20 md:w-[22vw] md:max-w-xs`}
+      className={`absolute ${CARD_Z[index]} aspect-3/4 w-[38vw] max-w-56 overflow-hidden bg-white opacity-0 shadow-[0_12px_32px_rgba(0,0,0,0.12)] ring-1 ring-ink/10 hover:z-20 md:w-[22vw] md:max-w-xs`}
       style={
         reduceMotion
           ? {
@@ -112,7 +133,7 @@ function WorkCard({
               rotate: spread.rotate,
               opacity: 1,
             }
-          : { x, y, rotate, opacity, scale }
+          : { x, y, rotate, opacity, scale, visibility }
       }
     >
       <Link href={`/work/${project.slug}`} className="group absolute inset-0">
