@@ -3,11 +3,8 @@ import { WeddingGallery } from '@/components/wedding-work-gallery';
 
 export function WeddingWorkSection() {
   return (
-    <section
-      // id="work"
-      className="scroll-mt-8 bg-white py-12 md:py-14 max-w-7xl mx-auto bg-white"
-    >
-      <div className="mx-auto px-6">
+    <section id="work" className="scroll-mt-8 bg-white py-12 md:py-14">
+      <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             Work
@@ -22,7 +19,7 @@ export function WeddingWorkSection() {
         </Reveal>
       </div>
 
-      <div className="mt-10 md:mt-12">
+      <div className="mx-auto mt-10 max-w-6xl md:mt-12">
         <WeddingGallery />
       </div>
     </section>
