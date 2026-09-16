@@ -54,7 +54,7 @@ export function ContactCta({
       </p>
 
       <h2 className="font-sans text-black mt-4 text-center text-5xl uppercase md:text-5xl">
-        Get in{' '}
+        <span className="font-sans !text-[0.7em]">Get in </span>{' '}
         <Link
           href="/contact"
           aria-label="Get in contact — open the inquiry form"
