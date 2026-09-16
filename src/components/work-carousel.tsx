@@ -6,7 +6,6 @@ import { GoldLink } from '@/components/gold-link';
 import type { Project } from '@/lib/project-types';
 
 export function WorkCarousel({ projects }: { projects: Project[] }) {
-  const slides = projects;
   return (
     <section className="bg-white pt-12 md:pt-16">
       <div className="mx-auto flex max-w-6xl items-end justify-between px-6">
@@ -29,18 +28,18 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
         </Reveal>
       </div>
 
-    <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6">
-        {slides.map((project, index) => (
-          <Reveal key={project.slug} delay={index * 70} className="shrink-0">
+      <div className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 px-6 sm:gap-5 lg:grid-cols-4">
+        {projects.map((project, index) => (
+          <Reveal key={project.slug} delay={index * 70}>
             <Link
               href={`/work/${project.slug}`}
-              className="group relative block aspect-4/5 w-[78vw] snap-center overflow-hidden sm:w-[48vw] lg:w-[28vw]"
+              className="group relative block aspect-4/5 overflow-hidden"
             >
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                sizes="(max-width: 768px) 78vw, 28vw"
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/45" />
