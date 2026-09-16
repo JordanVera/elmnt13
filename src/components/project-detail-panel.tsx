@@ -13,7 +13,9 @@ export function ProjectDetailPanel({
   const isOverlay = variant === 'overlay';
 
   return (
-    <article className={cn(isOverlay ? 'bg-white text-ink' : 'bg-ink text-paper')}>
+    <article
+      className={cn(isOverlay ? 'bg-white text-ink' : 'bg-ink text-paper')}
+    >
       <section
         className={cn(
           'relative overflow-hidden',
@@ -35,7 +37,7 @@ export function ProjectDetailPanel({
             isOverlay ? 'pb-6' : 'pb-28',
           )}
         >
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-6xl text-center">
             <p className="text-[11px] tracking-[0.32em] text-gold uppercase">
               {project.service}
             </p>
@@ -52,7 +54,7 @@ export function ProjectDetailPanel({
       </section>
 
       <section className={cn('px-6', isOverlay ? 'py-10 md:py-14' : 'py-14')}>
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1.4fr] md:gap-12">
+        <div className="mx-auto max-w-7xl text-center">
           {project.client ? (
             <div>
               <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
@@ -62,7 +64,7 @@ export function ProjectDetailPanel({
             </div>
           ) : null}
           {project.description ? (
-            <p className="max-w-xl text-lg leading-8 text-stone">
+            <p className="max-w-xl text-lg leading-8 text-stone text-center mx-auto">
               {project.description}
             </p>
           ) : null}
