@@ -10,8 +10,15 @@ export function BrandsSection() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white border-t border-b border-stone/20">
+    <div
+      className={
+        open
+          ? 'bg-white border-t-[0.5px] border-stone/20'
+          : 'border-t-[0.5px] border-b-[0.5px] border-stone/20 bg-white'
+      }
+    >
       <LogoMarquee
+        showBorders={!open}
         action={
           <button
             type="button"
@@ -32,7 +39,11 @@ export function BrandsSection() {
                   <section aria-labelledby={`brands-${category.id}`}>
                     <h3
                       id={`brands-${category.id}`}
-                      className="border-b border-ink/10 pb-3 text-[15px] tracking-[0.32em] text-stone uppercase"
+                      className={`pb-3 text-[15px] tracking-[0.32em] text-stone uppercase ${
+                        category.id === 'personal'
+                          ? 'border-b-[0.5px] border-ink/10'
+                          : ''
+                      }`}
                     >
                       {category.label}
                     </h3>
