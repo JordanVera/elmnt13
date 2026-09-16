@@ -16,15 +16,15 @@ export const metadata: Metadata = {
 export default function WeddingsPage() {
   return (
     <main>
-      <TieTheKnot>
-        <ChampagneToast />
-        <WeddingServicesSection />
-        <WeddingLoveStory />
-        <DetailsMoment tone="paper" />
-        <WeddingGallery />
-        <KnotMarker kind="bow" side="center" word="forever" />
-        <ContactCta phrase="weddings" href="/contact" id="contact" />
-      </TieTheKnot>
+      {/* <TieTheKnot> */}
+      <ChampagneToast />
+      <WeddingServicesSection />
+      <WeddingLoveStory />
+      <DetailsMoment tone="paper" />
+      <WeddingGallery />
+      {/* <KnotMarker kind="bow" side="center" word="forever" /> */}
+      <ContactCta phrase="weddings" href="/contact" id="contact" />
+      {/* </TieTheKnot> */}
     </main>
   );
 }
