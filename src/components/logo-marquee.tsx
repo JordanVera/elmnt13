@@ -6,14 +6,16 @@ import { featuredBrandLogos } from '@/lib/brands';
 export function LogoMarquee({
   title = 'Brands We’ve Worked With',
   action,
+  showBorders = true,
 }: {
   title?: string;
   action?: ReactNode;
+  showBorders?: boolean;
 }) {
   const loop = [...featuredBrandLogos, ...featuredBrandLogos];
 
   return (
-    <div className="border-t border-b border-stone/20">
+    <div className={showBorders ? 'border-t border-b border-stone/20' : undefined}>
       <section
         className={
           action

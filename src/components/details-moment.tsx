@@ -112,19 +112,12 @@ export function DetailsMoment({
         {layout === 'tagline' ? (
           <Reveal>
             <p className="text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
-              suscipit. Quas, illum, temporibus sed quia, voluptate cupiditate
-              natus soluta dolor aut repellendus nulla! Ipsam deserunt voluptate
-              nesciunt? Impedit, officiis soluta? Blanditiis enim incidunt
-              mollitia neque molestias numquam deserunt recusandae repellendus
-              soluta quae perferendis dicta ipsum ea voluptatum repellat nisi,
-              dignissimos non nostrum vel nihil modi labore, cupiditate sint.
-              Debitis nesciunt adipisci voluptas assumenda ratione sapiente quod
-              facere nostrum iure veniam. Delectus architecto nulla fugit sunt
-              repellendus numquam officia adipisci quis, laboriosam dignissimos
-              suscipit? Id error sit amet, alias inventore dignissimos
-              praesentium quod ducimus debitis expedita illum maiores in quia
-              iure.
+              We’ve worked across various industries, audiences and types of
+              experiences, giving us insight that extends beyond any one
+              category. That range, combined with years of experience, allows us
+              to approach every project differently and creatively, develop
+              ideas with greater perspective and ultimately take your vision
+              further.
             </p>
 
             <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
