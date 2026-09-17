@@ -8,19 +8,8 @@ import { getWeddingWorkPhotos } from '@/lib/wedding-work-photos';
 
 const PREVIEW_SRCS = [
   '/weddings/collections/teagan-proposal/photos/frame-001.jpg',
-  '/weddings/collections/christian-engagement/photos/001.jpg',
   '/weddings/collections/christian-proposal/photos/frame-001.jpg',
-  '/weddings/collections/mookie-proposal/photos/040.jpg',
-  '/weddings/collections/mookie-wedding/photos/frame-001.jpg',
 ] as const;
-
-const PREVIEW_TILE_CLASS = [
-  'aspect-video md:col-start-1 md:row-start-1 md:aspect-auto',
-  'hidden md:col-start-2 md:row-span-2 md:row-start-1 md:block md:aspect-auto',
-  'aspect-video md:col-start-3 md:row-start-1 md:aspect-auto',
-  'aspect-video md:col-start-1 md:row-start-2 md:aspect-auto',
-  'aspect-video md:col-start-3 md:row-start-2 md:aspect-auto',
-];
 
 function PhotoTile({
   photo,
@@ -55,13 +44,13 @@ function PreviewGrid({
   photos: ReturnType<typeof getWeddingWorkPhotos>;
 }) {
   return (
-    <div className="grid grid-cols-2 gap-2 md:aspect-8/3 md:grid-cols-3 md:grid-rows-2 md:gap-3">
-      {photos.map((photo, index) => (
+    <div className="grid grid-cols-2 gap-2 md:gap-3">
+      {photos.map((photo) => (
         <PhotoTile
           key={photo.src}
           photo={photo}
-          className={cn('h-full min-h-0', PREVIEW_TILE_CLASS[index])}
-          sizes="(max-width: 768px) 50vw, 33vw"
+          className="aspect-video"
+          sizes="(max-width: 768px) 50vw, 50vw"
         />
       ))}
     </div>
