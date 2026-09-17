@@ -1,6 +1,6 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import type { NextConfig } from "next";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import type { NextConfig } from 'next';
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
@@ -9,21 +9,22 @@ const nextConfig: NextConfig = {
     root: projectRoot,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "i.ytimg.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-        pathname: "/images/**",
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/images/**',
       },
     ],
   },
