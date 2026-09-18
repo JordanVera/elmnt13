@@ -272,7 +272,7 @@ export function ChampagneToast() {
       />
 
       <h1 className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
-        <span className="block overflow-hidden pb-[0.32em]">
+        <span className="block overflow-hidden px-[0.14em] pb-[0.32em]">
           <motion.span
             className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-[1.12] italic text-ink"
             initial={skipMotion ? false : { y: '115%' }}
