@@ -19,7 +19,7 @@ export function WeddingLoveStory() {
         </Reveal>
         <Reveal delay={120}>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-black md:mt-10">
-            We love love, so your <span className="font-serif">love</span>{' '}
+            We love <span className="font-serif">love,</span> so your love
             matters to us. We listen closely to what you desire, seek to
             understand what’s most important and bring our creativity and
             perspective to push your ideas beyond the expected, create the

@@ -6,7 +6,7 @@ export function WeddingServicesSection() {
   return (
     <section id="services" className="scroll-mt-8 bg-white px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <Reveal>
+        {/* <Reveal>
           <div className="flex md:items-center">
             <p className="max-w-3xl text-lg text-center mx-auto leading-8 text-black">
               May your story be filled with moments worth celebrating, from the
@@ -19,10 +19,10 @@ export function WeddingServicesSection() {
               and distinctly yours.
             </p>
           </div>
-        </Reveal>
+        </Reveal> */}
 
         <Reveal delay={80}>
-          <p className="mt-14 text-[15px] tracking-[0.36em] text-gold uppercase md:mt-16">
+          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             Services
           </p>
         </Reveal>
