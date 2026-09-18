@@ -9,9 +9,9 @@ export function WeddingWorkSection() {
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             Work
           </p>
-          <h2 className="mt-6 font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
+          <h2 className="mt-6 font-[family-name:var(--font-playfair)] text-5xl leading-[0.95] tracking-tight lowercase md:text-7xl">
             Moments Then,{' '}
-            <span className="font-serif text-5xl tracking-normal normal-case text-gold italic md:text-7xl">
+            <span className="font-serif text-5xl tracking-normal lowercase text-gold italic md:text-7xl">
               Memories Now
             </span>
           </h2>

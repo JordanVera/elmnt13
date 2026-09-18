@@ -23,7 +23,7 @@ export default function WeddingsPage() {
       <div className="mx-auto  bg-white">
         <Reveal>
           <div className="flex md:items-center max-w-6xl mx-auto">
-            <p className="mt-12 max-w-3xl text-2xl text-center mx-auto leading-8 text-black">
+            <p className="mt-12 max-w-3xl text-2xl text-center mx-auto leading-8 text-black/50!">
               <span className="font-serif">
                 May your story be filled with moments worth celebrating, from
                 the beginning of a new chapter to the forever you’re building
