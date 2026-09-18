@@ -59,6 +59,6 @@ export const weddingSocialLinks = [
 export const stats = [
   { value: 14, suffix: '+', label: `Years`, label2: `in business` },
   { value: 500, suffix: '+', label: `Curated`, label2: `experiences` },
-  { value: 100, suffix: '+', label: `Brands`, label2: `+ clients` },
+  { value: 100, suffix: '+', label: `Brands +`, label2: `clients` },
   { value: 90, suffix: '%', label: `Repeat +`, label2: `referral business` },
 ] as const;

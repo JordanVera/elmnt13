@@ -111,23 +111,26 @@ export function DetailsMoment({
       >
         {layout === 'tagline' ? (
           <Reveal>
-            <p className=" leading-8 text-black text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight mb-8">
-              Every project has a different audience, objective and opportunity.
-              Our experience has taught us there is no one-size-fits-all
-              approach, which is why we look at each project with a fresh
-              lens—considering what it needs, what it could become and how every
-              element can work together to create the greatest impact.
-            </p>
-            <p className="text-lg leading-8 text-black text-lg mx-auto text-center max-w-5xl  tracking-tight">
-              We look beyond what’s typical, challenge what’s expected and make
-              intentional choices that support the ultimate goal. From the
-              broadest idea to the smallest detail, everything contributes to
-              creating an experience that leaves a lasting impression—
-              <span className="font-display">
-                because every element has a purpose and every detail has its
-                place.
-              </span>
-            </p>
+            <div className="max-w-3xl mx-auto">
+              <p className=" leading-8 text-black text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight mb-8">
+                Every project has a different audience, objective and
+                opportunity. Our experience has taught us there is no
+                one-size-fits-all approach, which is why we look at each project
+                with a fresh lens—considering what it needs, what it could
+                become and how every element can work together to create the
+                greatest impact.
+              </p>
+              <p className="text-lg leading-8 text-black text-lg mx-auto text-center max-w-5xl  tracking-tight">
+                We look beyond what’s typical, challenge what’s expected and
+                make intentional choices that support the ultimate goal. From
+                the broadest idea to the smallest detail, everything contributes
+                to creating an experience that leaves a lasting impression—
+                <span className="font-display">
+                  because every element has a purpose and every detail has its
+                  place.
+                </span>
+              </p>
+            </div>
 
             <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
               <span className="block font-sans text-6xl! font-light tracking-[-0.04em] text-black uppercase">

@@ -13,9 +13,7 @@ export function ProjectDetailPanel({
   const isOverlay = variant === 'overlay';
 
   return (
-    <article
-      className={cn(isOverlay ? 'bg-white text-ink' : 'bg-ink text-paper')}
-    >
+    <article className={cn(true ? 'bg-white text-ink' : 'bg-ink text-paper')}>
       <section
         className={cn(
           'relative overflow-hidden',
