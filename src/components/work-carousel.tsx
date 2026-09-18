@@ -28,7 +28,7 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
         </Reveal>
       </div>
 
-      <div className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 px-6 sm:gap-5 lg:grid-cols-4">
+      <div className="mx-auto mt-10 grid max-w-7xl grid-cols-2 gap-4 px-6 sm:gap-5 lg:grid-cols-4">
         {projects.map((project, index) => (
           <Reveal key={project.slug} delay={index * 70}>
             <Link
@@ -39,7 +39,7 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
                 src={project.image}
                 alt={project.title}
                 fill
-                sizes="(max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/45" />
