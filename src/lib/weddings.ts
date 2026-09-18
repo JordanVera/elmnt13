@@ -8,58 +8,50 @@ export type WeddingService = {
 export const weddingServices: readonly WeddingService[] = [
   {
     title: 'Proposals',
-    kicker: 'The beginning',
+    kicker: 'She said yes.',
     description:
-      'The beginning of forever deserves its own moment. We thoughtfully plan and design a proposal that feels personal, intentional and true to your love story.',
+      'The beginning of forever deserves a moment of its own. We bring your proposal to life by transforming your vision and story into an unforgettable experience.',
     details: ['Planning', 'Design', 'Execution'],
   },
   {
-    title: 'Full-Service Wedding Planning',
-    kicker: 'From Yes to I do',
+    title: 'Pre-Wedding Celebrations',
+    kicker: 'Before the aisle.',
     description:
-      "Your wedding day is one of the moments you'll remember forever. We thoughtfully plan and manage every detail, taking your vision further while allowing you to be fully present and enjoy every moment.",
-    details: ['Ceremony', 'Cocktail Hour', 'Reception'],
+      'There’s so much to celebrate leading up to “I do.” We plan, design and execute each occasion, making every chapter a memorable part of your love story.',
+    details: ['Engagement Party', 'Bridal Shower', 'Bachelor(ette) Party'],
   },
   {
     title: 'Wedding Design',
-    kicker: 'A Setting that reflects you',
+    kicker: 'A setting that reflects you.',
     description:
-      'Your love story deserves a setting that reflects you. We translate your vision into a thoughtfully designed wedding, bringing every visual element together to create a setting that feels personal, intentional and distinctly yours.',
-    details: ['Creative Direction', 'Decor', 'Styling'],
+      'Your wedding should be as beautiful as the love it celebrates. We bring your style and ideas together to create a setting that looks and feels like everything you’ve dreamed of.',
+    details: ['Creative Direction', 'Decor & Design', 'Styling'],
   },
   {
-    title: 'Wedding Celebrations',
-    kicker: 'Every chapter',
+    title: 'Full-Service Wedding Planning',
+    kicker: 'From Yes to I Do.',
     description:
-      'There are so many moments worth celebrating before you say “I do.” We thoughtfully plan, design and execute every celebration before the aisle, making each chapter a memorable part of your love story.',
-    details: [
-      'Engagement Parties',
-      'Bridal Showers',
-      'Bachelor & Bachelorette Parties',
-    ],
+      'There’s so much to look forward to between “yes” and “I do.” From the first decision to the final send-off, we’re by your side making sure it all comes together beautifully.',
+    details: ['Planning', 'Coordination', 'Execution'],
   },
   {
-    title: 'Wedding Weekend Experiences',
-    kicker: 'More than a day',
+    title: 'Wedding Weekends',
+    kicker: 'More than a day.',
     description:
-      'The celebration doesn’t have to begin and end with the wedding day. We curate experiences throughout the weekend that give you and your guests more opportunities to celebrate, connect and enjoy every moment together.',
+      'One day doesn’t always feel like enough. We extend the celebration beyond the wedding day, creating more time to gather, celebrate and make memories with the people you love.',
     details: [
-      'Welcome Parties',
-      'Day Parties',
-      'Yacht Experiences',
-      'After Parties',
-      'Farewell Events',
+      'Welcome Event',
+      'Day Party',
+      'Yacht Experience',
+      'After Party',
+      'Farewell Event',
     ],
   },
   {
     title: 'Destination Weddings',
-    kicker: 'Love travels',
+    kicker: 'Wherever love takes you.',
     description:
-      'Planning a wedding away from home comes with its own set of details. From finding the perfect destination to coordinating travel logistics, we thoughtfully plan, design and manage every element of your wedding, ensuring your vision travels with you and your celebration feels seamless wherever you choose to say “I do.”',
-    details: [
-      'Destination Sourcing',
-      'Travel Logistics',
-      'Multi-Day Planning',
-    ],
+      'A celebration shouldn’t feel complicated because it takes you miles away. We make celebrating from afar feel effortless, so you can enjoy your wedding journey just as much as the destination you desire.',
+    details: ['Planning', 'Logistics', 'Multi-Day Experience'],
   },
 ];
