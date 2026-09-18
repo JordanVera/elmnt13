@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 export default function WeddingsPage() {
   return (
     <main>
-      {/* <TieTheKnot> */}
       <ChampagneToast />
       <div className="mx-auto  bg-white">
         <Reveal>
@@ -42,9 +41,7 @@ export default function WeddingsPage() {
       {/* <DetailsMoment tone="paper" /> */}
       <WeddingWorkSection />
       {/* <WeddingGallery /> */}
-      {/* <KnotMarker kind="bow" side="center" word="forever" /> */}
       <ContactCta phrase="weddings" href="/contact" id="contact" />
-      {/* </TieTheKnot> */}
     </main>
   );
 }
