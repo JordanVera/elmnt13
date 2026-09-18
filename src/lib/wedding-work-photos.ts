@@ -11,8 +11,6 @@ export type WeddingWorkTile = {
   previewVideo?: string;
 };
 
-export const WEDDING_WORK_PREVIEW_COUNT = 3;
-
 export const weddingWorkTiles: WeddingWorkTile[] = [
   {
     slug: 'teagan-proposal',

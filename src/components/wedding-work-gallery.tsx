@@ -4,11 +4,38 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
 import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
+import { cn } from '@/lib/cn';
 import {
-  WEDDING_WORK_PREVIEW_COUNT,
   getWeddingWorkItems,
   type WeddingWorkItem,
 } from '@/lib/wedding-work-photos';
+
+function tileLayout(item: WeddingWorkItem, index: number, count: number) {
+  if (item.preview === 'video') {
+    return {
+      className: 'col-span-2 aspect-video md:col-span-6 md:aspect-21/9',
+      sizes: '100vw',
+    };
+  }
+
+  if (index < 2) {
+    return {
+      className: 'aspect-video md:col-span-3',
+      sizes: '(max-width: 768px) 50vw, 50vw',
+    };
+  }
+
+  const remaining = count - 3;
+  const isLastOdd = index === count - 1 && remaining % 2 === 1;
+
+  return {
+    className: cn(
+      'aspect-4/5 md:col-span-2',
+      isLastOdd && 'max-md:col-span-2 max-md:aspect-video',
+    ),
+    sizes: '(max-width: 768px) 50vw, 33vw',
+  };
+}
 
 function TileVideo({ src }: { src: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -47,9 +74,13 @@ function TileVideo({ src }: { src: string }) {
 function EventTile({
   item,
   onOpen,
+  className,
+  sizes,
 }: {
   item: WeddingWorkItem;
   onOpen: (item: WeddingWorkItem) => void;
+  className: string;
+  sizes: string;
 }) {
   const hoverLabel = `${item.kind} ${item.location}`;
 
@@ -58,7 +89,10 @@ function EventTile({
       type="button"
       onClick={() => onOpen(item)}
       aria-label={`${item.collection.title}. ${hoverLabel}`}
-      className="group relative block aspect-4/5 w-full cursor-pointer overflow-hidden bg-mist text-left"
+      className={cn(
+        'group relative block w-full cursor-pointer overflow-hidden bg-mist text-left',
+        className,
+      )}
     >
       {item.preview === 'video' && item.previewVideo ? (
         <TileVideo src={item.previewVideo} />
@@ -67,7 +101,7 @@ function EventTile({
           src={item.collection.cover}
           alt={item.collection.title}
           fill
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes={sizes}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
       )}
@@ -183,33 +217,27 @@ function CollectionOverlay({
 
 export function WeddingGallery() {
   const items = getWeddingWorkItems();
-  const preview = items.slice(0, WEDDING_WORK_PREVIEW_COUNT);
-  const remaining = items.slice(WEDDING_WORK_PREVIEW_COUNT);
-  const [expanded, setExpanded] = useState(false);
   const [activeItem, setActiveItem] = useState<WeddingWorkItem | null>(null);
-  const visible = expanded ? items : preview;
 
   const closeOverlay = useCallback(() => setActiveItem(null), []);
 
   return (
     <div className="px-6">
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
-        {visible.map((item) => (
-          <EventTile key={item.slug} item={item} onOpen={setActiveItem} />
-        ))}
-      </div>
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
+        {items.map((item, index) => {
+          const layout = tileLayout(item, index, items.length);
 
-      {remaining.length > 0 && !expanded ? (
-        <div className="mt-8 text-center md:mt-10">
-          <button
-            type="button"
-            onClick={() => setExpanded(true)}
-            className="cursor-pointer border border-ink/20 px-8 py-3 text-[11px] tracking-[0.32em] text-ink uppercase transition-colors hover:border-ink hover:bg-ink hover:text-gold"
-          >
-            View more
-          </button>
-        </div>
-      ) : null}
+          return (
+            <EventTile
+              key={item.slug}
+              item={item}
+              onOpen={setActiveItem}
+              className={layout.className}
+              sizes={layout.sizes}
+            />
+          );
+        })}
+      </div>
 
       {activeItem ? (
         <CollectionOverlay item={activeItem} onClose={closeOverlay} />
