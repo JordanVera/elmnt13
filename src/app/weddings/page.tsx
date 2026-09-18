@@ -21,7 +21,7 @@ export default function WeddingsPage() {
       <ChampagneToast />
       <WeddingServicesSection />
       <WeddingLoveStory />
-      <DetailsMoment tone="paper" />
+      {/* <DetailsMoment tone="paper" /> */}
       <WeddingWorkSection />
       {/* <WeddingGallery /> */}
       {/* <KnotMarker kind="bow" side="center" word="forever" /> */}
