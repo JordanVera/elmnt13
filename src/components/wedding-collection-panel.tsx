@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { cn } from '@/lib/cn';
 import type { WeddingCollection } from '@/lib/wedding-gallery';
 import { WeddingVideoPlayer } from '@/components/wedding-video-player';
 
@@ -48,51 +47,44 @@ export function WeddingCollectionPanel({
   }, [activeIndex, collection.photos.length]);
 
   return (
-    <div className="border-t border-ink/10 pt-10">
-      <div
-        className={cn(
-          'grid gap-10',
-          collection.video && 'lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)]',
-        )}
-      >
-        {collection.video ? (
-          <div>
-            <WeddingVideoPlayer
-              url={collection.video}
-              poster={collection.poster}
-              title={collection.title}
-            />
-            <p className="mt-4 text-sm text-ink/55">
-              {collection.photos.length} photos · film included
-            </p>
-          </div>
-        ) : null}
-
-        <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
-          {collection.photos.map((photo, index) => (
-            <button
-              key={photo}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              className="group relative mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden bg-mist"
-            >
-              <Image
-                src={photo}
-                alt=""
-                width={900}
-                height={1200}
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="transition-transform duration-700 group-hover:scale-[1.03]"
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </button>
-          ))}
+    <div>
+      {collection.video ? (
+        <div className="mb-10">
+          <WeddingVideoPlayer
+            url={collection.video}
+            poster={collection.poster}
+            title={collection.title}
+          />
+          <p className="mt-4 text-sm text-ink/55">
+            {collection.photos.length} photos · film included
+          </p>
         </div>
+      ) : null}
+
+      <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
+        {collection.photos.map((photo, index) => (
+          <button
+            key={photo}
+            type="button"
+            onClick={() => setActiveIndex(index)}
+            className="group relative mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden bg-mist"
+          >
+            <Image
+              src={photo}
+              alt=""
+              width={900}
+              height={1200}
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="transition-transform duration-700 group-hover:scale-[1.03]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </button>
+        ))}
       </div>
 
       {activePhoto && activeIndex !== null ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 p-6"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-ink/90 p-6"
           onClick={() => setActiveIndex(null)}
           role="dialog"
           aria-modal="true"
