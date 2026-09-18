@@ -23,17 +23,16 @@ export default function WeddingsPage() {
       <div className="mx-auto  bg-white">
         <Reveal>
           <div className="flex md:items-center max-w-6xl mx-auto">
-            <p className="mt-12 max-w-3xl text-2xl text-center mx-auto leading-8 text-black/70!">
-              <span className="font-serif">
-                May your story be filled with moments worth celebrating, from
-                the beginning of a new chapter to the forever you’re building
-                together. Wherever you are in your story, we’re here to make
-                what happens next unforgettable. From when you say{' '}
-                <span className="font-serif text-gold">“yes”</span> to when you
-                say <span className="font-serif text-gold">“I do”</span>, we
-                consider every element with intention, creating memories that
-                feel beautifully and distinctly yours.
-              </span>{' '}
+            <p className="mt-12 max-w-3xl text-lg text-center mx-auto leading-8 text-black/70!">
+              May your story be filled with moments worth celebrating, from the
+              beginning of a new chapter to the forever you’re building
+              together. Wherever you are in your story, we’re here to make what
+              happens next unforgettable.{' '}
+              <span className="font-serif text-gold">
+                From when you say “yes” to when you say “I do”
+              </span>
+              , we consider every element with intention, creating memories that
+              feel beautifully and distinctly yours.
             </p>
           </div>
         </Reveal>
