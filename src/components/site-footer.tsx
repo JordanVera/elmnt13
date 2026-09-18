@@ -8,7 +8,8 @@ import {
   externalLinkProps,
   footerLinks,
   socialLinks,
-  weddingInquiryUrl,
+  weddingNavLinks,
+  weddingSocialLinks,
 } from '@/lib/site';
 
 function SocialIcon({ label }: { label: string }) {
@@ -87,37 +88,43 @@ function SocialIcon({ label }: { label: string }) {
 
 export function SiteFooter() {
   const pathname = usePathname();
+  const isWeddings = pathname === '/weddings';
+  const links = isWeddings ? weddingNavLinks : footerLinks;
+  const socials = isWeddings ? weddingSocialLinks : socialLinks;
 
   return (
     <footer className="bg-ink text-paper">
       <div className="mx-auto grid max-w-7xl gap-10 px-8 py-12 md:grid-cols-3 md:items-center md:gap-6 md:py-14">
         <Reveal>
-          <nav aria-label="Footer">
+          <nav aria-label={isWeddings ? 'On this page' : 'Footer'}>
             <ul className="space-y-3">
-              {footerLinks.map((link) => {
-                const href =
-                  pathname === '/weddings' && link.href === '/contact'
-                    ? weddingInquiryUrl
-                    : link.href;
-
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={href}
-                      {...externalLinkProps(href)}
-                      onClick={(event) => {
-                        if (link.href === '/' && pathname === '/') {
-                          event.preventDefault();
-                          window.scrollTo({ top: 0 });
-                        }
-                      }}
-                      className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    {...externalLinkProps(link.href)}
+                    onClick={(event) => {
+                      if (link.href === '/' && pathname === '/') {
+                        event.preventDefault();
+                        window.scrollTo({ top: 0 });
+                      }
+                    }}
+                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {isWeddings ? (
+                <li>
+                  <Link
+                    href="/"
+                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                  >
+                    Back to ELMNT13
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </nav>
         </Reveal>
@@ -131,7 +138,7 @@ export function SiteFooter() {
         <Reveal delay={160}>
           <div className="flex justify-start md:justify-end">
             <ul className="flex flex-col items-start gap-4 md:items-end">
-              {socialLinks.map((link) => (
+              {socials.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
