@@ -226,7 +226,7 @@ export function SiteHeader() {
                   <span className="font-sans tracking-tighter uppercase text-4xl mr-12">
                     Taking your
                   </span>
-                  <span className="font-display text-7xl font-bold uppercase xl:text-8xl mr-12">
+                  <span className="font-display font-bold uppercase text-8xl mr-12">
                     Vision
                   </span>
                   <span className="-mt-1 font-serif text-6xl text-gold italic normal-case xl:-mt-2 xl:text-7xl">
