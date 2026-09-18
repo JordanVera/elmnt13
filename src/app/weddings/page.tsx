@@ -29,10 +29,10 @@ export default function WeddingsPage() {
                 the beginning of a new chapter to the forever you’re building
                 together. Wherever you are in your story, we’re here to make
                 what happens next unforgettable. From when you say{' '}
-                <span className="font-serif">“yes”</span> to when you say{' '}
-                <span className="font-serif">“I do”</span>, we consider every
-                element with intention, creating memories that feel beautifully
-                and distinctly yours.
+                <span className="font-serif text-gold">“yes”</span> to when you
+                say <span className="font-serif text-gold">“I do”</span>, we
+                consider every element with intention, creating memories that
+                feel beautifully and distinctly yours.
               </span>{' '}
             </p>
           </div>
