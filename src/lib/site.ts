@@ -21,6 +21,12 @@ export const heroNavLinks = [
   { href: '/contact', label: 'Contact' },
 ] as const;
 
+export const weddingNavLinks = [
+  { href: '#services', label: 'Services' },
+  { href: '#work', label: 'Work' },
+  { href: '#contact', label: 'Contact' },
+] as const;
+
 export const footerLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },

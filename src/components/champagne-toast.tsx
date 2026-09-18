@@ -16,6 +16,7 @@ import {
   useReducedMotion,
   type Variants,
 } from 'framer-motion';
+import { weddingNavLinks } from '@/lib/site';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const PIVOT_Y = 0.68;
@@ -42,13 +43,6 @@ const RIGHT = {
   meetY: 12,
   settleY: 8,
 } as const;
-
-const PAGE_NAV = [
-  { href: '#services', label: 'Services' },
-  // { href: '#story', label: 'Story' },
-  { href: '#work', label: 'Work' },
-  { href: '#contact', label: 'Contact' },
-] as const;
 
 function poseFor(dir: number) {
   return dir < 0 ? LEFT : RIGHT;
@@ -314,7 +308,7 @@ export function ChampagneToast() {
         }}
       >
         <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2 sm:gap-x-12">
-          {PAGE_NAV.map((link) => (
+          {weddingNavLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
