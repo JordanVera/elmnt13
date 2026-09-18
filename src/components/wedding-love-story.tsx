@@ -12,7 +12,7 @@ export function WeddingLoveStory() {
             <span className="mt-4 block font-[family-name:var(--font-playfair)] text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.12] tracking-tight">
               a part of your{' '}
               <span className="font-serif text-gold whitespace-nowrap">
-                love story.
+                love story
               </span>
             </span>
           </h2>

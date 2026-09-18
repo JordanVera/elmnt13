@@ -28,9 +28,10 @@ export function WeddingServicesSection() {
         </Reveal>
 
         <Reveal delay={140}>
-          <h2 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
+          <h2 className="font-[family-name:var(--font-playfair)] text-5xl leading-[0.95] tracking-tight lowercase md:text-5xl">
             With you for the
-            <span className="text-gold -mt-5 block font-serif text-4xl tracking-normal normal-case italic md:ml-16 md:text-6xl">
+            <br />
+            <span className="ml-14 font-serif text-5xl tracking-normal lowercase text-gold italic md:text-7xl">
               moments that matter
             </span>
           </h2>
