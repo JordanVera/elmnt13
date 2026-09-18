@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Logo } from '@/components/logo';
 import {
   externalLinkProps,
   heroNavLinks,
@@ -176,36 +175,27 @@ export function SiteHeader() {
               initial={skip ? false : { opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
-              className="pointer-events-none absolute inset-x-0 top-12 hidden justify-center lg:flex lg:top-14"
-            >
-              {isWeddings ? (
-                <span
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    setMenuOpen(false);
-                  }}
-                  className="pointer-events-auto"
-                >
-                  <Logo href="/weddings" />
-                </span>
-              ) : (
-                <Link
-                  href="/"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    setMenuOpen(false);
-                  }}
-                  className="pointer-events-auto"
-                >
-                  <Image
-                    src="/logo.png"
-                    alt="ELMNT13"
-                    width={180}
-                    height={54}
-                    className="h-10 w-auto xl:h-12"
-                  />
-                </Link>
+              className={cn(
+                'pointer-events-none absolute inset-x-0 top-10 justify-center lg:top-14',
+                isWeddings ? 'flex' : 'hidden lg:flex',
               )}
+            >
+              <Link
+                href={isWeddings ? '/weddings' : '/'}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuOpen(false);
+                }}
+                className="pointer-events-auto"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="ELMNT13"
+                  width={180}
+                  height={54}
+                  className="h-10 w-auto xl:h-12"
+                />
+              </Link>
             </motion.div>
 
             <div
@@ -278,17 +268,17 @@ export function SiteHeader() {
                         ? { duration: 0 }
                         : { ...EASE, delay: 0.05 + links.length * 0.05 }
                     }
-                    className="mt-8 border-t border-ink/15 pt-6 lg:hidden"
+                    className="mt-8 border-t border-ink/15 pt-6"
                   >
                     <Link
                       href="/"
                       onClick={() => setMenuOpen(false)}
                       className="group inline-flex flex-col"
                     >
-                      <span className="text-[11px] tracking-[0.32em] text-stone uppercase">
-                        Go back to
+                      <span className="text-[11px] tracking-[0.32em] text-stone uppercase lg:text-sm">
+                        Go to
                       </span>
-                      <span className="font-display mt-1 text-3xl tracking-tight text-ink uppercase transition-colors group-hover:text-gold">
+                      <span className="font-display mt-1 text-3xl tracking-tight text-ink uppercase transition-colors group-hover:text-gold lg:text-5xl">
                         ELMNT13
                       </span>
                     </Link>
@@ -296,47 +286,30 @@ export function SiteHeader() {
                 ) : null}
               </nav>
 
-              {isWeddings ? (
-                <motion.aside
-                  initial={skip ? false : { opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
-                  className="hidden shrink-0 lg:block"
+              <motion.aside
+                initial={skip ? false : { opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
+                aria-hidden="true"
+                className="hidden shrink-0 lg:block"
+              >
+                <p
+                  className={cn(
+                    'flex flex-col items-end leading-[0.82] tracking-tight',
+                    isWeddings ? 'text-ink' : 'text-white',
+                  )}
                 >
-                  <Link
-                    href="/"
-                    onClick={() => setMenuOpen(false)}
-                    className="group flex flex-col items-end leading-[0.82] tracking-tight text-ink"
-                  >
-                    <span className="font-sans mr-14 text-[2.1em] tracking-tighter uppercase">
-                      Go back to
-                    </span>
-                    <span className="font-display mr-12 text-8xl font-bold uppercase transition-colors group-hover:text-gold">
-                      ELMNT13
-                    </span>
-                  </Link>
-                </motion.aside>
-              ) : (
-                <motion.aside
-                  initial={skip ? false : { opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
-                  aria-hidden="true"
-                  className="hidden shrink-0 lg:block"
-                >
-                  <p className="flex flex-col items-end leading-[0.82] tracking-tight text-white">
-                    <span className="font-sans mr-14 text-[2.1em] tracking-tighter uppercase">
-                      Taking your
-                    </span>
-                    <span className="font-display mr-12 text-8xl font-bold uppercase">
-                      Vision
-                    </span>
-                    <span className="-mt-6 font-serif text-6xl text-gold italic normal-case xl:text-7xl">
-                      further
-                    </span>
-                  </p>
-                </motion.aside>
-              )}
+                  <span className="font-sans mr-14 text-[2.1em] tracking-tighter uppercase">
+                    Taking your
+                  </span>
+                  <span className="font-display mr-12 text-8xl font-bold uppercase">
+                    Vision
+                  </span>
+                  <span className="-mt-6 font-serif text-6xl text-gold italic normal-case xl:text-7xl">
+                    further
+                  </span>
+                </p>
+              </motion.aside>
             </div>
           </motion.div>
         ) : null}
