@@ -21,11 +21,19 @@ export const heroNavLinks = [
   { href: '/contact', label: 'Contact' },
 ] as const;
 
+export const weddingInquiryUrl =
+  'https://www.aisleplanner.com/inquiries/ELMNT13/72738d95-c1cd-4d2d-9752-255fcd99d2e5';
+
 export const weddingNavLinks = [
   { href: '#services', label: 'Services' },
   { href: '#work', label: 'Work' },
-  { href: '#contact', label: 'Contact' },
+  { href: weddingInquiryUrl, label: 'Contact' },
 ] as const;
+
+export function externalLinkProps(href: string) {
+  if (!href.startsWith('http')) return {};
+  return { target: '_blank' as const, rel: 'noreferrer' };
+}
 
 export const footerLinks = [
   { href: '/', label: 'Home' },

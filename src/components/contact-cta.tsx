@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { GoldLink } from '@/components/gold-link';
 import { Reveal } from '@/components/reveal';
+import { externalLinkProps } from '@/lib/site';
 
 function ContactBar({ href }: { href: string }) {
   return (
@@ -10,6 +10,7 @@ function ContactBar({ href }: { href: string }) {
         href={href}
         aria-label="Get in contact — open the inquiry form"
         className="font-serif font-normal tracking-normal text-gold italic normal-case underline decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+        {...externalLinkProps(href)}
       >
         contact
       </Link>
@@ -59,9 +60,10 @@ export function ContactCta({
       <h2 className="font-sans text-black mt-4 text-center text-5xl uppercase md:text-5xl">
         <span className="font-sans !text-[0.75em]">Get in </span>{' '}
         <Link
-          href="/contact"
+          href={href}
           aria-label="Get in contact — open the inquiry form"
           className="font-bebas font-black tracking-normal text-gold normal-case underline decoration-1 decoration-gold/50 underline-offset-[0.18em] transition-colors hover:text-gold-bright hover:decoration-gold"
+          {...externalLinkProps(href)}
         >
           contact
         </Link>

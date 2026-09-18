@@ -8,6 +8,7 @@ import { WeddingLoveStory } from '@/components/wedding-love-story';
 import { WeddingServicesSection } from '@/components/wedding-services-section';
 import { WeddingWorkSection } from '@/components/wedding-work-section';
 import { Reveal } from '@/components/reveal';
+import { weddingInquiryUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Weddings',
@@ -41,7 +42,7 @@ export default function WeddingsPage() {
       {/* <DetailsMoment tone="paper" /> */}
       <WeddingWorkSection />
       {/* <WeddingGallery /> */}
-      <ContactCta phrase="weddings" href="/contact" id="contact" />
+      <ContactCta phrase="weddings" href={weddingInquiryUrl} />
     </main>
   );
 }
