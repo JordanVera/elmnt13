@@ -1,101 +1,69 @@
-import { weddingCollections } from '@/lib/wedding-gallery';
+import {
+  weddingCollections,
+  type WeddingCollection,
+} from '@/lib/wedding-gallery';
 
-export type WeddingWorkPhoto = {
-  src: string;
-  title: string;
+export type WeddingWorkTile = {
   slug: string;
+  kind: string;
+  location: string;
+  preview: 'photo' | 'video';
+  previewVideo?: string;
 };
 
-const HIGHLIGHTS: Record<string, string[]> = {
-  'teagan-proposal': [
-    '/weddings/collections/teagan-proposal/photos/frame-001.jpg',
-    '/weddings/collections/teagan-proposal/photos/frame-005.jpg',
-    '/weddings/collections/teagan-proposal/photos/frame-008.jpg',
-    '/weddings/collections/teagan-proposal/photos/frame-011.jpg',
-    '/weddings/collections/teagan-proposal/photos/frame-003.jpg',
-    '/weddings/collections/teagan-proposal/photos/frame-010.jpg',
-  ],
-  'christian-proposal': [
-    '/weddings/collections/christian-proposal/photos/frame-001.jpg',
-    '/weddings/collections/christian-proposal/photos/frame-003.jpg',
-    '/weddings/collections/christian-proposal/photos/frame-010.jpg',
-    '/weddings/collections/christian-proposal/photos/frame-002.jpg',
-    '/weddings/collections/christian-proposal/photos/frame-004.jpg',
-  ],
-  'christian-wedding': [
-    '/weddings/collections/christian-wedding/photos/001.jpg',
-    '/weddings/collections/christian-wedding/photos/025.jpg',
-    '/weddings/collections/christian-wedding/photos/045.jpg',
-    '/weddings/collections/christian-wedding/photos/080.jpg',
-    '/weddings/collections/christian-wedding/photos/090.jpg',
-    '/weddings/collections/christian-wedding/photos/110.jpg',
-    '/weddings/collections/christian-wedding/photos/120.jpg',
-    '/weddings/collections/christian-wedding/photos/150.jpg',
-    '/weddings/collections/christian-wedding/photos/165.jpg',
-    '/weddings/collections/christian-wedding/photos/052.jpg',
-    '/weddings/collections/christian-wedding/photos/134.jpg',
-    '/weddings/collections/christian-wedding/photos/033.jpg',
-    '/weddings/collections/christian-wedding/photos/102.jpg',
-    '/weddings/collections/christian-wedding/photos/178.jpg',
-    '/weddings/collections/christian-wedding/photos/036.jpg',
-  ],
-  'christian-engagement': [
-    '/weddings/collections/christian-engagement/photos/001.jpg',
-    '/weddings/collections/christian-engagement/photos/012.jpg',
-    '/weddings/collections/christian-engagement/photos/018.jpg',
-    '/weddings/collections/christian-engagement/photos/030.jpg',
-    '/weddings/collections/christian-engagement/photos/045.jpg',
-    '/weddings/collections/christian-engagement/photos/035.jpg',
-    '/weddings/collections/christian-engagement/photos/050.jpg',
-    '/weddings/collections/christian-engagement/photos/060.jpg',
-  ],
-  'mookie-proposal': [
-    '/weddings/collections/mookie-proposal/photos/040.jpg',
-    '/weddings/collections/mookie-proposal/photos/048.jpg',
-    '/weddings/collections/mookie-proposal/photos/055.jpg',
-    '/weddings/collections/mookie-proposal/photos/070.jpg',
-    '/weddings/collections/mookie-proposal/photos/085.jpg',
-    '/weddings/collections/mookie-proposal/photos/062.jpg',
-    '/weddings/collections/mookie-proposal/photos/078.jpg',
-    '/weddings/collections/mookie-proposal/photos/092.jpg',
-  ],
-  'mookie-wedding': [
-    '/weddings/collections/mookie-wedding/photos/frame-001.jpg',
-    '/weddings/collections/mookie-wedding/photos/frame-008.jpg',
-    '/weddings/collections/mookie-wedding/photos/frame-012.jpg',
-    '/weddings/collections/mookie-wedding/photos/frame-015.jpg',
-    '/weddings/collections/mookie-wedding/photos/frame-002.jpg',
-    '/weddings/collections/mookie-wedding/photos/frame-016.jpg',
-  ],
+export const WEDDING_WORK_PREVIEW_COUNT = 3;
+
+export const weddingWorkTiles: WeddingWorkTile[] = [
+  {
+    slug: 'teagan-proposal',
+    kind: 'Proposal',
+    location: 'Houston, TX',
+    preview: 'photo',
+  },
+  {
+    slug: 'mookie-wedding',
+    kind: 'Wedding',
+    location: 'Los Angeles, CA',
+    preview: 'photo',
+  },
+  {
+    slug: 'christian-wedding',
+    kind: 'Wedding',
+    location: 'Los Cabos, MX',
+    preview: 'video',
+    previewVideo: '/weddings/MrandMrsBettsWeddingTeaserwithoutNelly.mp4',
+  },
+  {
+    slug: 'christian-engagement',
+    kind: 'Engagement Shoot',
+    location: 'Miami, FL',
+    preview: 'photo',
+  },
+  {
+    slug: 'christian-proposal',
+    kind: 'Proposal',
+    location: 'Houston, TX',
+    preview: 'photo',
+  },
+  {
+    slug: 'mookie-proposal',
+    kind: 'Proposal',
+    location: 'Nashville, TN',
+    preview: 'photo',
+  },
+];
+
+export type WeddingWorkItem = WeddingWorkTile & {
+  collection: WeddingCollection;
 };
 
-function interleave<T>(lists: T[][]): T[] {
-  const result: T[] = [];
-  const max = Math.max(0, ...lists.map((list) => list.length));
-
-  for (let index = 0; index < max; index += 1) {
-    for (const list of lists) {
-      const item = list[index];
-      if (item) result.push(item);
-    }
-  }
-
-  return result;
-}
-
-export function getWeddingWorkPhotos(): WeddingWorkPhoto[] {
+export function getWeddingWorkItems(): WeddingWorkItem[] {
   const bySlug = new Map(
-    weddingCollections.map((collection) => [collection.slug, collection.title]),
+    weddingCollections.map((collection) => [collection.slug, collection]),
   );
 
-  const grouped = weddingCollections.map((collection) => {
-    const paths = HIGHLIGHTS[collection.slug] ?? [];
-    return paths.map((src) => ({
-      src,
-      title: bySlug.get(collection.slug) ?? collection.title,
-      slug: collection.slug,
-    }));
+  return weddingWorkTiles.flatMap((tile) => {
+    const collection = bySlug.get(tile.slug);
+    return collection ? [{ ...tile, collection }] : [];
   });
-
-  return interleave(grouped);
 }
