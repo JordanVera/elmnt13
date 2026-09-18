@@ -18,7 +18,7 @@ export const weddingServices: readonly WeddingService[] = [
     kicker: 'Before the aisle',
     description:
       'There’s so much to celebrate leading up to “I do.” We plan, design and execute each occasion, making every chapter a memorable part of your love story.',
-    details: ['Engagement Party', 'Bridal Shower', 'Bachelor(ette) Party'],
+    details: ['Engagement Party', 'Bridal Shower Bachelor(ette) Party'],
   },
   {
     title: 'Wedding Design',
