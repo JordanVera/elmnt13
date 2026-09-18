@@ -34,17 +34,22 @@ export default function AboutPage() {
           <Reveal delay={120} className="mt-12 md:ml-auto md:max-w-xl ">
             <div className="flex md:items-center">
               <div
-                className="hidden md:block h-32 w-px shrink-0 bg-gold rounded mr-10"
+                className="hidden md:block h-44 w-px shrink-0 bg-gold rounded mr-10"
                 aria-hidden="true"
               ></div>
               <p className="text-lg leading-8 text-black">
-                ELMNT13 is a creative marketing and management company where
-                vision drives the work and the details shape the outcome. Since
-                2012, we’ve partnered with brands, organizations and individuals
-                to bring ideas to life through strategy, creativity and
-                management. We see the full vision, understand how every brand
-                element matters and handle the creative direction and execution
-                needed to create a memorable experience.
+                ELMNT13 is a creative marketing and management company that
+                brings strategic thinking and creative perspective to the
+                development of ideas, shaping their evolution into compelling
+                concepts and elevated experiences. Since 2012, we’ve partnered
+                with brands, organizations and individuals across industries,
+                cultivating a diverse body of work that reflects the range of
+                our capabilities and depth of our experience. We consider every
+                element with purpose, ensuring the details reinforce the
+                client’s brand, heighten its visibility and strengthen its
+                presence. We think beyond what seems possible to create the
+                unimaginable, maximizing every opportunity to take the vision
+                further.
               </p>
             </div>
           </Reveal>

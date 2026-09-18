@@ -33,8 +33,8 @@ export function HomeServices() {
               <br />
               Management
             </h2>
-            <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto md:max-w-md md:text-3xl">
-              From the initial concept through execution, we thoughtfully manage
+            <p className="mt-6 font-serif text-2xl italic text-gold md:ml-auto  md:text-3xl">
+              From the initial concept to execution, we thoughtfully manage
               every element.
             </p>
             <p className="mt-6 text-stone leading-8 tracking-wide md:ml-auto md:max-w-md">

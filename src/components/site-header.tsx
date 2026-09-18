@@ -223,13 +223,13 @@ export function SiteHeader() {
                 className="hidden shrink-0 lg:block"
               >
                 <p className="flex flex-col items-end leading-[0.82] tracking-tight text-white">
-                  <span className="font-sans tracking-tighter uppercase text-4xl mr-12">
+                  <span className="font-sans tracking-tighter uppercase text-[2.1em] mr-14">
                     Taking your
                   </span>
                   <span className="font-display font-bold uppercase text-8xl mr-12">
                     Vision
                   </span>
-                  <span className="-mt-1 font-serif text-6xl text-gold italic normal-case xl:-mt-2 xl:text-7xl">
+                  <span className="-mt-6 font-serif text-6xl text-gold italic normal-case xl:text-7xl">
                     further
                   </span>
                 </p>
