@@ -53,7 +53,10 @@ export const socialLinks = [
 
 export const weddingSocialLinks = [
   { href: 'https://www.instagram.com/elmnt13weddings/', label: 'Instagram' },
+  { href: 'https://www.facebook.com/elmnt13llc', label: 'Facebook' },
   { href: 'https://www.tiktok.com/@elmnt13weddings', label: 'TikTok' },
+  { href: 'https://www.youtube.com/elmnt13', label: 'YouTube' },
+  { href: 'mailto:cheers@elmnt13weddings.com', label: 'Email' },
 ] as const;
 
 export const stats = [
