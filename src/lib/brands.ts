@@ -36,7 +36,7 @@ export const featuredBrandLogos: BrandLogo[] = [
   logo('VH1', '/brands/vh1.png', 358, 141),
   logo('Mountain Dew', '/brands/mountain-dew.png', 601, 415),
   logo("Raising Cane's", '/brands/raising-canes.png', 1898, 914),
-  logo('Jordan', '/brands/jordan.png', 120, 112),
+  logo('Jordan', '/brands/jordan.png', 120, 112, 1.4),
   logo('Kroger', '/brands/kroger.png', 562, 444),
 ];
 
@@ -58,7 +58,7 @@ export const brandCategories = [
       logo('Tiphani Montgomery', '/brands/tiphani-montgomery.png', 229, 103),
       logo('Jeff Johnson', '/brands/jeff-johnson.png', 208, 175),
       logo('J. Bolin', '/brands/j-bolin.png', 279, 99),
-      logo('Shedeur Sanders', '/brands/shedeur-sanders.png', 999, 309),
+      logo('Shedeur Sanders', '/brands/competition.png', 999, 309, 1.8),
     ],
   },
   {
@@ -81,7 +81,12 @@ export const brandCategories = [
       logo('Target', '/brands/target.png', 107, 146),
       logo('Main Event Entertainment', '/brands/main-event.png', 535, 133),
       logo('Nike', '/brands/nike.svg', 240, 94),
-      logo('Cleveland Guardians', '/brands/cleveland-guardians.png', 1679, 2387),
+      logo(
+        'Cleveland Guardians',
+        '/brands/cleveland-guardians.png',
+        1679,
+        2387,
+      ),
       logo('Hennessy', '/brands/hennessy.svg', 185, 108),
       logo('Puma', '/brands/puma.png', 800, 398),
       logo("McDonald's", '/brands/mcdonalds.png', 600, 480),

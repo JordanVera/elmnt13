@@ -38,7 +38,7 @@ function fit(brand: BrandLogoData, frame: Frame) {
   const ratio = brand.width / brand.height;
   const scale = brand.scale ?? 1;
 
-  let height = frame.height * Math.sqrt(frame.refRatio / ratio) * scale;
+  let height = frame.height * Math.sqrt(frame.refRatio / ratio);
   height = Math.min(height, frame.height * frame.tallCap);
   height = Math.max(height, frame.height * frame.minHeightRatio);
 
@@ -47,6 +47,9 @@ function fit(brand: BrandLogoData, frame: Frame) {
     width = frame.maxWidth;
     height = width / ratio;
   }
+
+  height *= scale;
+  width *= scale;
 
   return { width: Math.round(width), height: Math.round(height) };
 }
