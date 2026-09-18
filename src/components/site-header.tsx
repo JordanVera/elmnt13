@@ -186,7 +186,7 @@ export function SiteHeader() {
                   }}
                   className="pointer-events-auto"
                 >
-                  <Logo href="/weddings" variant="weddings" />
+                  <Logo href="/weddings" />
                 </span>
               ) : (
                 <Link
