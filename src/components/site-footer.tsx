@@ -81,6 +81,20 @@ function SocialIcon({ label }: { label: string }) {
           <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.25 6.5 1.75 1.75 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.65 1.65 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h3v1.76a3.28 3.28 0 0 1 3-1.68c1.88 0 3.24 1.18 3.24 3.83V19z" />
         </svg>
       );
+    case 'Email':
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          className={className}
+          aria-hidden="true"
+        >
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -142,9 +156,12 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={link.label}
+                    {...externalLinkProps(link.href)}
+                    aria-label={
+                      link.label === 'Email'
+                        ? 'Email cheers@elmnt13weddings.com'
+                        : link.label
+                    }
                     className="text-paper transition-colors hover:text-gold"
                   >
                     <SocialIcon label={link.label} />
