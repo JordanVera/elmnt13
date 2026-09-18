@@ -51,6 +51,11 @@ export const socialLinks = [
   { href: 'https://www.linkedin.com/company/elmnt13', label: 'LinkedIn' },
 ] as const;
 
+export const weddingSocialLinks = [
+  { href: 'https://www.instagram.com/elmnt13weddings/', label: 'Instagram' },
+  { href: 'https://www.tiktok.com/@elmnt13weddings', label: 'TikTok' },
+] as const;
+
 export const stats = [
   { value: 14, suffix: '+', label: `Years`, label2: `in business` },
   { value: 500, suffix: '+', label: `Curated`, label2: `experiences` },
