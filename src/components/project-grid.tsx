@@ -50,7 +50,7 @@ export function ProjectGrid({ items }: { items: Project[] }) {
             onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
             className="cursor-pointer border border-ink/20 px-8 py-3 text-[11px] tracking-[0.32em] text-ink uppercase transition-colors hover:border-ink hover:bg-ink hover:text-gold"
           >
-            Show more
+            View more
           </button>
         </Reveal>
       ) : null}

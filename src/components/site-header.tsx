@@ -5,13 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { heroNavLinks, navLinks } from '@/lib/site';
+import { Logo } from '@/components/logo';
+import { heroNavLinks, navLinks, weddingNavLinks } from '@/lib/site';
 import { cn } from '@/lib/cn';
 
 const EASE = { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const };
 const SCROLL_THRESHOLD = 16;
 
-function isActive(pathname: string, href: string) {
+function isActive(pathname: string, href: string, hash = '') {
+  if (href.startsWith('#')) return hash === href;
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
 }
@@ -46,10 +48,13 @@ export function SiteHeader() {
   const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hash, setHash] = useState('');
   const skip = Boolean(reduceMotion);
   const transition = skip ? { duration: 0 } : EASE;
   const isHome = pathname === '/';
+  const isWeddings = pathname === '/weddings';
   const showHeroNav = isHome && !scrolled && !menuOpen;
+  const links = isWeddings ? weddingNavLinks : navLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
@@ -60,6 +65,13 @@ export function SiteHeader() {
 
   useEffect(() => {
     setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
   }, [pathname]);
 
   useEffect(() => {
@@ -142,7 +154,7 @@ export function SiteHeader() {
             id="site-menu"
             role="dialog"
             aria-modal="true"
-            aria-label="Primary"
+            aria-label={isWeddings ? 'Weddings' : 'Primary'}
             initial={skip ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={skip ? undefined : { opacity: 0 }}
@@ -150,7 +162,10 @@ export function SiteHeader() {
               skip ? { duration: 0 } : { duration: 0.32, ease: EASE.ease }
             }
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-6 pt-28 pb-16 sm:justify-center sm:pb-24 lg:px-12 lg:pt-24 xl:px-20"
+            className={cn(
+              'fixed inset-0 z-40 flex flex-col justify-end px-6 pt-28 pb-16 sm:justify-center sm:pb-24 lg:px-12 lg:pt-24 xl:px-20',
+              isWeddings ? 'bg-paper/90' : 'bg-ink',
+            )}
           >
             <motion.div
               initial={skip ? false : { opacity: 0, y: -12 }}
@@ -158,32 +173,44 @@ export function SiteHeader() {
               transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
               className="pointer-events-none absolute inset-x-0 top-12 hidden justify-center lg:flex lg:top-14"
             >
-              <Link
-                href="/"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setMenuOpen(false);
-                }}
-                className="pointer-events-auto"
-              >
-                <Image
-                  src="/logo.png"
-                  alt="ELMNT13"
-                  width={180}
-                  height={54}
-                  className="h-10 w-auto xl:h-12"
-                />
-              </Link>
+              {isWeddings ? (
+                <span
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setMenuOpen(false);
+                  }}
+                  className="pointer-events-auto"
+                >
+                  <Logo href="/weddings" variant="weddings" />
+                </span>
+              ) : (
+                <Link
+                  href="/"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setMenuOpen(false);
+                  }}
+                  className="pointer-events-auto"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="ELMNT13"
+                    width={180}
+                    height={54}
+                    className="h-10 w-auto xl:h-12"
+                  />
+                </Link>
+              )}
             </motion.div>
 
             <div
               onClick={(event) => event.stopPropagation()}
               className="mx-auto flex w-full max-w-5xl flex-col lg:max-w-352 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
             >
-              <nav aria-label="Primary">
+              <nav aria-label={isWeddings ? 'On this page' : 'Primary'}>
                 <ul className="flex flex-col gap-1 lg:gap-0">
-                  {navLinks.map((link, index) => {
-                    const active = isActive(pathname, link.href);
+                  {links.map((link, index) => {
+                    const active = isActive(pathname, link.href, hash);
                     return (
                       <li key={link.href}>
                         <motion.div
@@ -197,13 +224,35 @@ export function SiteHeader() {
                         >
                           <Link
                             href={link.href}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(event) => {
+                              if (!isWeddings || !link.href.startsWith('#')) {
+                                setMenuOpen(false);
+                                return;
+                              }
+
+                              event.preventDefault();
+                              const id = link.href.slice(1);
+                              setMenuOpen(false);
+                              setHash(link.href);
+                              window.setTimeout(() => {
+                                document
+                                  .getElementById(id)
+                                  ?.scrollIntoView({ behavior: 'smooth' });
+                                window.history.replaceState(
+                                  null,
+                                  '',
+                                  link.href,
+                                );
+                              }, 80);
+                            }}
                             aria-current={active ? 'page' : undefined}
                             className={cn(
                               'block py-2 font-display text-4xl tracking-tight uppercase transition-colors sm:text-6xl lg:py-1 lg:text-7xl lg:leading-none xl:text-[5.5rem]',
                               active
                                 ? 'text-gold'
-                                : 'text-white hover:text-gold',
+                                : isWeddings
+                                  ? 'text-ink hover:text-gold'
+                                  : 'text-white hover:text-gold',
                             )}
                           >
                             {link.label}
@@ -213,27 +262,75 @@ export function SiteHeader() {
                     );
                   })}
                 </ul>
+
+                {isWeddings ? (
+                  <motion.div
+                    initial={skip ? false : { opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={
+                      skip
+                        ? { duration: 0 }
+                        : { ...EASE, delay: 0.05 + links.length * 0.05 }
+                    }
+                    className="mt-8 border-t border-ink/15 pt-6 lg:hidden"
+                  >
+                    <Link
+                      href="/"
+                      onClick={() => setMenuOpen(false)}
+                      className="group inline-flex flex-col"
+                    >
+                      <span className="text-[11px] tracking-[0.32em] text-stone uppercase">
+                        Go back to
+                      </span>
+                      <span className="font-display mt-1 text-3xl tracking-tight text-ink uppercase transition-colors group-hover:text-gold">
+                        ELMNT13
+                      </span>
+                    </Link>
+                  </motion.div>
+                ) : null}
               </nav>
 
-              <motion.aside
-                initial={skip ? false : { opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
-                aria-hidden="true"
-                className="hidden shrink-0 lg:block"
-              >
-                <p className="flex flex-col items-end leading-[0.82] tracking-tight text-white">
-                  <span className="font-sans tracking-tighter uppercase text-[2.1em] mr-14">
-                    Taking your
-                  </span>
-                  <span className="font-display font-bold uppercase text-8xl mr-12">
-                    Vision
-                  </span>
-                  <span className="-mt-6 font-serif text-6xl text-gold italic normal-case xl:text-7xl">
-                    further
-                  </span>
-                </p>
-              </motion.aside>
+              {isWeddings ? (
+                <motion.aside
+                  initial={skip ? false : { opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
+                  className="hidden shrink-0 lg:block"
+                >
+                  <Link
+                    href="/"
+                    onClick={() => setMenuOpen(false)}
+                    className="group flex flex-col items-end leading-[0.82] tracking-tight text-ink"
+                  >
+                    <span className="font-sans mr-14 text-[2.1em] tracking-tighter uppercase">
+                      Go back to
+                    </span>
+                    <span className="font-display mr-12 text-8xl font-bold uppercase transition-colors group-hover:text-gold">
+                      ELMNT13
+                    </span>
+                  </Link>
+                </motion.aside>
+              ) : (
+                <motion.aside
+                  initial={skip ? false : { opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
+                  aria-hidden="true"
+                  className="hidden shrink-0 lg:block"
+                >
+                  <p className="flex flex-col items-end leading-[0.82] tracking-tight text-white">
+                    <span className="font-sans mr-14 text-[2.1em] tracking-tighter uppercase">
+                      Taking your
+                    </span>
+                    <span className="font-display mr-12 text-8xl font-bold uppercase">
+                      Vision
+                    </span>
+                    <span className="-mt-6 font-serif text-6xl text-gold italic normal-case xl:text-7xl">
+                      further
+                    </span>
+                  </p>
+                </motion.aside>
+              )}
             </div>
           </motion.div>
         ) : null}

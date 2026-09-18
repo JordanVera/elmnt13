@@ -41,7 +41,10 @@ export function ContactCta({
   }
 
   return (
-    <section className="bg-white px-6 py-20 text-ink md:py-12">
+    <section
+      id={id}
+      className={id ? 'scroll-mt-8 bg-white px-6 py-20 text-ink md:py-12' : 'bg-white px-6 py-20 text-ink md:py-12'}
+    >
       <p className="text-black flex flex-col items-center justify-center text-center text-xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl">
         <span className=" font-sans text-[0.5em] leading-none tracking-tighter uppercase">
           {/* Let&apos;s Take Your */}
