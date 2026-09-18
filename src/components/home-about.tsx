@@ -36,8 +36,8 @@ export function HomeAbout() {
           <p className="max-w-md text-lg leading-8 text-black">
             ELMNT13 is a creative marketing and management company known for
             transforming ideas into thoughtfully developed concepts and elevated
-            brand experiences. We pair creative thinking with an eye for the
-            details, maximizing every opportunity to strengthen brands, elevate
+            brand experiences. We pair creative thinking with a discerning eye
+            for detail, maximizing the opportunity to strengthen brands, elevate
             their presence and create lasting impact.
           </p>
           <div className="mt-10">
