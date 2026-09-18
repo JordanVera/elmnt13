@@ -29,7 +29,7 @@ export const weddingWorkTiles: WeddingWorkTile[] = [
     kind: 'Wedding',
     location: 'Los Cabos, MX',
     preview: 'video',
-    previewVideo: '/weddings/MrandMrsBettsWeddingTeaserwithoutNelly.mp4',
+    previewVideo: '/weddings/KENDRAANDCHRISTIANWEDDINGSNEAKPEAKWIDE_comp.mp4',
   },
   {
     slug: 'christian-engagement',
