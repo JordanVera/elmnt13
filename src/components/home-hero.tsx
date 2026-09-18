@@ -52,14 +52,16 @@ export function HomeHero() {
             skip={skip}
             from="left"
           />
-          <HeroStatement
-            eyebrow="We Handle"
-            headline="The Details."
-            delay={SECOND_STATEMENT_DELAY}
-            skip={skip}
-            className="mt-[0.14em] ml-[0.8em]"
-            from="right"
-          />
+          <div className="ml-12">
+            <HeroStatement
+              eyebrow="We Handle"
+              headline="The Details."
+              delay={SECOND_STATEMENT_DELAY}
+              skip={skip}
+              className="mt-[0.14em] ml-[0.8em]"
+              from="right"
+            />
+          </div>
         </h1>
       </section>
     </div>
