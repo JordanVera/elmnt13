@@ -111,13 +111,22 @@ export function DetailsMoment({
       >
         {layout === 'tagline' ? (
           <Reveal>
-            <p className="text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight">
-              We’ve worked across various industries, audiences and types of
-              experiences, giving us insight that extends beyond any one
-              category. That range, combined with years of experience, allows us
-              to approach every project differently and creatively, develop
-              ideas with greater perspective and ultimately take your vision
-              further.
+            <p className=" leading-8 text-black text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight mb-8">
+              Every project has a different audience, objective and opportunity.
+              Our experience has taught us there is no one-size-fits-all
+              approach, which is why we look at each project with a fresh
+              lens—considering what it needs, what it could become and how every
+              element can work together to create the greatest impact.
+            </p>
+            <p className="text-lg leading-8 text-black text-lg mx-auto text-center max-w-5xl  tracking-tight">
+              We look beyond what’s typical, challenge what’s expected and make
+              intentional choices that support the ultimate goal. From the
+              broadest idea to the smallest detail, everything contributes to
+              creating an experience that leaves a lasting impression—
+              <span className="font-display">
+                because every element has a purpose and every detail has its
+                place.
+              </span>
             </p>
 
             <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">

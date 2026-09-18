@@ -2,25 +2,29 @@ import { Reveal } from '@/components/reveal';
 
 export function WeddingLoveStory() {
   return (
-    <section id="story" className="scroll-mt-8 bg-white px-6 py-12 md:py-14">
+    <section id="story" className="scroll-mt-8 bg-white px-6 py-16 md:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <Reveal>
-          <h2 className="leading-[1.05]">
-            <span className="block font-display text-4xl tracking-tight uppercase md:text-6xl">
-              allow us to be
+          <h2>
+            <span className="block text-[15px] tracking-[0.36em] text-stone uppercase">
+              Allow us to be
             </span>
-            <span className="mt-1 block font-serif text-4xl italic md:text-6xl">
-              a part of your love story
+            <span className="mt-4 block font-[family-name:var(--font-playfair)] text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.12] tracking-tight">
+              a part of your{' '}
+              <span className="font-serif text-gold whitespace-nowrap">
+                love story.
+              </span>
             </span>
           </h2>
         </Reveal>
         <Reveal delay={120}>
-          <p className="mx-auto mt-6 max-w-2xl text-xl leading-8 text-black md:text-2xl md:leading-9">
-            We love love, and we’d be honored to be part of yours. We understand
-            that being trusted with your wedding means being trusted with one of
-            the most meaningful moments of your life. Your vision matters to us,
-            which is why we consider every detail and curate every moment with
-            the care and intention it deserves.
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-black md:mt-10">
+            We love love, so your love matters to us. We listen closely to what
+            you desire, seek to understand what’s most important and bring our
+            creativity and perspective to push your ideas beyond the expected,
+            create the unimaginable and take your vision further. Because when
+            it comes to your love story, we believe what you envision is only
+            the beginning of what it can truly become.
           </p>
         </Reveal>
       </div>

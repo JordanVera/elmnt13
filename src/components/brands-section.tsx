@@ -65,7 +65,7 @@ export function BrandsSection() {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="cursor-pointer text-[11px] tracking-[0.32em] text-stone uppercase transition-colors hover:text-ink mx-auto block text-center pb-4"
+            className="mt-12 cursor-pointer text-[11px] tracking-[0.32em] text-stone uppercase transition-colors hover:text-ink mx-auto block text-center pb-4"
             aria-expanded={open}
           >
             {open ? 'Close list' : 'View all'}

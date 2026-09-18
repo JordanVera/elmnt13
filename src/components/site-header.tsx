@@ -150,40 +150,91 @@ export function SiteHeader() {
               skip ? { duration: 0 } : { duration: 0.32, ease: EASE.ease }
             }
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink/95 px-6 pt-28 pb-16 sm:justify-center sm:pb-24"
+            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-6 pt-28 pb-16 sm:justify-center sm:pb-24 lg:px-12 lg:pt-24 xl:px-20"
           >
-            <nav onClick={(event) => event.stopPropagation()}>
-              <ul className="mx-auto flex w-full max-w-5xl flex-col gap-1">
-                {navLinks.map((link, index) => {
-                  const active = isActive(pathname, link.href);
-                  return (
-                    <li key={link.href}>
-                      <motion.div
-                        initial={skip ? false : { opacity: 0, y: 18 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={
-                          skip
-                            ? { duration: 0 }
-                            : { ...EASE, delay: 0.05 + index * 0.05 }
-                        }
-                      >
-                        <Link
-                          href={link.href}
-                          onClick={() => setMenuOpen(false)}
-                          aria-current={active ? 'page' : undefined}
-                          className={cn(
-                            'block py-2 font-display text-4xl tracking-tight uppercase transition-colors sm:text-6xl',
-                            active ? 'text-gold' : 'text-white hover:text-gold',
-                          )}
+            <motion.div
+              initial={skip ? false : { opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
+              className="pointer-events-none absolute inset-x-0 top-12 hidden justify-center lg:flex lg:top-14"
+            >
+              <Link
+                href="/"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuOpen(false);
+                }}
+                className="pointer-events-auto"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="ELMNT13"
+                  width={180}
+                  height={54}
+                  className="h-10 w-auto xl:h-12"
+                />
+              </Link>
+            </motion.div>
+
+            <div
+              onClick={(event) => event.stopPropagation()}
+              className="mx-auto flex w-full max-w-5xl flex-col lg:max-w-352 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
+            >
+              <nav aria-label="Primary">
+                <ul className="flex flex-col gap-1 lg:gap-0">
+                  {navLinks.map((link, index) => {
+                    const active = isActive(pathname, link.href);
+                    return (
+                      <li key={link.href}>
+                        <motion.div
+                          initial={skip ? false : { opacity: 0, y: 18 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={
+                            skip
+                              ? { duration: 0 }
+                              : { ...EASE, delay: 0.05 + index * 0.05 }
+                          }
                         >
-                          {link.label}
-                        </Link>
-                      </motion.div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+                          <Link
+                            href={link.href}
+                            onClick={() => setMenuOpen(false)}
+                            aria-current={active ? 'page' : undefined}
+                            className={cn(
+                              'block py-2 font-display text-4xl tracking-tight uppercase transition-colors sm:text-6xl lg:py-1 lg:text-7xl lg:leading-none xl:text-[5.5rem]',
+                              active
+                                ? 'text-gold'
+                                : 'text-white hover:text-gold',
+                            )}
+                          >
+                            {link.label}
+                          </Link>
+                        </motion.div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+
+              <motion.aside
+                initial={skip ? false : { opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={skip ? { duration: 0 } : { ...EASE, delay: 0.28 }}
+                aria-hidden="true"
+                className="hidden shrink-0 lg:block"
+              >
+                <p className="flex flex-col items-end leading-[0.82] tracking-tight text-white">
+                  <span className="font-sans tracking-tighter uppercase text-4xl mr-12">
+                    Taking your
+                  </span>
+                  <span className="font-display text-7xl font-bold uppercase xl:text-8xl mr-12">
+                    Vision
+                  </span>
+                  <span className="-mt-1 font-serif text-6xl text-gold italic normal-case xl:-mt-2 xl:text-7xl">
+                    further
+                  </span>
+                </p>
+              </motion.aside>
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
