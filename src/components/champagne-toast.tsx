@@ -297,7 +297,7 @@ export function ChampagneToast() {
               ease: EASE_LUXE,
             }}
           >
-            Love.
+            Love
           </motion.span>
         </span>
       </h1>

@@ -65,12 +65,12 @@ function ServiceCard({
           )}
         >
           <div>
-            <h3 className="mt-3 font-display text-2xl tracking-tight uppercase md:text-3xl">
-              {service.title}
-            </h3>
             <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
               {service.kicker}
             </p>
+            <h3 className="mt-3 font-display text-2xl tracking-tight uppercase md:text-3xl">
+              {service.title}
+            </h3>
           </div>
 
           <div

@@ -8,11 +8,7 @@ export function WeddingServicesSection() {
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="flex md:items-center">
-            <div
-              className="mr-10 hidden h-32 w-px shrink-0 rounded bg-gold md:block"
-              aria-hidden="true"
-            />
-            <p className="max-w-3xl text-lg leading-8 text-black">
+            <p className="max-w-3xl text-lg text-center mx-auto leading-8 text-black">
               May your story be filled with moments worth celebrating, from the
               beginning of a new chapter to the forever you’re building
               together. Wherever you are in your story, we’re here to make what
@@ -32,8 +28,8 @@ export function WeddingServicesSection() {
         <Reveal delay={140}>
           <h2 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
             With you for the
-            <span className="text-gold mt-3 block font-serif text-4xl tracking-normal normal-case italic md:ml-16 md:text-6xl">
-              moments that matter.
+            <span className="text-gold -mt-5 block font-serif text-4xl tracking-normal normal-case italic md:ml-16 md:text-6xl">
+              moments that matter
             </span>
           </h2>
         </Reveal>
