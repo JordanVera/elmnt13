@@ -4,7 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/logo';
 import { Reveal } from '@/components/reveal';
-import { footerLinks, socialLinks } from '@/lib/site';
+import {
+  externalLinkProps,
+  footerLinks,
+  socialLinks,
+  weddingInquiryUrl,
+} from '@/lib/site';
 
 function SocialIcon({ label }: { label: string }) {
   const className = 'size-6';
@@ -89,22 +94,30 @@ export function SiteFooter() {
         <Reveal>
           <nav aria-label="Footer">
             <ul className="space-y-3">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={(event) => {
-                      if (link.href === '/' && pathname === '/') {
-                        event.preventDefault();
-                        window.scrollTo({ top: 0 });
-                      }
-                    }}
-                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {footerLinks.map((link) => {
+                const href =
+                  pathname === '/weddings' && link.href === '/contact'
+                    ? weddingInquiryUrl
+                    : link.href;
+
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={href}
+                      {...externalLinkProps(href)}
+                      onClick={(event) => {
+                        if (link.href === '/' && pathname === '/') {
+                          event.preventDefault();
+                          window.scrollTo({ top: 0 });
+                        }
+                      }}
+                      className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </Reveal>

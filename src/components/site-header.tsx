@@ -6,7 +6,12 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Logo } from '@/components/logo';
-import { heroNavLinks, navLinks, weddingNavLinks } from '@/lib/site';
+import {
+  externalLinkProps,
+  heroNavLinks,
+  navLinks,
+  weddingNavLinks,
+} from '@/lib/site';
 import { cn } from '@/lib/cn';
 
 const EASE = { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const };
@@ -224,6 +229,7 @@ export function SiteHeader() {
                         >
                           <Link
                             href={link.href}
+                            {...externalLinkProps(link.href)}
                             onClick={(event) => {
                               if (!isWeddings || !link.href.startsWith('#')) {
                                 setMenuOpen(false);

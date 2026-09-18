@@ -16,7 +16,7 @@ import {
   useReducedMotion,
   type Variants,
 } from 'framer-motion';
-import { weddingNavLinks } from '@/lib/site';
+import { externalLinkProps, weddingNavLinks } from '@/lib/site';
 
 const EASE_LUXE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const PIVOT_Y = 0.68;
@@ -313,6 +313,7 @@ export function ChampagneToast() {
               <Link
                 href={link.href}
                 className="text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:text-ink"
+                {...externalLinkProps(link.href)}
               >
                 {link.label}
               </Link>
