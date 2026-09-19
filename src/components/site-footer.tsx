@@ -135,7 +135,7 @@ export function SiteFooter() {
                     href="/"
                     className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
                   >
-                    Back to ELMNT13
+                    ELMNT13 Home
                   </Link>
                 </li>
               ) : null}
