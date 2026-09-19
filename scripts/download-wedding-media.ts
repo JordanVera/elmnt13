@@ -80,16 +80,19 @@ const collections: CollectionConfig[] = [
   {
     slug: 'mookie-wedding',
     title: "Mookie's Wedding",
+    photos: {
+      source: 'json',
+      file: 'scripts/scraped-urls/mookie-wedding.json',
+    },
     video: {
       type: 'url',
-      value: 'https://galleries.vidflow.co/briannaandmookie',
+      value: '/weddings/MrandMrsBettsWeddingTeaserwithNelly_1080.mp4',
     },
     poster: {
       type: 'url',
       value:
         'https://img.vidflow.co/studio/qkx4iiy6/deliverable/egwdmc2m/media/tpgnqjfs/i-WWJ2VRJ-X5.jpeg?width=1200&height=1200&optimize=image',
     },
-    extractPhotoFrames: 16,
   },
 ];
 
