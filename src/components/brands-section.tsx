@@ -10,13 +10,7 @@ export function BrandsSection() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div
-      className={
-        open
-          ? 'bg-white border-t-[0.5px] border-stone/20'
-          : 'border-t-[0.5px] border-b-[0.5px] border-stone/20 bg-white'
-      }
-    >
+    <div className="bg-white">
       <LogoMarquee
         showBorders={!open}
         action={

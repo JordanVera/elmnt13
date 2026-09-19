@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { BrandLogo } from '@/components/brand-logo';
 import { Reveal } from '@/components/reveal';
 import { featuredBrandLogos } from '@/lib/brands';
+import { cn } from '@/lib/cn';
 
 export function LogoMarquee({
   title = 'Brands We’ve Worked With',
@@ -15,7 +16,12 @@ export function LogoMarquee({
   const loop = [...featuredBrandLogos, ...featuredBrandLogos];
 
   return (
-    <div className={showBorders ? 'border-t border-b border-stone/20' : undefined}>
+    <div
+      className={cn(
+        'border-t-[0.5px] border-stone/20',
+        showBorders && 'border-b-[0.5px]',
+      )}
+    >
       <section
         className={
           action
