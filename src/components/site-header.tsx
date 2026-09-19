@@ -168,7 +168,7 @@ export function SiteHeader() {
             onClick={() => setMenuOpen(false)}
             className={cn(
               'fixed inset-0 z-40 flex flex-col justify-end px-6 pt-28 pb-16 sm:justify-center sm:pb-24 lg:px-12 lg:pt-24 xl:px-20',
-              isWeddings ? 'bg-paper/90' : 'bg-ink',
+              isWeddings ? 'bg-paper/95' : 'bg-ink',
             )}
           >
             <motion.div
