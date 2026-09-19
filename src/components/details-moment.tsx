@@ -132,7 +132,7 @@ export function DetailsMoment({
               </p>
             </div>
 
-            <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+            {/* <p className=" mr-60! mt-24 text-center text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
               <span className="block font-sans text-6xl! font-light tracking-[-0.04em] text-black uppercase">
                 We take your
               </span>
@@ -144,7 +144,7 @@ export function DetailsMoment({
                   further
                 </span>
               </span>
-            </p>
+            </p> */}
           </Reveal>
         ) : (
           <StatementTypography dark={dark} active={active} skip={skip} />

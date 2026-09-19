@@ -6,6 +6,13 @@ export function AboutStats() {
   return (
     <section className="bg-white px-6 pt-20">
       <div className="mx-auto max-w-6xl">
+        <h2 className="ml-18 font-display text-5xl leading-[0.5] tracking-tight text-ink md:text-7xl">
+          <span className="block">It All</span>
+          <span className="block font-serif text-gold mt-1 md:mt-2">
+            counts
+          </span>
+        </h2>
+
         <div className="relative grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (
             <Reveal
