@@ -125,7 +125,7 @@ export function DetailsMoment({
                 make intentional choices that support the ultimate goal. From
                 the broadest idea to the smallest detail, everything contributes
                 to creating an experience that leaves a lasting impression—
-                <span className="font-display">
+                <span className="font-serif">
                   because every element has a purpose and every detail has its
                   place.
                 </span>
