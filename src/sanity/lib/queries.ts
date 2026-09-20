@@ -8,7 +8,7 @@ const projectFields = /* groq */ `
   category,
   year,
   "image": image.asset->url,
-  "gallery": gallery[].asset->url,
+  "gallery": gallery[defined(asset._ref)].asset->url,
   featured,
   description
 `;

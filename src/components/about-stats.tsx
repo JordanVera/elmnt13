@@ -6,6 +6,14 @@ export function AboutStats() {
   return (
     <section className="bg-white px-6 pt-20">
       <div className="mx-auto max-w-6xl">
+        <h2 className="flex flex-wrap items-baseline gap-x-[0.18em] text-[clamp(2.75rem,11vw,5rem)] leading-none uppercase">
+          <span className="font-bebas tracking-tight text-ink">It</span>
+          <span className="font-display font-bold text-ink">All</span>
+          <span className="italic font-didot text-[0.92em] tracking-[0.01em] text-gold">
+            Counts
+          </span>
+        </h2>
+
         <div className="relative grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => (
             <Reveal
