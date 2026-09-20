@@ -21,6 +21,7 @@
   --font-sans: var(--font-century-gothic);
   --font-display: var(--font-bebas);
   --font-serif: var(--font-playfair);
+  --font-didot: var(--font-bodoni);
 }
 
 html {
@@ -52,6 +53,11 @@ body {
   font-family: var(--font-playfair), serif;
   font-style: italic;
   font-weight: 400;
+}
+
+.font-didot {
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-weight: 500;
 }
 
 .grain {

@@ -1,6 +1,6 @@
 import './globals.css';
 import localFont from 'next/font/local';
-import { Bebas_Neue, Playfair_Display } from 'next/font/google';
+import { Bebas_Neue, Bodoni_Moda, Playfair_Display } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { SiteShell } from '@/components/site-shell';
 
@@ -15,6 +15,13 @@ const playfair = Playfair_Display({
   weight: '400',
   style: ['normal', 'italic'],
   variable: '--font-playfair',
+});
+
+const bodoni = Bodoni_Moda({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-bodoni',
 });
 
 const centuryGothic = localFont({
@@ -50,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${playfair.variable} ${centuryGothic.variable} h-full antialiased`}
+      className={`${bebas.variable} ${playfair.variable} ${bodoni.variable} ${centuryGothic.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">
         <div className="grain" aria-hidden="true" />

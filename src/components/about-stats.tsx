@@ -6,10 +6,11 @@ export function AboutStats() {
   return (
     <section className="bg-white px-6 pt-20">
       <div className="mx-auto max-w-6xl">
-        <h2 className="ml-18 font-display text-5xl leading-[0.5] tracking-tight text-ink md:text-7xl">
-          <span className="block">It All</span>
-          <span className="block font-serif text-gold mt-1 md:mt-2">
-            counts
+        <h2 className="flex flex-wrap items-baseline gap-x-[0.18em] text-[clamp(2.75rem,11vw,5rem)] leading-none uppercase">
+          <span className="font-bebas tracking-tight text-ink">It</span>
+          <span className="font-display font-bold text-ink">All</span>
+          <span className="italic font-didot text-[0.92em] tracking-[0.01em] text-gold">
+            Counts
           </span>
         </h2>
 
