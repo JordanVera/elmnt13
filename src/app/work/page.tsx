@@ -4,6 +4,8 @@ import { ProjectGrid } from '@/components/project-grid';
 import { WorkHero } from '@/components/work-hero';
 import { getFeaturedProjects, getWorkProjects } from '@/lib/projects';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Work',
   description: 'A selection of experiences produced by ELMNT13.',

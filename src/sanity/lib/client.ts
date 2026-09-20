@@ -1,11 +1,17 @@
 import 'server-only';
-import { createClient } from 'next-sanity';
+import { createClient, type QueryParams } from 'next-sanity';
 import { apiVersion, dataset, projectId } from '../env';
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
-  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+  perspective: 'published',
 });
+
+export function sanityFetch<T>(query: string, params: QueryParams = {}) {
+  return client.fetch<T>(query, params, {
+    cache: 'no-store',
+  });
+}

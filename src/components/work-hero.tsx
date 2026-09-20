@@ -69,14 +69,10 @@ export function WorkHero({ projects }: { projects: Project[] }) {
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden bg-white px-6">
         <div className="relative flex w-full max-w-6xl items-center justify-center">
           <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[19vw] leading-none tracking-tight text-ink uppercase md:text-[15vw]">
-            <motion.span
-              style={reduceMotion ? { x: '-16vw' } : { x: leftX }}
-            >
+            <motion.span style={reduceMotion ? { x: '-16vw' } : { x: leftX }}>
               Our
             </motion.span>
-            <motion.span
-              style={reduceMotion ? { x: '16vw' } : { x: rightX }}
-            >
+            <motion.span style={reduceMotion ? { x: '16vw' } : { x: rightX }}>
               Work
             </motion.span>
           </h1>
@@ -110,14 +106,14 @@ function WorkCard({
   reduceMotion: boolean;
 }) {
   const spread = CARD_SPREAD[index];
-  const start = 0.1 + index * 0.055;
-  const end = 0.62 + index * 0.07;
+  const start = 0.08 + index * 0.04;
+  const end = 0.58 + index * 0.06;
 
   const x = useTransform(progress, [start, end], ['0vw', `${spread.x}vw`]);
   const rotate = useTransform(progress, [start, end], [0, spread.rotate]);
-  const y = useTransform(progress, [start, end], [56, spread.y]);
-  const opacity = useTransform(progress, [start, start + 0.18], [0, 1]);
-  const scale = useTransform(progress, [start, end], [0.84, 1]);
+  const y = useTransform(progress, [start, end], [340, spread.y]);
+  const opacity = useTransform(progress, [start, start + 0.22], [0, 1]);
+  const scale = useTransform(progress, [start, end], [0.72, 1]);
   const visibility = useTransform(opacity, (value) =>
     value > 0 ? 'visible' : 'hidden',
   );

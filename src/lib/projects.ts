@@ -1,6 +1,6 @@
 import 'server-only';
 import { cache } from 'react';
-import { client } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/client';
 import type { Project } from '@/lib/project-types';
 import {
   featuredProjectsQuery,
@@ -53,33 +53,52 @@ function toProject(doc: SanityProject | null): Project | null {
 }
 
 export const getProjects = cache(async () => {
-  const docs = await client.fetch<SanityProject[]>(projectsQuery);
+  const docs = await sanityFetch<SanityProject[]>(projectsQuery);
   return docs.map(toProject).filter((project): project is Project => Boolean(project));
 });
 
 export const getFeaturedProjects = cache(async () => {
-  const docs = await client.fetch<SanityProject[]>(featuredProjectsQuery);
+  const docs = await sanityFetch<SanityProject[]>(featuredProjectsQuery);
   return docs.map(toProject).filter((project): project is Project => Boolean(project));
 });
 
 export const getWorkProjects = cache(async () => {
-  const docs = await client.fetch<SanityProject[]>(workProjectsQuery);
+  const docs = await sanityFetch<SanityProject[]>(workProjectsQuery);
   return docs.map(toProject).filter((project): project is Project => Boolean(project));
 });
 
 export const getWeddingProjects = cache(async () => {
-  const docs = await client.fetch<SanityProject[]>(weddingProjectsQuery);
+  const docs = await sanityFetch<SanityProject[]>(weddingProjectsQuery);
   return docs.map(toProject).filter((project): project is Project => Boolean(project));
 });
 
 export const getProject = cache(async (slug: string) => {
-  const doc = await client.fetch<SanityProject | null>(projectBySlugQuery, { slug });
+  const doc = await sanityFetch<SanityProject | null>(projectBySlugQuery, { slug });
   return toProject(doc);
 });
 
 export const getProjectSlugs = cache(async () => {
-  const docs = await client.fetch<Array<{ slug: string | null }>>(projectSlugsQuery);
+  const docs = await sanityFetch<Array<{ slug: string | null }>>(projectSlugsQuery);
   return docs
     .map((doc) => doc.slug)
     .filter((slug): slug is string => Boolean(slug));
+});
+
+export type AdjacentProject = Pick<Project, 'slug' | 'title'>;
+
+export const getAdjacentWorkProjects = cache(async (slug: string) => {
+  const projects = await getWorkProjects();
+  const index = projects.findIndex((project) => project.slug === slug);
+  if (index === -1) return { prev: null, next: null };
+
+  const toAdjacent = (project: Project): AdjacentProject => ({
+    slug: project.slug,
+    title: project.title,
+  });
+
+  return {
+    prev: index > 0 ? toAdjacent(projects[index - 1]) : null,
+    next:
+      index < projects.length - 1 ? toAdjacent(projects[index + 1]) : null,
+  };
 });
