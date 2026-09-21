@@ -1,7 +1,10 @@
 import { Reveal } from '@/components/reveal';
 import { WeddingGallery } from '@/components/wedding-work-gallery';
+import { getWeddingCollections } from '@/lib/wedding-collections';
 
-export function WeddingWorkSection() {
+export async function WeddingWorkSection() {
+  const items = await getWeddingCollections();
+
   return (
     <section id="work" className="scroll-mt-8 bg-white py-16 md:pt-24 pb-6">
       <div className="mx-auto max-w-6xl px-6">
@@ -19,7 +22,7 @@ export function WeddingWorkSection() {
       </div>
 
       <div className="mx-auto mt-10 max-w-6xl md:mt-12">
-        <WeddingGallery />
+        <WeddingGallery items={items} />
       </div>
     </section>
   );

@@ -5,10 +5,7 @@ import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
 import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
 import { cn } from '@/lib/cn';
-import {
-  getWeddingWorkItems,
-  type WeddingWorkItem,
-} from '@/lib/wedding-work-photos';
+import type { WeddingWorkItem } from '@/lib/wedding-work-photos';
 
 function tileLayout(item: WeddingWorkItem, index: number, count: number) {
   if (item.preview === 'video') {
@@ -215,8 +212,7 @@ function CollectionOverlay({
   );
 }
 
-export function WeddingGallery() {
-  const items = getWeddingWorkItems();
+export function WeddingGallery({ items }: { items: WeddingWorkItem[] }) {
   const [activeItem, setActiveItem] = useState<WeddingWorkItem | null>(null);
 
   const closeOverlay = useCallback(() => setActiveItem(null), []);
