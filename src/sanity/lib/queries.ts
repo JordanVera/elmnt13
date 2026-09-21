@@ -10,7 +10,12 @@ const projectFields = /* groq */ `
   "image": image.asset->url,
   "gallery": gallery[defined(asset._ref)].asset->url,
   featured,
-  description
+  description,
+  kind,
+  location,
+  video,
+  poster,
+  previewVideo
 `;
 
 export const projectsQuery = defineQuery(
@@ -35,4 +40,18 @@ export const projectBySlugQuery = defineQuery(
 
 export const projectSlugsQuery = defineQuery(
   `*[_type == "project" && defined(slug.current)]{"slug": slug.current}`,
+);
+
+export const weddingCollectionsQuery = defineQuery(
+  `*[_type == "wedding"] | order(sortOrder asc) {
+    "slug": slug.current,
+    title,
+    kind,
+    location,
+    "cover": cover.asset->url,
+    "gallery": gallery[defined(asset._ref)][].asset->url,
+    video,
+    poster,
+    previewVideo
+  }`,
 );

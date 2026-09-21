@@ -24,6 +24,11 @@ type SanityProject = {
   gallery: Array<string | null> | null;
   featured: boolean | null;
   description: string | null;
+  kind: string | null;
+  location: string | null;
+  video: string | null;
+  poster: string | null;
+  previewVideo: string | null;
 };
 
 const CATEGORIES = new Set<Project['category']>([
@@ -54,31 +59,42 @@ function toProject(doc: SanityProject | null): Project | null {
 
 export const getProjects = cache(async () => {
   const docs = await sanityFetch<SanityProject[]>(projectsQuery);
-  return docs.map(toProject).filter((project): project is Project => Boolean(project));
+  return docs
+    .map(toProject)
+    .filter((project): project is Project => Boolean(project));
 });
 
 export const getFeaturedProjects = cache(async () => {
   const docs = await sanityFetch<SanityProject[]>(featuredProjectsQuery);
-  return docs.map(toProject).filter((project): project is Project => Boolean(project));
+  return docs
+    .map(toProject)
+    .filter((project): project is Project => Boolean(project));
 });
 
 export const getWorkProjects = cache(async () => {
   const docs = await sanityFetch<SanityProject[]>(workProjectsQuery);
-  return docs.map(toProject).filter((project): project is Project => Boolean(project));
+  return docs
+    .map(toProject)
+    .filter((project): project is Project => Boolean(project));
 });
 
 export const getWeddingProjects = cache(async () => {
   const docs = await sanityFetch<SanityProject[]>(weddingProjectsQuery);
-  return docs.map(toProject).filter((project): project is Project => Boolean(project));
+  return docs
+    .map(toProject)
+    .filter((project): project is Project => Boolean(project));
 });
 
 export const getProject = cache(async (slug: string) => {
-  const doc = await sanityFetch<SanityProject | null>(projectBySlugQuery, { slug });
+  const doc = await sanityFetch<SanityProject | null>(projectBySlugQuery, {
+    slug,
+  });
   return toProject(doc);
 });
 
 export const getProjectSlugs = cache(async () => {
-  const docs = await sanityFetch<Array<{ slug: string | null }>>(projectSlugsQuery);
+  const docs =
+    await sanityFetch<Array<{ slug: string | null }>>(projectSlugsQuery);
   return docs
     .map((doc) => doc.slug)
     .filter((slug): slug is string => Boolean(slug));
@@ -98,7 +114,6 @@ export const getAdjacentWorkProjects = cache(async (slug: string) => {
 
   return {
     prev: index > 0 ? toAdjacent(projects[index - 1]) : null,
-    next:
-      index < projects.length - 1 ? toAdjacent(projects[index + 1]) : null,
+    next: index < projects.length - 1 ? toAdjacent(projects[index + 1]) : null,
   };
 });
