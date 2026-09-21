@@ -290,6 +290,11 @@ async function seed() {
   for (let i = 0; i < docs.length; i += chunkSize) {
     const chunk = docs.slice(i, i + chunkSize);
     let tx = client.transaction();
+
+    // if (i === 0 ) {
+    //   return;
+    // }
+
     for (const doc of chunk) {
       tx = tx.createOrReplace(doc);
     }
