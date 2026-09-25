@@ -35,7 +35,7 @@ export function WeddingStory({
       ) : null}
 
       {description?.length ? (
-        <div className={cn(services?.length && 'mt-8', 'space-y-5')}>
+        <div className={cn(services?.length ? 'mt-8' : undefined, 'space-y-5')}>
           {description.map((block, index) => {
             const isLead = block.style === 'lead';
             return (
@@ -67,7 +67,7 @@ export function WeddingStory({
       {credits?.length ? (
         <ul
           className={cn(
-            (services?.length || description?.length) && 'mt-8',
+            services?.length || description?.length ? 'mt-8' : undefined,
             'space-y-1',
           )}
         >

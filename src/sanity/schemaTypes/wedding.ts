@@ -1,22 +1,18 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
-function mediaSource(rule: {
-  custom: (fn: (value: unknown) => true | string) => unknown;
-}) {
-  return rule.custom((value) => {
-    if (value === undefined || value === null || value === '') return true;
-    if (typeof value !== 'string') return 'Must be a URL or local path';
-    if (value.startsWith('/')) return true;
-    try {
-      const parsed = new URL(value);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
-        return true;
-      }
-    } catch {
-      // fall through
+function validateMediaSource(value: unknown): true | string {
+  if (value === undefined || value === null || value === '') return true;
+  if (typeof value !== 'string') return 'Must be a URL or local path';
+  if (value.startsWith('/')) return true;
+  try {
+    const parsed = new URL(value);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return true;
     }
-    return 'Use an https URL or a local path starting with / (e.g. /weddings/film.mp4)';
-  });
+  } catch {
+    // fall through
+  }
+  return 'Use an https URL or a local path starting with / (e.g. /weddings/film.mp4)';
 }
 
 export const weddingType = defineType({
@@ -140,7 +136,7 @@ export const weddingType = defineType({
       type: 'string',
       description:
         'External video link (Google Drive, Vidflow, etc.) or a local /public path such as /weddings/film.mp4.',
-      validation: mediaSource,
+      validation: (rule) => rule.custom(validateMediaSource),
     }),
     defineField({
       name: 'poster',
@@ -148,7 +144,7 @@ export const weddingType = defineType({
       type: 'string',
       description:
         'Thumbnail image URL or a local /public path. Shown before the film loads.',
-      validation: mediaSource,
+      validation: (rule) => rule.custom(validateMediaSource),
     }),
     defineField({
       name: 'previewVideo',
@@ -156,7 +152,7 @@ export const weddingType = defineType({
       type: 'string',
       description:
         'Short looping video on the gallery tile (external URL or local /public path). When set the tile displays a play icon.',
-      validation: mediaSource,
+      validation: (rule) => rule.custom(validateMediaSource),
     }),
     defineField({
       name: 'sortOrder',
