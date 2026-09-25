@@ -17,7 +17,7 @@ export function HomeHero() {
   const skip = Boolean(reduceMotion);
 
   return (
-    <div className="relative bg-ink md:min-h-dvh">
+    <div className="relative bg-ink min-h-dvh">
       <motion.div
         className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-8 md:pt-12"
         initial={{ opacity: 0, y: -40 }}
@@ -44,25 +44,30 @@ export function HomeHero() {
         </Link>
       </motion.div>
 
-      <section className="relative flex flex-col items-center justify-center overflow-x-hidden px-6 pt-24 pb-6 text-paper md:min-h-dvh md:py-0">
-        <h1 className="mx-auto flex w-max max-w-full flex-col items-start font-display text-[13.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
-          <HeroStatement
-            eyebrow="We See"
-            headline="The Vision."
-            delay={FIRST_STATEMENT_DELAY}
-            skip={skip}
-            from="left"
-          />
-          <HeroStatement
-            eyebrow="We Handle"
-            headline="The Details."
-            delay={SECOND_STATEMENT_DELAY}
-            skip={skip}
-            className="mt-[0.14em] ml-[1.5em]"
-            from="right"
-          />
-        </h1>
-        <nav aria-label="Primary" className="mt-8 w-full md:hidden">
+      <section className="relative flex min-h-dvh flex-col overflow-x-hidden px-6 pt-24 text-paper md:items-center md:justify-center md:py-0">
+        <div className="flex flex-1 flex-col items-center justify-center md:flex-none">
+          <h1 className="mx-auto flex w-max max-w-full flex-col items-start font-display text-[13.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
+            <HeroStatement
+              eyebrow="We See"
+              headline="The Vision."
+              delay={FIRST_STATEMENT_DELAY}
+              skip={skip}
+              from="left"
+            />
+            <HeroStatement
+              eyebrow="We Handle"
+              headline="The Details."
+              delay={SECOND_STATEMENT_DELAY}
+              skip={skip}
+              className="mt-[0.14em] ml-[1.5em]"
+              from="right"
+            />
+          </h1>
+        </div>
+        <nav
+          aria-label="Primary"
+          className="w-full shrink-0 pb-[max(1.75rem,env(safe-area-inset-bottom))] md:hidden"
+        >
           <ul className="flex flex-nowrap items-center justify-center gap-x-3.5">
             {heroNavLinks.map((link) => (
               <li key={link.href}>
