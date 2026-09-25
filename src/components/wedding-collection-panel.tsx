@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { WeddingCollection } from '@/lib/wedding-gallery';
 import { WeddingVideoPlayer } from '@/components/wedding-video-player';
 
@@ -23,6 +24,7 @@ export function WeddingCollectionPanel({
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        event.stopImmediatePropagation();
         setActiveIndex(null);
         return;
       }
@@ -42,8 +44,8 @@ export function WeddingCollectionPanel({
       }
     };
 
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    window.addEventListener('keydown', onKeyDown, true);
+    return () => window.removeEventListener('keydown', onKeyDown, true);
   }, [activeIndex, collection.photos.length]);
 
   return (
@@ -82,68 +84,74 @@ export function WeddingCollectionPanel({
         ))}
       </div>
 
-      {activePhoto && activeIndex !== null ? (
-        <div
-          className="fixed inset-0 z-100 flex items-center justify-center bg-ink/90 p-6"
-          onClick={() => setActiveIndex(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${collection.title} photo ${activeIndex + 1} of ${collection.photos.length}`}
-        >
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => setActiveIndex(null)}
-            className="absolute top-6 right-6 cursor-pointer border border-white/30 px-4 py-2 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold"
-          >
-            Close
-          </button>
+      {activePhoto && activeIndex !== null
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[200] flex items-center justify-center bg-ink"
+              onClick={() => setActiveIndex(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${collection.title} photo ${activeIndex + 1} of ${collection.photos.length}`}
+            >
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setActiveIndex(null)}
+                className="absolute top-4 right-4 z-10 cursor-pointer border border-white/30 px-4 py-2 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold md:top-6 md:right-6"
+              >
+                Close
+              </button>
 
-          <button
-            type="button"
-            aria-label="Previous photo"
-            disabled={activeIndex === 0}
-            onClick={(event) => {
-              event.stopPropagation();
-              setActiveIndex((index) => (index === null ? index : index - 1));
-            }}
-            className="absolute top-1/2 left-4 -translate-y-1/2 cursor-pointer border border-white/30 px-4 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:left-8"
-          >
-            Prev
-          </button>
+              <button
+                type="button"
+                aria-label="Previous photo"
+                disabled={activeIndex === 0}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setActiveIndex((index) =>
+                    index === null ? index : index - 1,
+                  );
+                }}
+                className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer border border-white/30 px-3 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:left-4 md:px-4"
+              >
+                Prev
+              </button>
 
-          <button
-            type="button"
-            aria-label="Next photo"
-            disabled={activeIndex === collection.photos.length - 1}
-            onClick={(event) => {
-              event.stopPropagation();
-              setActiveIndex((index) => (index === null ? index : index + 1));
-            }}
-            className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer border border-white/30 px-4 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:right-8"
-          >
-            Next
-          </button>
+              <button
+                type="button"
+                aria-label="Next photo"
+                disabled={activeIndex === collection.photos.length - 1}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setActiveIndex((index) =>
+                    index === null ? index : index + 1,
+                  );
+                }}
+                className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer border border-white/30 px-3 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:right-4 md:px-4"
+              >
+                Next
+              </button>
 
-          <div
-            className="relative max-h-[90vh] max-w-6xl overflow-hidden"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <Image
-              src={activePhoto}
-              alt=""
-              width={1800}
-              height={2400}
-              sizes="100vw"
-              className="max-h-[90vh] w-auto object-contain"
-              style={{ width: 'auto', height: 'auto' }}
-            />
-            <p className="mt-4 text-center text-[11px] tracking-[0.28em] text-white/70 uppercase">
-              {activeIndex + 1} / {collection.photos.length}
-            </p>
-          </div>
-        </div>
-      ) : null}
+              <div
+                className="relative h-[92vh] w-[calc(100vw-1.5rem)] md:w-[calc(100vw-7rem)]"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <Image
+                  src={activePhoto}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  className="object-contain"
+                  priority
+                />
+                <p className="absolute inset-x-0 bottom-3 text-center text-[11px] tracking-[0.28em] text-white/70 uppercase">
+                  {activeIndex + 1} / {collection.photos.length}
+                </p>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

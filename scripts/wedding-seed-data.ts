@@ -21,8 +21,8 @@ export const weddingSeedData: WeddingSeed[] = [
   // 1. Teagan's Proposal
   // ─────────────────────────────────────────────────────────────────────────
   {
-    slug: 'teagan-proposal',
-    title: "Teagan's Proposal",
+    slug: 'teagan-and-issy-proposal',
+    title: "Teagan & Issy's Proposal",
     kind: 'Proposal',
     location: 'Houston, TX',
     cover: '/weddings/collections/teagan-proposal/cover.jpg',
@@ -50,7 +50,7 @@ export const weddingSeedData: WeddingSeed[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: 'mookie-wedding',
-    title: "Mookie's Wedding",
+    title: "Mookie & Brianna's Wedding",
     kind: 'Wedding',
     location: 'Los Angeles, CA',
     cover: '/weddings/collections/mookie-wedding/cover.jpg',
@@ -148,7 +148,7 @@ export const weddingSeedData: WeddingSeed[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: 'christian-wedding',
-    title: "Christian's Wedding",
+    title: "Christian & Kendra's Wedding",
     kind: 'Wedding',
     location: 'Los Cabos, MX',
     cover: '/weddings/collections/christian-wedding/cover.jpg',
@@ -358,7 +358,7 @@ export const weddingSeedData: WeddingSeed[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: 'christian-engagement',
-    title: "Christian's Engagement Shoot",
+    title: "Christian & Kendra's Engagement Shoot",
     kind: 'Engagement Shoot',
     location: 'Miami, FL',
     cover: '/weddings/collections/christian-engagement/cover.jpg',
@@ -436,7 +436,7 @@ export const weddingSeedData: WeddingSeed[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: 'christian-proposal',
-    title: "Christian's Proposal",
+    title: "Christian & Kendra's Proposal",
     kind: 'Proposal',
     location: 'Houston, TX',
     cover: '/weddings/collections/christian-proposal/cover.jpg',
@@ -464,7 +464,7 @@ export const weddingSeedData: WeddingSeed[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: 'mookie-proposal',
-    title: "Mookie's Proposal",
+    title: "Mookie & Brianna's Proposal",
     kind: 'Proposal',
     location: 'Nashville, TN',
     cover: '/weddings/collections/mookie-proposal/cover.jpg',

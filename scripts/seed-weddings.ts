@@ -19,6 +19,8 @@ import { createClient } from '@sanity/client';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { markdownToBlocks } from './portable-text';
+import { weddingCopyBySlug } from './wedding-seed-copy';
 import { weddingSeedData, type WeddingSeed } from './wedding-seed-data';
 
 // ─── Sanity client ────────────────────────────────────────────────────────────
@@ -228,6 +230,14 @@ function toDocument(wedding: WeddingSeed, assets: Map<string, string>) {
     .map((src, i) => toImageRef(assets.get(src), src, i))
     .filter((ref): ref is ImageRef => Boolean(ref));
 
+  const copy = weddingCopyBySlug[wedding.slug];
+  const credits = copy?.credits?.map((credit, index) => ({
+    _type: 'credit' as const,
+    _key: `${wedding.slug}-credit-${index}`,
+    role: credit.role,
+    name: credit.name,
+  }));
+
   return {
     _id: weddingDocumentId(wedding.slug),
     _type: 'wedding',
@@ -237,6 +247,11 @@ function toDocument(wedding: WeddingSeed, assets: Map<string, string>) {
     location: wedding.location,
     cover,
     gallery,
+    ...(copy?.services?.length ? { services: copy.services } : {}),
+    ...(copy?.markdown
+      ? { description: markdownToBlocks(wedding.slug, copy.markdown) }
+      : {}),
+    ...(credits?.length ? { credits } : {}),
     ...(wedding.video ? { video: wedding.video } : {}),
     ...(wedding.poster ? { poster: wedding.poster } : {}),
     ...(wedding.previewVideo ? { previewVideo: wedding.previewVideo } : {}),

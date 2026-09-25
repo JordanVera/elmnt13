@@ -37,9 +37,9 @@ export function ProjectAdjacentNav({
   if (!prev && !next) return null;
 
   const buttonClass = cn(
-    'fixed bg-gold text-black top-1/2 z-100 -translate-y-1/2 cursor-pointer px-4 py-3 text-[11px] tracking-[0.28em] uppercase transition-colors',
+    'fixed top-1/2 z-100 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center bg-gold text-black transition-colors md:size-11',
     variant === 'page'
-      ? 'hover:border-gold hover:text-white'
+      ? 'hover:bg-gold/85 hover:text-white'
       : 'text-ink hover:border-ink hover:bg-ink hover:text-gold',
   );
 
@@ -51,7 +51,7 @@ export function ProjectAdjacentNav({
           aria-label={`Previous project: ${prev.title}`}
           className={cn(buttonClass, 'left-4 md:left-8')}
         >
-          Prev
+          <ArrowLeftIcon />
         </Link>
       ) : null}
       {next ? (
@@ -60,9 +60,39 @@ export function ProjectAdjacentNav({
           aria-label={`Next project: ${next.title}`}
           className={cn(buttonClass, 'right-4 md:right-8')}
         >
-          Next
+          <ArrowRightIcon />
         </Link>
       ) : null}
     </>
+  );
+}
+
+function ArrowLeftIcon() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      className="size-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      <path d="M10 3.5L5.5 8 10 12.5" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      className="size-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      <path d="M6 3.5L10.5 8 6 12.5" />
+    </svg>
   );
 }
