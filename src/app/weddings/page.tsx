@@ -17,10 +17,10 @@ export default function WeddingsPage() {
   return (
     <main>
       <ChampagneToast />
-      <div className="mx-auto  bg-white">
+      <div className="mx-auto bg-white px-6">
         <Reveal>
-          <div className="flex md:items-center max-w-6xl mx-auto">
-            <p className="mt-12 max-w-3xl text-lg text-center mx-auto leading-8 text-black/70!">
+          <div className="mx-auto flex max-w-6xl md:items-center">
+            <p className="mx-auto mt-8 max-w-3xl text-center text-base leading-7 text-black/70! md:mt-12 md:text-lg md:leading-8">
               May your story be filled with moments worth celebrating, from the
               beginning of a new chapter to the forever you’re building
               together. Wherever you are in your story, we’re here to make what

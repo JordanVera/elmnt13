@@ -17,9 +17,9 @@ export default function ContactPage() {
             <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
               Contact
             </p>
-            <h1 className="mt-6 font-display text-5xl leading-[0.95] tracking-tight uppercase md:text-7xl">
+            <h1 className="mt-6 font-display text-5xl leading-[0.88] tracking-tight uppercase md:text-7xl md:leading-[0.95]">
               Have a Vision?
-              <span className="mt-3 block font-serif text-4xl tracking-normal normal-case text-gold italic md:text-6xl">
+              <span className="mt-1 block font-serif text-4xl tracking-normal text-gold italic normal-case md:mt-3 md:text-6xl">
                 Let’s take it further.
               </span>
             </h1>

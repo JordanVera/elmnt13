@@ -19,16 +19,16 @@ export function AboutStats() {
             <Reveal
               key={stat.label}
               delay={index * 80}
-              className={`relative px-4 py-10 text-center md:px-6 md:py-14 ${
+              className={`relative px-2 py-8 text-center md:px-6 md:py-14 ${
                 index !== stats.length - 1
-                  ? 'after:absolute after:top-1/2 after:right-0 after:h-32 after:w-px after:-translate-y-1/2 after:bg-gold md:after:h-32 max-md:even:after:hidden'
+                  ? 'after:absolute after:top-1/2 after:right-0 after:h-16 after:w-px after:-translate-y-1/2 after:bg-gold md:after:h-32 max-md:even:after:hidden'
                   : ''
               }`}
             >
-              <p className="font-display text-[clamp(8rem,10vw,6rem)] leading-none tracking-tight text-ink">
+              <p className="font-display text-[clamp(2.6rem,11vw,3.4rem)] leading-none tracking-tight text-ink whitespace-nowrap md:text-[8rem]">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mx-auto mt-5 max-w-[12rem] font-sans uppercase text-base leading-snug text-stone md:text-lg">
+              <p className="mx-auto mt-4 max-w-[12rem] font-sans text-sm leading-snug text-stone uppercase md:mt-5 md:text-lg">
                 {stat.label} <br />
                 {stat.label2}
               </p>

@@ -4,7 +4,7 @@ import { weddingServices } from '@/lib/weddings';
 
 export function WeddingServicesSection() {
   return (
-    <section id="services" className="scroll-mt-8 bg-white px-6 py-16 md:py-24">
+    <section id="services" className="scroll-mt-8 bg-white px-6 pt-12 pb-4 md:py-24">
       <div className="mx-auto max-w-6xl">
         {/* <Reveal>
           <div className="flex md:items-center">
@@ -28,10 +28,10 @@ export function WeddingServicesSection() {
         </Reveal>
 
         <Reveal delay={140}>
-          <h2 className="font-[family-name:var(--font-playfair)] text-5xl leading-[0.95] tracking-tight lowercase md:text-5xl">
+          <h2 className="font-[family-name:var(--font-playfair)] text-[1.75rem] leading-[1.05] tracking-tight lowercase md:text-5xl md:leading-[0.95]">
             With you for the
             <br />
-            <span className="ml-14 font-serif text-5xl tracking-normal lowercase text-gold italic md:text-7xl">
+            <span className="ml-5 inline-block font-serif text-[clamp(1.45rem,6.4vw,1.9rem)] leading-[1.05] tracking-normal text-gold lowercase italic md:ml-14 md:text-7xl">
               moments that matter
             </span>
           </h2>

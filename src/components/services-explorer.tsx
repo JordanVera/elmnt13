@@ -24,7 +24,7 @@ function CategoryTitle({
   return (
     <h2
       id={id}
-      className="font-display leading-[0.86] tracking-tight text-[clamp(1.55rem,6.5vw,5.75rem)] text-white uppercase"
+      className="font-display text-[clamp(2.75rem,12vw,4.5rem)] leading-[0.86] tracking-tight text-white uppercase md:text-[clamp(1.55rem,6.5vw,5.75rem)]"
     >
       {words.map((word) => (
         <span key={word} className="block">

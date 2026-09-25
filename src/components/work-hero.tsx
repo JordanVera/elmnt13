@@ -65,7 +65,7 @@ export function WorkHero({ projects }: { projects: Project[] }) {
   const rightX = useTransform(progress, [0, 0.5], ['0vw', '16vw']);
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh] bg-white">
+    <section ref={sectionRef} className="relative h-[140vh] bg-white md:h-[200vh]">
       <div className="sticky top-0 flex h-dvh items-center justify-center overflow-hidden bg-white px-6">
         <div className="relative flex w-full max-w-6xl items-center justify-center">
           <h1 className="font-display pointer-events-none flex w-full items-center justify-center gap-[0.18em] text-[19vw] leading-none tracking-tight text-ink uppercase md:text-[15vw]">

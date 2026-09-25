@@ -107,7 +107,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={skip ? undefined : { opacity: 0, y: -72, x: 48 }}
             transition={transition}
-            className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-6 pb-[max(1.75rem,env(safe-area-inset-bottom))]"
+            className="fixed inset-x-0 bottom-0 z-50 hidden justify-center px-6 pb-[max(1.75rem,env(safe-area-inset-bottom))] md:flex"
           >
             <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-12">
               {heroNavLinks.map((link) => (

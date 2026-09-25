@@ -13,7 +13,7 @@ import {
 } from '@/lib/site';
 
 function SocialIcon({ label }: { label: string }) {
-  const className = 'size-6';
+  const className = 'size-5 md:size-6';
 
   switch (label) {
     case 'Instagram':
@@ -108,7 +108,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-7xl gap-10 px-8 py-12 md:grid-cols-3 md:items-center md:gap-6 md:py-14">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 px-4 py-10 md:gap-6 md:px-8 md:py-14">
         <Reveal>
           <nav aria-label={isWeddings ? 'On this page' : 'Footer'}>
             <ul className="space-y-3">
@@ -123,7 +123,7 @@ export function SiteFooter() {
                         window.scrollTo({ top: 0 });
                       }
                     }}
-                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                    className="text-[11px] tracking-[0.12em] text-paper uppercase transition-colors hover:text-gold md:text-sm md:tracking-[0.18em]"
                   >
                     {link.label}
                   </Link>
@@ -133,7 +133,7 @@ export function SiteFooter() {
                 <li>
                   <Link
                     href="/"
-                    className="text-sm tracking-[0.18em] text-paper uppercase transition-colors hover:text-gold"
+                    className="text-[11px] tracking-[0.12em] text-paper uppercase transition-colors hover:text-gold md:text-sm md:tracking-[0.18em]"
                   >
                     ELMNT13 Home
                   </Link>
@@ -145,13 +145,13 @@ export function SiteFooter() {
 
         <Reveal delay={80}>
           <div className="flex flex-col items-center text-center">
-            <Logo inverted className="[&_img]:h-12 md:[&_img]:h-20" />
+            <Logo inverted className="[&_img]:h-8 md:[&_img]:h-20" />
           </div>
         </Reveal>
 
         <Reveal delay={160}>
-          <div className="flex justify-start md:justify-end">
-            <ul className="flex flex-col items-start gap-4 md:items-end">
+          <div className="flex justify-end">
+            <ul className="flex flex-col items-end gap-3 md:gap-4">
               {socials.map((link) => (
                 <li key={link.label}>
                   <a
