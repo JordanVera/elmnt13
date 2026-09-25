@@ -230,7 +230,7 @@ export function ChampagneToast() {
         aria-hidden="true"
       >
         <motion.div
-          className="h-[92%] w-auto shrink-0 md:h-[96%]"
+          className="h-[50%] w-auto shrink-0 md:h-[96%]"
           custom={-1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -245,7 +245,7 @@ export function ChampagneToast() {
           />
         </motion.div>
         <motion.div
-          className="h-[92%] w-auto shrink-0 md:h-[96%]"
+          className="h-[50%] w-auto shrink-0 md:h-[96%]"
           custom={1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}

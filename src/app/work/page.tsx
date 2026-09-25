@@ -23,7 +23,7 @@ export default async function WorkPage() {
   return (
     <main className="bg-white">
       <WorkHero projects={heroProjects} />
-      <section className="bg-white px-6 pt-14">
+      <section className="bg-white px-4 pt-4 md:px-6 md:pt-14">
         <div className="mx-auto max-w-4xl">
           <ProjectGrid items={workProjects} />
         </div>

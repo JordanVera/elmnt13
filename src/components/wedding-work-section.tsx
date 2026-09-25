@@ -6,7 +6,7 @@ export async function WeddingWorkSection() {
   const items = await getWeddingCollections();
 
   return (
-    <section id="work" className="scroll-mt-8 bg-white py-16 md:pt-24 pb-6">
+    <section id="work" className="scroll-mt-8 bg-white pt-4 pb-6 md:pt-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/cn';
+import { heroNavLinks } from '@/lib/site';
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -16,9 +17,9 @@ export function HomeHero() {
   const skip = Boolean(reduceMotion);
 
   return (
-    <div className="relative min-h-dvh bg-ink">
+    <div className="relative bg-ink md:min-h-dvh">
       <motion.div
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-12"
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-8 md:pt-12"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -43,8 +44,8 @@ export function HomeHero() {
         </Link>
       </motion.div>
 
-      <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-6 text-paper">
-        <h1 className="mx-auto flex w-max max-w-full flex-col items-start font-display text-[11.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
+      <section className="relative flex flex-col items-center justify-center overflow-x-hidden px-6 pt-24 pb-6 text-paper md:min-h-dvh md:py-0">
+        <h1 className="mx-auto flex w-max max-w-full flex-col items-start font-display text-[13.5vw] leading-[0.86] tracking-tight text-white uppercase md:text-[9vw] lg:text-[8rem] xl:text-[9.75rem] 2xl:text-[11.5rem]">
           <HeroStatement
             eyebrow="We See"
             headline="The Vision."
@@ -61,6 +62,20 @@ export function HomeHero() {
             from="right"
           />
         </h1>
+        <nav aria-label="Primary" className="mt-8 w-full md:hidden">
+          <ul className="flex flex-nowrap items-center justify-center gap-x-3.5">
+            {heroNavLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-[10px] tracking-[0.16em] text-gold uppercase transition-colors hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </section>
     </div>
   );

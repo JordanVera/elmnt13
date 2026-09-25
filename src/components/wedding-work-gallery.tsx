@@ -112,7 +112,7 @@ function EventTile({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
       )}
-      <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/45 max-md:bg-ink/25" />
+      <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/30 to-transparent md:bg-ink/0 md:bg-none md:transition-colors md:duration-500 md:group-hover:bg-ink/45" />
       {item.preview === 'video' ? (
         <span
           aria-hidden="true"
@@ -123,11 +123,11 @@ function EventTile({
           </svg>
         </span>
       ) : null}
-      <div className="absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-100 transition-all duration-500 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
-        <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
+      <div className="absolute inset-x-0 bottom-0 translate-y-0 p-2.5 opacity-100 transition-all duration-500 md:translate-y-4 md:p-5 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
+        <p className="text-[10px] leading-none tracking-[0.14em] text-gold uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] md:text-[11px] md:tracking-[0.28em]">
           {item.kind}
         </p>
-        <p className="mt-1.5 font-display text-xl leading-tight text-white uppercase md:text-2xl">
+        <p className="mt-1 font-display text-sm leading-none text-white uppercase md:mt-1.5 md:text-2xl md:leading-tight">
           {item.location}
         </p>
       </div>
