@@ -4,8 +4,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
 import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
+import { WeddingStory } from '@/components/wedding-story';
 import { cn } from '@/lib/cn';
 import type { WeddingWorkItem } from '@/lib/wedding-work-photos';
+
+const INITIAL_COUNT = 3;
 
 function tileLayout(item: WeddingWorkItem, index: number, count: number) {
   if (item.preview === 'video') {
@@ -19,6 +22,13 @@ function tileLayout(item: WeddingWorkItem, index: number, count: number) {
     return {
       className: 'aspect-video md:col-span-3',
       sizes: '(max-width: 768px) 50vw, 50vw',
+    };
+  }
+
+  if (count === INITIAL_COUNT && index === 2) {
+    return {
+      className: 'col-span-2 aspect-video md:col-span-6 md:aspect-21/9',
+      sizes: '100vw',
     };
   }
 
@@ -202,6 +212,11 @@ function CollectionOverlay({
           <p className="mt-2 font-serif text-xl text-gold italic md:text-2xl">
             {item.location}
           </p>
+          <WeddingStory
+            services={item.services}
+            description={item.description}
+            credits={item.credits}
+          />
         </div>
 
         <div className="px-6 pb-16 md:px-10">
@@ -214,14 +229,17 @@ function CollectionOverlay({
 
 export function WeddingGallery({ items }: { items: WeddingWorkItem[] }) {
   const [activeItem, setActiveItem] = useState<WeddingWorkItem | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   const closeOverlay = useCallback(() => setActiveItem(null), []);
+  const visibleItems = expanded ? items : items.slice(0, INITIAL_COUNT);
+  const hasMore = items.length > INITIAL_COUNT;
 
   return (
     <div className="px-6">
       <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
-        {items.map((item, index) => {
-          const layout = tileLayout(item, index, items.length);
+        {visibleItems.map((item, index) => {
+          const layout = tileLayout(item, index, visibleItems.length);
 
           return (
             <EventTile
@@ -234,6 +252,18 @@ export function WeddingGallery({ items }: { items: WeddingWorkItem[] }) {
           );
         })}
       </div>
+
+      {hasMore && !expanded ? (
+        <div className="mt-10 text-center">
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="cursor-pointer border border-ink/20 px-8 py-3 text-[11px] tracking-[0.32em] text-ink uppercase transition-colors hover:border-ink hover:bg-ink hover:text-gold"
+          >
+            View more
+          </button>
+        </div>
+      ) : null}
 
       {activeItem ? (
         <CollectionOverlay item={activeItem} onClose={closeOverlay} />

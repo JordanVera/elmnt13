@@ -1,5 +1,24 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+function mediaSource(rule: {
+  custom: (fn: (value: unknown) => true | string) => unknown;
+}) {
+  return rule.custom((value) => {
+    if (value === undefined || value === null || value === '') return true;
+    if (typeof value !== 'string') return 'Must be a URL or local path';
+    if (value.startsWith('/')) return true;
+    try {
+      const parsed = new URL(value);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return true;
+      }
+    } catch {
+      // fall through
+    }
+    return 'Use an https URL or a local path starting with / (e.g. /weddings/film.mp4)';
+  });
+}
+
 export const weddingType = defineType({
   name: 'wedding',
   title: 'Wedding',
@@ -41,6 +60,66 @@ export const weddingType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'services',
+      title: 'Services',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      description:
+        'Shown as a styled line under the title, e.g. Full-Service Wedding Planning.',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [
+            { title: 'Paragraph', value: 'normal' },
+            { title: 'Italic lead', value: 'lead' },
+          ],
+          lists: [],
+          marks: {
+            decorators: [
+              { title: 'Italic', value: 'em' },
+              { title: 'Bold', value: 'strong' },
+            ],
+            annotations: [],
+          },
+        }),
+      ],
+      description:
+        'Story copy for the collection. Use Italic lead for section openers, and italic/bold marks for inline styling.',
+    }),
+    defineField({
+      name: 'credits',
+      title: 'Credits',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'credit',
+          fields: [
+            defineField({
+              name: 'role',
+              title: 'Role',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'name', subtitle: 'role' },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'cover',
       title: 'Cover Photo',
       type: 'image',
@@ -58,21 +137,26 @@ export const weddingType = defineType({
     defineField({
       name: 'video',
       title: 'Film URL',
-      type: 'url',
-      description: 'External video link (Google Drive, Vidflow, etc.).',
+      type: 'string',
+      description:
+        'External video link (Google Drive, Vidflow, etc.) or a local /public path such as /weddings/film.mp4.',
+      validation: mediaSource,
     }),
     defineField({
       name: 'poster',
       title: 'Film Poster URL',
-      type: 'url',
-      description: 'Thumbnail image shown before the film loads.',
+      type: 'string',
+      description:
+        'Thumbnail image URL or a local /public path. Shown before the film loads.',
+      validation: mediaSource,
     }),
     defineField({
       name: 'previewVideo',
       title: 'Tile Preview Video URL',
-      type: 'url',
+      type: 'string',
       description:
-        'Short looping video shown on the gallery tile. When set the tile displays a play icon.',
+        'Short looping video on the gallery tile (external URL or local /public path). When set the tile displays a play icon.',
+      validation: mediaSource,
     }),
     defineField({
       name: 'sortOrder',

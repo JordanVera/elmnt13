@@ -3,6 +3,25 @@ import {
   type WeddingCollection,
 } from '@/lib/wedding-gallery';
 
+export type WeddingCredit = {
+  role: string;
+  name: string;
+};
+
+export type WeddingPortableSpan = {
+  _type: 'span';
+  _key?: string;
+  text: string;
+  marks?: string[];
+};
+
+export type WeddingPortableBlock = {
+  _type: 'block';
+  _key?: string;
+  style?: string;
+  children?: WeddingPortableSpan[];
+};
+
 export type WeddingWorkTile = {
   slug: string;
   kind: string;
@@ -53,6 +72,9 @@ export const weddingWorkTiles: WeddingWorkTile[] = [
 
 export type WeddingWorkItem = WeddingWorkTile & {
   collection: WeddingCollection;
+  services?: string[];
+  description?: WeddingPortableBlock[];
+  credits?: WeddingCredit[];
 };
 
 export function getWeddingWorkItems(): WeddingWorkItem[] {
