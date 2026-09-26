@@ -1,10 +1,135 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { WeddingCollection } from '@/lib/wedding-gallery';
 import { WeddingVideoPlayer } from '@/components/wedding-video-player';
+
+const GRID_GAP = 12;
+
+function photoRatio(url: string) {
+  const match = url.match(/-(\d+)x(\d+)\.[a-z0-9]+(?:\?|$)/i);
+  if (!match) return 1;
+
+  const width = Number(match[1]);
+  const height = Number(match[2]);
+  if (!width || !height) return 1;
+
+  return width / height;
+}
+
+type JustifiedPhoto = {
+  src: string;
+  index: number;
+  ratio: number;
+};
+
+function buildRows(
+  photos: string[],
+  containerWidth: number,
+  targetHeight: number,
+) {
+  const items: JustifiedPhoto[] = photos.map((src, index) => ({
+    src,
+    index,
+    ratio: photoRatio(src),
+  }));
+  const rows: JustifiedPhoto[][] = [];
+  let index = 0;
+
+  while (index < items.length) {
+    const row: JustifiedPhoto[] = [];
+    let ratioSum = 0;
+
+    while (index < items.length) {
+      const item = items[index];
+      const nextSum = ratioSum + item.ratio;
+      const nextCount = row.length + 1;
+      const height = (containerWidth - GRID_GAP * (nextCount - 1)) / nextSum;
+
+      if (row.length > 0 && height < targetHeight) break;
+
+      row.push(item);
+      ratioSum = nextSum;
+      index += 1;
+
+      if (height <= targetHeight) break;
+    }
+
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function PhotoGrid({
+  photos,
+  onSelect,
+}: {
+  photos: string[];
+  onSelect: (index: number) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const update = () => setWidth(node.clientWidth);
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const targetHeight = width < 700 ? 180 : 220;
+  const rows = width > 0 ? buildRows(photos, width, targetHeight) : [];
+
+  return (
+    <div ref={ref} className="flex flex-col" style={{ gap: GRID_GAP }}>
+      {rows.map((row, rowIndex) => {
+        const isLast = rowIndex === rows.length - 1;
+        const ratioSum = row.reduce((sum, item) => sum + item.ratio, 0);
+        const justified = (width - GRID_GAP * (row.length - 1)) / ratioSum;
+        const fillRow = !(isLast && justified > targetHeight);
+        const height = fillRow ? justified : targetHeight;
+
+        return (
+          <div
+            key={row[0]?.index ?? rowIndex}
+            className="flex"
+            style={{ gap: GRID_GAP, height }}
+          >
+            {row.map((item) => (
+              <button
+                key={`${item.src}-${item.index}`}
+                type="button"
+                onClick={() => onSelect(item.index)}
+                className="group relative min-w-0 cursor-pointer overflow-hidden bg-mist"
+                style={
+                  fillRow
+                    ? { flex: `${item.ratio} ${item.ratio} 0%` }
+                    : { width: height * item.ratio, flex: '0 0 auto' }
+                }
+              >
+                <Image
+                  src={item.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+              </button>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function WeddingCollectionPanel({
   collection,
@@ -57,32 +182,13 @@ export function WeddingCollectionPanel({
             poster={collection.poster}
             title={collection.title}
           />
-          <p className="mt-4 text-sm text-ink/55">
+          {/* <p className="mt-4 text-sm text-ink/55">
             {collection.photos.length} photos · film included
-          </p>
+          </p> */}
         </div>
       ) : null}
 
-      <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
-        {collection.photos.map((photo, index) => (
-          <button
-            key={photo}
-            type="button"
-            onClick={() => setActiveIndex(index)}
-            className="group relative mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden bg-mist"
-          >
-            <Image
-              src={photo}
-              alt=""
-              width={900}
-              height={1200}
-              sizes="(max-width: 768px) 50vw, 25vw"
-              className="transition-transform duration-700 group-hover:scale-[1.03]"
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </button>
-        ))}
-      </div>
+      <PhotoGrid photos={collection.photos} onSelect={setActiveIndex} />
 
       {activePhoto && activeIndex !== null
         ? createPortal(
