@@ -171,29 +171,31 @@ export function SiteHeader() {
               isWeddings ? 'bg-paper' : 'bg-ink',
             )}
           >
-            <motion.div
-              initial={skip ? false : { opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
-              className="pointer-events-none absolute inset-x-0 top-10 flex justify-center lg:top-14"
-            >
-              <Link
-                href={isWeddings ? '/weddings' : '/'}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setMenuOpen(false);
-                }}
-                className="pointer-events-auto"
+            {!isWeddings && (
+              <motion.div
+                initial={skip ? false : { opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
+                className="pointer-events-none absolute inset-x-0 top-10 flex justify-center lg:top-14"
               >
-                <Image
-                  src={isWeddings ? '' : '/logo.png'}
-                  alt="ELMNT13"
-                  width={180}
-                  height={54}
-                  className="h-10 w-auto xl:h-12"
-                />
-              </Link>
-            </motion.div>
+                <Link
+                  href={'/'}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setMenuOpen(false);
+                  }}
+                  className="pointer-events-auto"
+                >
+                  <Image
+                    src={'/logo.png'}
+                    alt="ELMNT13"
+                    width={180}
+                    height={54}
+                    className="h-10 w-auto xl:h-12"
+                  />
+                </Link>
+              </motion.div>
+            )}
 
             <div
               onClick={(event) => event.stopPropagation()}

@@ -12,9 +12,9 @@ export async function WeddingWorkSection() {
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
             Work
           </p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-5xl leading-[0.95] tracking-tight lowercase md:text-5xl">
+          <h2 className="font-[family-name:var(--font-playfair)] text-[2rem] leading-[0.95] tracking-tight lowercase md:text-5xl">
             Moments Then, <br />
-            <span className="font-serif text-5xl tracking-normal lowercase text-gold italic md:text-7xl">
+            <span className="font-serif text-[2rem] tracking-normal lowercase text-gold italic md:text-7xl">
               Memories Now
             </span>
           </h2>

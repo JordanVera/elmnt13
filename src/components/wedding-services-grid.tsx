@@ -87,7 +87,7 @@ function ServiceCard({
               <p className="text-base leading-7 text-stone md:text-lg md:leading-8">
                 {service.description}
               </p>
-              <p className="mt-4 text-sm tracking-[0.16em] text-stone uppercase">
+              <p className="mt-4 text-[10px] tracking-[0.16em] text-stone uppercase">
                 {service.details.join(' · ')}
               </p>
             </div>
