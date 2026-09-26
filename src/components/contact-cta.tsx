@@ -55,8 +55,8 @@ export function ContactCta({
     >
       <p
         className={cn(
-          // Make the base font size larger on mobile
-          'flex flex-col items-center justify-center text-center text-5xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl',
+          'flex flex-col items-center justify-center text-center leading-[0.8] tracking-tight md:text-5xl lg:text-7xl',
+          phrase === 'weddings' ? 'text-[2rem]' : 'text-5xl',
           inverted ? 'text-white' : 'text-black',
         )}
       >
@@ -71,7 +71,8 @@ export function ContactCta({
 
       <h2
         className={cn(
-          'mt-0 text-center font-sans text-5xl uppercase md:mt-4 md:text-5xl',
+          'mt-0 text-center font-sans uppercase md:mt-4 md:text-5xl',
+          phrase === 'weddings' ? 'text-[2rem]' : 'text-5xl',
           inverted ? 'text-white' : 'text-black',
         )}
       >
