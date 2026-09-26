@@ -109,7 +109,7 @@ function EventTile({
           alt={item.collection.title}
           fill
           sizes={sizes}
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
       )}
       <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/30 to-transparent md:bg-ink/0 md:bg-none md:transition-colors md:duration-500 md:group-hover:bg-ink/45" />
