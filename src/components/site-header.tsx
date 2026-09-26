@@ -186,7 +186,7 @@ export function SiteHeader() {
                 className="pointer-events-auto"
               >
                 <Image
-                  src={isWeddings ? '/logo-black.png' : '/logo.png'}
+                  src={isWeddings ? '' : '/logo.png'}
                   alt="ELMNT13"
                   width={180}
                   height={54}
