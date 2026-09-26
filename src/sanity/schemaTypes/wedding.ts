@@ -80,12 +80,46 @@ export const weddingType = defineType({
               { title: 'Italic', value: 'em' },
               { title: 'Bold', value: 'strong' },
             ],
-            annotations: [],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  defineField({
+                    name: 'href',
+                    title: 'URL',
+                    type: 'string',
+                    description:
+                      'Internal path (e.g. /services, /weddings#work) or https URL',
+                    validation: (rule) =>
+                      rule.required().custom((value) => {
+                        if (typeof value !== 'string' || !value) return 'Required';
+                        if (value.startsWith('/') || value.startsWith('#')) {
+                          return true;
+                        }
+                        try {
+                          const parsed = new URL(value);
+                          if (
+                            parsed.protocol === 'http:' ||
+                            parsed.protocol === 'https:'
+                          ) {
+                            return true;
+                          }
+                        } catch {
+                          // fall through
+                        }
+                        return 'Use /path, #anchor, or https://…';
+                      }),
+                  }),
+                ],
+              },
+            ],
           },
         }),
       ],
       description:
-        'Story copy for the collection. Use Italic lead for section openers, and italic/bold marks for inline styling.',
+        'Story copy for the collection. Use Italic lead for section openers, italic/bold marks for inline styling, and links for on-site pages.',
     }),
     defineField({
       name: 'credits',
@@ -135,7 +169,7 @@ export const weddingType = defineType({
       title: 'Film URL',
       type: 'string',
       description:
-        'External video link (Google Drive, Vidflow, etc.) or a local /public path such as /weddings/film.mp4.',
+        'YouTube, Google Drive, Vidflow, or a local /public path such as /weddings/film.mp4.',
       validation: (rule) => rule.custom(validateMediaSource),
     }),
     defineField({

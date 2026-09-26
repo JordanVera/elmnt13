@@ -8,6 +8,12 @@ export type WeddingCredit = {
   name: string;
 };
 
+export type WeddingPortableLink = {
+  _type: 'link';
+  _key: string;
+  href: string;
+};
+
 export type WeddingPortableSpan = {
   _type: 'span';
   _key?: string;
@@ -19,6 +25,7 @@ export type WeddingPortableBlock = {
   _type: 'block';
   _key?: string;
   style?: string;
+  markDefs?: WeddingPortableLink[];
   children?: WeddingPortableSpan[];
 };
 
