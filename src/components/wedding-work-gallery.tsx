@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
+import { WeddingAdjacentNav } from '@/components/wedding-adjacent-nav';
 import { WeddingCollectionPanel } from '@/components/wedding-collection-panel';
 import { WeddingStory } from '@/components/wedding-story';
 import { cn } from '@/lib/cn';
@@ -137,10 +138,16 @@ function EventTile({
 
 function CollectionOverlay({
   item,
+  prev,
+  next,
   onClose,
+  onNavigate,
 }: {
   item: WeddingWorkItem;
+  prev: WeddingWorkItem | null;
+  next: WeddingWorkItem | null;
   onClose: () => void;
+  onNavigate: (slug: string) => void;
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -174,6 +181,19 @@ function CollectionOverlay({
       }}
       className="fixed inset-0 z-90 overflow-y-auto bg-ink/55 p-4 md:p-8"
     >
+      <WeddingAdjacentNav
+        prev={
+          prev
+            ? { slug: prev.slug, title: prev.collection.title }
+            : null
+        }
+        next={
+          next
+            ? { slug: next.slug, title: next.collection.title }
+            : null
+        }
+        onNavigate={onNavigate}
+      />
       <div
         role="dialog"
         aria-modal="true"
@@ -233,6 +253,21 @@ export function WeddingGallery({ items }: { items: WeddingWorkItem[] }) {
   const [expanded, setExpanded] = useState(false);
 
   const closeOverlay = useCallback(() => setActiveItem(null), []);
+  const navigateToItem = useCallback(
+    (slug: string) => {
+      const item = items.find((entry) => entry.slug === slug);
+      if (item) setActiveItem(item);
+    },
+    [items],
+  );
+  const activeIndex = activeItem
+    ? items.findIndex((entry) => entry.slug === activeItem.slug)
+    : -1;
+  const prevItem = activeIndex > 0 ? items[activeIndex - 1] : null;
+  const nextItem =
+    activeIndex >= 0 && activeIndex < items.length - 1
+      ? items[activeIndex + 1]
+      : null;
   const visibleItems = expanded ? items : items.slice(0, INITIAL_COUNT);
   const hasMore = items.length > INITIAL_COUNT;
 
@@ -267,7 +302,13 @@ export function WeddingGallery({ items }: { items: WeddingWorkItem[] }) {
       ) : null}
 
       {activeItem ? (
-        <CollectionOverlay item={activeItem} onClose={closeOverlay} />
+        <CollectionOverlay
+          item={activeItem}
+          prev={prevItem}
+          next={nextItem}
+          onClose={closeOverlay}
+          onNavigate={navigateToItem}
+        />
       ) : null}
     </div>
   );
