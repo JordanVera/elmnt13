@@ -222,7 +222,7 @@ export function ChampagneToast() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-dvh overflow-hidden bg-white"
+      className="relative min-h-[74dvh] overflow-hidden bg-white md:min-h-dvh"
     >
       <div
         ref={stageRef}
@@ -230,7 +230,7 @@ export function ChampagneToast() {
         aria-hidden="true"
       >
         <motion.div
-          className="h-[50%] w-auto shrink-0 md:h-[96%]"
+          className="h-[72%] w-auto shrink-0 md:h-[96%]"
           custom={-1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -245,7 +245,7 @@ export function ChampagneToast() {
           />
         </motion.div>
         <motion.div
-          className="h-[50%] w-auto shrink-0 md:h-[96%]"
+          className="h-[72%] w-auto shrink-0 md:h-[96%]"
           custom={1}
           variants={glassVariants}
           initial={skipMotion ? 'clink' : 'hidden'}
@@ -265,7 +265,8 @@ export function ChampagneToast() {
         contactY={pose?.contactY ?? 0}
       />
 
-      <h1 className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
+      {/* Shift matches the mobile flute height (72% of the stage) so the line stays on the rims. */}
+      <h1 className="pointer-events-none absolute inset-0 z-10 flex -translate-y-[calc(22%-0.11rem)] flex-col items-center justify-center px-6 text-center md:translate-y-0">
         <span className="block overflow-hidden px-[0.14em] pb-[0.32em]">
           <motion.span
             className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-[1.12] italic text-ink"

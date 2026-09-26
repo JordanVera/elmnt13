@@ -50,16 +50,17 @@ export function ContactCta({
       className={cn(
         id && 'scroll-mt-8',
         inverted ? 'bg-ink text-paper' : 'bg-white text-ink',
-        'px-6 py-20 md:py-12',
+        'px-6 py-12',
       )}
     >
       <p
         className={cn(
-          'flex flex-col items-center justify-center text-center text-4xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl',
+          // Make the base font size larger on mobile
+          'flex flex-col items-center justify-center text-center text-5xl leading-[0.8] tracking-tight md:text-5xl lg:text-7xl',
           inverted ? 'text-white' : 'text-black',
         )}
       >
-        <span className="font-sans text-[0.5em] leading-none tracking-tighter uppercase">
+        <span className="font-sans text-[0.6em] leading-none tracking-tighter uppercase md:text-[0.5em]">
           Ready to take your
         </span>
         <span className="flex items-baseline justify-center gap-x-2 md:gap-x-3">

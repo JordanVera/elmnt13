@@ -2,7 +2,7 @@ import { Reveal } from '@/components/reveal';
 
 export function WeddingLoveStory() {
   return (
-    <section id="story" className="scroll-mt-8 bg-white px-6 py-6 md:py-2">
+    <section id="story" className="scroll-mt-8 bg-white px-6 pb-6 md:py-2">
       <div className="mx-auto max-w-4xl text-center">
         <Reveal>
           <h2>

@@ -175,10 +175,7 @@ export function SiteHeader() {
               initial={skip ? false : { opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={skip ? { duration: 0 } : { ...EASE, delay: 0.04 }}
-              className={cn(
-                'pointer-events-none absolute inset-x-0 top-10 justify-center lg:top-14',
-                isWeddings ? 'flex' : 'hidden lg:flex',
-              )}
+              className="pointer-events-none absolute inset-x-0 top-10 flex justify-center lg:top-14"
             >
               <Link
                 href={isWeddings ? '/weddings' : '/'}

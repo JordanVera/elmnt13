@@ -3,7 +3,7 @@ import { Reveal } from '@/components/reveal';
 
 export function HomeAbout() {
   return (
-    <section className="relative overflow-hidden bg-white px-6 py-20 md:py-24">
+    <section className="relative overflow-hidden bg-white px-6 py-12 md:py-24">
       <p
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 right-[0%] -translate-y-1/2 font-serif text-[28vw] leading-none text-gold/20 select-none"
@@ -31,7 +31,7 @@ export function HomeAbout() {
         </div>
         <Reveal
           delay={120}
-          className="mt-8 md:col-span-5 md:col-start-6 md:mt-14 md:-ml-8"
+          className="md:mt-8 md:col-span-5 md:col-start-6 md:mt-14 md:-ml-8"
         >
           <p className="max-w-md text-lg leading-8 text-black">
             ELMNT13 is a creative marketing and management company known for

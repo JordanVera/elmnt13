@@ -112,7 +112,7 @@ export function DetailsMoment({
         {layout === 'tagline' ? (
           <Reveal>
             <div className="max-w-3xl mx-auto">
-              <p className=" leading-8 text-black text-lg mx-auto mt-24 text-center max-w-5xl  tracking-tight mb-8">
+              <p className=" leading-8 text-black text-lg mx-auto  mt-6 md:mt-24 text-center max-w-5xl  tracking-tight mb-8">
                 Every project has a different audience, objective and
                 opportunity. Our experience has taught us there is no
                 one-size-fits-all approach, which is why we look at each project

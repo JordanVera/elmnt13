@@ -4,7 +4,7 @@ import { CountUp } from '@/components/count-up';
 
 export function AboutStats() {
   return (
-    <section className="bg-white px-6 pt-20">
+    <section className="bg-white px-6 pt-4 md:pt-20">
       <div className="mx-auto max-w-6xl">
         <h2 className="flex flex-wrap items-baseline justify-center gap-x-[0.18em] text-[clamp(2.75rem,11vw,5rem)] leading-none uppercase text-center">
           <span className="font-bebas tracking-tight text-ink">It</span>
