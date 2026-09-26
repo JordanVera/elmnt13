@@ -9,7 +9,8 @@ export function WeddingLoveStory() {
             <span className="block text-xl tracking-[.3em] text-stone uppercase">
               Allow us to be
             </span>
-            <span className="mt-1 block font-[family-name:var(--font-playfair)] text-[2rem] leading-[1.12] tracking-tight md:text-[clamp(2.25rem,6.4vw,4.75rem)]">
+            <span className="mt-1 block font-[family-name:var(--font-playfair)] text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.12] tracking-tight">
+              {' '}
               a part of your{' '}
               <span className="font-serif text-gold whitespace-nowrap">
                 love story

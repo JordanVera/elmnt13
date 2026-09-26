@@ -56,7 +56,9 @@ export function ContactCta({
       <p
         className={cn(
           'flex flex-col items-center justify-center text-center leading-[0.8] tracking-tight md:text-5xl lg:text-7xl',
-          phrase === 'weddings' ? 'text-[2rem]' : 'text-5xl',
+          phrase === 'weddings'
+            ? 'text-[clamp(2.25rem,6.4vw,4.75rem)]'
+            : 'text-5xl',
           inverted ? 'text-white' : 'text-black',
         )}
       >
@@ -72,7 +74,9 @@ export function ContactCta({
       <h2
         className={cn(
           'mt-0 text-center font-sans uppercase md:mt-4 md:text-5xl',
-          phrase === 'weddings' ? 'text-[2rem]' : 'text-5xl',
+          phrase === 'weddings'
+            ? 'text-[clamp(2.25rem,6.4vw,4.75rem)]'
+            : 'text-5xl',
           inverted ? 'text-white' : 'text-black',
         )}
       >
