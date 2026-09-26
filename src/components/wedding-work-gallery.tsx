@@ -213,6 +213,7 @@ function CollectionOverlay({
             {item.location}
           </p>
           <WeddingStory
+            slug={item.slug}
             services={item.services}
             description={item.description}
             credits={item.credits}

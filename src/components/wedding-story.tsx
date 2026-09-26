@@ -40,7 +40,9 @@ function renderSpan(
   const className = spanClassName(span);
 
   if (link?.href) {
-    const href = link.href.startsWith('#') ? `/weddings${link.href}` : link.href;
+    const href = link.href.startsWith('#')
+      ? `/weddings${link.href}`
+      : link.href;
     const isExternal = href.startsWith('http');
 
     if (isExternal) {
@@ -70,11 +72,40 @@ function renderSpan(
   );
 }
 
+const TEAGAN_SLUG = 'teagan-and-issy-proposal';
+
+function blockText(block: WeddingPortableBlock) {
+  return (block.children ?? [])
+    .map((span) => span.text)
+    .join('')
+    .trim();
+}
+
+function StoryBlock({ block }: { block: WeddingPortableBlock }) {
+  const isLead = block.style === 'lead';
+
+  return (
+    <p
+      className={
+        isLead
+          ? 'mb-3 break-inside-avoid font-serif text-base leading-snug text-gold italic md:mb-4 md:text-lg'
+          : 'mb-3 break-inside-avoid text-sm leading-6 text-ink/75 md:mb-4 md:text-base md:leading-7'
+      }
+    >
+      {(block.children ?? []).map((span, spanIndex) =>
+        renderSpan(span, block.markDefs, span._key ?? spanIndex),
+      )}
+    </p>
+  );
+}
+
 export function WeddingStory({
+  slug,
   services,
   description,
   credits,
 }: {
+  slug?: string;
   services?: string[];
   description?: WeddingPortableBlock[];
   credits?: WeddingCredit[];
@@ -82,6 +113,14 @@ export function WeddingStory({
   if (!services?.length && !description?.length && !credits?.length) {
     return null;
   }
+
+  const experienceIndex =
+    slug === TEAGAN_SLUG
+      ? (description ?? []).findIndex(
+          (block) => blockText(block).toUpperCase() === 'THE EXPERIENCE',
+        )
+      : -1;
+  const splitAtExperience = experienceIndex > 0;
 
   return (
     <div className="mt-5 w-full md:mt-6">
@@ -92,30 +131,39 @@ export function WeddingStory({
       ) : null}
 
       {description?.length ? (
-        <div
-          className={cn(
-            services?.length ? 'mt-5 md:mt-6' : undefined,
-            'w-full columns-1 gap-x-5 md:columns-2 md:gap-x-10',
-          )}
-        >
-          {description.map((block, index) => {
-            const isLead = block.style === 'lead';
-            return (
-              <p
-                key={block._key ?? index}
-                className={
-                  isLead
-                    ? 'mb-3 break-inside-avoid font-serif text-base leading-snug text-gold italic md:mb-4 md:text-lg'
-                    : 'mb-3 break-inside-avoid text-sm leading-6 text-ink/75 md:mb-4 md:text-base md:leading-7'
-                }
-              >
-                {(block.children ?? []).map((span, spanIndex) =>
-                  renderSpan(span, block.markDefs, span._key ?? spanIndex),
-                )}
-              </p>
-            );
-          })}
-        </div>
+        splitAtExperience ? (
+          <div
+            className={cn(
+              services?.length ? 'mt-5 md:mt-6' : undefined,
+              'grid w-full grid-cols-1 gap-x-5 md:grid-cols-2 md:gap-x-10',
+            )}
+          >
+            <div>
+              {description.slice(0, experienceIndex).map((block, index) => (
+                <StoryBlock key={block._key ?? index} block={block} />
+              ))}
+            </div>
+            <div>
+              {description.slice(experienceIndex).map((block, index) => (
+                <StoryBlock
+                  key={block._key ?? experienceIndex + index}
+                  block={block}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              services?.length ? 'mt-5 md:mt-6' : undefined,
+              'w-full columns-1 gap-x-5 md:columns-2 md:gap-x-10',
+            )}
+          >
+            {description.map((block, index) => (
+              <StoryBlock key={block._key ?? index} block={block} />
+            ))}
+          </div>
+        )
       ) : null}
 
       {credits?.length ? (
