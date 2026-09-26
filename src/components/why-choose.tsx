@@ -49,7 +49,7 @@ export function WhyChoose() {
     <>
       <section
         ref={sectionRef}
-        className="relative overflow-hidden bg-white px-6 pb-24 "
+        className="relative overflow-hidden bg-white px-6 pb-6 md:pb-24 "
       >
         <div className="relative mx-auto max-w-6xl text-center">
           <Reveal>
@@ -79,7 +79,7 @@ export function WhyChoose() {
                 <motion.p
                   key={line}
                   aria-live="polite"
-                  className="col-start-1 row-start-1 font-serif text-5xl leading-[1.2] text-ink"
+                  className="col-start-1 row-start-1 font-serif text-4xl md:text-5xl leading-[1.2] text-ink"
                   initial={
                     reduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: 82 }
                   }

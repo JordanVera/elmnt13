@@ -190,7 +190,7 @@ function CategorySection({
 
 export function ServicesExplorer() {
   return (
-    <div className="bg-ink px-6 pt-20 pb-20 text-paper md:pt-24 md:pb-24">
+    <div className="bg-ink px-6 pt-20 text-paper md:pt-24 md:pb-24">
       <div className="mx-auto w-full max-w-7xl">
         <Reveal>
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
