@@ -205,7 +205,7 @@ function CollectionOverlay({
           </p>
           <h3
             id="wedding-collection-title"
-            className="mt-2 font-display text-2xl tracking-tight uppercase md:text-4xl"
+            className="mt-2 font-display text-2xl tracking-tight uppercase md:text-6xl"
           >
             {item.collection.title}
           </h3>
