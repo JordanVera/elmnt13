@@ -27,15 +27,15 @@ export function WeddingStory({
   }
 
   return (
-    <div className="mt-8 max-w-3xl">
+    <div className="mt-5 max-w-3xl md:mt-6">
       {services?.length ? (
-        <p className="text-[11px] tracking-[0.22em] text-stone uppercase">
+        <p className="text-[10px] tracking-[0.18em] text-stone uppercase md:text-[11px] md:tracking-[0.22em]">
           {services.join(' · ')}
         </p>
       ) : null}
 
       {description?.length ? (
-        <div className={cn(services?.length ? 'mt-8' : undefined, 'space-y-5')}>
+        <div className={cn(services?.length ? 'mt-5 md:mt-6' : undefined, 'space-y-3 md:space-y-4')}>
           {description.map((block, index) => {
             const isLead = block.style === 'lead';
             return (
@@ -43,8 +43,8 @@ export function WeddingStory({
                 key={block._key ?? index}
                 className={
                   isLead
-                    ? 'font-serif text-xl leading-snug text-gold italic md:text-2xl'
-                    : 'text-base leading-7 text-ink/75 md:text-lg md:leading-8'
+                    ? 'font-serif text-base leading-snug text-gold italic md:text-lg'
+                    : 'text-sm leading-6 text-ink/75 md:text-base md:leading-7'
                 }
               >
                 {(block.children ?? []).map((span, spanIndex) => {
@@ -67,16 +67,16 @@ export function WeddingStory({
       {credits?.length ? (
         <ul
           className={cn(
-            services?.length || description?.length ? 'mt-8' : undefined,
+            services?.length || description?.length ? 'mt-5 md:mt-6' : undefined,
             'space-y-1',
           )}
         >
           {credits.map((credit) => (
             <li
               key={`${credit.role}-${credit.name}`}
-              className="text-sm tracking-wide text-ink/50"
+              className="text-xs tracking-wide text-ink/50 md:text-sm"
             >
-              <span className="text-[11px] tracking-[0.18em] text-gold uppercase">
+              <span className="text-[10px] tracking-[0.16em] text-gold uppercase md:text-[11px] md:tracking-[0.18em]">
                 {credit.role}
               </span>
               {': '}

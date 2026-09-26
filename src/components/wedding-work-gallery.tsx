@@ -199,17 +199,17 @@ function CollectionOverlay({
           </svg>
         </button>
 
-        <div className="px-6 pt-16 pb-8 md:px-10 md:pt-20">
-          <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
+        <div className="px-6 pt-14 pb-6 md:px-10 md:pt-16 md:pb-8">
+          <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
             {item.kind}
           </p>
           <h3
             id="wedding-collection-title"
-            className="mt-3 font-display text-4xl tracking-tight uppercase md:text-6xl"
+            className="mt-2 font-display text-2xl tracking-tight uppercase md:text-4xl"
           >
             {item.collection.title}
           </h3>
-          <p className="mt-2 font-serif text-xl text-gold italic md:text-2xl">
+          <p className="mt-1.5 font-serif text-lg text-gold italic md:text-xl">
             {item.location}
           </p>
           <WeddingStory
