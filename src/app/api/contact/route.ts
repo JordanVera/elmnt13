@@ -7,7 +7,7 @@ import {
 } from '@/lib/contact-inquiry';
 import { isTurnstileConfigured, verifyTurnstileToken } from '@/lib/turnstile';
 
-const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/ashley@elmnt13.com';
+const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/info@elmnt13.com';
 
 export async function POST(request: Request) {
   let fields: Record<
@@ -40,7 +40,10 @@ export async function POST(request: Request) {
 
   const validationError = validateContactInquiry(input);
   if (validationError) {
-    return Response.json({ ok: false, message: validationError }, { status: 400 });
+    return Response.json(
+      { ok: false, message: validationError },
+      { status: 400 },
+    );
   }
 
   if (isTurnstileConfigured()) {
@@ -109,7 +112,9 @@ export async function POST(request: Request) {
   }
 }
 
-async function notifyFormSubmit(payload: ReturnType<typeof buildContactInquiryPayload>) {
+async function notifyFormSubmit(
+  payload: ReturnType<typeof buildContactInquiryPayload>,
+) {
   await fetch(FORM_SUBMIT_URL, {
     method: 'POST',
     headers: {
