@@ -58,7 +58,7 @@ export function ContactForm() {
       setSelectedOfferings([]);
       setTurnstileToken('');
       turnstileRef.current?.reset();
-      setState({ ok: true, message: 'Thank you. We’ll be in touch.' });
+      setState({ ok: true, message: '' });
       return;
     }
 
@@ -116,10 +116,7 @@ export function ContactForm() {
       setSelectedOfferings([]);
       setTurnstileToken('');
       turnstileRef.current?.reset();
-      setState({
-        ok: true,
-        message: 'Thank you. We’ll be in touch to talk through the vision.',
-      });
+      setState({ ok: true, message: '' });
     } catch {
       setState({
         ok: false,
@@ -213,30 +210,46 @@ export function ContactForm() {
         />
       </label>
 
-      {TURNSTILE_ENABLED ? (
-        <Turnstile
-          ref={turnstileRef}
-          siteKey={TURNSTILE_SITE_KEY}
-          onSuccess={setTurnstileToken}
-          onExpire={() => setTurnstileToken('')}
-          onError={() => setTurnstileToken('')}
-          options={{ theme: 'light', size: 'normal' }}
-        />
-      ) : null}
+      {state.ok ? (
+        <div
+          className="space-y-3 border-t border-ink/10 pt-8"
+          role="status"
+          aria-live="polite"
+        >
+          <p className="font-display text-2xl tracking-tight text-ink uppercase md:text-3xl">
+            Thank you for contacting us!
+          </p>
+          <p className="max-w-md text-sm leading-relaxed text-stone md:text-base">
+            We’ll be in touch to discuss your vision and how we can take it
+            further.
+          </p>
+        </div>
+      ) : (
+        <>
+          {TURNSTILE_ENABLED ? (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={TURNSTILE_SITE_KEY}
+              onSuccess={setTurnstileToken}
+              onExpire={() => setTurnstileToken('')}
+              onError={() => setTurnstileToken('')}
+              options={{ theme: 'light', size: 'normal' }}
+            />
+          ) : null}
 
-      <button
-        type="submit"
-        // disabled={pending || (TURNSTILE_ENABLED && !turnstileToken)}
-        className="cursor-pointer bg-ink px-10 py-4 text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:bg-gold hover:text-ink disabled:opacity-50"
-      >
-        {pending ? 'Sending' : 'Send'}
-      </button>
+          <button
+            type="submit"
+            disabled={pending}
+            className="cursor-pointer bg-ink px-10 py-4 text-[11px] tracking-[0.32em] text-gold uppercase transition-colors hover:bg-gold hover:text-ink disabled:opacity-50"
+          >
+            {pending ? 'Sending' : 'Send'}
+          </button>
 
-      {state.message ? (
-        <p className={state.ok ? 'text-sm text-stone' : 'text-sm text-red-700'}>
-          {state.message}
-        </p>
-      ) : null}
+          {state.message ? (
+            <p className="text-sm text-red-700">{state.message}</p>
+          ) : null}
+        </>
+      )}
     </form>
   );
 }
