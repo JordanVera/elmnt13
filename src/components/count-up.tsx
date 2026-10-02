@@ -6,10 +6,12 @@ export function CountUp({
   value,
   suffix = "",
   suffixClassName,
+  className,
 }: {
   value: number;
   suffix?: string;
   suffixClassName?: string;
+  className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [shown, setShown] = useState(0);
@@ -49,7 +51,7 @@ export function CountUp({
   }, [active, value]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className={className}>
       {shown}
       {suffix ? (
         <span className={suffixClassName}>{suffix}</span>

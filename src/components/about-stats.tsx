@@ -33,9 +33,12 @@ export function AboutStats() {
                 <CountUp
                   value={stat.value}
                   suffix={stat.suffix}
+                  className={
+                    index === stats.length - 1 ? 'inline-flex items-center' : undefined
+                  }
                   suffixClassName={
-                    stat.suffix === '%'
-                      ? 'max-md:text-[0.55em] max-md:align-top'
+                    index === stats.length - 1
+                      ? 'max-md:text-[0.55em] md:text-[0.72em]'
                       : undefined
                   }
                 />
