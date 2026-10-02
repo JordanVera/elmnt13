@@ -5,6 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { WeddingCollection } from '@/lib/wedding-gallery';
 import { WeddingVideoPlayer } from '@/components/wedding-video-player';
+import {
+  WeddingArrowLeftIcon,
+  WeddingArrowRightIcon,
+  weddingNavArrowButtonClass,
+  weddingNavArrowPosition,
+} from '@/components/wedding-nav-arrows';
+import { cn } from '@/lib/cn';
 
 const GRID_GAP = 12;
 
@@ -218,9 +225,13 @@ export function WeddingCollectionPanel({
                     index === null ? index : index - 1,
                   );
                 }}
-                className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer border border-white/30 px-3 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:left-4 md:px-4"
+                className={cn(
+                  weddingNavArrowButtonClass,
+                  'absolute top-1/2 z-10 -translate-y-1/2',
+                  weddingNavArrowPosition.prev,
+                )}
               >
-                Prev
+                <WeddingArrowLeftIcon />
               </button>
 
               <button
@@ -233,9 +244,13 @@ export function WeddingCollectionPanel({
                     index === null ? index : index + 1,
                   );
                 }}
-                className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer border border-white/30 px-3 py-3 text-[11px] tracking-[0.28em] text-white uppercase transition-colors hover:border-gold hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 md:right-4 md:px-4"
+                className={cn(
+                  weddingNavArrowButtonClass,
+                  'absolute top-1/2 z-10 -translate-y-1/2',
+                  weddingNavArrowPosition.next,
+                )}
               >
-                Next
+                <WeddingArrowRightIcon />
               </button>
 
               <div

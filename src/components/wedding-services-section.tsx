@@ -4,7 +4,7 @@ import { weddingServices } from '@/lib/weddings';
 
 export function WeddingServicesSection() {
   return (
-    <section id="services" className="scroll-mt-8 bg-white px-6 pt-12 md:py-24">
+    <section id="services" className="scroll-mt-8 bg-white px-6 pt-12 md:pt-24">
       <div className="mx-auto max-w-6xl">
         {/* <Reveal>
           <div className="flex md:items-center">
