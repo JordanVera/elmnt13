@@ -6,7 +6,7 @@ export async function WeddingWorkSection() {
   const items = await getWeddingCollections();
 
   return (
-    <section id="work" className="scroll-mt-8 bg-white pt-4 pb-6 md:pt-24">
+    <section id="work" className="scroll-mt-8 bg-white pb-6 md:pb-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="text-[15px] tracking-[0.36em] text-gold uppercase">
@@ -14,14 +14,14 @@ export async function WeddingWorkSection() {
           </p>
           <h2 className="font-[family-name:var(--font-playfair)] text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[0.95] tracking-tight lowercase md:text-5xl">
             Moments Then, <br />
-            <span className="font-serif text-[clamp(2.25rem,6.4vw,4.75rem)] tracking-normal lowercase text-gold italic md:text-7xl">
+            <span className="font-serif text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.12] tracking-normal lowercase text-gold max-md:not-italic md:text-7xl md:italic">
               Memories Now
             </span>
           </h2>
         </Reveal>
       </div>
 
-      <div className="mx-auto mt-10 max-w-6xl md:mt-12">
+      <div className="mx-auto mt-6 max-w-6xl md:mt-12">
         <WeddingGallery items={items} />
       </div>
     </section>
