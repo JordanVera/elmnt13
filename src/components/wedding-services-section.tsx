@@ -31,7 +31,7 @@ export function WeddingServicesSection() {
           <h2 className="font-[family-name:var(--font-playfair)] text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.05] tracking-tight lowercase md:text-5xl md:leading-[0.95]">
             With you for the
             <br />
-            <span className="md:ml-5 inline-block font-serif text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.05] tracking-normal text-gold lowercase italic md:ml-14 md:text-7xl">
+            <span className="md:ml-5 inline-block font-serif text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.12] tracking-normal text-gold lowercase max-md:not-italic md:ml-14 md:text-7xl md:leading-[1.05] md:italic">
               moments that matter
             </span>
           </h2>

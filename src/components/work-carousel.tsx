@@ -28,7 +28,7 @@ export function WorkCarousel({ projects }: { projects: Project[] }) {
         </Reveal>
       </div>
 
-      <div className="mx-auto mt-10 grid max-w-7xl grid-cols-2 gap-4 px-6 sm:gap-5 lg:grid-cols-4">
+      <div className="mx-auto mt-6 grid max-w-7xl grid-cols-2 gap-4 px-6 sm:gap-5 md:mt-10 lg:grid-cols-4">
         {projects.map((project, index) => (
           <Reveal key={project.slug} delay={index * 70}>
             <Link

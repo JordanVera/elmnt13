@@ -266,7 +266,7 @@ export function ChampagneToast() {
       />
 
       {/* Mobile shift sits the line just under the rims. */}
-      <h1 className="pointer-events-none absolute inset-0 z-10 flex -translate-y-[calc(6%-0.11rem)] flex-col items-center justify-center px-6 text-center md:translate-y-0">
+      <h1 className="pointer-events-none absolute inset-0 z-10 flex translate-y-[calc(2%-0.11rem)] flex-col items-center justify-center px-6 text-center md:translate-y-0">
         <span className="block overflow-hidden px-[0.14em] pb-[0.32em]">
           <motion.span
             className="block font-serif text-[clamp(2.4rem,7vw,5.75rem)] leading-[1.12] italic text-ink"
